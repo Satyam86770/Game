@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:transparent}
+body{font-family:'Inter','Noto Color Emoji',sans-serif;color:#fff}
+.mono{font-family:'DejaVu Sans Mono','Noto Color Emoji',monospace}
+#stage{position:absolute;inset:0;overflow:hidden}
+#bg{position:absolute;inset:0;background:
+ radial-gradient(700px 700px at var(--b1x,20%) var(--b1y,75%),rgba(150,40,200,.35),transparent 70%),
+ radial-gradient(650px 650px at var(--b2x,85%) var(--b2y,30%),rgba(255,120,40,.22),transparent 70%),
+ radial-gradient(900px 900px at 50% 110%,rgba(40,80,220,.30),transparent 70%),
+ linear-gradient(180deg,#0b0b2b 0%,#14102f 50%,#0b0a24 100%)}
+#prog{position:absolute;left:0;top:0;height:10px;background:linear-gradient(90deg,#22d3ee,#a855f7,#f472b6);box-shadow:0 0 18px #22d3ee}
+#wm{position:absolute;top:95px;width:100%;text-align:center;font-size:30px;font-weight:600;color:rgba(255,255,255,.6)}
+#frame{position:absolute;left:34px;top:424px;width:1012px;height:868px;border-radius:18px;border:6px solid #f472b6;box-shadow:0 0 40px rgba(244,114,182,.6),inset 0 0 0 2px rgba(0,0,0,.4)}
+.scene{position:absolute;inset:0;opacity:0}
+.a{position:absolute;opacity:var(--o,0);transform:translate(var(--x,0px),var(--y,0px)) scale(var(--s,1)) rotate(var(--r,0deg));transform-origin:center}
+.c{left:0;width:1080px;text-align:center}
+.h1{font-size:64px;font-weight:900;line-height:1.15;text-shadow:0 4px 18px rgba(0,0,0,.7)}
+.h2{font-size:48px;font-weight:800;line-height:1.25;text-shadow:0 3px 14px rgba(0,0,0,.7)}
+.sub{font-size:38px;font-weight:700;color:#d6d6f0}
+.y{color:#fde047}.r{color:#f43f5e}.cy{color:#22d3ee}.or{color:#fb923c}.g{color:#4ade80}.pk{color:#f472b6}
+.pill{display:inline-block;padding:14px 32px;border-radius:999px;font-size:36px;font-weight:800}
+.pill.cy{background:#22d3ee;color:#062033;box-shadow:0 0 30px rgba(34,211,238,.6)}
+.pill.or{background:#fb923c;color:#2a1000;box-shadow:0 0 30px rgba(251,146,60,.6)}
+.pill.pu{background:#a855f7;color:#fff;box-shadow:0 0 30px rgba(168,85,247,.6)}
+.pill.pk{background:#f472b6;color:#2a0016;box-shadow:0 0 30px rgba(244,114,182,.6)}
+.pill.dk{background:rgba(10,10,30,.85);color:#fde047;border:2px solid rgba(253,224,71,.6)}
+.pill.g{background:#22c55e;color:#03210f;box-shadow:0 0 30px rgba(34,197,94,.6)}
+.pill.r{background:#f43f5e;color:#fff;box-shadow:0 0 30px rgba(244,63,94,.6)}
+.panel{border-radius:30px;background:rgba(12,16,45,.85);border:3px solid rgba(34,211,238,.6);box-shadow:0 0 40px rgba(34,211,238,.2)}
+.card{position:absolute;width:380px;height:112px;border-radius:20px;display:flex;overflow:hidden;background:#1d1236;border:3px solid #fb923c;box-shadow:0 0 22px rgba(251,146,60,.35)}
+.card .av{width:86px;display:flex;align-items:center;justify-content:center;font-size:58px;background:linear-gradient(180deg,#7c2d12,#431407)}
+.card .nm{flex:1;display:flex;flex-direction:column;justify-content:center;padding-left:14px}
+.card .nm b{font-size:29px;font-weight:900}
+.card .nm i{font-style:normal;font-size:21px;color:#fed7aa;font-weight:700}
+.card .nx{width:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#fed7aa;background:#2a1a3a;border-left:3px dashed #fb923c}
+.card .nx span{font-size:34px}
+.card.rani{border-color:#fde047;box-shadow:0 0 30px rgba(253,224,71,.45)}
+.card.rani .av{background:linear-gradient(180deg,#a16207,#422006)}
+.card.on{border-color:#22d3ee;box-shadow:0 0 44px #22d3ee}
+.code{position:absolute;left:60px;top:230px;width:960px;height:380px;padding:30px 0 0 0}
+.ln{position:relative;height:62px;line-height:62px;font-size:40px;padding-left:40px;white-space:pre;border-left:8px solid transparent}
+.ln.hl{background:rgba(253,224,71,.16);border-left-color:#fde047}
+.ln.bad{background:rgba(244,63,94,.2);border-left-color:#f43f5e}
+.kw{color:#c084fc}.ty{color:#22d3ee}.st{color:#fdba74}.cm{color:#4ade80}
+.cons{position:absolute;left:60px;top:630px;width:960px;height:170px;border-radius:24px;background:#05060f;border:3px solid #334155;padding:20px 30px;font-size:30px}
+.badge{display:inline-block;padding:18px 38px;border-radius:24px;font-size:44px;font-weight:900}
+.badge.g{background:rgba(34,197,94,.18);border:3px solid #4ade80;color:#4ade80;box-shadow:0 0 34px rgba(74,222,128,.4)}
+.circ{position:absolute;width:140px;height:140px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:66px;background:rgba(255,255,255,.1);border:4px solid rgba(255,255,255,.6)}
+.step{position:absolute;left:110px;width:860px;height:110px;border-radius:24px;display:flex;align-items:center;padding-left:34px;font-size:42px;font-weight:800;background:rgba(12,16,45,.85)}
+svg{position:absolute;left:0;top:0;overflow:visible}
+</style></head>
+<body><div id="stage">
+<div id="bg"></div>
+<div class="a" id="frame"></div>
+
+<!-- ===== CLIP A: HOOK ===== -->
+<div class="scene" id="A">
+  <div class="a c h1" id="A1" style="top:215px">Baalveer ne sikhaya<br><span class="y">LINKED LIST?!</span> 😱</div>
+  <div class="a c" id="A2" style="top:1320px"><span class="pill pk">🔁 Singly Linked List TRAVERSAL</span></div>
+  <div class="a c h2" id="A3" style="top:1440px;font-size:44px">Ek message... <span class="y">5 log</span>... ek rule! 👀</div>
+</div>
+<!-- ===== CLIP B ===== -->
+<div class="scene" id="B">
+  <div class="a c h1" id="B1" style="top:250px">Ye scene <span class="y">yaad hai?</span> 🤔</div>
+  <div class="a c" id="B2" style="top:1320px"><span class="pill dk" style="font-size:42px">Isme chhupa hai <span style="color:#fff">TRAVERSAL!</span> 🔍</span></div>
+</div>
+<!-- ===== CLIP C ===== -->
+<div class="scene" id="C">
+  <div class="a c h2" id="C1" style="top:280px">“Ab main pahunchata hoon <span class="y">sandesh!</span>” 📜</div>
+  <div class="a c" id="C2" style="top:1320px"><span class="pill cy mono" style="font-size:40px">temp = head;</span></div>
+</div>
+<!-- ===== CLIP D ===== -->
+<div class="scene" id="D">
+  <div class="a c h2" id="D1" style="top:280px">📨 Sandesh <span class="y">next</span> ko pass...</div>
+  <div class="a" id="D2" style="left:170px;top:845px;width:682px;height:303px;border-radius:24px;background:#080a1e;border:4px solid #22d3ee;box-shadow:0 0 30px rgba(34,211,238,.5);text-align:center;padding-top:40px">
+    <div class="mono" style="font-size:44px;font-weight:700;color:#fde047">temp = temp-&gt;next;</div>
+    <div style="font-size:40px;font-weight:900;margin-top:40px"><span id="D2a">DD4</span><span id="D2b"> ➜ DD3</span><span id="D2c"> ➜ DD2</span></div>
+  </div>
+  <div class="a c" id="D3" style="top:1320px"><span class="pill or">Har node ➜ apne NEXT ko 💌</span></div>
+</div>
+<!-- ===== CLIP E ===== -->
+<div class="scene" id="E">
+  <div class="a c h2" id="E1" style="top:280px">“Khush raho <span class="y">Rani Pari!</span>” 👑</div>
+  <div class="a" id="E3" style="left:52px;top:768px;width:976px;height:324px;border-radius:24px;background:#080a1e;border:4px solid #fde047;box-shadow:0 0 30px rgba(253,224,71,.5);text-align:center;padding-top:50px">
+    <div style="font-size:58px;font-weight:900">👑 Rani Pari = <span class="y">LAST NODE</span></div>
+    <div class="mono" style="font-size:44px;font-weight:700;margin-top:40px;color:#fca5a5">next ➜ NULL 🛑</div></div>
+  <div class="a c" id="E2" style="top:1320px"><span class="pill r">Ab loop khatam! 🔚</span></div>
+</div>
+
+<!-- ===== ANIMATION: CHAIN + CODE ===== -->
+<div class="scene" id="M">
+  <!-- v1 upper -->
+  <div class="a c h2" id="M1" style="top:240px">📜 Sandesh ➜ <span class="y">Rani Pari</span> 👑</div>
+  <div class="a c" id="M2" style="top:370px"><span class="pill cy">HEAD = Dooba Dooba 4 🧝‍♂️</span></div>
+  <div class="a c" id="M3" style="top:480px"><span class="pill or">data = 📜 sandesh</span></div>
+  <div class="a c sub" id="M4" style="top:600px">Har node: <span class="or">data</span> + <span class="cy">next ➜</span></div>
+  <!-- code -->
+  <div class="a panel code mono" id="K">
+    <div class="ln" id="L0"><span class="ty">Node*</span> temp = head;</div>
+    <div class="ln" id="L1"><span class="kw">while</span> (temp != <span class="st">NULL</span>) {<span id="L1x" style="color:#f43f5e;font-family:Inter;font-weight:900"></span></div>
+    <div class="ln" id="L2">    cout &lt;&lt; temp-&gt;data;</div>
+    <div class="ln" id="L3">    temp = temp-&gt;next;</div>
+    <div class="ln" id="L4">}</div>
+  </div>
+  <div class="a cons" id="O"><span style="color:#64748b;font-weight:800">OUTPUT ▸</span> <span id="Ot" class="g" style="font-weight:800"></span></div>
+  <div class="a" id="DEL" style="left:150px;top:610px;width:780px;text-align:center"><span style="display:inline-block;padding:20px 44px;border:7px solid #4ade80;border-radius:20px;font-size:66px;font-weight:900;color:#4ade80;background:rgba(5,30,15,.92);box-shadow:0 0 50px rgba(74,222,128,.6)">✅ SANDESH DELIVERED!</span></div>
+  <!-- chain -->
+  <svg id="Msvg" width="1080" height="1920"></svg>
+  <div id="chain"></div>
+  <div class="a" id="NUL" style="left:845px;top:858px"><span class="pill" style="background:#3f3f46;color:#fca5a5;font-size:34px;padding:10px 26px">NULL ❌</span></div>
+  <div class="a" id="TMP" style="left:0;top:0"><span class="pill pu mono" style="font-size:34px;padding:10px 22px">temp 👉</span></div>
+  <div class="a" id="MSG" style="left:0;top:0;font-size:56px">📜</div>
+  <div class="a" id="LAST" style="left:600px;top:956px"><span class="pill dk" style="font-size:26px;padding:6px 18px">👑 LAST NODE</span></div>
+  <div class="a" id="NB1" style="left:50px;top:870px"><span class="pill r" style="font-size:30px;padding:10px 22px">⬅️❌ Peeche nahi ja sakte</span></div>
+  <div class="a" id="NB2" style="left:50px;top:950px"><span class="pill g" style="font-size:30px;padding:10px 22px">➡️ One-way = SINGLY</span></div>
+  <div class="a c" id="ON" style="top:1755px"><span class="badge g">⏱️ O(N) • har node 1 baar</span></div>
+</div>
+
+<!-- ===== CTA ===== -->
+<div class="scene" id="F">
+  <div class="a c h1" id="F1" style="top:215px;color:#fde047;font-size:58px">EK LINE MEIN YAAD RAKHO 🧠</div>
+  <div class="a step" id="F2" style="top:330px;border:3px solid #22d3ee">1️⃣&nbsp; <span class="cy">HEAD</span>&nbsp;se shuru 🏁</div>
+  <div class="a step" id="F3" style="top:460px;border:3px solid #fb923c">2️⃣&nbsp; <span class="or">next</span>&nbsp;pakad ke chalo ➡️</div>
+  <div class="a step" id="F4" style="top:590px;border:3px solid #f43f5e">3️⃣&nbsp; <span class="r">NULL</span>&nbsp;pe ruk jao 🛑</div>
+  <div class="a c" id="F5" style="top:750px"><span class="pill pk" style="font-size:38px">💬 Comment: Agla Baalveer concept kaunsa?</span></div>
+  <div class="a circ" id="F6" style="left:300px;top:870px">🔖</div>
+  <div class="a circ" id="F7" style="left:640px;top:870px">✈️</div>
+  <div class="a c sub" id="F6t" style="top:1020px"><span style="display:inline-block;width:340px">SAVE</span><span style="display:inline-block;width:340px">SHARE</span></div>
+  <div class="a panel" id="F8" style="left:170px;top:1110px;width:740px;height:380px;border-color:#f472b6;box-shadow:0 0 50px rgba(244,114,182,.4)">
+    <div style="position:absolute;left:310px;top:26px;width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#f472b6);display:flex;align-items:center;justify-content:center;font-size:50px;font-weight:900;border:4px solid #fff">PP</div>
+    <div style="position:absolute;width:100%;top:165px;text-align:center;font-size:46px;font-weight:900">@pretestpassed.codes</div>
+    <div id="fbtn" style="position:absolute;left:200px;top:255px;width:340px;height:90px;border-radius:20px;background:#3b82f6;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:900">FOLLOW</div>
+  </div>
+  <div class="a" id="F9" style="left:0;top:0;font-size:110px">👆</div>
+  <div class="a c sub" id="F10" style="top:1540px;color:#22d3ee">DSA ab Baalveer style mein! 🚀</div>
+  <div id="conf"></div>
+</div>
+
+<div class="a c" id="cred" style="top:1858px;font-size:22px;font-weight:600;color:rgba(255,255,255,.45)">Clip: Baalveer (SAB TV) • ref @campus_comder</div>
+<div id="prog"></div>
+<div id="wm">@pretestpassed.codes</div>
+</div>
+
+<script>
+const TL=window.TL, TX=window.TX||{}, END=window.END, CLIPS=window.CLIPS;
+const CL={}; CLIPS.forEach(c=>CL[c.id]=c.t);
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const eo=x=>1-Math.pow(1-clamp(x),3);
+const eio=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const back=x=>{x=clamp(x);const c1=2.0,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const S=k=>TL[k][0], E=k=>TL[k][1];
+function at(k,word,n){const s=TL[k];const tx=(TX[k]||'').toLowerCase();let i=-1;n=n||1;for(let j=0;j<n;j++){i=tx.indexOf(word.toLowerCase(),i+1)}
+  if(i<0) {console.log('MISSING',k,word);return s[0]} return s[0]+(s[1]-s[0])*(i/tx.length)*0.97;}
+const CUES=[]; const cue=(t,n,g)=>CUES.push([+t.toFixed(3),n,g||1]);
+function set(el,o,x,y,s,r){el=typeof el=='string'?$(el):el;el.style.setProperty('--o',o);el.style.setProperty('--x',(x||0)+'px');el.style.setProperty('--y',(y||0)+'px');el.style.setProperty('--s',s==null?1:s);el.style.setProperty('--r',(r||0)+'deg')}
+function pop(el,t,t0,d){d=d||.4;const p=clamp((t-t0)/d);set(el,clamp(p*2.5),0,0,t<t0?.4:.4+.6*back(p))}
+function rise(el,t,t0,d){d=d||.45;const p=clamp((t-t0)/d);set(el,clamp(p*2),0,50*(1-eo(p)),1)}
+function fm(id,f){const el=$(id);el.style.setProperty('--o',(parseFloat(el.style.getPropertyValue('--o'))||0)*f)}
+function draw(id,p){const el=$(id);if(!el._L){el._L=el.getTotalLength();el.setAttribute('stroke-dasharray',el._L)}p=clamp(p);el.setAttribute('stroke-dashoffset',el._L*(1-p));el.style.opacity=p>0.02?1:0}
+function rnd(i,k){const x=Math.sin(i*12.9898+k*78.233)*43758.5453;return x-Math.floor(x)}
+
+// ---------- windows ----------
+const WIN={A:[0,CL.A[1]+.075],B:[CL.B[0]-.075,CL.B[1]],C:CL.C,D:CL.D,E:CL.E,F:[(E('v4')+S('v5'))/2,END+1]};
+WIN.C=[CL.C[0]-.075,CL.C[1]+.075];WIN.D=[CL.D[0]-.075,CL.D[1]+.075];WIN.E=[CL.E[0]-.075,CL.E[1]+.075];
+const MRANGES=[[CL.B[1],WIN.C[0]],[WIN.C[1],WIN.D[0]],[WIN.D[1],WIN.E[0]],[WIN.E[1],WIN.F[0]]];
+const CLIPWIN=['A','B','C','D','E'].map(k=>CL[k]);
+function inR(t,r){return t>=r[0]&&t<r[1]}
+function vis(t,r,f){f=f||.12;return Math.min(clamp((t-r[0])/f),clamp((r[1]-t)/f))}
+
+// ---------- chain build ----------
+const NAMES=[['🧝‍♂️','Dooba Dooba 4','DD4'],['🧝‍♂️','Dooba Dooba 3','DD3'],['🧝‍♂️','Dooba Dooba 2','DD2'],['🧝‍♂️','Dooba Dooba 1','DD1'],['🧚‍♀️','Rani Pari','Rani Pari']];
+const NX=i=>150+i*110, NY=i=>1600-i*150;
+(function(){let h='',sv='<defs><marker id="ah" viewBox="0 0 10 10" markerWidth="4" markerHeight="4" refX="6" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#fdba74"/></marker></defs>';
+ NAMES.forEach((n,i)=>{h+=`<div class="a card${i==4?' rani':''}" id="nd${i}" style="left:${NX(i)}px;top:${NY(i)}px"><div class="av">${n[0]}</div><div class="nm"><b>${n[1]}</b><i>${i==0?'HEAD • ':''}data</i></div><div class="nx">next<span>${i<4?'⬆️':'🛑'}</span></div></div>`;
+  const x=NX(i)+332; if(i<4) sv+=`<path id="ar${i}" d="M${x},${NY(i)-2} L${x},${NY(i)-34}" stroke="#fdba74" stroke-width="7" fill="none" marker-end="url(#ah)"/>`;
+  else sv+=`<path id="ar4" d="M${x},${NY(4)-2} L${x},${NY(4)-60}" stroke="#fca5a5" stroke-width="7" fill="none" marker-end="url(#ah)"/>`});
+ $('chain').innerHTML=h;$('Msvg').innerHTML=sv;
+ let ch='';for(let i=0;i<90;i++){const col=['#22d3ee','#f472b6','#fde047','#4ade80','#a855f7','#fb923c'][i%6];ch+=`<div class="a" id="cf${i}" style="left:0;top:0;width:${14+(i*7)%12}px;height:${8+(i*5)%10}px;background:${col};border-radius:3px"></div>`}
+ $('conf').innerHTML=ch;})();
+
+// temp position timeline (node index as float; 5 = NULL)
+const TT=[];  // [time, index]
+function buildTT(){
+ TT.push([S('v2'),0]);
+ const a=[at('v3','se teen'),at('v3','se do'),at('v3','se ek')]; a.forEach((t,i)=>TT.push([t-.1,i+1]));
+ TT.push([S('v4')+.05,4]); TT.push([at('v4','temp jaise'),5]);
+}
+function tempIdx(t){let v=0;for(let i=0;i<TT.length;i++){const [ti,k]=TT[i];const prev=i?TT[i-1][1]:0;if(t>=ti) v=prev+(k-prev)*eio((t-ti)/.45)}return v}
+function nodePos(f){f=clamp(f,0,5);const i=Math.floor(f),u=f-i;const P=k=>k<5?[NX(k),NY(k)]:[700,860];const a=P(i),b=P(Math.min(5,i+1));return [a[0]+(b[0]-a[0])*u,a[1]+(b[1]-a[1])*u]}
+
+// ---------- cues ----------
+function buildCues(){
+ // scene cuts
+ [CL.B[1],CL.C[0],CL.C[1],CL.D[0],CL.D[1],CL.E[0],CL.E[1],WIN.F[0]].forEach(t=>cue(t-.12,'whoosh',.7));
+ cue(.3,'pop'); cue(1.2,'ding',.5);
+ cue(CL.B[1]+.3,'pop'); cue(at('v1','head node'),'pop'); cue(at('v1','data'),'pop');
+ cue(S('v2')+.1,'pop'); cue(at('v2','pointer'),'tick'); cue(at('v2','jab tak'),'tick'); cue(at('v2','data print'),'ding',.5);
+ TT.slice(1,4).forEach(x=>{cue(x[0],'whoosh',.35);cue(x[0]+.5,'ding',.45)});
+ cue(at('v3','peeche'),'buzz',.5); cue(at('v3','isiliye'),'pop');
+ cue(S('v4')+.05,'whoosh',.35); cue(at('v4','null'),'buzz',.4); cue(at('v4','sandesh deliver'),'success',.9); cue(at('v4','time complexity'),'pop');
+ cue(S('v5')+.1,'pop'); cue(at('v5','head se'),'tick'); cue(at('v5','next pakad'),'tick'); cue(at('v5','null pe'),'tick');
+ cue(at('v5','comment'),'pop'); cue(at('v5','save'),'pop');
+ cue(at('v5','follow')-.1,'click'); cue(at('v5','follow'),'sparkle',.9);
+}
+
+// ---------- render ----------
+window.render=function(t){
+ $('prog').style.width=(1080*clamp(t/END))+'px';
+ const bg=$('bg');bg.style.setProperty('--b1x',(20+8*Math.sin(t*.25))+'%');bg.style.setProperty('--b1y',(75+6*Math.cos(t*.2))+'%');bg.style.setProperty('--b2x',(82+6*Math.cos(t*.3))+'%');bg.style.setProperty('--b2y',(28+8*Math.sin(t*.22))+'%');
+ const inClip=CLIPWIN.some(r=>t>=r[0]&&t<r[1]);
+ bg.style.clipPath=inClip?"path(evenodd,'M0 0 H1080 V1920 H0 Z M40 430 H1040 V1286 H40 Z')":'none';
+ set('frame',inClip?1:0); set('cred',inClip?1:0);
+ ['A','B','C','D','E','F'].forEach(id=>{const o=vis(t,WIN[id]);const el=$(id);el.style.opacity=o;el.style.display=o>0?'block':'none'});
+ {const o=Math.max(...MRANGES.map(r=>vis(t,r,.1)));const el=$('M');el.style.opacity=o;el.style.display=o>0?'block':'none'}
+ // A
+ pop('A1',t,.15); pop('A2',t,1.0); rise('A3',t,1.8);
+ // B
+ pop('B1',t,CL.B[0]+.1); pop('B2',t,at('v1','traversal')-.2);
+ // C
+ rise('C1',t,CL.C[0]+.1); pop('C2',t,CL.C[0]+.6);
+ // D (dialogue-relative: DD3 at ~+0.1, DD2 at ~+4.7)
+ rise('D1',t,CL.D[0]+.1); pop('D2',t,CL.D[0]+.2); rise('D3',t,CL.D[0]+1.2);
+ $('D2b').style.opacity=t>CL.D[0]+1.0?1:0; $('D2c').style.opacity=t>CL.D[0]+4.7?1:0;
+ // E
+ rise('E1',t,CL.E[0]+.1); pop('E3',t,CL.E[0]+.15); pop('E2',t,CL.E[0]+1.4);
+ // ===== M: chain + code =====
+ const m0=CL.B[1];
+ for(let i=0;i<5;i++){pop('nd'+i,t,m0+.15+i*.15,.4); draw('ar'+i,eo((t-m0-.5-i*.15)/.4))}
+ set('NUL',clamp((t-m0-1.3)/.3),0,0,1);
+ // v1 upper
+ const up1=1-clamp((t-S('v2')+.2)/.2);
+ rise('M1',t,m0+.1); pop('M2',t,at('v1','head node')-.1); pop('M3',t,at('v1','data')-.1); rise('M4',t,at('v1','data')+.7);
+ ['M1','M2','M3','M4'].forEach(id=>fm(id,up1));
+ // code
+ set('K',clamp((t-S('v2'))/.3),0,0,1); set('O',clamp((t-S('v2')-.2)/.3),0,0,1);
+ const hl=[]; // which line highlighted
+ let cur=-1;
+ if(t>=S('v2')){cur=0; if(t>at('v2','jab tak')) cur=1; if(t>at('v2','data print')) cur=2; if(t>at('v2','temp ko next')) cur=3;}
+ if(t>=E('v2')){ // during traversal: cycle lines at each move
+   cur=1; TT.slice(1).forEach(([ti])=>{if(t>ti-.35&&t<ti+.15) cur=3; else if(t>=ti+.15&&t<ti+.6) cur=1;});
+   TT.slice(1,5).forEach(([ti])=>{if(t>=ti+.6&&t<ti+1.2) cur=2});
+ }
+ const exitT=at('v4','temp jaise')+.4;
+ for(let i=0;i<5;i++){$('L'+i).classList.toggle('hl',i==cur&&!(i==1&&t>exitT));$('L'+i).classList.toggle('bad',i==1&&t>exitT)}
+ $('L1x').textContent=t>exitT?'  ❌ EXIT':'';
+ // output
+ let out=[];if(t>at('v2','data print')) out.push('DD4');
+ TT.slice(1,5).forEach(([ti],j)=>{if(t>ti+.6) out.push(NAMES[j+1][2])});
+ $('Ot').textContent=out.join(' ➜ ');
+ // temp & message
+ const ti=tempIdx(t); const [px,py]=nodePos(ti);
+ set('TMP',clamp((t-at('v2','temp'))/.3),px-150,py+30,1);
+ set('MSG',clamp((t-at('v1','sandesh',2))/.3)*(t>at('v4','sandesh deliver')?0:1),px+20+(ti>4.5?0:0),py-48+(ti>=5?80:0),1,-10+8*Math.sin(t*5));
+ for(let i=0;i<5;i++) $('nd'+i).classList.toggle('on',Math.round(ti)==i&&t>=S('v2')&&Math.abs(ti-i)<.3);
+ // nud highlight
+ const nulOn=t>at('v4','null');$('NUL').firstElementChild.style.background=nulOn?'#f43f5e':'#3f3f46';$('NUL').firstElementChild.style.color=nulOn?'#fff':'#fca5a5';
+ pop('LAST',t,S('v4')+.2); pop('NB1',t,at('v3','peeche')-.1); pop('NB2',t,at('v3','isiliye')-.1);
+ {const f=1-clamp((t-S('v4'))/.3);fm('NB1',f);fm('NB2',f)}
+ pop('DEL',t,at('v4','sandesh deliver')-.1,.45); if(t>at('v4','sandesh deliver')-.1) $('DEL').style.setProperty('--r','-4deg');
+ pop('ON',t,at('v4','time complexity')-.1);
+ // ===== F =====
+ const f0=S('v5');
+ pop('F1',t,f0); slideF('F2',t,at('v5','head se')-.15); slideF('F3',t,at('v5','next pakad')-.15); slideF('F4',t,at('v5','null pe')-.15);
+ pop('F5',t,at('v5','comment')-.1); pop('F6',t,at('v5','save')-.15); pop('F7',t,at('v5','share')-.15); set('F6t',clamp((t-at('v5','save'))/.3),0,0,1);
+ pop('F8',t,at('v5','save')+.3);
+ {const tc=at('v5','follow')-.1;const p=eo((t-tc+.9)/.8);const x=900+(560-900)*p,y=1680+(1410-1680)*p;const press=t>tc&&t<tc+.2?.85:1;
+  set('F9',clamp((t-tc+1)/.3),x-60,y-60,press);
+  const b=$('fbtn');if(t>tc){b.textContent='FOLLOWING ✓';b.style.background='#475569'}else{b.textContent='FOLLOW';b.style.background='#3b82f6'}
+  for(let i=0;i<90;i++){const dt=t-tc;const el=$('cf'+i);if(dt<0){set(el,0);continue}
+    const ang=rnd(i,1)*Math.PI*2, sp=500+rnd(i,2)*900;const x=540+Math.cos(ang)*sp*dt*0.8, y=1300+Math.sin(ang)*sp*dt*0.7-500*dt+700*dt*dt;
+    set(el,clamp(3-dt),x,y,1,dt*400*(rnd(i,3)-.5))}}
+ rise('F10',t,at('v5','follow')+.6);
+};
+function slideF(el,t,t0){const p=clamp((t-t0)/.45);set(el,clamp(p*2),-700*(1-eo(p)),0,1)}
+buildTT(); buildCues(); window.CUES=CUES; window.render(0);
+</script></body></html>
