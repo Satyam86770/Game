@@ -1,6 +1,6 @@
 # Array vs Linked List — Reel Script (Hinglish, ~66s)
 
-Style: same format as the "Auth vs Authz" reel — dark gradient, @PretestPassed watermark, step pills,
+Style: same format as the "Auth vs Authz" reel — dark gradient, @pretestpassed.codes watermark, step pills,
 real-life analogy, "Ek line mein yaad rakho", Save/Share/Follow CTA.
 Voice: Gemini TTS, voice **Puck** (picked as the closest match to the reference: young male, energetic, fast Hinglish).
 Music: original lo-fi hip-hop beat (synthesized), ducked under the voice. SFX: whoosh / pop / ding / buzz / click / sparkle.
