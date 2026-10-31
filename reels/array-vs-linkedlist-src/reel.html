@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#0a0a22}
+body{font-family:'Inter','Noto Color Emoji',sans-serif;color:#fff}
+.em{font-family:'Noto Color Emoji'}
+#stage{position:absolute;inset:0;overflow:hidden}
+#bg{position:absolute;inset:-200px;background:
+ radial-gradient(700px 700px at var(--b1x,20%) var(--b1y,75%),rgba(150,40,200,.35),transparent 70%),
+ radial-gradient(650px 650px at var(--b2x,85%) var(--b2y,30%),rgba(255,120,40,.22),transparent 70%),
+ radial-gradient(900px 900px at 50% 110%,rgba(40,80,220,.30),transparent 70%),
+ linear-gradient(180deg,#0b0b2b 0%,#14102f 50%,#0b0a24 100%)}
+#prog{position:absolute;left:0;top:0;height:10px;background:linear-gradient(90deg,#22d3ee,#a855f7,#f472b6);box-shadow:0 0 18px #22d3ee}
+#wm{position:absolute;top:95px;width:100%;text-align:center;font-size:30px;font-weight:600;color:rgba(255,255,255,.55)}
+.scene{position:absolute;inset:0;opacity:0}
+.a{position:absolute;opacity:var(--o,0);transform:translate(var(--x,0px),var(--y,0px)) scale(var(--s,1)) rotate(var(--r,0deg));transform-origin:center}
+.c{left:0;width:1080px;text-align:center}
+.h1{font-size:62px;font-weight:800;line-height:1.2;text-shadow:0 4px 18px rgba(0,0,0,.6)}
+.h2{font-size:50px;font-weight:800;line-height:1.25}
+.sub{font-size:40px;font-weight:700;color:#d6d6f0}
+.y{color:#fde047}.r{color:#f43f5e}.cy{color:#22d3ee}.or{color:#fb923c}.g{color:#4ade80}
+.pill{display:inline-block;padding:14px 34px;border-radius:999px;font-size:36px;font-weight:800;letter-spacing:1px}
+.pill.cy{background:#22d3ee;color:#062033;box-shadow:0 0 30px rgba(34,211,238,.6)}
+.pill.or{background:#fb923c;color:#2a1000;box-shadow:0 0 30px rgba(251,146,60,.6)}
+.pill.pu{background:#a855f7;color:#fff;box-shadow:0 0 30px rgba(168,85,247,.6)}
+.pill.dk{background:rgba(255,255,255,.1);color:#fde047;border:2px solid rgba(253,224,71,.5)}
+.panel{border-radius:36px;background:rgba(15,20,50,.75);border:3px solid rgba(34,211,238,.6);box-shadow:0 0 40px rgba(34,211,238,.25),inset 0 0 60px rgba(34,211,238,.06)}
+.panel.o{border-color:rgba(251,146,60,.7);box-shadow:0 0 40px rgba(251,146,60,.25),inset 0 0 60px rgba(251,146,60,.06)}
+.box{position:absolute;display:flex;align-items:center;justify-content:center;font-weight:800;border-radius:18px}
+.cell{width:100px;height:100px;background:linear-gradient(180deg,#1e3a8a,#1e40af);border:3px solid #60a5fa;font-size:40px}
+.seat{width:100px;height:110px;border-radius:30px 30px 14px 14px;background:linear-gradient(180deg,#be123c,#7f1d1d);border:3px solid #fb7185;font-size:38px;box-shadow:0 8px 0 #4c0519}
+.seat.hl{background:linear-gradient(180deg,#facc15,#ca8a04);border-color:#fef08a;color:#1a1200;box-shadow:0 8px 0 #713f12,0 0 40px #facc15}
+.idx{position:absolute;width:100px;text-align:center;font-size:34px;font-weight:800;color:#22d3ee}
+.addr{position:absolute;width:110px;text-align:center;font-size:24px;font-weight:700;color:#a5b4fc;font-family:'DejaVu Sans Mono',monospace}
+.node{position:absolute;height:120px;display:flex;border-radius:22px;overflow:hidden;border:3px solid #fb923c;box-shadow:0 0 26px rgba(251,146,60,.35);background:#1a1030}
+.node .d{width:150px;display:flex;align-items:center;justify-content:center;font-size:44px;font-weight:800;background:linear-gradient(180deg,#7c2d12,#431407)}
+.node .n{width:170px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:24px;font-weight:700;color:#fed7aa;background:#2a1a3a;border-left:3px dashed #fb923c}
+.node .n b{font-size:28px;color:#fff;font-family:'DejaVu Sans Mono',monospace}
+.tag{position:absolute;padding:8px 18px;border-radius:14px;font-size:28px;font-weight:800}
+.badge{display:inline-block;padding:20px 40px;border-radius:24px;font-size:46px;font-weight:900}
+.badge.g{background:rgba(34,197,94,.18);border:3px solid #4ade80;color:#4ade80;box-shadow:0 0 34px rgba(74,222,128,.4)}
+.badge.r{background:rgba(244,63,94,.16);border:3px solid #f43f5e;color:#fb7185;box-shadow:0 0 34px rgba(244,63,94,.4)}
+.slot{position:absolute;width:130px;height:130px;border-radius:20px;border:3px dashed rgba(96,165,250,.6)}
+.sbox{position:absolute;width:130px;height:130px;font-size:56px}
+.ab{background:linear-gradient(180deg,#1d4ed8,#1e3a8a);border:3px solid #93c5fd}
+.xb{background:linear-gradient(180deg,#16a34a,#14532d);border:3px solid #86efac}
+.lnode{position:absolute;width:150px;height:110px;border-radius:20px;font-size:50px;font-weight:800;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#9a3412,#431407);border:3px solid #fdba74}
+.card{position:absolute;left:90px;width:900px;border-radius:30px;padding:30px 40px;background:rgba(10,15,45,.8)}
+.card .t{font-size:52px;font-weight:900;margin-bottom:18px}
+.chip{display:inline-block;margin:8px 8px;padding:12px 24px;border-radius:16px;font-size:34px;font-weight:800;background:rgba(255,255,255,.08)}
+.circ{position:absolute;width:150px;height:150px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:70px;background:rgba(255,255,255,.1);border:4px solid rgba(255,255,255,.6)}
+svg{position:absolute;left:0;top:0;overflow:visible}
+</style></head>
+<body><div id="stage">
+<div id="bg"></div>
+
+<!-- ============ SCENE A: HOOK ============ -->
+<div class="scene" id="A">
+  <div class="a c h1" id="A1" style="top:250px">Array <span class="cy">🆚</span> Linked List</div>
+  <div class="a c sub" id="A2" style="top:345px">Dono mein <span class="y">DATA</span> hi store hota hai 📦</div>
+  <div class="a panel" id="A3" style="left:70px;top:480px;width:940px;height:600px">
+    <div style="position:absolute;left:40px;top:30px;font-size:38px;font-weight:900" class="cy">ARRAY</div>
+    <div class="box cell" style="left:40px;top:100px">10</div><div class="box cell" style="left:146px;top:100px">20</div>
+    <div class="box cell" style="left:252px;top:100px">30</div><div class="box cell" style="left:358px;top:100px">40</div>
+    <div style="position:absolute;left:40px;top:320px;font-size:38px;font-weight:900" class="or">LINKED LIST</div>
+  </div>
+  <div class="a" id="A3b" style="left:0;top:0;width:1080px;height:1920px">
+    <div class="lnode" style="left:110px;top:880px;width:130px">10</div>
+    <div class="lnode" style="left:350px;top:930px;width:130px">20</div>
+    <div class="lnode" style="left:590px;top:870px;width:130px">30</div>
+    <div class="lnode" style="left:830px;top:940px;width:130px">40</div>
+    <svg width="1080" height="1920"><defs><marker id="ah" viewBox="0 0 10 10" markerWidth="4.5" markerHeight="4.5" refX="6" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#fdba74"/></marker></defs>
+      <path d="M240,935 Q295,930 345,985" stroke="#fdba74" stroke-width="6" fill="none" marker-end="url(#ah)"/>
+      <path d="M480,985 Q535,940 585,925" stroke="#fdba74" stroke-width="6" fill="none" marker-end="url(#ah)"/>
+      <path d="M720,925 Q775,950 825,995" stroke="#fdba74" stroke-width="6" fill="none" marker-end="url(#ah)"/></svg>
+  </div>
+  <div class="a" id="A3c" style="left:600px;top:575px;font-size:110px"><span class="em">🤷</span></div>
+  <div class="a c" id="A4" style="top:1160px"><span class="pill pu">🧑‍💼 Interviewer: "Difference batao?"</span></div>
+  <div class="a c h1" id="A5" style="top:1290px;font-size:84px">Toh <span class="r">FARK</span> kya hai?! 🤔</div>
+</div>
+
+<!-- ============ SCENE B: VS ============ -->
+<div class="scene" id="B">
+  <div class="a c" id="B1" style="top:520px;font-size:130px;font-weight:900;color:#22d3ee;text-shadow:0 0 40px rgba(34,211,238,.7)">ARRAY</div>
+  <div class="a" id="B2" style="left:440px;top:700px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,#a855f7,#4c1d95);display:flex;align-items:center;justify-content:center;font-size:80px;font-weight:900;box-shadow:0 0 60px #a855f7">VS</div>
+  <div class="a c" id="B3" style="top:930px;font-size:120px;font-weight:900;color:#fb923c;text-shadow:0 0 40px rgba(251,146,60,.7)">LINKED LIST</div>
+  <div class="a c h2" id="B4" style="top:1140px">Kaam same... par tareeka <span class="y">bilkul ALAG!</span> 😮</div>
+  <div class="a c" id="B5" style="top:1290px"><span class="pill dk">🍿 Cinema Hall + 🗺️ Treasure Hunt</span></div>
+</div>
+
+<!-- ============ SCENE C: ARRAY ============ -->
+<div class="scene" id="C">
+  <div class="a c" id="C1" style="top:200px"><span class="pill cy">STEP 1 • ARRAY 🎬</span></div>
+  <div class="a c h2" id="C2" style="top:310px">Array = Cinema hall ki ek <span class="y">ROW</span> 🍿</div>
+  <div class="a panel" id="C3" style="left:50px;top:430px;width:980px;height:760px"></div>
+  <div class="a" id="C4" style="left:150px;top:470px;width:780px;height:70px;border-radius:50% 50% 0 0/100% 100% 0 0;background:linear-gradient(180deg,#e0f2fe,#7dd3fc);box-shadow:0 0 60px #7dd3fc;color:#082f49;font-size:32px;font-weight:900;text-align:center;line-height:80px;letter-spacing:12px">SCREEN</div>
+  <div id="seats"></div>
+  <div class="a c" id="C6" style="top:1000px"><span style="display:inline-block;width:880px;height:22px;border:5px solid #a5b4fc;border-top:none;border-radius:0 0 20px 20px"></span></div>
+  <div class="a c sub" id="C7" style="top:1050px"><span class="cy">📦 Continuous memory</span> — ek ke baad ek</div>
+  <div class="a" id="C8" style="left:0;top:0;font-size:100px"><span class="em">🧑</span></div>
+  <div class="a c" id="C9" style="top:1240px"><span class="pill dk" style="font-size:48px">🎟️ arr[5] = <span style="color:#fff">21</span></span></div>
+  <div class="a c h2" id="C10" style="top:1370px">Seedha wahin! <span class="y">Ek hi JUMP</span> 🚀</div>
+  <div class="a c" id="C11" style="top:1490px"><span class="badge g">⚡ O(1) • Direct Access</span></div>
+</div>
+
+<!-- ============ SCENE D: LINKED LIST ============ -->
+<div class="scene" id="D">
+  <div class="a c" id="D1" style="top:200px"><span class="pill or">STEP 2 • LINKED LIST 🗺️</span></div>
+  <div class="a c h2" id="D2" style="top:310px">Linked List = <span class="y">Treasure Hunt!</span> 🗺️</div>
+  <svg id="Dsvg" width="1080" height="1920"></svg>
+  <div id="nodes"></div>
+  <div class="a tag" id="D5" style="left:95px;top:440px;background:#fb923c;color:#2a1000">DATA</div>
+  <div class="a tag" id="D6" style="left:255px;top:440px;background:#a855f7">POINTER ➜ next ka address</div>
+  <div class="a c sub" id="D7" style="top:1390px">🌀 Memory mein <span class="or">kahin bhi</span> bikhre!</div>
+  <div class="a" id="D8" style="left:0;top:0;font-size:84px"><span class="em">🕵️</span></div>
+  <div class="a" id="D9" style="left:0;top:0;" ><span class="pill pu" id="D9t">Step 1</span></div>
+  <div class="a c h2" id="D10" style="top:1480px">5th chahiye? <span class="y">Shuru se chalo</span> 🚶</div>
+  <div class="a c" id="D11" style="top:1600px"><span class="badge r">🐢 O(N) • Ek-ek karke</span></div>
+</div>
+
+<!-- ============ SCENE E: INSERT ============ -->
+<div class="scene" id="E">
+  <div class="a c" id="E1" style="top:200px"><span class="pill pu">⚡ TWIST • INSERT IN MIDDLE</span></div>
+  <div class="a c h2" id="E2" style="top:300px">Beech mein <span class="y">naya dost</span> aaya! 🙋</div>
+  <div class="a panel" id="E3" style="left:50px;top:400px;width:980px;height:600px">
+    <div style="position:absolute;left:36px;top:24px;font-size:40px;font-weight:900" class="cy">ARRAY</div></div>
+  <div id="arr"></div>
+  <div class="a c" id="E5" style="top:880px"><span class="badge r" style="font-size:40px;padding:14px 30px">😩 Sabko SHIFT! O(N)</span></div>
+  <div class="a panel o" id="E6" style="left:50px;top:1040px;width:980px;height:560px">
+    <div style="position:absolute;left:36px;top:24px;font-size:40px;font-weight:900" class="or">LINKED LIST</div></div>
+  <svg id="Esvg" width="1080" height="1920"></svg>
+  <div id="ll"></div>
+  <div class="a c" id="E8" style="top:1500px"><span class="badge g" style="font-size:40px;padding:14px 30px">😎 Sirf 2 arrow! O(1)</span></div>
+  <div class="a c sub" id="E9" style="top:1650px">Koi shifting nahi! ✅</div>
+</div>
+
+<!-- ============ SCENE F: SUMMARY ============ -->
+<div class="scene" id="F">
+  <div class="a c h1" id="F1" style="top:230px;color:#fde047">EK LINE MEIN YAAD RAKHO 🧠</div>
+  <div class="a card panel" id="F2" style="top:380px">
+    <div class="t cy">ARRAY 🎬</div>
+    <span class="chip">⚡ Fast access</span><span class="chip">📏 Fixed size</span><span class="chip">📦 Continuous</span></div>
+  <div class="a card panel o" id="F3" style="top:720px">
+    <div class="t or">LINKED LIST 🗺️</div>
+    <span class="chip">✂️ Easy insert/delete</span><span class="chip">🎈 Dynamic size</span><span class="chip">🌀 Scattered</span></div>
+  <div class="a c sub" id="F4" style="top:1110px;color:#fff">Hamesha yaad rakho 👇</div>
+  <div class="a c h2" id="F5" style="top:1200px">📖 Padhna zyada? ➜ <span class="pill cy" style="font-size:44px">ARRAY</span></div>
+  <div class="a c h2" id="F6" style="top:1340px">✏️ Badalna zyada? ➜ <span class="pill or" style="font-size:44px">LINKED LIST</span></div>
+</div>
+
+<!-- ============ SCENE G: CTA ============ -->
+<div class="scene" id="G">
+  <div class="a c h1" id="G1" style="top:300px">Interview mein ye sawaal<br><span class="y">PAKKA</span> aata hai! 💯</div>
+  <div class="a circ" id="G2" style="left:280px;top:520px">🔖</div>
+  <div class="a circ" id="G3" style="left:650px;top:520px">✈️</div>
+  <div class="a c sub" id="G2t" style="top:690px"><span style="display:inline-block;width:370px">SAVE</span><span style="display:inline-block;width:370px">SHARE</span></div>
+  <div class="a c h2" id="G4" style="top:790px;font-size:44px">Us dost ko bhejo jo dono ko<br><span class="y">SAME</span> samajhta hai 😅</div>
+  <div class="a c h2" id="G5" style="top:990px;font-size:46px;color:#fde047">Jaate-jaate FOLLOW karna mat bhoolna! 🔔</div>
+  <div class="a panel" id="G6" style="left:190px;top:1090px;width:700px;height:400px;border-color:#f472b6;box-shadow:0 0 50px rgba(244,114,182,.4)">
+    <div style="position:absolute;left:290px;top:30px;width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#f472b6);display:flex;align-items:center;justify-content:center;font-size:50px;font-weight:900;border:4px solid #fff">PP</div>
+    <div style="position:absolute;width:100%;top:170px;text-align:center;font-size:46px;font-weight:900">@PretestPassed</div>
+    <div id="fbtn" style="position:absolute;left:180px;top:265px;width:340px;height:90px;border-radius:20px;background:#3b82f6;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:900">FOLLOW</div>
+  </div>
+  <div class="a" id="G7" style="left:0;top:0;font-size:110px"><span class="em">👆</span></div>
+  <div class="a c sub" id="G8" style="top:1560px;color:#22d3ee">Interview concepts — EASY way mein! 🚀</div>
+  <div id="conf"></div>
+</div>
+
+<div id="prog"></div>
+<div id="wm">@PretestPassed</div>
+</div>
+
+<script>
+const TL = window.TL || {"s01":[0,5],"s02":[5.2,10],"s03":[10.2,16],"s04":[16.2,21],"s05":[21.2,27],"s06":[27.2,33],"s07":[33.2,39],"s08":[39.2,43],"s09":[43.2,49],"s10":[49.2,53],"s11":[53.2,58],"s12":[58.2,61]};
+const TX = window.TX || {};
+const END = window.END || 62;
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const eo=x=>1-Math.pow(1-clamp(x),3);
+const eio=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const back=x=>{x=clamp(x);const c1=2.0,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const S=k=>TL[k][0], E=k=>TL[k][1];
+// time of a word inside a segment, by character position
+function at(k,word,frac){const s=TL[k];const tx=(TX[k]||'').toLowerCase();let i=tx.indexOf(word.toLowerCase());
+  if(i<0||!tx.length) return s[0]+(s[1]-s[0])*(frac||0); return s[0]+(s[1]-s[0])*(i/tx.length)*0.97;}
+const CUES=[]; const cue=(t,n,g)=>CUES.push([+t.toFixed(3),n,g||1]);
+function set(el,o,x,y,s,r){el=typeof el=='string'?$(el):el;el.style.setProperty('--o',o);el.style.setProperty('--x',(x||0)+'px');el.style.setProperty('--y',(y||0)+'px');el.style.setProperty('--s',s==null?1:s);el.style.setProperty('--r',(r||0)+'deg')}
+function pop(el,t,t0,d){d=d||.4;const p=clamp((t-t0)/d);set(el,clamp(p*2.5),0,0,t<t0?.4:.4+.6*back(p))}
+function rise(el,t,t0,d){d=d||.45;const p=clamp((t-t0)/d);set(el,clamp(p*2),0,60*(1-eo(p)),1)}
+function slideX(el,t,t0,dx,d){d=d||.5;const p=clamp((t-t0)/d);set(el,clamp(p*2),dx*(1-eo(p)),0,1)}
+
+// ---------- scene windows ----------
+const SC={A:['s01','s01'],B:['s02','s02'],C:['s03','s04'],D:['s05','s06'],E:['s07','s08'],F:['s09','s10'],G:['s11','s12']};
+const order=['A','B','C','D','E','F','G'];
+function win(id){const i=order.indexOf(id);const st=i==0?0:(E(SC[order[i-1]][1])+S(SC[id][0]))/2;const en=i==order.length-1?END+1:(E(SC[id][1])+S(SC[order[i+1]][0]))/2;return [st,en]}
+
+// ---------- build dynamic DOM ----------
+const seatVals=[12,45,7,33,90,21,64,8];
+const SX=i=>91+i*114, SY=650;
+(function(){let h='';seatVals.forEach((v,i)=>{h+=`<div class="a box seat" id="seat${i}" style="left:${SX(i)}px;top:${SY}px">${v}</div><div class="a idx" id="idx${i}" style="left:${SX(i)}px;top:${SY+130}px">${i}</div><div class="a addr" id="ad${i}" style="left:${SX(i)-5}px;top:${SY+185}px">${1000+i*4}</div>`});$('seats').innerHTML=h;
+ // linked list nodes
+ const N=[[80,520,'🗝️12','@2050'],[620,690,'💎45','@1010'],[90,870,'🪙7','@3300'],[610,1040,'📜33','@1500'],[100,1210,'👑90','@4120']];
+ window.N=N; let nh='',sv='<defs><marker id="ah2" viewBox="0 0 10 10" markerWidth="4.5" markerHeight="4.5" refX="6" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#fdba74"/></marker></defs>';
+ N.forEach((n,i)=>{const nxt=i<N.length-1?N[i+1][3]:'NULL';nh+=`<div class="a node" id="nd${i}" style="left:${n[0]}px;top:${n[1]}px"><div class="d">${n[2]}</div><div class="n">next<b>${nxt}</b></div></div><div class="a addr" id="na${i}" style="left:${n[0]+(i%2?200:0)}px;top:${n[1]-36}px;width:130px;font-size:26px;color:#fdba74;text-align:left">${n[3]}</div>`;
+  if(i<N.length-1){const x1=n[0]+320,y1=n[1]+60,x2=N[i+1][0]+(N[i+1][0]>n[0]?0:320),y2=N[i+1][1]+60;
+   let d; if(N[i+1][0]>n[0]) d=`M${x1},${y1} C${x1+120},${y1} ${x2-140},${y2} ${x2-8},${y2}`; else {const sx=n[0]+160,sy=n[1]+122,ex=N[i+1][0]+160,ey=N[i+1][1]-10; d=`M${sx},${sy} C${sx},${sy+70} ${ex},${ey-70} ${ex},${ey}`;}
+   sv+=`<path id="pa${i}" d="${d}" stroke="#fdba74" stroke-width="7" fill="none" marker-end="url(#ah2)" stroke-dasharray="1000" stroke-dashoffset="1000"/>`}});
+ nh+=`<div class="a tag" id="null" style="left:470px;top:1250px;background:#3f3f46;color:#fca5a5">➜ NULL ❌</div>`;
+ $('nodes').innerHTML=nh;$('Dsvg').innerHTML=sv;
+ // array insert
+ let ah='';const AX=i=>110+i*146, AY=600;window.AX=AX;
+ for(let i=0;i<6;i++) ah+=`<div class="a slot" id="sl${i}" style="left:${AX(i)}px;top:${AY}px"></div>`;
+ 'ABCDE'.split('').forEach((c,i)=>ah+=`<div class="a box sbox ab" id="ab${i}" style="left:${AX(i)}px;top:${AY}px">${c}</div>`);
+ ah+=`<div class="a box sbox xb" id="abx" style="left:${AX(2)}px;top:${AY}px">X</div>`;
+ for(let i=0;i<6;i++) ah+=`<div class="a idx" id="aix${i}" style="left:${AX(i)+15}px;top:${AY+145}px">${i}</div>`;
+ $('arr').innerHTML=ah;
+ // linked list insert
+ const LX=[100,340,580,820], LY=1170; let lh='',ls='<defs><marker id="ah3" viewBox="0 0 10 10" markerWidth="4.5" markerHeight="4.5" refX="6" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#fdba74"/></marker><marker id="ah4" viewBox="0 0 10 10" markerWidth="4.5" markerHeight="4.5" refX="6" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker></defs>';
+ 'ABCD'.split('').forEach((c,i)=>lh+=`<div class="a lnode" id="ln${i}" style="left:${LX[i]}px;top:${LY}px">${c}</div>`);
+ lh+=`<div class="a lnode" id="lnx" style="left:460px;top:1350px;background:linear-gradient(180deg,#16a34a,#14532d);border-color:#86efac">X</div>`;
+ [0,1,2].forEach(i=>ls+=`<path id="lp${i}" d="M${LX[i]+150},${LY+55} L${LX[i+1]-10},${LY+55}" stroke="#fdba74" stroke-width="7" fill="none" marker-end="url(#ah3)"/>`);
+ ls+=`<path id="lpx1" d="M${LX[1]+110},${LY+110} Q${LX[1]+110},${1405} 452,1405" stroke="#4ade80" stroke-width="8" fill="none" marker-end="url(#ah4)" stroke-dasharray="400" stroke-dashoffset="400"/>`;
+ ls+=`<path id="lpx2" d="M610,1405 Q${LX[2]+40},1405 ${LX[2]+40},${LY+118}" stroke="#4ade80" stroke-width="8" fill="none" marker-end="url(#ah4)" stroke-dasharray="400" stroke-dashoffset="400"/>`;
+ ls+=`<text id="lcut" x="${(LX[1]+150+LX[2])/2-24}" y="${LY+75}" font-size="60" opacity="0">✂️</text>`;
+ $('ll').innerHTML=lh;$('Esvg').innerHTML=ls;window.LX=LX;window.LY=LY;
+ // confetti
+ let ch='';for(let i=0;i<90;i++){const col=['#22d3ee','#f472b6','#fde047','#4ade80','#a855f7','#fb923c'][i%6];ch+=`<div class="a" id="cf${i}" style="left:0;top:0;width:${14+(i*7)%12}px;height:${8+(i*5)%10}px;background:${col};border-radius:3px"></div>`}
+ $('conf').innerHTML=ch;
+})();
+function draw(id,p){const el=$(id);if(!el._L){el._L=el.getTotalLength();el.setAttribute('stroke-dasharray',el._L)}p=clamp(p);el.setAttribute('stroke-dashoffset',el._L*(1-p));el.style.opacity=p>0.02?1:0}
+function fm(id,f){const el=$(id);el.style.setProperty('--o',(parseFloat(el.style.getPropertyValue('--o'))||0)*f)}
+function rnd(i,k){const x=Math.sin(i*12.9898+k*78.233)*43758.5453;return x-Math.floor(x)}
+
+// ---------- cue list (sfx) ----------
+function buildCues(){
+ order.forEach((id,i)=>{if(i>0) cue(win(id)[0]-0.15,'whoosh',0.8)});
+ cue(S('s01')+0.05,'pop'); cue(at('s01','fark')-0.05,'buzz',0.6);
+ cue(S('s02')+0.2,'pop'); cue(S('s02')+0.6,'pop');
+ cue(at('s03','memory'),'tick'); cue(at('s04','index'),'whoosh',0.5); cue(at('s04','index')+0.55,'ding'); cue(at('s04','o of'),'success',0.8);
+ cue(at('s05','data'),'pop'); cue(at('s05','pointer'),'pop');
+ for(let k=0;k<5;k++) cue(at('s06','shuru')+k*0.45,'tick');
+ cue(at('s06','o of')+0.05,'buzz',0.5);
+ for(let k=0;k<3;k++) cue(at('s07','sabko')+k*0.35,'tick',0.45); cue(at('s07','o of'),'buzz',0.6);
+ cue(at('s08','do arrow'),'click'); cue(at('s08','naya box'),'success',0.8);
+ cue(at('s09','array'),'pop'); cue(at('s09','linked'),'pop');
+ cue(at('s10','array'),'ding',0.6); cue(at('s10','linked'),'ding',0.6);
+ cue(S('s11')+0.4,'ding',0.7); cue(at('s11','save'),'pop'); cue(at('s11','bhejo'),'pop');
+ cue(at('s12','follow')+0.5,'click'); cue(at('s12','follow')+0.55,'sparkle',0.9);
+}
+
+// ---------- render ----------
+window.render=function(t){
+ $('prog').style.width=(1080*clamp(t/END))+'px';
+ const bg=$('bg');bg.style.setProperty('--b1x',(20+8*Math.sin(t*.25))+'%');bg.style.setProperty('--b1y',(75+6*Math.cos(t*.2))+'%');bg.style.setProperty('--b2x',(82+6*Math.cos(t*.3))+'%');bg.style.setProperty('--b2y',(28+8*Math.sin(t*.22))+'%');
+ order.forEach(id=>{const [a,b]=win(id);const o=Math.min(clamp((t-a)/.25),clamp((b-t)/.25));const el=$(id);el.style.opacity=o;el.style.display=o>0?'block':'none';
+   el.style.transform=`scale(${1+0.04*(1-clamp((t-a)/.4))})`});
+ // A
+ let s=S('s01');
+ pop('A1',t,s); rise('A2',t,s+.4); pop('A3',t,s+.7); set('A3b',clamp((t-s-1)/.4),0,0,1);
+ set('A3c',clamp((t-s-1.3)/.3),0,0,.6+.4*back((t-s-1.3)/.4),8*Math.sin(t*6));
+ rise('A4',t,at('s01','phir')); pop('A5',t,at('s01','fark')-.15);
+ // B
+ s=S('s02');
+ slideX('B1',t,s,-700); pop('B2',t,s+.35); slideX('B3',t,s+.5,700);
+ rise('B4',t,at('s02','bilkul')-.3); pop('B5',t,at('s02','chalo'));
+ // C
+ s=S('s03');
+ pop('C1',t,s); rise('C2',t,s+.25); set('C3',clamp((t-s-.3)/.4),0,0,1); pop('C4',t,s+.5);
+ seatVals.forEach((v,i)=>{const t0=s+.8+i*.12; pop('seat'+i,t,t0,.35); set('idx'+i,clamp((t-at('s03','line')-i*.06)/.3),0,0,1); set('ad'+i,clamp((t-at('s03','memory')-i*.08)/.3),0,0,1);
+   $('seat'+i).classList.toggle('hl', i==5 && t>at('s04','index')+.55)});
+ set('C6',clamp((t-at('s03','continuous')+.4)/.4),0,0,1); rise('C7',t,at('s03','continuous')-.3);
+ {const tj=at('s04','index'),p=clamp((t-tj)/.55);const x0=SX(0)-10,y0=SY-118,x1=SX(5)+0,y1=SY-118;
+  const x=x0+(x1-x0)*eio(p), y=y0+(y1-y0)*p-80*Math.sin(Math.PI*p);
+  set('C8',clamp((t-S('s04')+.1)/.3),x,y,1+.15*Math.sin(Math.PI*p),p>0&&p<1?360*p:0)}
+ pop('C9',t,S('s04')+.2); rise('C10',t,at('s04','seedha')); pop('C11',t,at('s04','o of')-.1);
+ // D
+ s=S('s05');
+ pop('D1',t,s); rise('D2',t,s+.25);
+ N.forEach((n,i)=>{pop('nd'+i,t,at('s05','har box')+i*.18,.4); set('na'+i,clamp((t-at('s06','boxes')-i*.12)/.3),0,0,1);
+   if(i<4) draw('pa'+i,eo((t-at('s05','agle')-i*.15)/.6))});
+ set('null',clamp((t-at('s05','agle')-.8)/.3),0,0,1);
+ pop('D5',t,at('s05','data')); pop('D6',t,at('s05','address'));
+ {const fade=1-clamp((t-at('s06','boxes'))/.3); fm('D5',fade); fm('D6',fade);}
+ rise('D7',t,at('s06','boxes'));
+ {const t0=at('s06','shuru'),st=0.45;const k=clamp((t-t0)/st,0,4);const i0=Math.floor(k),f=eio(k-i0);const a=N[i0],b=N[Math.min(4,i0+1)];
+  const x=a[0]+(b[0]-a[0])*f+250, y=a[1]+(b[1]-a[1])*f-70-40*Math.abs(Math.sin(Math.PI*f));
+  set('D8',clamp((t-t0+.3)/.3),x,y,1); set('D9',clamp((t-t0+.3)/.3),x-140,y+20,1);
+  $('D9t').textContent='Step '+(Math.min(5,Math.floor(k+1e-6)+1));
+  N.forEach((n,i)=>{$('nd'+i).style.boxShadow=(t>t0+i*st-.1&&t>t0-.1)?'0 0 40px #fde047':'';$('nd'+i).style.borderColor=(t>t0+i*st-.1)?'#fde047':''})}
+ rise('D10',t,at('s06','paanchva')); pop('D11',t,at('s06','o of')-.1);
+ {const fade=1-clamp((t-at('s06','paanchva'))/.3); fm('D7',fade);}
+ // E
+ s=S('s07');
+ pop('E1',t,s); rise('E2',t,s+.25); set('E3',clamp((t-s-.3)/.4),0,0,1);
+ const ts=at('s07','sabko');
+ for(let i=0;i<6;i++){set('sl'+i,clamp((t-s-.5)/.3),0,0,1); set('aix'+i,clamp((t-s-.5)/.3),0,0,1)}
+ for(let i=0;i<5;i++){let dx=0; if(i>=2){const order_=4-i;const p=eo((t-ts-order_*.35)/.3);dx=146*p}
+   set('ab'+i,clamp((t-s-.6-i*.08)/.3),dx,0,1)}
+ {const tx=at('s07','naya'); const tdrop=ts+1.05; const p=eo((t-tdrop)/.35);
+  set('abx',clamp((t-tx)/.3),0,-170+170*p+(p<1?6*Math.sin(t*10):0),1)}
+ pop('E5',t,at('s07','o of')-.1);
+ s=S('s08');
+ set('E6',clamp((t-s+.2)/.4),0,0,1);
+ for(let i=0;i<4;i++) pop('ln'+i,t,s-.1+i*.08,.35);
+ for(let i=0;i<3;i++) set('lp'+i,clamp((t-s+.1)/.3),0,0,1);
+ for(let i=0;i<3;i++){const el=$('lp'+i);el.style.opacity=clamp((t-s+.1)/.3)*(i==1?1-clamp((t-at('s08','do arrow'))/.4)*.85:1); if(i==1) el.setAttribute('stroke',t>at('s08','do arrow')?'#f43f5e':'#fdba74')}
+ $('lcut').setAttribute('opacity',clamp((t-at('s08','do arrow'))/.2)*(1-clamp((t-at('s08','do arrow')-1)/.3)));
+ pop('lnx',t,s+.4);
+ draw('lpx1',eo((t-at('s08','do arrow')-.2)/.5));
+ draw('lpx2',eo((t-at('s08','do arrow')-.6)/.5));
+ pop('E8',t,at('s08','naya box')); rise('E9',t,at('s08','koi'));
+ // F
+ s=S('s09');
+ pop('F1',t,s); slideX('F2',t,at('s09','array')-.1,-900); slideX('F3',t,at('s09','linked')-.1,900);
+ rise('F4',t,E('s09')-.2); pop('F5',t,at('s10','padhna')); pop('F6',t,at('s10','badalna'));
+ // G
+ s=S('s11');
+ pop('G1',t,s); pop('G2',t,at('s11','save')-.1); pop('G3',t,at('s11','save')+.1); set('G2t',clamp((t-at('s11','save'))/.3),0,0,1);
+ rise('G4',t,at('s11','bhejo')-.2);
+ rise('G5',t,S('s12')); pop('G6',t,S('s12')+.2);
+ {const tc=at('s12','follow')+.5;const p=eo((t-tc+.9)/.8);const x=900+(560-900)*p,y=1640+(1380-1640)*p;const press=t>tc&&t<tc+.2?.85:1;
+  set('G7',clamp((t-tc+1)/.3),x-60,y-60,press);
+  const b=$('fbtn');if(t>tc){b.textContent='FOLLOWING ✓';b.style.background='#475569'}else{b.textContent='FOLLOW';b.style.background='#3b82f6'}
+  for(let i=0;i<90;i++){const dt=t-tc;const el=$('cf'+i);if(dt<0){set(el,0);continue}
+    const ang=rnd(i,1)*Math.PI*2, sp=500+rnd(i,2)*900;const x=540+Math.cos(ang)*sp*dt*0.8, y=1280+Math.sin(ang)*sp*dt*0.7-500*dt+700*dt*dt;
+    set(el,clamp(3-dt),x,y,1,dt*400*(rnd(i,3)-.5))}}
+ rise('G8',t,at('s12','follow')+1.0);
+};
+buildCues(); window.CUES=CUES; window.render(0);
+</script></body></html>
