@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:transparent}
+body{font-family:'Inter','Noto Color Emoji',sans-serif;color:#fff}
+.mono{font-family:'DejaVu Sans Mono','Noto Color Emoji',monospace}
+#stage{position:absolute;inset:0;overflow:hidden}
+#bg{position:absolute;inset:0;background:
+ radial-gradient(700px 700px at var(--b1x,20%) var(--b1y,75%),rgba(150,40,200,.35),transparent 70%),
+ radial-gradient(650px 650px at var(--b2x,85%) var(--b2y,30%),rgba(255,120,40,.22),transparent 70%),
+ radial-gradient(900px 900px at 50% 110%,rgba(40,80,220,.30),transparent 70%),
+ linear-gradient(180deg,#0b0b2b 0%,#14102f 50%,#0b0a24 100%)}
+#shade{position:absolute;left:0;right:0;bottom:0;height:620px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.75))}
+#prog{position:absolute;left:0;top:0;height:10px;background:linear-gradient(90deg,#22d3ee,#a855f7,#f472b6);box-shadow:0 0 18px #22d3ee}
+#wm{position:absolute;top:95px;width:100%;text-align:center;font-size:30px;font-weight:600;color:rgba(255,255,255,.7);text-shadow:0 2px 8px #000}
+#mframe{position:absolute;left:34px;top:444px;width:1012px;height:612px;border-radius:18px;border:6px solid #22d3ee;box-shadow:0 0 40px rgba(34,211,238,.6)}
+#ring{position:absolute;left:789px;top:1614px;width:262px;height:262px;border-radius:50%;border:6px solid #f472b6;box-shadow:0 0 30px rgba(244,114,182,.7)}
+.scene{position:absolute;inset:0;opacity:0}
+.a{position:absolute;opacity:var(--o,0);transform:translate(var(--x,0px),var(--y,0px)) scale(var(--s,1)) rotate(var(--r,0deg));transform-origin:center}
+.c{left:0;width:1080px;text-align:center}
+.h1{font-size:64px;font-weight:900;line-height:1.15;text-shadow:0 4px 18px rgba(0,0,0,.8)}
+.h2{font-size:48px;font-weight:800;line-height:1.25;text-shadow:0 3px 14px rgba(0,0,0,.8)}
+y,.y{color:#fde047}r,.r{color:#f43f5e}g,.g{color:#4ade80}c,.cy{color:#22d3ee}.or{color:#fb923c}
+.pill{display:inline-block;padding:14px 32px;border-radius:999px;font-size:36px;font-weight:800}
+.pill.cy{background:#22d3ee;color:#062033;box-shadow:0 0 30px rgba(34,211,238,.6)}
+.pill.or{background:#fb923c;color:#2a1000;box-shadow:0 0 30px rgba(251,146,60,.6)}
+.pill.pu{background:#a855f7;color:#fff;box-shadow:0 0 30px rgba(168,85,247,.6)}
+.pill.pk{background:#f472b6;color:#2a0016;box-shadow:0 0 30px rgba(244,114,182,.6)}
+.pill.dk{background:rgba(10,10,30,.88);color:#fde047;border:2px solid rgba(253,224,71,.6)}
+.pill.g{background:#22c55e;color:#03210f;box-shadow:0 0 30px rgba(34,197,94,.6)}
+.pill.r{background:#f43f5e;color:#fff;box-shadow:0 0 30px rgba(244,63,94,.6)}
+.panel{border-radius:28px;background:rgba(12,16,45,.9);border:3px solid rgba(34,211,238,.6);box-shadow:0 0 40px rgba(34,211,238,.2)}
+.qry{position:absolute;left:60px;width:960px;padding:24px 34px;border-radius:24px;background:#05060f;border:3px solid #334155;font-size:34px;line-height:1.5}
+.kw{color:#c084fc;font-weight:700}.st{color:#fdba74}.nm{color:#22d3ee}
+.chip{display:inline-block;padding:12px 26px;border-radius:16px;font-size:38px;font-weight:900}
+.tbl{position:absolute;border-radius:22px;overflow:hidden;background:#0d1230;border:3px solid #60a5fa;box-shadow:0 0 30px rgba(96,165,250,.3)}
+.tr{display:flex;height:var(--rh);align-items:center;border-top:2px solid rgba(148,163,184,.25);position:relative}
+.tr.hd{background:#1e3a8a;border-top:none;font-weight:900;color:#bfdbfe}
+.td{flex:1;text-align:center;font-size:var(--fs);font-weight:800}
+.tr.scan{background:rgba(253,224,71,.18)}
+.tr.no{background:rgba(244,63,94,.18)}
+.tr.ok{background:rgba(34,197,94,.3);box-shadow:inset 0 0 0 4px #4ade80}
+.mark{position:absolute;right:14px;font-size:40px}
+.badge{display:inline-block;padding:18px 38px;border-radius:24px;font-size:48px;font-weight:900}
+.badge.g{background:rgba(34,197,94,.18);border:3px solid #4ade80;color:#4ade80;box-shadow:0 0 34px rgba(74,222,128,.4)}
+.badge.r{background:rgba(244,63,94,.16);border:3px solid #f43f5e;color:#fb7185;box-shadow:0 0 34px rgba(244,63,94,.4)}
+#cap{position:absolute;left:60px;width:960px;top:1470px;text-align:center}
+#capt{display:inline-block;padding:14px 28px;border-radius:20px;background:rgba(0,0,0,.72);font-size:46px;font-weight:900;line-height:1.2;text-shadow:0 2px 6px #000;max-width:960px}
+.cover{position:absolute;border-radius:22px;background:#0a0a1f;border:4px solid #fde047;box-shadow:0 0 30px rgba(253,224,71,.4);text-align:center}
+svg{position:absolute;left:0;top:0;overflow:visible}
+</style></head>
+<body><div id="stage">
+<div id="bg"></div>
+<div id="shade"></div>
+<div class="a" id="mframe"></div>
+<div class="a" id="ring"></div>
+
+<!-- ===== HOOK ===== -->
+<div class="scene" id="H">
+  <div class="a c" id="H0" style="top:165px"><span class="pill pu" style="font-size:30px;padding:10px 26px">🎓 Placement Prep Series • Ep 03</span></div>
+  <div class="a c h1" id="H1" style="top:255px;font-size:58px">Lakhs mein se <y>1 Bhajan Lal</y>...<br>1 second mein?! 🤯</div>
+  <div class="a c h1" id="H1b" style="top:270px;font-size:66px">SQL itna <y>FAST</y> kaise?! ⚡</div>
+  <div class="a" id="Ht1" style="left:60px;top:470px"><span class="pill cy" style="font-size:28px;padding:8px 20px">🤖 Robot = SQL Engine</span></div>
+  <div class="a" id="Ht2" style="left:700px;top:470px"><span class="pill or" style="font-size:28px;padding:8px 20px">👴 = Client</span></div>
+  <div class="a qry mono" id="HQ" style="top:1090px">
+    <div><span class="kw">SELECT</span> * <span class="kw">FROM</span> users</div>
+    <div id="HQ2"><span class="kw">WHERE</span> name <span class="kw">LIKE</span> <span class="st" id="HQn">'Bhajan Lal%'</span></div>
+    <div id="HQ3" style="opacity:0"><span class="kw">AND</span> address = <span class="st">'No 6, Manna Reddy St'</span></div>
+  </div>
+  <div class="a c" id="HR" style="top:1340px"><span class="chip" id="HRt" style="background:rgba(244,63,94,.2);border:3px solid #f43f5e;color:#fb7185">12 rows 😳</span></div>
+  <div class="a c" id="HOK" style="top:1330px"><span class="chip" style="font-size:50px;background:rgba(34,197,94,.2);border:4px solid #4ade80;color:#4ade80;box-shadow:0 0 40px rgba(74,222,128,.5)">✅ 1 row • 0.003 sec ⚡</span></div>
+</div>
+
+<!-- ===== FACE 1 ===== -->
+<div class="scene" id="F1">
+  <div class="a cover" id="F1c" style="left:110px;top:1085px;width:860px;height:300px;padding-top:40px">
+    <div style="font-size:40px;font-weight:800;color:#cbd5e1">Interviewer ka sawaal 🎤</div>
+    <div style="font-size:62px;font-weight:900;margin-top:14px">SQL itna <y>FAST</y> kaise? 🤔</div></div>
+</div>
+<!-- ===== INTUIT ===== -->
+<div class="scene" id="I">
+  <div class="a c h1" id="I0" style="top:560px;font-size:78px;line-height:1.35">📚 <y>10,00,000</y> records<br>🎯 1 naam<br>⚡ 1 second?!</div>
+  <div class="a c" id="I1" style="top:230px"><span style="display:inline-block;background:#236cff;color:#fff;font-size:110px;font-weight:900;letter-spacing:8px;padding:10px 50px;border-radius:18px;box-shadow:0 0 60px rgba(35,108,255,.6)">INTUIT</span></div>
+  <div class="a c" id="I2" style="top:440px"><span class="pill dk" style="font-size:38px">SDE-1 • <span style="color:#fff">3rd Round</span> • Fresher</span></div>
+  <div class="a panel" id="I3" style="left:120px;top:570px;width:840px;padding:30px 40px">
+    <div style="font-size:30px;color:#94a3b8;font-weight:700">Interview questions 📋</div>
+    <div style="font-size:46px;font-weight:900;margin-top:12px">1. What is <y>Indexing?</y> ✅</div>
+    <div style="font-size:34px;color:#64748b;font-weight:700;margin-top:10px">2. ACID properties...</div></div>
+  <div class="a c" id="I4" style="top:880px"><span style="font-size:130px;font-weight:900;color:#4ade80;text-shadow:0 0 50px rgba(74,222,128,.7)">💰 <span id="I4n">35</span> LPA</span></div>
+  <div class="a c sub" id="I5" style="top:1060px;font-size:40px;font-weight:800;color:#d6d6f0">CTC for a fresher 🤯</div>
+</div>
+<!-- ===== FACE 2 ===== -->
+<div class="scene" id="F2">
+  <div class="a cover" id="F2c" style="left:150px;top:700px;width:780px;height:250px;padding-top:28px;border-color:#22d3ee;box-shadow:0 0 40px rgba(34,211,238,.6)">
+    <div style="font-size:40px;font-weight:800;color:#cbd5e1">Answer 👇</div>
+    <div style="font-size:96px;font-weight:900;color:#22d3ee;text-shadow:0 0 30px rgba(34,211,238,.8)">INDEXING ⚡</div></div>
+  <div class="a c" id="F2t" style="top:560px"><span class="pill r" style="font-size:40px">⏱️ 30 sec challenge</span></div>
+</div>
+<!-- ===== TABLE (no index) ===== -->
+<div class="scene" id="T">
+  <div class="a c" id="T0" style="top:190px"><span class="pill r">STEP 1 • WITHOUT INDEX 🐢</span></div>
+  <div class="a tbl" id="T1" style="left:140px;top:290px;width:800px;--rh:100px;--fs:42px"><div id="Trows"></div></div>
+  <div class="a qry mono" id="TQ" style="top:1010px;font-size:34px"><span id="TQt"></span><span id="TQc" style="color:#fde047">▌</span></div>
+  <div class="a" id="TC" style="left:690px;top:1120px"><span class="pill dk" style="font-size:32px" id="TCt">Checked: 0/6</span></div>
+  <div class="a c" id="T5" style="top:1210px"><span class="badge r">O(N) 😟 — har row check</span></div>
+  <div class="a cover" id="T6" style="left:110px;top:1100px;width:860px;height:260px;padding-top:22px;border-color:#f43f5e;box-shadow:0 0 40px rgba(244,63,94,.6)">
+    <div style="font-size:96px;font-weight:900;color:#fb7185" class="mono" id="T6n">6</div>
+    <div style="font-size:44px;font-weight:900">rows?! 😱 <span style="color:#fca5a5">= itne checks ⏳</span></div></div>
+</div>
+<!-- ===== FACE 3 ===== -->
+<div class="scene" id="F3">
+  <div class="a cover" id="F3c" style="left:110px;top:1060px;width:860px;height:300px;padding-top:30px;border-color:#f43f5e;box-shadow:0 0 40px rgba(244,63,94,.6)">
+    <div style="font-size:96px;font-weight:900;color:#fb7185" class="mono" id="F3n">6</div>
+    <div style="font-size:46px;font-weight:900">rows?! 😱 <span style="color:#fca5a5">O(N) = itne checks ⏳</span></div></div>
+</div>
+<!-- ===== INDEX ===== -->
+<div class="scene" id="X">
+  <div class="a c" id="X0" style="top:190px"><span class="pill g">STEP 2 • WITH INDEX ⚡</span></div>
+  <div class="a" id="XL" style="left:40px;top:290px;font-size:30px;font-weight:900;color:#4ade80">INDEX TABLE</div>
+  <div class="a" id="XR" style="left:560px;top:290px;font-size:30px;font-weight:900;color:#93c5fd">PLAYERS TABLE</div>
+  <div class="a tbl" id="X1" style="left:40px;top:340px;width:380px;--rh:92px;--fs:38px;border-color:#4ade80"><div id="Xidx"></div></div>
+  <div class="a tbl" id="X2" style="left:560px;top:340px;width:480px;--rh:92px;--fs:34px"><div id="Xrows"></div></div>
+  <svg id="Xsvg" width="1080" height="1920"></svg>
+  <div class="a" id="XB" style="left:0;top:0"><span class="pill pu mono" style="font-size:26px;padding:6px 16px" id="XBt">mid</span></div>
+  <div class="a c" id="XQ" style="top:1010px"><span class="pill dk mono" style="font-size:36px">WHERE age = 34 🔍 <span id="XQs" style="color:#fff"></span></span></div>
+  <div class="a c" id="X5" style="top:1110px"><span class="badge g">O(log N) 😎 — Binary Search</span></div>
+  <div class="a c" id="X6" style="top:1240px"><span class="pill pk" style="font-size:34px">10 lakh rows ➜ sirf ~20 steps! 🚀</span></div>
+</div>
+<!-- ===== CTA ===== -->
+<div class="scene" id="C">
+  <div class="a c h1" id="C1" style="top:200px;color:#fde047;font-size:56px">EK LINE MEIN YAAD RAKHO 🧠</div>
+  <div class="a panel" id="C2" style="left:70px;top:310px;width:940px;padding:26px 30px;text-align:center;font-size:42px;font-weight:900;line-height:1.35">INDEX = <y>Sorted column</y> + <c>Pointer</c><br>➜ Binary Search ➜ <g>O(log N)</g> ⚡</div>
+  <div class="a panel" id="C3" style="left:190px;top:600px;width:700px;height:360px;border-color:#f472b6;box-shadow:0 0 50px rgba(244,114,182,.4)">
+    <div style="position:absolute;left:290px;top:24px;width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#f472b6);display:flex;align-items:center;justify-content:center;font-size:50px;font-weight:900;border:4px solid #fff">PP</div>
+    <div style="position:absolute;width:100%;top:160px;text-align:center;font-size:44px;font-weight:900">@pretestpassed.codes</div>
+    <div id="fbtn" style="position:absolute;left:180px;top:245px;width:340px;height:86px;border-radius:20px;background:#3b82f6;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:900">FOLLOW</div></div>
+  <div class="a c" id="C4" style="top:1000px"><span class="pill dk" style="font-size:36px">❤️ Like • 🔁 Share • 🔖 Save</span></div>
+  <div class="a" id="C5" style="left:0;top:0;font-size:110px">👆</div>
+  <div id="conf"></div>
+</div>
+
+<div id="cap"><span class="a" id="capw" style="position:relative;display:inline-block"><span id="capt"></span></span></div>
+<div id="prog"></div>
+<div id="wm">@pretestpassed.codes</div>
+</div>
+<script>
+const K=window.K, CAPS=window.CAPS, SPANS=window.SPANS, END=window.END;
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const eo=x=>1-Math.pow(1-clamp(x),3);
+const eio=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const back=x=>{x=clamp(x);const c1=2.0,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const CUES=[]; const cue=(t,n,g)=>CUES.push([+t.toFixed(3),n,g||1]);
+function set(el,o,x,y,s,r){el=typeof el=='string'?$(el):el;el.style.setProperty('--o',o);el.style.setProperty('--x',(x||0)+'px');el.style.setProperty('--y',(y||0)+'px');el.style.setProperty('--s',s==null?1:s);el.style.setProperty('--r',(r||0)+'deg')}
+function pop(el,t,t0,d){d=d||.4;const p=clamp((t-t0)/d);set(el,clamp(p*2.5),0,0,t<t0?.4:.4+.6*back(p))}
+function rise(el,t,t0,d){d=d||.45;const p=clamp((t-t0)/d);set(el,clamp(p*2),0,50*(1-eo(p)),1)}
+function fm(id,f){const el=$(id);el.style.setProperty('--o',(parseFloat(el.style.getPropertyValue('--o'))||0)*f)}
+function draw(el,p){if(!el._L){el._L=el.getTotalLength();el.setAttribute('stroke-dasharray',el._L)}p=clamp(p);el.setAttribute('stroke-dashoffset',el._L*(1-p));el.style.opacity=p>0.02?1:0}
+function rnd(i,k){const x=Math.sin(i*12.9898+k*78.233)*43758.5453;return x-Math.floor(x)}
+function mode(t){for(const s of SPANS) if(t>=s[0]&&t<s[1]) return s; return SPANS[SPANS.length-1]}
+function vis(t,a,b,f){f=f||.12;return Math.min(clamp((t-a)/f),clamp((b-t)/f))}
+
+// ---------- data ----------
+const P=[['Dhoni',42,'IND',6234],['Sachin',50,'IND',234],['Dravid',50,'IND',1845],['Yuvraj',41,'IND',749],['Sehwag',44,'IND',8753],['Kohli',34,'IND',123]];
+const IDX=[[34,123,5],[41,749,3],[42,6234,0],[44,8753,4],[50,234,1],[50,1845,2]];  // age, ptr, row
+(function(){
+ let h=`<div class="tr hd"><div class="td" id="th0">Name</div><div class="td" id="th1">Age</div><div class="td" id="th2">Team</div></div>`;
+ P.forEach((p,i)=>h+=`<div class="tr" id="tr${i}"><div class="td">${p[0]}</div><div class="td">${p[1]}</div><div class="td">${p[2]}</div><span class="mark" id="mk${i}"></span></div>`);
+ $('Trows').innerHTML=h;
+ let x=`<div class="tr hd"><div class="td">Age</div><div class="td" id="xph" style="opacity:0">Pointer</div></div>`;
+ for(let i=0;i<6;i++) x+=`<div class="tr" id="xi${i}"><div class="td" id="xa${i}" style="position:relative">${IDX[i][0]}</div><div class="td mono" id="xp${i}" style="color:#fde047;opacity:0;font-size:30px">@${IDX[i][1]}</div></div>`;
+ $('Xidx').innerHTML=x;
+ let r=`<div class="tr hd"><div class="td" style="flex:.8;font-size:24px">Disk</div><div class="td">Name</div><div class="td" style="flex:.6">Age</div></div>`;
+ P.forEach((p,i)=>r+=`<div class="tr" id="xr${i}"><div class="td mono" style="flex:.8;font-size:22px;color:#fde047">@${p[3]}</div><div class="td">${p[0]}</div><div class="td" style="flex:.6">${p[1]}</div></div>`);
+ $('Xrows').innerHTML=r;
+ let s='<defs><marker id="am" viewBox="0 0 10 10" markerWidth="4" markerHeight="4" refX="6" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#fde047"/></marker><marker id="am2" viewBox="0 0 10 10" markerWidth="4" markerHeight="4" refX="6" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker></defs>';
+ const RY=i=>340+92*(i+1)+46;
+ IDX.forEach((d,i)=>{s+=`<path id="pa${i}" d="M422,${RY(i)} C490,${RY(i)} 500,${RY(d[2])} 556,${RY(d[2])}" stroke="#fde047" stroke-opacity=".75" stroke-width="4" fill="none" marker-end="url(#am)"/>`});
+ s+=`<path id="pk" d="M422,${RY(0)} C490,${RY(0)} 500,${RY(5)} 556,${RY(5)}" stroke="#4ade80" stroke-width="9" fill="none" marker-end="url(#am2)"/>`;
+ $('Xsvg').innerHTML=s; window.RY=RY;
+ let ch='';for(let i=0;i<90;i++){const col=['#22d3ee','#f472b6','#fde047','#4ade80','#a855f7','#fb923c'][i%6];ch+=`<div class="a" id="cf${i}" style="left:0;top:0;width:${14+(i*7)%12}px;height:${8+(i*5)%10}px;background:${col};border-radius:3px"></div>`}
+ $('conf').innerHTML=ch;
+})();
+const QTXT="SELECT * FROM Player_Table WHERE age = 34;";
+function qhtml(n){const s=QTXT.slice(0,n);return s.replace(/(SELECT|FROM|WHERE)/g,'<span class="kw">$1</span>').replace(/(Player_Table)/,'<span class="nm">$1</span>')}
+// scan schedule
+const SC0=K.scan[0], SCD=0.6; const SCT=K.scan;   // row i checked at SC0+i*SCD
+// binary search: step1 mid=2 (42) ; step2 mid=0 (34) found
+const B1=K.b1, B2=K.b2, BF=K.bf;
+
+// ---------- cues ----------
+(function(){
+ cue(0.05,'boom',.9); cue(K.bara,'buzz',.35); cue(K.deen,'buzz',.35); cue(K.addr-0.2,'riser',.5); cue(K.correct,'success',.8); cue(K.correct+0.6,'whoosh',.5);
+ SPANS.forEach((s,i)=>{if(i>1&&s[0]>SPANS[i-1][0]+0.01) cue(s[0]-0.12,'whoosh',.55)}); cue(SPANS[0][1]-0.02,'boom',.9);
+ cue(K.intro,'pop',.8); cue(K.intuit,'boom',.6); cue(K.round,'pop'); cue(K.pays,'cash',.9); cue(K.lpa,'ding',.6);
+ cue(K.answer-0.9,'riser',.55); cue(K.indexing-0.4,'boom',.8); cue(K.explain+0.3,'tick',.8);
+ cue(K.example,'pop'); cue(K.name,'tick'); cue(K.age,'tick'); cue(K.team,'tick');
+ for(let i=0;i<QTXT.length;i+=2) cue(K.query+(K.n34-K.query)*i/QTXT.length,'type',.6);
+ for(let i=0;i<6;i++) cue(SCT[i],i<5?'tick':'ding',i<5?.8:.7);
+ cue(K.complexity,'buzz',.5);
+ cue(K.million+0.2,'riser',.5); cue(K.million+1.3,'boom',.6);
+ cue(K.indextable,'pop'); cue(K.sorted,'whoosh',.4); cue(K.pointer,'pop'); for(let i=0;i<6;i++) cue(K.pointer+0.3+i*0.25,'tick',.5);
+ cue(B1,'ding',.5); cue(B2,'ding',.6); cue(BF,'success',.8); cue(K.login,'sparkle',.7); cue(K.kaafi,'pop');
+ cue(K.please,'pop'); cue(K.follow+0.25,'click'); cue(K.follow+0.3,'sparkle',.9);
+})();
+
+window.render=function(t){
+ $('prog').style.width=(1080*clamp(t/END))+'px';
+ const bg=$('bg');bg.style.setProperty('--b1x',(20+8*Math.sin(t*.25))+'%');bg.style.setProperty('--b1y',(75+6*Math.cos(t*.2))+'%');bg.style.setProperty('--b2x',(82+6*Math.cos(t*.3))+'%');bg.style.setProperty('--b2y',(28+8*Math.sin(t*.22))+'%');
+ const sp=mode(t), m=sp[2];
+ if(m=='hook') bg.style.clipPath="path(evenodd,'M0 0 H1080 V1920 H0 Z M40 450 H1040 V1050 H40 Z')";
+ else if(m=='anim') bg.style.clipPath="path(evenodd,'M0 0 H1080 V1920 H0 Z M795 1745 A125 125 0 1 0 1045 1745 A125 125 0 1 0 795 1745 Z')";
+ if(m=='anim0') bg.style.clipPath='none';
+ bg.style.display=m=='face'?'none':'block';
+ $('shade').style.display=m=='face'?'block':'none';
+ set('mframe',m=='hook'?1:0); set('ring',m=='anim'?1:0);
+ // scene visibility
+ const S={H:[0,SPANS[0][1]],F1:[SPANS[1][0],SPANS[1][1]],I:[SPANS[2][0],SPANS[2][1]],F2:[SPANS[3][0],SPANS[3][1]],T:[SPANS[4][0],SPANS[4][1]],X:[SPANS[5][0],K.please-0.1],C:[K.please-0.1,END+1]};
+ for(const id in S){const o=vis(t,S[id][0],S[id][1],.1);const el=$(id);el.style.opacity=o;el.style.display=o>0?'block':'none'}
+ // ===== HOOK =====
+ pop('H0',t,0.05); pop('H1',t,0.1,.35); fm('H1',1-clamp((t-K.correct+0.25)/.2)); pop('H1b',t,K.correct-0.05);
+ pop('Ht1',t,K.bara-0.2); pop('Ht2',t,K.bara+0.1);
+ set('HQ',clamp((t-K.bara+0.3)/.3),0,30*(1-eo((t-K.bara+0.3)/.4)),1);
+ $('HQn').textContent=t>K.ke?"'K. Bhajan Lal%'":"'Bhajan Lal%'";
+ $('HQ3').style.opacity=clamp((t-K.addr)/.3);
+ {const v=t<K.deen?'12 rows 😳':'3 rows 🤨';$('HRt').textContent=v; const t0=t<K.deen?K.bara+0.4:K.deen+0.1; pop('HR',t,t0,.3); fm('HR',1-clamp((t-K.correct+0.1)/.15))}
+ pop('HOK',t,K.correct,.45);
+ // ===== FACE1 =====
+ pop('F1c',t,SPANS[1][0]+0.05,.4);
+ // ===== INTUIT =====
+ pop('I0',t,K.intro); fm('I0',1-clamp((t-K.intuit+0.25)/.25)); pop('I1',t,K.intuit-0.1); rise('I2',t,K.round-0.1); rise('I3',t,K.fresher-0.3); pop('I4',t,K.pays-0.1);
+ $('I4n').textContent=Math.round(35*eo((t-K.pays)/0.9)); rise('I5',t,K.lpa);
+ // ===== FACE2 =====
+ pop('F2c',t,SPANS[3][0]+0.05,.45); pop('F2t',t,K.explain+0.2);
+ // ===== TABLE =====
+ pop('T0',t,SPANS[4][0]+0.05); pop('T1',t,SPANS[4][0]+0.15);
+ ['th0','th1','th2'].forEach((id,i)=>{const k=[K.name,K.age,K.team][i];$(id).style.color=(t>k&&t<k+0.9)?'#fde047':'';$(id).style.transform=(t>k&&t<k+0.9)?'scale(1.15)':''});
+ {const n=Math.floor(QTXT.length*clamp((t-K.query)/(K.n34-K.query+0.01)));set('TQ',clamp((t-K.query+0.2)/.3),0,0,1);$('TQt').innerHTML=qhtml(n);$('TQc').style.opacity=(Math.floor(t*3)%2==0||n<QTXT.length)?1:0}
+ for(let i=0;i<6;i++){const ti=SCT[i];const r=$('tr'+i);r.classList.toggle('scan',t>=ti-0.05&&t<ti+SCD*0.6&&i<5);r.classList.toggle('no',i<5&&t>=ti+SCD*0.6);r.classList.toggle('ok',i==5&&t>=ti);$('mk'+i).textContent=t>=ti+(i<5?SCD*0.6:0)?(i<5?'❌':'✅'):''}
+ {const k=SCT.filter(x=>t>=x).length;set('TC',t>SC0-0.1?1:0,0,0,1);$('TCt').textContent='Checked: '+k+'/6'}
+ pop('T5',t,K.complexity-0.1); fm('T5',1-clamp((t-K.million)/.2)); pop('T6',t,K.million+0.05);
+ {const p=eio((t-K.million-0.2)/1.1);const v=Math.round(6+(1000000-6)*p*p);$('T6n').textContent=v.toLocaleString('en-IN')}
+ {const f=1-clamp((t-K.million)/.25);fm('TC',f)}
+ // ===== FACE3 =====
+ pop('F3c',t,SPANS[5][0]+0.05,.4);
+ {const p=eio((t-K.million-0.2)/1.1);const v=Math.round(6+(1000000-6)*p*p);$('F3n').textContent=v.toLocaleString('en-IN')}
+ // ===== INDEX =====
+ pop('X0',t,SPANS[5][0]+0.05); set('XR',clamp((t-SPANS[5][0]-0.1)/.3),0,0,1); pop('X2',t,SPANS[5][0]+0.15);
+ set('XL',clamp((t-K.indextable+0.1)/.3),0,0,1); pop('X1',t,K.indextable-0.1);
+ // age values: start in table order, slide to sorted at K.sorted
+ {const ord=[42,50,50,41,44,34];const ps=eio((t-K.sorted)/0.7);
+  for(let i=0;i<6;i++){const v=IDX[i][0];const from=ord.indexOf(v)+(v==50&&i==5?1:0);const dy=(from-i)*92*(1-ps);$('xa'+i).style.transform=`translateY(${dy}px)`;$('xa'+i).style.color=ps>0&&ps<1?'#fde047':''}}
+ $('xph').style.opacity=clamp((t-K.pointer)/.3);
+ for(let i=0;i<6;i++){$('xp'+i).style.opacity=clamp((t-K.pointer-0.2-i*0.12)/.3); draw($('pa'+i),eo((t-K.pointer-0.3-i*0.25)/.5))}
+ // binary search marker
+ {let row=-1,lab='';if(t>=B1&&t<B2){row=2;lab='mid = 42 ➜ 34 < 42 ⬆️'} else if(t>=B2){row=0;lab=t>=B2+0.2?'mid = 34 ✅ FOUND':'mid = 34'}
+  set('XB',0); $('XQs').textContent=lab?('➜ '+lab):'';
+  for(let i=0;i<6;i++){const r=$('xi'+i);r.classList.toggle('scan',i==row&&!(i==0&&t>=B2+0.2));r.classList.toggle('ok',i==0&&t>=B2+0.2);r.classList.toggle('no',i>=2&&t>=B1+0.4)}
+  for(let i=0;i<6;i++) $('xr'+i).classList.toggle('ok',i==5&&t>=BF);
+  draw($('pk'),eo((t-BF+0.25)/.35))}
+ set('XQ',clamp((t-K.kyunki+0.2)/.3),0,0,1); if(t>=B2+0.2) $('XQs').textContent='➜ FOUND in 2 steps! ✅';
+ pop('X5',t,K.login-0.1); pop('X6',t,K.kaafi);
+ // ===== CTA =====
+ pop('C1',t,K.please-0.05,.35); pop('C2',t,K.please+0.15,.35); pop('C3',t,K.please+0.35,.35); rise('C4',t,K.follow+0.6);
+ {const tc=K.follow+0.25;const p=eo((t-tc+0.7)/0.6);const x=900+(560-900)*p,y=1300+(1100-1300)*p;const press=t>tc&&t<tc+.2?.85:1;
+  set('C5',clamp((t-tc+0.8)/.25),x-60,y-60,press);
+  const b=$('fbtn');if(t>tc){b.textContent='FOLLOWING ✓';b.style.background='#475569'}else{b.textContent='FOLLOW';b.style.background='#3b82f6'}
+  for(let i=0;i<90;i++){const dt=t-tc;const el=$('cf'+i);if(dt<0){set(el,0);continue}
+   const ang=rnd(i,1)*Math.PI*2, sp=500+rnd(i,2)*900;const x=540+Math.cos(ang)*sp*dt*0.8, y=900+Math.sin(ang)*sp*dt*0.7-500*dt+700*dt*dt;
+   set(el,clamp(3-dt),x,y,1,dt*400*(rnd(i,3)-.5))}}
+ // ===== captions =====
+ {let cur=null;for(let i=0;i<CAPS.length;i++){const s=CAPS[i][0],e=i+1<CAPS.length?Math.min(CAPS[i+1][0],s+3.2):s+2.5;if(t>=s-0.05&&t<e) cur=[i,s,e]}
+  if(cur&&m!=='hook'&&!(t>=K.please-0.1&&false)){$('capt').innerHTML=CAPS[cur[0]][1];const p=clamp((t-cur[1]+0.05)/.18);set('capw',Math.min(clamp(p*2),clamp((cur[2]-t)/.12)),0,14*(1-eo(p)),.9+.1*back(p))} else set('capw',0)}
+ const top=m!='hook'&&t>=K.please-0.1; $('cap').style.top=top?'1200px':'1470px';
+};
+window.CUES=CUES; window.render(0);
+</script></body></html>
