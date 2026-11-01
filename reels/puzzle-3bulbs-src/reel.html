@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#0d1530}
+body{font-family:'Inter','Noto Color Emoji',sans-serif;color:#fff}
+#stage{position:absolute;inset:0;overflow:hidden;background:linear-gradient(180deg,#101a3a,#0b1128)}
+#prog{position:absolute;left:0;top:0;height:10px;background:linear-gradient(90deg,#fde047,#fb923c,#f472b6);box-shadow:0 0 18px #fde047;z-index:50}
+#wm{position:absolute;top:92px;width:100%;text-align:center;font-size:30px;font-weight:700;color:rgba(255,255,255,.75);z-index:50}
+#view{position:absolute;left:0;top:330px;width:1080px;height:1060px;overflow:hidden;border-top:6px solid #0a0f22;border-bottom:6px solid #0a0f22}
+#world{position:absolute;left:0;top:0;width:1080px;height:1060px;transform-origin:0 0}
+.a{position:absolute;opacity:var(--o,0);transform:translate(var(--x,0px),var(--y,0px)) scale(var(--s,1)) rotate(var(--r,0deg));transform-origin:center}
+.c{left:0;width:1080px;text-align:center}
+.stk{display:inline-block;background:#fffaf0;color:#1f2937;border:5px solid #1f2937;border-radius:22px;padding:14px 30px;font-size:44px;font-weight:900;box-shadow:8px 8px 0 #1f2937;line-height:1.2}
+.stk.g{background:#dcfce7}.stk.r{background:#fee2e2}.stk.y{background:#fef9c3}.stk.p{background:#f3e8ff}.stk.b{background:#dbeafe}.stk.o{background:#ffedd5}
+.big{font-size:60px}
+.co{display:inline-block;padding:16px 34px;border-radius:18px;font-size:54px;font-weight:900;border:5px solid #1f2937;box-shadow:8px 8px 0 #1f2937}
+#cap{position:absolute;left:40px;width:1000px;top:1405px;text-align:center;z-index:30}
+#capt{display:inline-block;padding:12px 26px;border-radius:18px;background:rgba(0,0,0,.78);font-size:42px;font-weight:900;line-height:1.2;max-width:1000px}
+y{color:#fde047}r{color:#fb7185}g{color:#4ade80}b{color:#60a5fa}o{color:#fb923c}
+#cd{position:absolute;inset:0;background:rgba(5,6,20,.86);z-index:40;opacity:0}
+.res{display:inline-block;background:#fffaf0;color:#1f2937;border:5px solid #1f2937;border-radius:18px;padding:10px 26px;font-size:40px;font-weight:900;box-shadow:6px 6px 0 #1f2937}
+</style></head>
+<body><div id="stage">
+<div id="view"><div id="world">
+<svg width="1080" height="1060" viewBox="0 0 1080 1060">
+ <defs>
+  <radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff7b0" stop-opacity="1"/><stop offset=".35" stop-color="#fde047" stop-opacity=".7"/><stop offset="1" stop-color="#fde047" stop-opacity="0"/></radialGradient>
+  <radialGradient id="hot" cx="50%" cy="55%" r="50%"><stop offset="0" stop-color="#ff7a1a" stop-opacity="1"/><stop offset=".5" stop-color="#ef4444" stop-opacity=".55"/><stop offset="1" stop-color="#ef4444" stop-opacity="0"/></radialGradient>
+  <pattern id="chk" width="120" height="120" patternUnits="userSpaceOnUse"><rect width="120" height="120" fill="#e9e3d3"/><rect width="60" height="60" fill="#cfc6b0"/><rect x="60" y="60" width="60" height="60" fill="#cfc6b0"/></pattern>
+  <pattern id="wallp" width="60" height="60" patternUnits="userSpaceOnUse"><rect width="60" height="60" fill="#2c4a70"/><circle cx="30" cy="30" r="4" fill="#355883"/></pattern>
+ </defs>
+ <!-- OUTSIDE -->
+ <rect x="0" y="0" width="525" height="760" fill="url(#wallp)"/>
+ <rect x="0" y="610" width="525" height="150" fill="#6b3e26"/><rect x="0" y="606" width="525" height="10" fill="#4a2a19"/>
+ <rect x="0" y="760" width="1080" height="300" fill="url(#chk)"/>
+ <!-- clock -->
+ <g transform="translate(190,180)"><circle r="62" fill="#fffaf0" stroke="#1f2937" stroke-width="8"/>
+   <line id="chh" x1="0" y1="0" x2="0" y2="-32" stroke="#1f2937" stroke-width="8" stroke-linecap="round"/>
+   <line id="chm" x1="0" y1="0" x2="0" y2="-48" stroke="#ef4444" stroke-width="5" stroke-linecap="round"/><circle r="6" fill="#1f2937"/></g>
+ <!-- door -->
+ <rect x="318" y="318" width="184" height="444" fill="#3b2314" rx="6"/>
+ <g id="door"><rect x="330" y="330" width="160" height="430" fill="#9a6232" stroke="#5a3519" stroke-width="6"/>
+   <rect x="350" y="355" width="120" height="150" fill="none" stroke="#5a3519" stroke-width="5"/><rect x="350" y="530" width="120" height="190" fill="none" stroke="#5a3519" stroke-width="5"/>
+   <circle cx="470" cy="560" r="11" fill="#fcd34d" stroke="#5a3519" stroke-width="3"/></g>
+ <rect x="345" y="262" width="130" height="44" rx="10" fill="#fffaf0" stroke="#1f2937" stroke-width="5"/><text x="410" y="294" text-anchor="middle" font-size="28" font-weight="900" fill="#1f2937" font-family="Inter">ROOM</text>
+ <!-- switch panel -->
+ <rect x="70" y="390" width="230" height="180" rx="22" fill="#fffaf0" stroke="#1f2937" stroke-width="7"/>
+ <g id="sw0" transform="translate(115,480)"><rect x="-22" y="-55" width="44" height="110" rx="12" fill="#d1d5db" stroke="#1f2937" stroke-width="5"/><rect id="lv0" x="-16" y="-48" width="32" height="46" rx="8" fill="#6b7280"/></g>
+ <g id="sw1" transform="translate(185,480)"><rect x="-22" y="-55" width="44" height="110" rx="12" fill="#d1d5db" stroke="#1f2937" stroke-width="5"/><rect id="lv1" x="-16" y="-48" width="32" height="46" rx="8" fill="#6b7280"/></g>
+ <g id="sw2" transform="translate(255,480)"><rect x="-22" y="-55" width="44" height="110" rx="12" fill="#d1d5db" stroke="#1f2937" stroke-width="5"/><rect id="lv2" x="-16" y="-48" width="32" height="46" rx="8" fill="#6b7280"/></g>
+ <g font-family="Inter" font-weight="900" font-size="34" text-anchor="middle">
+  <circle cx="115" cy="610" r="26" fill="#fde047" stroke="#1f2937" stroke-width="5"/><text x="115" y="622" fill="#1f2937">1</text>
+  <circle cx="185" cy="610" r="26" fill="#fde047" stroke="#1f2937" stroke-width="5"/><text x="185" y="622" fill="#1f2937">2</text>
+  <circle cx="255" cy="610" r="26" fill="#fde047" stroke="#1f2937" stroke-width="5"/><text x="255" y="622" fill="#1f2937">3</text></g>
+ <!-- person -->
+ <g id="man" transform="translate(150,0)">
+  <ellipse cx="0" cy="1000" rx="70" ry="14" fill="rgba(0,0,0,.25)"/>
+  <g id="legL"><rect x="-34" y="860" width="28" height="140" rx="12" fill="#1e3a8a" stroke="#1f2937" stroke-width="5"/></g>
+  <g id="legR"><rect x="6" y="860" width="28" height="140" rx="12" fill="#1e3a8a" stroke="#1f2937" stroke-width="5"/></g>
+  <rect x="-50" y="700" width="100" height="180" rx="30" fill="#14b8a6" stroke="#1f2937" stroke-width="6"/>
+  <rect x="44" y="712" width="26" height="120" rx="12" fill="#14b8a6" stroke="#1f2937" stroke-width="5" transform="rotate(-10 57 712)"/>
+  <circle cx="0" cy="645" r="56" fill="#f2c094" stroke="#1f2937" stroke-width="6"/>
+  <path d="M-56,636 Q-50,575 0,580 Q52,575 58,630 Q40,605 0,606 Q-30,606 -56,636Z" fill="#1f2937"/>
+  <circle cx="-18" cy="650" r="6" fill="#1f2937"/><circle cx="20" cy="650" r="6" fill="#1f2937"/>
+  <path id="mouth" d="M-14,676 Q2,688 16,676" stroke="#1f2937" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <text id="think" x="60" y="560" font-size="64" opacity="0">🤔</text>
+ </g>
+ <!-- divider -->
+ <rect x="525" y="0" width="30" height="1060" fill="#16253f"/>
+ <!-- INSIDE -->
+ <rect id="inwall" x="555" y="0" width="525" height="760" fill="#252a36"/>
+ <rect id="inwall2" x="555" y="0" width="525" height="760" fill="#f6e7c8" opacity="0"/>
+ <rect x="555" y="0" width="525" height="22" fill="#111827"/>
+ <g id="bulbs" font-family="Inter" font-weight="900" text-anchor="middle"></g>
+ <!-- wires -->
+ <g id="wires" opacity="0" stroke="#9ca3af" stroke-width="5" stroke-dasharray="14 12" fill="none">
+  <path d="M115,420 C115,60 600,40 650,90"/><path d="M185,420 C185,40 760,30 815,90"/><path d="M255,420 C255,20 930,20 980,90"/>
+ </g>
+ <g id="qs" opacity="0" font-size="60" text-anchor="middle"><text x="380" y="80">❓</text><text x="560" y="60">❓</text><text x="740" y="60">❓</text></g>
+ <!-- curtain over inside -->
+ <g id="curt"><rect x="555" y="0" width="525" height="1060" fill="#0b1020"/>
+   <text x="817" y="470" text-anchor="middle" font-size="150">❓</text>
+   <text id="curtT" x="817" y="620" text-anchor="middle" font-size="44" font-weight="900" fill="#e5e7eb" font-family="Inter">Andar kya hai?</text></g>
+ <rect id="xray" x="568" y="12" width="500" height="1036" rx="16" fill="none" stroke="#22d3ee" stroke-width="6" stroke-dasharray="20 14" opacity="0"/>
+ <g id="xrayT" opacity="0"><rect x="580" y="900" width="480" height="66" rx="16" fill="#22d3ee" stroke="#1f2937" stroke-width="5"/><text id="xrayTt" x="820" y="944" text-anchor="middle" font-size="27" font-weight="900" fill="#062033" font-family="Inter">👀 X-RAY VIEW</text></g>
+ <text id="once" x="410" y="250" text-anchor="middle" font-size="64" opacity="0">☝️</text>
+ <text id="hand" x="0" y="0" font-size="90" opacity="0">✋</text>
+</svg>
+</div></div>
+
+<!-- screen-space overlays -->
+<div class="a c" id="T0" style="top:175px"><span class="stk y big">🧩 INTERVIEW PUZZLE</span></div>
+<div class="a c" id="T1" style="top:175px"><span class="stk p big">Kya AAP solve kar paoge? 🤔</span></div>
+<div class="a" id="B1" style="left:60px;top:1530px"><span class="co" style="background:#fff;color:#e11d48">MakeMyTrip</span></div>
+<div class="a" id="B2" style="left:600px;top:1530px"><span class="co" style="background:#fff;color:#2563eb">Qualcomm</span></div>
+<div class="a c" id="B3" style="top:1680px"><span class="stk r">😵 Zyaadatar log ATAK jaate hain!</span></div>
+<div class="a c" id="B4" style="top:1690px"><span class="stk g">👀 End tak dekhna!</span></div>
+<div class="a c" id="P0" style="top:175px"><span class="stk b big">💡 3 Bulbs • 3 Switches</span></div>
+<div class="a c" id="R1" style="top:1520px"><span class="stk g" style="font-size:38px">🔁 Switches: jitni baar chaho ON/OFF</span></div>
+<div class="a c" id="R2" style="top:1640px"><span class="stk r" style="font-size:38px">🚪 Room mein sirf <span style="color:#e11d48">1 BAAR</span>!</span></div>
+<div class="a c" id="R3" style="top:1760px"><span class="stk p" style="font-size:38px">🙈 Bahar se bulb nahi dikhte</span></div>
+<div class="a c" id="Q1" style="top:175px"><span class="stk o" style="font-size:46px">❓ Kaunsa switch ➜ kaunsa bulb?</span></div>
+<div class="a c" id="Q2" style="top:1540px"><span class="stk y">⏸️ Video PAUSE karo — 5 sec socho!</span></div>
+<div class="a c" id="Q3" style="top:1680px"><span class="stk g">💬 Answer COMMENT karo!</span></div>
+<div class="a c" id="S0" style="top:175px"><span class="stk g big">✅ SOLUTION</span></div>
+<div class="a c" id="S1" style="top:1530px"><span class="stk y" style="font-size:40px">STEP 1: Switch 1 ON 🔛</span></div>
+<div class="a c" id="S1b" style="top:1650px"><span class="stk b" style="font-size:40px">⏱️ 10 minute ruko... bulb garam 🔥</span></div>
+<div class="a c" id="S2" style="top:1530px"><span class="stk o" style="font-size:40px">STEP 2: Switch 1 OFF ⛔ • Switch 2 ON 🔛</span></div>
+<div class="a c" id="S2b" style="top:1650px"><span class="stk g" style="font-size:40px">🚶 Ab room mein jao!</span></div>
+<div class="a c" id="V1" style="top:1520px"><span class="res">💡 ON ➜ <span style="color:#16a34a">Switch 2</span></span></div>
+<div class="a c" id="V2" style="top:1630px"><span class="res">🔥 OFF + Garam ➜ <span style="color:#ea580c">Switch 1</span></span></div>
+<div class="a c" id="V3" style="top:1740px"><span class="res">❄️ OFF + Thanda ➜ <span style="color:#2563eb">Switch 3</span></span></div>
+<div class="a c" id="K1" style="top:175px"><span class="stk y big">TRICK: 💡 Roshni + 🔥 Garmi</span></div>
+
+<!-- countdown -->
+<div id="cd">
+  <div class="c" style="position:absolute;top:330px;font-size:80px;font-weight:900">🤔 SOCHO...</div>
+  <svg style="position:absolute;left:290px;top:520px" width="500" height="500"><circle cx="250" cy="250" r="220" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="28"/>
+    <circle id="cring" cx="250" cy="250" r="220" fill="none" stroke="#fde047" stroke-width="28" stroke-linecap="round" transform="rotate(-90 250 250)" stroke-dasharray="1382" stroke-dashoffset="0"/></svg>
+  <div id="cnum" class="c" style="position:absolute;top:600px;font-size:300px;font-weight:900;line-height:340px;color:#fde047;text-shadow:0 0 60px rgba(253,224,71,.6)">5</div>
+  <div class="c" style="position:absolute;top:1120px"><span class="stk y">⏸️ Pause karke socho!</span></div>
+  <div class="c" style="position:absolute;top:1260px"><span class="stk g">💬 Answer comment karo</span></div>
+</div>
+
+<!-- CTA -->
+<div class="a" id="FC" style="left:160px;top:640px;width:760px;height:430px;border-radius:30px;background:#fffaf0;border:6px solid #1f2937;box-shadow:10px 10px 0 #1f2937;z-index:35;color:#1f2937">
+  <div style="position:absolute;left:315px;top:30px;width:130px;height:130px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#f472b6);display:flex;align-items:center;justify-content:center;font-size:54px;font-weight:900;color:#fff;border:5px solid #1f2937">PP</div>
+  <div style="position:absolute;width:100%;top:180px;text-align:center;font-size:48px;font-weight:900">@pretestpassed.codes</div>
+  <div style="position:absolute;width:100%;top:244px;text-align:center;font-size:30px;font-weight:700;color:#475569">Daily interview puzzles 🧩</div>
+  <div id="fbtn" style="position:absolute;left:210px;top:310px;width:340px;height:90px;border-radius:20px;background:#3b82f6;color:#fff;display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:900;border:4px solid #1f2937">FOLLOW</div>
+</div>
+<div class="a" id="FH" style="left:0;top:0;font-size:110px;z-index:36">👆</div>
+<div id="conf" style="position:absolute;inset:0;z-index:37;pointer-events:none"></div>
+
+<div id="cap"><span class="a" id="capw" style="position:relative;display:inline-block"><span id="capt"></span></span></div>
+<div id="prog"></div>
+<div id="wm">@pretestpassed.codes</div>
+</div>
+<script>
+const K=window.K, CAPS=window.CAPS, END=window.END;
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const eo=x=>1-Math.pow(1-clamp(x),3);
+const eio=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const back=x=>{x=clamp(x);const c1=2.0,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const CUES=[]; const cue=(t,n,g)=>CUES.push([+t.toFixed(3),n,g||1]);
+function set(el,o,x,y,s,r){el=typeof el=='string'?$(el):el;el.style.setProperty('--o',o);el.style.setProperty('--x',(x||0)+'px');el.style.setProperty('--y',(y||0)+'px');el.style.setProperty('--s',s==null?1:s);el.style.setProperty('--r',(r||0)+'deg')}
+// sticker: pop in at a, out at b
+function stk(id,t,a,b,rot){const p=clamp((t-a)/.35);const q=b?clamp((b-t)/.2):1;set(id,Math.min(clamp(p*3),q),0,0,t<a?.3:.3+.7*back(p),(rot||0)*(1-eo(p))+(rot?rot*0.15:0))}
+function slide(id,t,a,b,dx){const p=clamp((t-a)/.4);const q=b?clamp((b-t)/.2):1;set(id,Math.min(clamp(p*2),q),dx*(1-eo(p)),0,1,0)}
+function rnd(i,k){const x=Math.sin(i*12.9898+k*78.233)*43758.5453;return x-Math.floor(x)}
+function lerpKeys(keys,t){if(t<=keys[0][0]) return keys[0].slice(1);for(let i=1;i<keys.length;i++){if(t<=keys[i][0]){const a=keys[i-1],b=keys[i];const u=eio((t-a[0])/(b[0]-a[0]||1));return a.slice(1).map((v,j)=>v+(b[j+1]-v)*u)}}return keys[keys.length-1].slice(1)}
+
+// bulbs: index 0=A(x650),1=B(x815),2=C(x980). Mapping: switch1->C, switch2->A, switch3->B
+const BX=[650,815,980];
+(function(){let h='';BX.forEach((x,i)=>{h+=`<line x1="${x}" y1="22" x2="${x}" y2="200" stroke="#111827" stroke-width="6"/>
+ <circle id="gl${i}" cx="${x}" cy="270" r="170" fill="url(#glow)" opacity="0"/><circle id="ht${i}" cx="${x}" cy="270" r="110" fill="url(#hot)" opacity="0"/>
+ <rect x="${x-22}" y="196" width="44" height="34" rx="6" fill="#9ca3af" stroke="#1f2937" stroke-width="5"/>
+ <circle id="bb${i}" cx="${x}" cy="270" r="48" fill="#e5e7eb" stroke="#1f2937" stroke-width="6"/>
+ <path d="M${x-14},262 q14,-18 28,0" stroke="#6b7280" stroke-width="4" fill="none"/>
+ <g id="hw${i}" opacity="0" stroke="#ef4444" stroke-width="5" fill="none" stroke-linecap="round"><path id="hwa${i}" d="M${x-30},210 q-10,-20 0,-40 q10,-20 0,-40"/><path d="M${x+30},210 q-10,-20 0,-40 q10,-20 0,-40"/></g>
+ <circle cx="${x}" cy="400" r="30" fill="#fffaf0" stroke="#1f2937" stroke-width="5"/><text x="${x}" y="412" font-size="32" fill="#1f2937">${'ABC'[i]}</text>
+ <text id="bt${i}" x="${x}" y="500" font-size="64" opacity="0"></text>`});$('bulbs').innerHTML=h;
+ let ch='';for(let i=0;i<100;i++){const col=['#22d3ee','#f472b6','#fde047','#4ade80','#a855f7','#fb923c'][i%6];ch+=`<div class="a" id="cf${i}" style="left:0;top:0;width:${14+(i*7)%12}px;height:${8+(i*5)%10}px;background:${col};border-radius:3px"></div>`}
+ $('conf').innerHTML=ch;})();
+
+// camera keyframes [t,cx,cy,s]
+const CAM=[[0,540,530,1],[K.room+1.6,540,530,1],[K.bahar-0.1,540,530,1],[K.bahar+0.4,190,480,1.7],[K.andar-0.2,190,480,1.7],[K.andar+0.4,815,300,1.6],[K.har-0.1,815,300,1.6],[K.har+0.4,540,530,1],
+ [K.s1on-0.2,540,530,1],[K.s1on+0.3,300,480,1.25],[K.das-0.1,300,480,1.25],[K.das+0.4,540,530,1],[K.jao-0.2,540,530,1],[K.r_on-0.4,540,530,1],[K.r_on+0.2,817,380,1.5],[K.trick-0.2,817,380,1.5],[K.trick+0.3,540,530,1],[END,540,530,1]];
+// switch states: list of [time, sw, on]
+const SWE=[[K.s1on+0.6,0,1],[K.s1off,0,0],[K.s2on,1,1]];
+function swState(t,i){let v=0;for(const e of SWE) if(e[1]==i&&t>=e[0]) v=e[2];return v}
+// hook flicker
+function flick(t,i){return t<K.room?(Math.sin(t*9+i*2.1)+Math.sin(t*23+i*5)>0.6?1:0.15):0}
+
+(function(){
+ cue(0.02,'boom',.9); cue(0.1,'pop'); cue(K.mmt,'pop'); cue(K.qc,'pop'); cue(K.atak,'buzz',.5); cue(K.solve,'bell',.6); cue(K.solve+0.5,'pop');
+ cue(K.room-0.15,'whoosh',.6); cue(K.bahar,'whoosh',.4); cue(K.andar,'whoosh',.4); cue(K.har,'pop');
+ cue(K.switches,'switch'); cue(K.switches+0.3,'switch'); cue(K.switches+0.6,'switch'); cue(K.lekin,'pop'); cue(K.ekbaar,'bell',.5); cue(K.baharse,'pop');
+ cue(K.batao,'pop'); cue(K.video,'riser',.6); cue(K.comment,'pop');
+ cue(K.cd0,'boom',.7); for(let i=0;i<5;i++) cue(K.cd0+i*(K.cd1-K.cd0)/5,i%2?'tock':'clock',1); cue(K.cd1-0.05,'bell',.8);
+ cue(K.sol,'success',.8); cue(K.s1on+0.6,'switch'); cue(K.s1on+0.65,'hum',.6);
+ for(let i=0;i<14;i++) cue(K.das+0.15*i,'clock',.5); cue(K.das,'riser',.4); cue(K.garam,'sizzle',.8);
+ cue(K.s1off,'switch'); cue(K.s2on,'switch'); cue(K.s2on+0.05,'hum',.6);
+ for(let i=0;i<4;i++) cue(K.jao+0.15+i*0.22,'step',.8); cue(K.jao+0.7,'door',.7);
+ cue(K.r_on+0.3,'ding',.7); cue(K.r_hot+0.4,'sizzle',.7); cue(K.r_hot+0.6,'ding',.7); cue(K.r_cold+0.5,'ding',.7);
+ cue(K.trick,'success',.8); cue(K.garmi,'sparkle',.6); cue(K.aise,'pop'); cue(K.follow+0.25,'click'); cue(K.follow+0.3,'sparkle',.9);
+})();
+
+window.render=function(t){
+ $('prog').style.width=(1080*clamp(t/END))+'px';
+ // camera
+ const [cx,cy,s]=lerpKeys(CAM,t); const shake=(t>K.cd0-0.1&&t<K.cd0+0.25)?6*Math.sin(t*90):0;
+ $('world').style.transform=`translate(${540-cx*s+shake}px,${530-cy*s}px) scale(${s})`;
+ // bulbs
+ const sw=[0,1,2].map(i=>swState(t,i));
+ const on=[sw[1],sw[2],sw[0]];  // A<-sw2, B<-sw3, C<-sw1
+ const heat=[0,0,clamp((t-K.s1on-0.6)/((K.garam+0.3)-(K.s1on+0.6)))*(t>K.s1on?1:0)];
+ let any=0;
+ for(let i=0;i<3;i++){const f=Math.max(on[i],flick(t,i)); any=Math.max(any,f);
+   $('gl'+i).setAttribute('opacity',f*(0.85+0.15*Math.sin(t*20+i)));
+   $('bb'+i).setAttribute('fill',f>0.5?'#fff59d':(heat[i]>0.3?`rgb(${230+25*heat[i]|0},${160-60*heat[i]|0},${120-80*heat[i]|0})`:'#e5e7eb'));
+   $('ht'+i).setAttribute('opacity',heat[i]*(f>0.5?0.3:0.9));
+   const hw=$('hw'+i); hw.setAttribute('opacity',(heat[i]>0.6&&t>K.garam-0.2)?0.6+0.4*Math.sin(t*8):0); hw.setAttribute('transform',`translate(0,${-((t*40)%20)})`)}
+ $('inwall2').setAttribute('opacity',any*0.85);
+ for(let i=0;i<3;i++) $('lv'+i).setAttribute('y',sw[i]?-48:2), $('lv'+i).setAttribute('fill',sw[i]?'#22c55e':'#6b7280');
+ // curtain: hidden during hook (flicker show), shown room..andar, hidden andar..baharse, shown baharse..sol (as "nahi dikhta"), xray afterwards
+ let cu=0; if(t>=K.room&&t<K.andar) cu=1; if(t>=K.baharse+0.2&&t<K.sol) cu=0.93;
+ const cuF=(t>=K.room&&t<K.room+0.3)?clamp((t-K.room)/.3):(t>=K.andar&&t<K.andar+0.3)?1-clamp((t-K.andar)/.3):(t>=K.baharse+0.2&&t<K.baharse+0.5)?clamp((t-K.baharse-0.2)/.3)*0.93:(t>=K.sol&&t<K.sol+0.3)?0.93*(1-clamp((t-K.sol)/.3)):cu;
+ $('curt').setAttribute('opacity',cuF); $('curtT').textContent=t>=K.baharse?'Bahar se nahi dikhta 🙈':'Andar kya hai?';
+ const xr=(t>=K.sol+0.2)?1:0; $('xray').setAttribute('opacity',xr*(t<K.jao+0.8?0.6+0.4*Math.sin(t*6):0)); $('xrayT').setAttribute('opacity',xr&&t<K.trick?1:0);
+ $('xrayTt').textContent=t<K.jao+0.8?'👀 X-RAY (tum nahi dekh sakte)':'✅ ANDAR AA GAYE!';
+ $('wires').setAttribute('opacity',(t>=K.har&&t<K.cd0)?clamp((t-K.har)/.4):0);
+ $('qs').setAttribute('opacity',(t>=K.batao&&t<K.cd0)?(0.7+0.3*Math.sin(t*6)):0);
+ $('once').setAttribute('opacity',(t>=K.ekbaar&&t<K.cd0)?1:0);
+ // person: walk to door at jao
+ const wp=eio((t-K.jao-0.1)/0.9); const mx=150+230*wp; const walking=t>K.jao&&t<K.jao+1.0;
+ $('man').setAttribute('transform',`translate(${mx},${walking?-6*Math.abs(Math.sin(t*14)):0})`);
+ $('legL').setAttribute('transform',walking?`rotate(${18*Math.sin(t*14)} -20 860)`:''); $('legR').setAttribute('transform',walking?`rotate(${-18*Math.sin(t*14)} 20 860)`:'');
+ $('think').setAttribute('opacity',(t>=K.batao&&t<K.sol)?1:0);
+ $('door').setAttribute('transform',`translate(330,0) scale(${1-0.85*eo((t-K.jao-0.7)/0.5)},1) translate(-330,0)`);
+ // reveal labels on bulbs
+ const lab=[['💡',K.r_on+0.3,0],['🔥',K.r_hot+0.6,2],['❄️',K.r_cold+0.5,1]];
+ for(const [e,tt,i] of lab){const el=$('bt'+i);el.textContent=e;const p=clamp((t-tt)/.3);el.setAttribute('opacity',t>=tt&&t<K.aise?1:0);el.setAttribute('font-size',64*(0.4+0.6*back(p)))}
+ // hand touching hot bulb
+ {const p=eo((t-K.r_hot)/0.5);const vis=t>K.r_hot&&t<K.r_cold;$('hand').setAttribute('opacity',vis?1:0);$('hand').setAttribute('x',980-40);$('hand').setAttribute('y',420-80*p+(t>K.r_hot+0.6&&t<K.r_hot+1.0?10*Math.sin(t*60):0))}
+ // clock hands
+ {const sp=t>=K.das&&t<K.garam+0.3?(t-K.das)*720:0; const base=t*6; const tot=t>=K.garam+0.3?(K.garam+0.3-K.das)*720:sp;
+  $('chm').setAttribute('transform',`rotate(${base*6+tot*1})`);$('chh').setAttribute('transform',`rotate(${base/2+tot/12})`)}
+ // ===== screen stickers =====
+ stk('T0',t,0.1,K.solve-0.1,-3); stk('T1',t,K.solve,K.room-0.1,2);
+ slide('B1',t,K.mmt-0.1,K.room-0.1,-600); slide('B2',t,K.qc-0.1,K.room-0.1,600);
+ stk('B3',t,K.atak-0.1,K.solve+0.3,-2); stk('B4',t,K.solve+0.5,K.room-0.1,2);
+ stk('P0',t,K.room+0.1,K.rule-0.1,-2);
+ stk('R1',t,K.switches-0.1,K.batao-0.1,-1.5); stk('R2',t,K.lekin,K.batao-0.1,1.5); stk('R3',t,K.baharse,K.batao-0.1,-1.5);
+ stk('Q1',t,K.batao-0.1,K.cd0,-2); stk('Q2',t,K.video-0.1,K.cd0,1.5); stk('Q3',t,K.comment-0.1,K.cd0,-1.5);
+ stk('S0',t,K.sol,K.trick-0.15,-3);
+ stk('S1',t,K.s1on,K.s1off-0.15,-1.5); stk('S1b',t,K.das,K.s1off-0.15,1.5);
+ stk('S2',t,K.s1off,K.r_on-0.15,1.5); stk('S2b',t,K.jao-0.1,K.r_on-0.15,-1.5);
+ stk('V1',t,K.r_on+0.3,K.aise-0.1,-1); stk('V2',t,K.r_hot+0.6,K.aise-0.1,1); stk('V3',t,K.r_cold+0.5,K.aise-0.1,-1);
+ stk('K1',t,K.trick,END+1,-2);
+ // countdown
+ {const o=Math.min(clamp((t-K.cd0)/.2),clamp((K.cd1-t)/.25));$('cd').style.opacity=o;$('cd').style.display=o>0?'block':'none';
+  const D=(K.cd1-K.cd0);const e=clamp((t-K.cd0)/D);const n=Math.max(1,5-Math.floor(e*5));$('cnum').textContent=n;
+  const fr=(e*5)%1;$('cnum').style.transform=`scale(${0.6+0.4*back(fr/0.3)})`;$('cnum').style.color=n<=2?'#fb7185':'#fde047';
+  $('cring').setAttribute('stroke-dashoffset',1382*e);$('cring').setAttribute('stroke',n<=2?'#fb7185':'#fde047')}
+ // CTA
+ {stk('FC',t,K.aise+0.1,END+1,0); const tc=K.follow+0.25;const p=eo((t-tc+0.7)/0.6);const x=900+(560-900)*p,y=1300+(1010-1300)*p;const press=t>tc&&t<tc+.2?.85:1;
+  set('FH',clamp((t-tc+0.8)/.25),x-60,y-60,press);
+  const b=$('fbtn');if(t>tc){b.textContent='FOLLOWING ✓';b.style.background='#64748b'}else{b.textContent='FOLLOW';b.style.background='#3b82f6'}
+  for(let i=0;i<100;i++){const dt=t-tc;const el=$('cf'+i);if(dt<0){set(el,0);continue}
+   const ang=rnd(i,1)*Math.PI*2, sp=500+rnd(i,2)*900;const x=540+Math.cos(ang)*sp*dt*0.8, y=850+Math.sin(ang)*sp*dt*0.7-500*dt+700*dt*dt;
+   set(el,clamp(3-dt),x,y,1,dt*400*(rnd(i,3)-.5))}}
+ // captions
+ {let cur=null;for(let i=0;i<CAPS.length;i++){const s=CAPS[i][0],e=i+1<CAPS.length?Math.min(CAPS[i+1][0],s+3.5):s+2.5;if(t>=s-0.05&&t<e) cur=[i,s,e]}
+  const hide=(t>=K.cd0-0.1&&t<K.cd1+0.1);
+  if(cur&&!hide){$('capt').innerHTML=CAPS[cur[0]][1];const p=clamp((t-cur[1]+0.05)/.18);set('capw',Math.min(clamp(p*2),clamp((cur[2]-t)/.12)),0,12*(1-eo(p)),.9+.1*back(p))} else set('capw',0)}
+};
+window.CUES=CUES; window.render(0);
+</script></body></html>
