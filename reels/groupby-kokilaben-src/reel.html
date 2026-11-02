@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:transparent}
+body{font-family:'Inter','Noto Color Emoji',sans-serif;color:#fff}
+.mono{font-family:'DejaVu Sans Mono','Noto Color Emoji',monospace}
+#stage{position:absolute;inset:0;overflow:hidden}
+#bg{position:absolute;inset:0;background:
+ radial-gradient(700px 700px at var(--b1x,20%) var(--b1y,75%),rgba(150,40,200,.35),transparent 70%),
+ radial-gradient(650px 650px at var(--b2x,85%) var(--b2y,30%),rgba(34,211,238,.18),transparent 70%),
+ radial-gradient(900px 900px at 50% 110%,rgba(40,80,220,.30),transparent 70%),
+ linear-gradient(180deg,#0b0b2b 0%,#14102f 50%,#0b0a24 100%)}
+#prog{position:absolute;left:0;top:0;height:10px;background:linear-gradient(90deg,#22d3ee,#a855f7,#f472b6);box-shadow:0 0 18px #22d3ee}
+#wm{position:absolute;top:95px;width:100%;text-align:center;font-size:30px;font-weight:600;color:rgba(255,255,255,.7)}
+.scene{position:absolute;inset:0;opacity:0}
+.a{position:absolute;opacity:var(--o,0);transform:translate(var(--x,0px),var(--y,0px)) scale(var(--s,1)) rotate(var(--r,0deg));transform-origin:center}
+.c{left:0;width:1080px;text-align:center}
+.h1{font-size:66px;font-weight:900;line-height:1.15;text-shadow:0 4px 18px rgba(0,0,0,.8)}
+y,.y{color:#fde047}r,.r{color:#fb7185}g,.g{color:#4ade80}c,.cy{color:#22d3ee}o,.or{color:#fb923c}
+.pill{display:inline-block;padding:14px 32px;border-radius:999px;font-size:38px;font-weight:900}
+.pill.cy{background:#22d3ee;color:#062033;box-shadow:0 0 30px rgba(34,211,238,.6)}
+.pill.or{background:#fb923c;color:#2a1000;box-shadow:0 0 30px rgba(251,146,60,.6)}
+.pill.g{background:#22c55e;color:#03210f;box-shadow:0 0 30px rgba(34,197,94,.6)}
+.pill.pu{background:#a855f7;color:#fff;box-shadow:0 0 30px rgba(168,85,247,.6)}
+.pill.r{background:#f43f5e;color:#fff;box-shadow:0 0 30px rgba(244,63,94,.6)}
+.pill.dk{background:rgba(10,10,30,.9);color:#fde047;border:2px solid rgba(253,224,71,.6)}
+.cell{position:absolute;height:86px;display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:800;border:3px solid rgba(255,255,255,.15)}
+.hd{background:#1e3a8a;color:#bfdbfe;font-weight:900}
+.hr{background:rgba(59,130,246,.28)}.it{background:rgba(250,204,21,.22)}
+#cframe{position:absolute;left:84px;top:294px;width:912px;height:1137px;border-radius:18px;border:6px solid #f472b6;box-shadow:0 0 40px rgba(244,114,182,.6)}
+.qry{position:absolute;left:50px;width:980px;padding:22px 30px;border-radius:22px;background:#05060f;border:3px solid #334155;font-size:30px;line-height:1.5;white-space:pre}
+.kw{color:#c084fc;font-weight:700}.fn{color:#fde047;font-weight:700}.hl{background:rgba(253,224,71,.22);border-radius:6px}
+.card{position:absolute;left:90px;width:900px;border-radius:28px;padding:26px 36px;background:rgba(10,15,45,.88);font-size:44px;font-weight:900;line-height:1.35}
+#cap{position:absolute;left:60px;width:960px;top:1560px;text-align:center}
+#capt{display:inline-block;padding:14px 28px;border-radius:20px;background:rgba(0,0,0,.72);font-size:46px;font-weight:900;line-height:1.2;max-width:960px}
+</style></head>
+<body><div id="stage">
+<div id="bg"></div>
+<div class="a" id="cframe"></div>
+<div class="scene" id="C">
+  <div class="a c" id="CL1" style="top:150px"><span class="pill pu" style="font-size:40px">🎤 Interviewer: "Rows mein KAUN tha?" 😂</span></div>
+  <div class="a c" id="CL2" style="top:1460px"><span class="pill dk" style="font-size:42px">GROUP BY: "Bas total pata hai... 180" 🤷</span></div>
+  <div class="a c" id="CL3" style="top:1580px"><span style="display:inline-block;padding:14px 34px;border:6px solid #f43f5e;border-radius:16px;font-size:52px;font-weight:900;color:#fb7185;background:rgba(40,5,10,.92)">😱 GROUP BY ke paas NAAM nahi!</span></div>
+</div>
+
+<!-- HOOK -->
+<div class="scene" id="H">
+  <div class="a c" id="H1" style="top:250px"><span class="pill cy" style="font-size:64px">GROUP BY</span></div>
+  <div class="a c" id="H2" style="top:390px;font-size:70px;font-weight:900;color:#fb7185">🆚</div>
+  <div class="a c" id="H3" style="top:500px"><span class="pill or" style="font-size:64px">WINDOW FN</span></div>
+  <div id="hrows"></div>
+  <div class="a c" id="H5" style="top:1180px"><span class="pill r" style="font-size:46px">😱 Naam gayab! Sirf total</span></div>
+  <div class="a c h1" id="H6" style="top:1310px;font-size:52px">Isiliye aaya <y>Window Function</y> ⚡</div>
+  <div class="a c" id="H7" style="top:1420px"><span class="pill dk" style="font-size:38px">Data Analyst interview ka favourite 🔥</span></div>
+</div>
+
+<!-- MAIN -->
+<div class="scene" id="M">
+  <div class="a c" id="M0" style="top:180px"><span class="pill dk" id="M0t" style="font-size:36px">🏏 ipl_match</span></div>
+  <div id="tbl"></div>
+  <div class="a qry mono" id="Q1" style="top:780px"><span id="Q1t"></span></div>
+  <div id="gres"></div>
+  <div class="a c" id="E1" style="top:1260px"><span class="pill g" style="font-size:44px">✅ Easy!</span></div>
+  <div class="a" id="I1" style="left:60px;top:780px;width:960px;border-radius:28px;background:rgba(88,28,135,.92);border:4px solid #c084fc;padding:26px 34px;font-size:42px;font-weight:900;line-height:1.35">🎤 Interviewer: "Har <y>PLAYER</y> ka naam + uski <y>team ka total</y>!"</div>
+  <div class="a c" id="F1" style="top:1160px"><span style="display:inline-block;padding:16px 40px;border:7px solid #f43f5e;border-radius:18px;font-size:70px;font-weight:900;color:#fb7185;background:rgba(40,5,10,.9);box-shadow:0 0 40px rgba(244,63,94,.5)">GROUP BY FAIL ❌</span></div>
+  <div id="fly"></div>
+  <div class="a c" id="W0" style="top:780px"><span class="pill pu" style="font-size:46px">⚡ Entry: WINDOW FUNCTION</span></div>
+  <div class="a qry mono" id="Q2" style="top:900px;font-size:28px"><span id="Q2t"></span></div>
+  <div class="a c" id="S1" style="top:1230px"><span class="pill g" style="font-size:42px">✅ Har row SAFE • 4 ➜ 4</span></div>
+  <div id="brk"></div>
+</div>
+
+<!-- SUMMARY -->
+<div class="scene" id="Z">
+  <div class="a c h1" id="Z1" style="top:230px;color:#fde047;font-size:58px">EK LINE MEIN YAAD RAKHO 🧠</div>
+  <div class="a card" id="Z2" style="top:370px;border:4px solid #f43f5e">GROUP BY ➜ rows <r>COLLAPSE</r> 🗜️<br><span style="font-size:36px;color:#cbd5e1">4 rows ➜ 2 rows (players gayab)</span></div>
+  <div class="a card" id="Z3" style="top:620px;border:4px solid #4ade80">WINDOW FN ➜ rows <g>SAFE</g> ✅<br><span style="font-size:36px;color:#cbd5e1">4 rows ➜ 4 rows + naya column</span></div>
+  <div class="a" id="Z4" style="left:190px;top:900px;width:700px;height:360px;border-radius:30px;background:rgba(12,16,45,.92);border:4px solid #f472b6;box-shadow:0 0 50px rgba(244,114,182,.4)">
+    <div style="position:absolute;left:290px;top:24px;width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#f472b6);display:flex;align-items:center;justify-content:center;font-size:50px;font-weight:900;border:4px solid #fff">PP</div>
+    <div style="position:absolute;width:100%;top:160px;text-align:center;font-size:46px;font-weight:900">@pretestpassed.codes</div>
+    <div id="fbtn" style="position:absolute;left:180px;top:245px;width:340px;height:86px;border-radius:20px;background:#3b82f6;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:900">FOLLOW</div></div>
+  <div class="a" id="Z5" style="left:0;top:0;font-size:110px">👆</div>
+  <div id="conf"></div>
+</div>
+
+<div id="cap"><span class="a" id="capw" style="position:relative;display:inline-block"><span id="capt"></span></span></div>
+<div id="prog"></div>
+<div id="wm">@pretestpassed.codes</div>
+</div>
+<script>
+const TL=window.TL, K=TL.K, CAPS=TL.CAPS, END=TL.END;
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const eo=x=>1-Math.pow(1-clamp(x),3);
+const eio=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const back=x=>{x=clamp(x);const c1=2.0,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const CUES=[]; const cue=(t,n,g)=>CUES.push([+t.toFixed(3),n,g||1]);
+function set(el,o,x,y,s,r){el=typeof el=='string'?$(el):el;el.style.setProperty('--o',o);el.style.setProperty('--x',(x||0)+'px');el.style.setProperty('--y',(y||0)+'px');el.style.setProperty('--s',s==null?1:s);el.style.setProperty('--r',(r||0)+'deg')}
+function pop(el,t,t0,d,t1){d=d||.4;const p=clamp((t-t0)/d);const q=t1?clamp((t1-t)/.2):1;set(el,t<t0?0:Math.min(clamp(p*2.5),q),0,0,t<t0?.4:.4+.6*back(p))}
+function rise(el,t,t0,t1){const p=clamp((t-t0)/.45);const q=t1?clamp((t1-t)/.2):1;set(el,t<t0?0:Math.min(clamp(p*2),q),0,50*(1-eo(p)),1)}
+function vis(t,a,b,f){f=f||.15;return Math.min(clamp((t-a)/f),clamp((b-t)/f))}
+function rnd(i,k){const x=Math.sin(i*12.9898+k*78.233)*43758.5453;return x-Math.floor(x)}
+const ROWS=[[1,'Rohit','MI',40],[2,'Surya','MI',60],[3,'Dhoni','CSK',30],[4,'Jadeja','CSK',50]];
+const COLX=[50,210,370,610,830], COLW=[160,160,240,220,200], TY=260, RH=86;
+const fmt=n=>String(n);
+(function(){
+ // hook rows
+ let h='';ROWS.forEach((r,i)=>h+=`<div class="a" id="hr${i}" style="left:240px;top:${680+i*100}px;width:600px;height:86px;border-radius:16px;background:${r[2]=='MI'?'#1d4ed8':'#a16207'};display:flex;align-items:center;justify-content:space-around;font-size:38px;font-weight:900;border:3px solid #fff"><span>${r[1]}</span><span>${r[2]}</span><span>${fmt(r[3])}</span></div>`);
+ h+=`<div class="a" id="hrm" style="left:240px;top:830px;width:600px;height:96px;border-radius:16px;background:#334155;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:900;border:3px solid #fde047">❓ ❓ | total: 180</div>`;
+ $('hrows').innerHTML=h;
+ // main table
+ let t='';const H=['id','player','team','runs','team_total'];
+ H.forEach((c,j)=>t+=`<div class="a cell hd" id="th${j}" style="left:${COLX[j]}px;top:${TY}px;width:${COLW[j]}px;font-size:${j==4?30:32}px;${j==4?'background:#166534;color:#bbf7d0':''}">${c}</div>`);
+ ROWS.forEach((r,i)=>{const cls=r[2]=='MI'?'hr':'it';[r[0],r[1],r[2],fmt(r[3])].forEach((v,j)=>t+=`<div class="a cell ${cls}" id="c${i}_${j}" style="left:${COLX[j]}px;top:${TY+RH*(i+1)}px;width:${COLW[j]}px">${v}</div>`);
+  t+=`<div class="a cell ${cls}" id="c${i}_4" style="left:${COLX[4]}px;top:${TY+RH*(i+1)}px;width:${COLW[4]}px;color:#4ade80;font-weight:900"><span id="dv${i}"></span></div>`});
+ $('tbl').innerHTML=t;
+ // group by result
+ $('gres').innerHTML=`<div class="a cell hd" id="g0" style="left:240px;top:1010px;width:300px">team</div><div class="a cell hd" id="g1" style="left:540px;top:1010px;width:300px">SUM(runs)</div>
+  <div class="a cell hr" id="g2" style="left:240px;top:1096px;width:300px">MI</div><div class="a cell hr" id="g3" style="left:540px;top:1096px;width:300px;color:#fde047">100</div>
+  <div class="a cell it" id="g4" style="left:240px;top:1182px;width:300px">CSK</div><div class="a cell it" id="g5" style="left:540px;top:1182px;width:300px;color:#fde047">80</div>`;
+ let f='';['Rohit','Surya','Dhoni','Jadeja'].forEach((n,i)=>f+=`<div class="a" id="fn${i}" style="left:0;top:0;font-size:56px;font-weight:900;color:#fde047">${n} 👋</div>`);$('fly').innerHTML=f;
+ $('brk').innerHTML=`<div class="a" id="bh" style="left:1040px;top:${TY+RH}px;width:14px;height:${RH*2}px;background:#22d3ee;border-radius:6px"></div><div class="a" id="bi" style="left:1040px;top:${TY+RH*3}px;width:14px;height:${RH*2}px;background:#fb923c;border-radius:6px"></div>`;
+ let ch='';for(let i=0;i<90;i++){const col=['#22d3ee','#f472b6','#fde047','#4ade80','#a855f7','#fb923c'][i%6];ch+=`<div class="a" id="cf${i}" style="left:0;top:0;width:${14+(i*7)%12}px;height:${8+(i*5)%10}px;background:${col};border-radius:3px"></div>`}$('conf').innerHTML=ch;
+})();
+const Q1="SELECT team, SUM(runs)\nFROM ipl_match\nGROUP BY team;";
+const Q2="SELECT id, player, team, runs,\n  SUM(runs) OVER (PARTITION BY team)\n    AS team_total\nFROM ipl_match;";
+function hlq(s){return s.replace(/(SELECT|FROM|GROUP BY|AS)\b/g,'<span class="kw">$1</span>').replace(/(SUM)/g,'<span class="fn">$1</span>').replace(/(OVER \(PARTITION BY team\))/,'<span class="hl">$1</span>').replace(/(OVER|PARTITION BY)/g,'<span class="kw">$1</span>')}
+(function(){
+ cue(0.05,'pop',.5); cue(TL.SEG[1][0]+0.1,'slap',.5); cue(TL.SEG[2][0]+0.05,'buzz',.5); cue(TL.HK-0.02,'boom',.7); cue(TL.HK+0.1,'pop'); cue(K.window-0.2,'pop'); cue(K.kyun-0.4,'whoosh',.5); cue(K.kyun,'buzz',.5); cue(K.intv,'slap',.6);
+ cue(K.table,'whoosh',.4); cue(K.AB,'pop',.6); cue(K.CD,'pop',.6);
+ for(let i=0;i<Q1.length;i+=3) cue(K.gb+(1.0)*i/Q1.length,'type',.5); cue(K.hr70-0.3,'whoosh',.5); cue(K.hr70,'ding',.6); cue(K.it110,'ding',.6); cue(K.easy,'success',.6);
+ cue(K.lekin,'slap',.6); cue(K.fail,'buzz',.8); cue(K.collapse,'whoosh',.6);
+ cue(K.entry,'riser',.5); cue(K.entry+0.5,'boom',.5); for(let i=0;i<Q2.length;i+=4) cue(K.sum+(K.part+0.8-K.sum)*i/Q2.length,'type',.45);
+ cue(K.safe,'whoosh',.5); cue(K.safe+0.2,'success',.6); cue(K.v70,'ding',.6); cue(K.v110,'ding',.6);
+ cue(K.yaad,'pop'); cue(K.gbc,'buzz',.4); cue(K.wn,'success',.6); cue(K.aise,'pop'); cue(K.follow+0.2,'click'); cue(K.follow+0.25,'sparkle',.9);
+})();
+window.render=function(t){
+ $('prog').style.width=(1080*clamp(t/END))+'px';
+ const bg=$('bg');bg.style.setProperty('--b1x',(20+8*Math.sin(t*.25))+'%');bg.style.setProperty('--b1y',(75+6*Math.cos(t*.2))+'%');bg.style.setProperty('--b2x',(82+6*Math.cos(t*.3))+'%');bg.style.setProperty('--b2y',(28+8*Math.sin(t*.22))+'%');
+ const W={C:[-1,TL.HK],H:[TL.HK,K.table-0.1],M:[K.table-0.1,K.yaad-0.1],Z:[K.yaad-0.1,END+1]};
+ const clip=t<TL.HK; bg.style.clipPath=clip?"path(evenodd,'M0 0 H1080 V1920 H0 Z M90 300 H990 V1425 H90 Z')":'none'; set('cframe',clip?1:0);
+ pop('CL1',t,0.05); rise('CL2',t,TL.SEG[1][0]+0.1,TL.SEG[2][0]); pop('CL3',t,TL.SEG[2][0]+0.05); if(t>TL.SEG[2][0]+0.15&&t<TL.SEG[2][0]+0.5) $('CL3').style.setProperty('--r',(6*Math.sin(t*60))+'deg');
+ for(const id in W){const o=vis(t,W[id][0],W[id][1],.12);const el=$(id);el.style.opacity=o;el.style.display=o>0?'block':'none'}
+ // HOOK
+ pop('H1',t,TL.HK+0.05); pop('H2',t,TL.HK+0.4); pop('H3',t,K.window-0.2);
+ {const cp=eio((t-K.kyun+0.5)/0.7);for(let i=0;i<4;i++){const y0=680+i*100;set('hr'+i,(t<TL.HK+0.6?0:clamp((t-TL.HK-0.6-i*0.12)/0.25))*(1-cp),0,(830-y0)*cp,1-0.2*cp)}
+  set('hrm',cp>0.6?1:0,0,0,cp>0.6?0.8+0.2*back((cp-0.6)/0.4):1)}
+ pop('H5',t,K.kyun); rise('H6',t,K.kyun+0.4); pop('H7',t,K.intv);
+ // MAIN table
+ pop('M0',t,K.table-0.05);
+ for(let j=0;j<4;j++) pop('th'+j,t,K.table+j*0.06,.35);
+ const gbM=eio((t-K.hr70+0.4)/0.7), gbBack=clamp((t-K.lekin)/0.4), wnOn=t>=K.entry;
+ for(let i=0;i<4;i++){
+  const ta=i<2?K.AB:K.CD; let o=clamp((t-ta+0.2-(i%2)*0.15)/.3);
+  // during GROUP BY merge: names/ids fade out of the table rows
+  for(let j=0;j<4;j++){let oo=o; if(t>=K.hr70-0.4&&t<K.entry) oo=o*(j==0||j==1?(1-0.75*gbM):(1-0.35*gbM)); if(t>=K.collapse&&t<K.entry) oo*=0.6; set(`c${i}_${j}`,oo,0,0,1)}
+ }
+ // dept_total column
+ {const p=eo((t-K.safe)/0.5); set('th4',t>=K.safe?clamp(p*2):0,120*(1-p),0,1); for(let i=0;i<4;i++){set(`c${i}_4`,t>=K.safe?clamp((p-0.1*i)*2):0,120*(1-p),0,1);$('dv'+i).textContent=t>=(i<2?K.v70:K.v110)-0.1?(i<2?'100':'80'):''}
+  set('bh',t>=K.v70-0.1&&t<K.yaad?1:0); set('bi',t>=K.v110-0.1&&t<K.yaad?1:0)}
+ // Q1 group by
+ {const n=Math.floor(Q1.length*clamp((t-K.gb)/1.0)); $('Q1t').innerHTML=hlq(Q1.slice(0,n)); set('Q1',t>=K.gb-0.15&&t<K.lekin?1:0,0,0,1)}
+ for(let k=0;k<6;k++){const tk=k<2?K.hr70-0.3:(k<4?K.hr70:K.it110);let o=t>=tk&&t<K.lekin?clamp((t-tk)/.3):0;set('g'+k,o,0,0,o?(0.6+0.4*back((t-tk)/.35)):1)}
+ pop('E1',t,K.easy,.4,K.lekin);
+ // interviewer + fail
+ rise('I1',t,K.lekin+0.2,K.entry-0.1); pop('F1',t,K.fail,.4,K.entry-0.1);
+ for(let i=0;i<4;i++){const p=eo((t-K.collapse-i*0.12)/0.8);const vis_=t>=K.collapse&&t<K.entry;set('fn'+i,vis_?1-p*0.9:0,COLX[1]+40+300*p*(i%2?1:-0.4),TY+RH*(i+1)+10-500*p,1,30*p*(i%2?1:-1))}
+ // window fn
+ pop('W0',t,K.entry,.4,K.sum-0.1);
+ {const n=Math.floor(Q2.length*clamp((t-K.sum)/(K.part+0.8-K.sum))); $('Q2t').innerHTML=hlq(Q2.slice(0,n)); set('Q2',t>=K.sum-0.15&&t<K.yaad?1:0,0,t>=K.safe?-100*eo((t-K.safe)/0.5):0,1)}
+ pop('S1',t,K.safe+0.3);
+ // SUMMARY
+ pop('Z1',t,K.yaad-0.05); rise('Z2',t,K.gbc-0.2); rise('Z3',t,K.wn-0.2); pop('Z4',t,K.aise);
+ {const tc=K.follow+0.2;const p=eo((t-tc+0.9)/0.8);const x=900+(560-900)*p,y=1500+(1180-1500)*p;const press=t>tc&&t<tc+.2?.85:1;
+  set('Z5',clamp((t-tc+1)/.3),x-60,y-60,press);
+  const b=$('fbtn');if(t>tc){b.textContent='FOLLOWING ✓';b.style.background='#475569'}else{b.textContent='FOLLOW';b.style.background='#3b82f6'}
+  for(let i=0;i<90;i++){const dt=t-tc;const el=$('cf'+i);if(dt<0){set(el,0);continue}
+   const ang=rnd(i,1)*Math.PI*2, sp=500+rnd(i,2)*900;const x=540+Math.cos(ang)*sp*dt*0.8, y=1000+Math.sin(ang)*sp*dt*0.7-500*dt+700*dt*dt;
+   set(el,clamp(3-dt),x,y,1,dt*400*(rnd(i,3)-.5))}}
+ // captions
+ {let cur=null;for(let i=0;i<CAPS.length;i++){const s0=CAPS[i][0],e0=i+1<CAPS.length?Math.min(CAPS[i+1][0],s0+3.6):s0+2.6;if(t>=s0-0.05&&t<e0) cur=[i,s0,e0]}
+  if(cur&&!(t<TL.HK)){$('capt').innerHTML=CAPS[cur[0]][1];const p=clamp((t-cur[1]+0.05)/.18);set('capw',Math.min(clamp(p*2),clamp((cur[2]-t)/.12)),0,14*(1-eo(p)),.9+.1*back(p))} else set('capw',0)}
+ $('cap').style.top=t>=K.yaad-0.1?'1330px':'1560px';
+};
+window.CUES=CUES; window.render(0);
+</script></body></html>

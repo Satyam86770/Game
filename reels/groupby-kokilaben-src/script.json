@@ -1,0 +1,8 @@
+[
+ ["x1","Kokilaben ko naam chahiye... aur GROUP BY sirf total batata hai! Isiliye aaya Window Function. Data analyst interviews ka favourite sawaal!"],
+ ["x2","Ye rahi IPL match ki table. Rohit aur Surya, Mumbai mein. Dhoni aur Jadeja, Chennai mein."],
+ ["x3","Team-wise total runs chahiye? GROUP BY lagao. Mumbai, sau runs. Chennai, assi runs. Easy!"],
+ ["x4","Lekin interviewer bola: mujhe har player ka naam bhi chahiye, aur saath mein uski team ka total bhi! Ab GROUP BY fail! Kyunki usne rows ko collapse kar diya."],
+ ["x5","Yahan entry hoti hai Window Function ki! SUM runs OVER, PARTITION BY team."],
+ ["x6","Har player ki row safe, aur saath mein team total! Rohit aur Surya, sau. Dhoni aur Jadeja, assi."]
+]
