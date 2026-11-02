@@ -1,0 +1,9 @@
+[
+ ["v1","Sorry... it's okay... yahi hai internet ka three-way handshake! Ye sawaal Oracle ke interview mein poocha gaya tha. Chalo, tees second mein samjho!"],
+ ["v2","Client ko server se data chahiye. Socho, bas query bheji, aur data aa gaya? Nahi! Pehle dono ke beech connection banna zaroori hai, aur wo banta hai teen steps mein."],
+ ["v3","Step one, SYN! Client server ko SYN packet bhejta hai, ek random sequence number ke saath... maan lo X."],
+ ["v4","Step two, SYN-ACK! Server apna SYN bhejta hai, number Y, aur saath mein ACK, X plus one. Matlab, tumhara message mil gaya!"],
+ ["v5","Step three, ACK! Client bhejta hai Y plus one. Ab connection established, aur data flow shuru!"],
+ ["v6","Interviewer ka twist: do steps kyun nahi? Kyunki dono taraf ka sequence number confirm hona zaroori hai!"],
+ ["v7","Ek line mein yaad rakho: SYN, SYN-ACK, ACK. Aise hi interview concepts ke liye, pretestpassed dot codes ko follow karo!"]
+]

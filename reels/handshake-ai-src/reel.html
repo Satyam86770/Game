@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:transparent}
+body{font-family:'Inter','Noto Color Emoji',sans-serif;color:#fff}
+.mono{font-family:'DejaVu Sans Mono','Noto Color Emoji',monospace}
+#stage{position:absolute;inset:0;overflow:hidden}
+#bg{position:absolute;inset:0;background:
+ radial-gradient(700px 700px at var(--b1x,20%) var(--b1y,75%),rgba(150,40,200,.35),transparent 70%),
+ radial-gradient(650px 650px at var(--b2x,85%) var(--b2y,30%),rgba(34,211,238,.18),transparent 70%),
+ radial-gradient(900px 900px at 50% 110%,rgba(40,80,220,.30),transparent 70%),
+ linear-gradient(180deg,#0b0b2b 0%,#14102f 50%,#0b0a24 100%)}
+#prog{position:absolute;left:0;top:0;height:10px;background:linear-gradient(90deg,#22d3ee,#a855f7,#f472b6);box-shadow:0 0 18px #22d3ee}
+#wm{position:absolute;top:95px;width:100%;text-align:center;font-size:30px;font-weight:600;color:rgba(255,255,255,.7)}
+#mframe{position:absolute;left:34px;top:294px;width:1012px;height:970px;border-radius:18px;border:6px solid #f472b6;box-shadow:0 0 40px rgba(244,114,182,.6)}
+.scene{position:absolute;inset:0;opacity:0}
+.a{position:absolute;opacity:var(--o,0);transform:translate(var(--x,0px),var(--y,0px)) scale(var(--s,1)) rotate(var(--r,0deg));transform-origin:center}
+.c{left:0;width:1080px;text-align:center}
+.h1{font-size:64px;font-weight:900;line-height:1.15;text-shadow:0 4px 18px rgba(0,0,0,.8)}
+.h2{font-size:50px;font-weight:800;line-height:1.25;text-shadow:0 3px 14px rgba(0,0,0,.8)}
+y,.y{color:#fde047}r,.r{color:#fb7185}g,.g{color:#4ade80}c,.cy{color:#22d3ee}o,.or{color:#fb923c}
+.pill{display:inline-block;padding:14px 32px;border-radius:999px;font-size:38px;font-weight:900}
+.pill.cy{background:#22d3ee;color:#062033;box-shadow:0 0 30px rgba(34,211,238,.6)}
+.pill.or{background:#fb923c;color:#2a1000;box-shadow:0 0 30px rgba(251,146,60,.6)}
+.pill.g{background:#22c55e;color:#03210f;box-shadow:0 0 30px rgba(34,197,94,.6)}
+.pill.pu{background:#a855f7;color:#fff;box-shadow:0 0 30px rgba(168,85,247,.6)}
+.pill.r{background:#f43f5e;color:#fff;box-shadow:0 0 30px rgba(244,63,94,.6)}
+.pill.dk{background:rgba(10,10,30,.9);color:#fde047;border:2px solid rgba(253,224,71,.6)}
+.cov{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:20px;font-weight:900;text-align:center;line-height:1.1;border:5px solid #fff;box-shadow:0 8px 24px rgba(0,0,0,.5)}
+.dev{position:absolute;width:250px;height:230px;border-radius:30px;background:rgba(12,16,45,.92);border:4px solid #22d3ee;box-shadow:0 0 34px rgba(34,211,238,.35);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:96px}
+.dev b{font-size:38px;font-weight:900;margin-top:4px}
+.dev.sv{border-color:#fb923c;box-shadow:0 0 34px rgba(251,146,60,.35)}
+.pkt{position:absolute;padding:14px 22px;border-radius:18px;font-size:34px;font-weight:900;white-space:nowrap;border:4px solid #fff;box-shadow:0 8px 24px rgba(0,0,0,.5)}
+.chip{display:inline-block;margin:0 10px;padding:18px 30px;border-radius:20px;font-size:52px;font-weight:900}
+#cap{position:absolute;left:60px;width:960px;top:1500px;text-align:center}
+#capt{display:inline-block;padding:14px 28px;border-radius:20px;background:rgba(0,0,0,.72);font-size:46px;font-weight:900;line-height:1.2;max-width:960px}
+svg{position:absolute;left:0;top:0;overflow:visible}
+</style></head>
+<body><div id="stage">
+<div id="bg"></div>
+<div class="a" id="mframe"></div>
+
+<!-- HOOK -->
+<div class="scene" id="H">
+  <div class="a c h1" id="H1" style="top:165px;font-size:58px">Internet bhi <y>haath milata</y> hai? 🤝</div>
+  <div class="a c h1" id="H1b" style="top:165px;font-size:58px"><y>TCP 3-Way Handshake</y> 😂</div>
+  <div class="a cov" id="C0" style="left:122px;top:332px;width:836px;height:186px;background:#a855f7;font-size:60px">🤝 3-WAY HANDSHAKE</div>
+  <div class="a cov" id="CA1" style="left:505px;top:310px;width:300px;height:296px;background:#22d3ee;color:#062033;font-size:44px;flex-direction:column"><span style="font-size:90px">💻</span>CLIENT</div>
+  <div class="a cov" id="CA2" style="left:218px;top:876px;width:270px;height:190px;background:#22d3ee;color:#062033;font-size:58px;flex-direction:column">SYN 👋<span style="font-size:28px">"Sorry"</span></div>
+  <div class="a cov" id="CB1" style="left:330px;top:405px;width:290px;height:432px;background:#fb923c;color:#2a1000;font-size:46px;flex-direction:column"><span style="font-size:110px">🖥️</span>SERVER</div>
+  <div class="a cov" id="CB2" style="left:640px;top:918px;width:405px;height:218px;background:#fb923c;color:#2a1000;font-size:54px;flex-direction:column">SYN+ACK 🤝<span style="font-size:28px">"It's okay"</span></div>
+  <div class="a cov" id="CC1" style="left:556px;top:308px;width:306px;height:388px;background:#22d3ee;color:#062033;font-size:46px;flex-direction:column"><span style="font-size:110px">💻</span>CLIENT</div>
+  <div class="a cov" id="CC2" style="left:362px;top:904px;width:348px;height:220px;background:#22c55e;color:#03210f;font-size:60px;flex-direction:column">ACK ✅<span style="font-size:28px">"Sorry" (got it!)</span></div>
+  <div class="a c" id="HS" style="top:1300px"><span class="pill dk" id="HSt" style="font-size:42px">STEP 1 • SYN</span></div>
+</div>
+
+<!-- S1 intro -->
+<div class="scene" id="S1">
+  <div class="a c h2" id="A1" style="top:300px;font-size:58px">"Sorry" ➜ "It's okay" ➜ 🤝</div>
+  <div class="a c h1" id="A2" style="top:430px;font-size:76px;line-height:1.2">Internet ka<br><y>3-WAY HANDSHAKE</y> ⚡</div>
+  <div class="a c" id="A3" style="top:720px"><span style="display:inline-block;background:#c74634;color:#fff;font-size:84px;font-weight:900;letter-spacing:4px;padding:10px 46px;border-radius:16px;box-shadow:0 0 50px rgba(199,70,52,.6)">ORACLE</span></div>
+  <div class="a c" id="A4" style="top:880px"><span class="pill dk" style="font-size:40px">Interview mein poocha gaya 🔥</span></div>
+  <div class="a c" id="A5" style="top:1010px"><span class="pill r" style="font-size:44px">⏱️ 30 sec mein samjho</span></div>
+</div>
+
+<!-- S2 query -->
+<div class="scene" id="S2">
+  <div class="a dev" id="Q1" style="left:90px;top:520px">💻<b class="cy">CLIENT</b></div>
+  <div class="a dev sv" id="Q2" style="left:740px;top:520px">🖥️<b class="or">SERVER</b></div>
+  <div class="a pkt mono" id="Q3" style="left:300px;top:600px;background:#1e1b4b;font-size:30px">SELECT * ... 📨</div>
+  <div class="a" id="Q4" style="left:560px;top:540px;font-size:160px">❌</div>
+  <div class="a c" id="Q5" style="top:300px"><span class="pill r" style="font-size:48px">NAHI! 🙅‍♂️</span></div>
+  <svg id="Qsvg" width="1080" height="1920"><path id="qline" d="M345 635 H735" stroke="#fde047" stroke-width="8" stroke-dasharray="20 14" fill="none"/></svg>
+  <div class="a c" id="Q6" style="top:840px"><span class="pill cy" style="font-size:44px">Pehle CONNECTION 🔌</span></div>
+  <div class="a c" id="Q7" style="top:980px"><span class="pill dk" style="font-size:44px">1️⃣ ➜ 2️⃣ ➜ 3️⃣ steps</span></div>
+</div>
+
+<!-- S3 sequence -->
+<div class="scene" id="S3">
+  <div class="a c" id="P0" style="top:190px"><span class="pill cy" id="P0t">STEP 1 • SYN</span></div>
+  <div class="a dev" id="D1" style="left:60px;top:300px;width:220px;height:190px;font-size:80px">💻<b class="cy" style="font-size:32px">CLIENT</b></div>
+  <div class="a dev sv" id="D2" style="left:800px;top:300px;width:220px;height:190px;font-size:80px">🖥️<b class="or" style="font-size:32px">SERVER</b></div>
+  <svg id="Ssvg" width="1080" height="1920">
+   <defs><marker id="m1" viewBox="0 0 10 10" markerWidth="4" markerHeight="4" refX="6" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#22d3ee"/></marker>
+   <marker id="m2" viewBox="0 0 10 10" markerWidth="4" markerHeight="4" refX="6" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#fb923c"/></marker>
+   <marker id="m3" viewBox="0 0 10 10" markerWidth="4" markerHeight="4" refX="6" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#4ade80"/></marker></defs>
+   <line id="ll" x1="170" y1="500" x2="170" y2="1290" stroke="#22d3ee" stroke-width="8" opacity=".7"/>
+   <line id="lr" x1="910" y1="500" x2="910" y2="1290" stroke="#fb923c" stroke-width="8" opacity=".7"/>
+   <path id="ar1" d="M175 580 L900 720" stroke="#22d3ee" stroke-width="9" fill="none" marker-end="url(#m1)"/>
+   <path id="ar2" d="M905 800 L180 940" stroke="#fb923c" stroke-width="9" fill="none" marker-end="url(#m2)"/>
+   <path id="ar3" d="M175 1020 L900 1160" stroke="#4ade80" stroke-width="9" fill="none" marker-end="url(#m3)"/>
+   <rect id="pipe" x="170" y="1210" width="740" height="70" rx="35" fill="rgba(34,197,94,.25)" stroke="#4ade80" stroke-width="5"/>
+  </svg>
+  <div class="a pkt" id="K1" style="left:0;top:0;background:#0e7490">✉️ SYN • seq=<y>X</y></div>
+  <div class="a pkt" id="K2" style="left:0;top:0;background:#9a3412">✉️ SYN-ACK • seq=<y>Y</y>, ack=<y>X+1</y></div>
+  <div class="a pkt" id="K3" style="left:0;top:0;background:#15803d">✉️ ACK • ack=<y>Y+1</y></div>
+  <div class="a" id="KX" style="left:20px;top:530px"><span class="pill dk" style="font-size:34px">X = 4291 🎲</span></div>
+  <div class="a" id="KM" style="left:20px;top:960px"><span class="pill g" style="font-size:32px">✅ Mera msg mila!</span></div>
+  <div class="a c" id="KE" style="top:1300px"><span style="display:inline-block;font-size:40px;font-weight:900;color:#4ade80;text-shadow:0 0 20px rgba(74,222,128,.8)">✅ CONNECTION ESTABLISHED</span></div>
+  <div id="flow"></div>
+</div>
+
+<!-- S4 twist -->
+<div class="scene" id="S4">
+  <div class="a c" id="W1" style="top:220px"><span class="pill pu" style="font-size:44px">🤔 INTERVIEWER KA TWIST</span></div>
+  <div class="a c h1" id="W2" style="top:340px;font-size:70px">2 steps <r>kyun nahi?</r></div>
+  <div class="a" id="W3" style="left:90px;top:520px;width:900px;border-radius:28px;background:rgba(12,16,45,.92);border:4px solid #fb7185;padding:30px 40px;font-size:44px;font-weight:800;line-height:1.6">
+    💻 Client ka seq <y>X</y> ➜ <g>confirm ✅</g><br>🖥️ Server ka seq <y>Y</y> ➜ <r>confirm ❓</r></div>
+  <div class="a" id="W4" style="left:90px;top:800px;width:900px;border-radius:28px;background:rgba(12,40,25,.92);border:4px solid #4ade80;padding:30px 40px;font-size:44px;font-weight:800;line-height:1.5;text-align:center">
+    3rd step (ACK) ➜ <g>dono taraf confirm ✅✅</g><br><span style="font-size:36px;color:#cbd5e1">Isliye 3-way! 💪</span></div>
+</div>
+
+<!-- S5 summary + CTA -->
+<div class="scene" id="S5">
+  <div class="a c h1" id="F1" style="top:230px;color:#fde047;font-size:58px">EK LINE MEIN YAAD RAKHO 🧠</div>
+  <div class="a c" id="F2" style="top:380px"><span class="chip" style="background:#0e7490">SYN</span><span style="font-size:52px">➜</span><span class="chip" style="background:#9a3412">SYN-ACK</span><span style="font-size:52px">➜</span><span class="chip" style="background:#15803d">ACK</span></div>
+  <div class="a" id="F5" style="left:190px;top:620px;width:700px;height:380px;border-radius:30px;background:rgba(12,16,45,.92);border:4px solid #f472b6;box-shadow:0 0 50px rgba(244,114,182,.4)">
+    <div style="position:absolute;left:290px;top:26px;width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#f472b6);display:flex;align-items:center;justify-content:center;font-size:50px;font-weight:900;border:4px solid #fff">PP</div>
+    <div style="position:absolute;width:100%;top:165px;text-align:center;font-size:46px;font-weight:900">@pretestpassed.codes</div>
+    <div id="fbtn" style="position:absolute;left:180px;top:255px;width:340px;height:90px;border-radius:20px;background:#3b82f6;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:900">FOLLOW</div></div>
+  <div class="a" id="F6" style="left:0;top:0;font-size:110px">👆</div>
+  <div class="a c" id="F7" style="top:1060px"><span class="pill dk" style="font-size:38px">❤️ Like • 🔁 Share • 🔖 Save</span></div>
+  <div id="conf"></div>
+</div>
+
+<div id="cap"><span class="a" id="capw" style="position:relative;display:inline-block"><span id="capt"></span></span></div>
+<div id="prog"></div>
+<div id="wm">@pretestpassed.codes</div>
+</div>
+<script>
+const TL=window.TL, K=TL.K, CAPS=TL.CAPS, END=TL.END, HK=TL.HK;
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const eo=x=>1-Math.pow(1-clamp(x),3);
+const eio=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const back=x=>{x=clamp(x);const c1=2.0,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const CUES=[]; const cue=(t,n,g)=>CUES.push([+t.toFixed(3),n,g||1]);
+function set(el,o,x,y,s,r){el=typeof el=='string'?$(el):el;el.style.setProperty('--o',o);el.style.setProperty('--x',(x||0)+'px');el.style.setProperty('--y',(y||0)+'px');el.style.setProperty('--s',s==null?1:s);el.style.setProperty('--r',(r||0)+'deg')}
+function pop(el,t,t0,d){d=d||.4;const p=clamp((t-t0)/d);set(el,t<t0?0:clamp(p*2.5),0,0,t<t0?.4:.4+.6*back(p))}
+function rise(el,t,t0,d){d=d||.45;const p=clamp((t-t0)/d);set(el,t<t0?0:clamp(p*2),0,50*(1-eo(p)),1)}
+function win(el,t,a,b){const e=typeof el=='string'?$(el):el;const o=t>=a&&t<b?1:0;e.style.setProperty('--o',o);e.style.setProperty('--s',1);e.style.setProperty('--x','0px');e.style.setProperty('--y','0px')}
+function vis(t,a,b,f){f=f||.15;return Math.min(clamp((t-a)/f),clamp((b-t)/f))}
+function draw(el,p){el=typeof el=='string'?$(el):el;if(!el._L){el._L=el.getTotalLength();el.setAttribute('stroke-dasharray',el._L)}p=clamp(p);el.setAttribute('stroke-dashoffset',el._L*(1-p));el.style.opacity=p>0.02?1:0}
+function rnd(i,k){const x=Math.sin(i*12.9898+k*78.233)*43758.5453;return x-Math.floor(x)}
+(function(){let ch='';for(let i=0;i<90;i++){const col=['#22d3ee','#f472b6','#fde047','#4ade80','#a855f7','#fb923c'][i%6];ch+=`<div class="a" id="cf${i}" style="left:0;top:0;width:${14+(i*7)%12}px;height:${8+(i*5)%10}px;background:${col};border-radius:3px"></div>`}$('conf').innerHTML=ch;
+ let f='';for(let i=0;i<6;i++) f+=`<div class="a" id="fl${i}" style="left:0;top:0;font-size:46px">📦</div>`;$('flow').innerHTML=f;})();
+const SA=1.6, SB=2.567, SC=5.233;
+(function(){
+ cue(0.05,'whoosh',.4); cue(SA,'pop',.7); cue(SB,'pop',.7); cue(SC,'pop',.7); cue(HK-0.6,'riser',.45);
+ cue(HK,'boom',.6); cue(K.inet,'pop'); cue(K.oracle,'slap',.6); cue(K.oracle+0.1,'cash',.5); cue(K.sec30,'tick',.8);
+ cue(K.client,'whoosh',.4); cue(K.query,'whoosh',.5); cue(K.nahi,'buzz',.6); cue(K.pehle,'pop'); cue(K.steps,'pop');
+ cue(K.step1,'whoosh',.4); cue(K.syn1,'whoosh',.6); cue(K.syn1+0.9,'ding',.5); cue(K.X,'pop');
+ cue(K.step2,'whoosh',.4); cue(K.synack,'whoosh',.6); cue(K.synack+0.9,'ding',.5); cue(K.mila,'success',.6);
+ cue(K.step3,'whoosh',.4); cue(K.ack,'whoosh',.6); cue(K.ack+0.9,'ding',.5); cue(K.estab,'success',.8); cue(K.estab+0.1,'sparkle',.6);
+ cue(K.twist,'riser',.4); cue(K.twist+0.5,'slap',.6); cue(K.kyun,'buzz',.4); cue(K.because,'ding',.6);
+ cue(K.yaad,'pop'); cue(K.c1,'pop'); cue(K.c2,'pop'); cue(K.c3,'pop'); cue(K.follow+0.3,'click'); cue(K.follow+0.35,'sparkle',.9);
+})();
+window.render=function(t){
+ $('prog').style.width=(1080*clamp(t/END))+'px';
+ const bg=$('bg');bg.style.setProperty('--b1x',(20+8*Math.sin(t*.25))+'%');bg.style.setProperty('--b1y',(75+6*Math.cos(t*.2))+'%');bg.style.setProperty('--b2x',(82+6*Math.cos(t*.3))+'%');bg.style.setProperty('--b2y',(28+8*Math.sin(t*.22))+'%');
+ const hook=t<HK; bg.style.clipPath=hook?"path(evenodd,'M0 0 H1080 V1920 H0 Z M40 300 H1040 V1258 H40 Z')":'none'; set('mframe',hook?1:0);
+ const W={H:[0,HK],S1:[HK,K.client-0.1],S2:[K.client-0.1,K.step1-0.1],S3:[K.step1-0.1,K.twist-0.1],S4:[K.twist-0.1,K.yaad-0.1],S5:[K.yaad-0.1,END+1]};
+ for(const id in W){const o=vis(t,W[id][0],W[id][1],.12);const el=$(id);el.style.opacity=o;el.style.display=o>0?'block':'none'}
+ // HOOK
+ pop('H1',t,0.05); if(t>SA-0.1) set('H1',0); pop('H1b',t,SA);
+ win('C0',t,0,SA); win('CA1',t,SA,SB); win('CA2',t,SA,SB); win('CB1',t,SB,SC); win('CB2',t,SB,SC); win('CC1',t,SC,HK+1); win('CC2',t,SC,HK+1);
+ for(const [id,a] of [['CA2',SA],['CB2',SB],['CC2',SC],['CA1',SA],['CB1',SB],['CC1',SC]]){if(t>=a&&t<a+0.35) $(id).style.setProperty('--s',0.6+0.4*back((t-a)/0.35))}
+ {const st=t<SB?'STEP 1 • SYN 👋':t<SC?'STEP 2 • SYN+ACK 🤝':'STEP 3 • ACK ✅';$('HSt').textContent=st;pop('HS',t,SA,.3)}
+ // S1
+ rise('A1',t,K.inet-0.3); pop('A2',t,K.inet+0.4); pop('A3',t,K.oracle-0.1); rise('A4',t,K.oracle+0.4); pop('A5',t,K.sec30-0.1);
+ // S2
+ pop('Q1',t,K.client-0.05); pop('Q2',t,K.client+0.3);
+ {const p=eo((t-K.query)/0.8);set('Q3',t>=K.query-0.1&&t<K.pehle?1:0,330*p,0,1)}
+ pop('Q4',t,K.nahi-0.05); if(t>K.pehle) set('Q4',0); pop('Q5',t,K.nahi-0.05); if(t>K.pehle+0.3) set('Q5',0);
+ draw('qline',eo((t-K.pehle)/0.6)); pop('Q6',t,K.pehle+0.2); pop('Q7',t,K.steps-0.2);
+ // S3
+ {const P0=$('P0t');if(t<K.step2-0.1){P0.textContent='STEP 1 • SYN';P0.className='pill cy'}else if(t<K.step3-0.1){P0.textContent='STEP 2 • SYN-ACK';P0.className='pill or'}else{P0.textContent='STEP 3 • ACK';P0.className='pill g'}
+  pop('P0',t,K.step1-0.1); for(const k of [K.step2,K.step3]) if(t>=k-0.1&&t<k+0.25) $('P0').style.setProperty('--s',0.7+0.3*back((t-k+0.1)/0.35))}
+ pop('D1',t,K.step1); pop('D2',t,K.step1+0.15);
+ $('ll').setAttribute('opacity',clamp((t-K.step1-0.2)/.3)*.7); $('lr').setAttribute('opacity',clamp((t-K.step1-0.3)/.3)*.7);
+ const fly=(id,arr,t0,x0,y0,x1,y1)=>{const p=eio((t-t0)/0.9);draw(arr,p);set(id,t>=t0-0.05?1:0,x0+(x1-x0)*p,y0+(y1-y0)*p,1,0)};
+ fly('K1','ar1',K.syn1,190,520,560,640); fly('K2','ar2',K.synack,560,740,150,860); fly('K3','ar3',K.ack,190,960,600,1080);
+ pop('KX',t,K.X-0.1); pop('KM',t,K.mila-0.1);
+ draw('pipe',0); $('pipe').style.opacity=clamp((t-K.estab+0.1)/.3); pop('KE',t,K.estab);
+ for(let i=0;i<6;i++){const ph=((t-K.estab-0.3)*0.9+i/6)%1;const on=t>K.estab+0.3;set('fl'+i,on?Math.min(1,Math.sin(Math.PI*ph)*2):0,180+ph*700,1215,1)}
+ // S4
+ pop('W1',t,K.twist); pop('W2',t,K.kyun-0.2); rise('W3',t,K.kyun+0.3); rise('W4',t,K.because);
+ // S5
+ pop('F1',t,K.yaad-0.05);
+ {const el=$('F2');const p=clamp((t-K.c1+0.1)/.3);set(el,t<K.c1-0.1?0:clamp(p*2.5),0,0,.5+.5*back(p));const ch=el.querySelectorAll('.chip');ch.forEach((c,i)=>c.style.opacity=t>=[K.c1,K.c2,K.c3][i]-0.1?1:0.15)}
+ pop('F5',t,K.aise-0.2); rise('F7',t,K.follow+0.8);
+ {const tc=K.follow+0.3;const p=eo((t-tc+0.9)/0.8);const x=900+(560-900)*p,y=1260+(940-1260)*p;const press=t>tc&&t<tc+.2?.85:1;
+  set('F6',clamp((t-tc+1)/.3),x-60,y-60,press);
+  const b=$('fbtn');if(t>tc){b.textContent='FOLLOWING ✓';b.style.background='#475569'}else{b.textContent='FOLLOW';b.style.background='#3b82f6'}
+  for(let i=0;i<90;i++){const dt=t-tc;const el=$('cf'+i);if(dt<0){set(el,0);continue}
+   const ang=rnd(i,1)*Math.PI*2, sp=500+rnd(i,2)*900;const x=540+Math.cos(ang)*sp*dt*0.8, y=800+Math.sin(ang)*sp*dt*0.7-500*dt+700*dt*dt;
+   set(el,clamp(3-dt),x,y,1,dt*400*(rnd(i,3)-.5))}}
+ // captions
+ {let cur=null;for(let i=0;i<CAPS.length;i++){const s0=CAPS[i][0],e0=i+1<CAPS.length?Math.min(CAPS[i+1][0],s0+3.4):s0+2.6;if(t>=s0-0.05&&t<e0) cur=[i,s0,e0]}
+  if(cur&&!hook){$('capt').innerHTML=CAPS[cur[0]][1];const p=clamp((t-cur[1]+0.05)/.18);set('capw',Math.min(clamp(p*2),clamp((cur[2]-t)/.12)),0,14*(1-eo(p)),.9+.1*back(p))} else set('capw',0)}
+ $('cap').style.top=t>=K.yaad-0.1?'1200px':'1500px';
+};
+window.CUES=CUES; window.render(0);
+</script></body></html>
