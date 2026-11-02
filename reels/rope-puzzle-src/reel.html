@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#0b0920}
+body{font-family:'Inter','Noto Color Emoji',sans-serif;color:#fff}
+#stage{position:absolute;inset:0;overflow:hidden}
+#world{position:absolute;left:0;top:0;width:1080px;height:1920px;transform-origin:0 0}
+#fx{position:absolute;inset:0;pointer-events:none}
+#vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 45%,rgba(0,0,0,.65) 100%)}
+#grain{position:absolute;inset:0;background:url(grain.png);background-size:540px 960px;opacity:.07;mix-blend-mode:overlay}
+#scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.25) 0 3px,transparent 3px 7px);opacity:0}
+#flash{position:absolute;inset:0;background:#fff;opacity:0}
+.a{position:absolute;opacity:var(--o,0);transform:translate(var(--x,0px),var(--y,0px)) scale(var(--s,1)) rotate(var(--r,0deg));transform-origin:center}
+.c{left:0;width:1080px;text-align:center}
+.pap{display:inline-block;background:linear-gradient(180deg,#f4efe2,#e2dac6);color:#2b2a33;border:5px solid #2b2a33;border-radius:10px;padding:14px 32px;font-size:50px;font-weight:900;letter-spacing:1px;box-shadow:0 8px 0 #2b2a33,0 14px 30px rgba(0,0,0,.5);text-transform:uppercase;line-height:1.15}
+.pap .sub{display:block;font-size:40px;color:#dc2626}
+.red{display:inline-block;background:linear-gradient(180deg,#ef4444,#b91c1c);color:#fff;border:5px solid #fff;border-radius:10px;padding:14px 36px;font-size:62px;font-weight:900;box-shadow:0 10px 0 #7f1d1d,0 14px 40px rgba(239,68,68,.6);text-transform:uppercase;letter-spacing:1px}
+.grn{display:inline-block;background:linear-gradient(180deg,#22c55e,#15803d);color:#fff;border:5px solid #fff;border-radius:10px;padding:14px 36px;font-size:62px;font-weight:900;box-shadow:0 10px 0 #14532d,0 14px 40px rgba(34,197,94,.6);text-transform:uppercase}
+.yel{display:inline-block;background:linear-gradient(180deg,#fde047,#eab308);color:#2b2a33;border:5px solid #2b2a33;border-radius:12px;padding:16px 36px;font-size:60px;font-weight:900;box-shadow:0 10px 0 #2b2a33,0 14px 40px rgba(253,224,71,.5);text-transform:uppercase;line-height:1.1}
+#hud{position:absolute;left:340px;top:52px;width:400px;height:86px;border-radius:16px;background:#f4efe2;border:5px solid #2b2a33;box-shadow:0 6px 0 #2b2a33;display:flex;align-items:center;justify-content:center;gap:8px;z-index:20}
+#hud .ic{font-size:46px;margin-right:6px}
+.dg{width:54px;height:62px;border-radius:8px;background:#2b2a33;color:#fff;font-size:48px;font-weight:900;display:flex;align-items:center;justify-content:center;font-family:'DejaVu Sans Mono',monospace}
+.col{font-size:46px;font-weight:900;color:#2b2a33;margin:0 -2px}
+#wm{position:absolute;right:40px;top:168px;font-size:24px;font-weight:700;color:rgba(255,255,255,.75);z-index:20}
+#cap{position:absolute;left:40px;width:1000px;top:1770px;text-align:center;z-index:25}
+#capt{display:inline-block;padding:10px 24px;border-radius:14px;background:rgba(0,0,0,.72);font-size:40px;font-weight:900;line-height:1.2;max-width:1000px}
+y{color:#fde047}r{color:#f87171}g{color:#4ade80}
+.xi{position:absolute;width:150px;height:150px;border-radius:50%;background:#f4efe2;border:6px solid #2b2a33;display:flex;align-items:center;justify-content:center;font-size:80px;box-shadow:0 6px 0 #2b2a33}
+.xi::after{content:'';position:absolute;inset:8px;border-radius:50%;border:10px solid #dc2626;background:linear-gradient(45deg,transparent 46%,#dc2626 46% 54%,transparent 54%)}
+#follow{position:absolute;left:350px;top:1560px;width:380px;z-index:22;text-align:center}
+#fb{display:inline-block;width:360px;padding:18px 0;border-radius:14px;background:#ef4444;font-size:44px;font-weight:900;box-shadow:0 6px 0 #7f1d1d;border:4px solid #fff}
+#fh{margin-top:14px;display:inline-block;padding:8px 20px;border-radius:12px;background:rgba(0,0,0,.6);font-size:30px;font-weight:800}
+</style></head>
+<body><div id="stage">
+<div id="world">
+<svg width="1080" height="1920" viewBox="0 0 1080 1920">
+<defs>
+ <pattern id="brick" width="160" height="80" patternUnits="userSpaceOnUse"><rect width="160" height="80" fill="#2b2656"/>
+  <path d="M0 40H160M80 0V40M0 40V80M160 40V80" stroke="#1d1940" stroke-width="5"/><rect x="6" y="6" width="68" height="28" fill="#312b62" opacity=".5"/><rect x="86" y="46" width="68" height="28" fill="#312b62" opacity=".4"/></pattern>
+ <pattern id="tile" width="180" height="90" patternUnits="userSpaceOnUse"><rect width="180" height="90" fill="#1e1a3d"/><path d="M0 0H180M0 0V90M90 45V90M0 45H180" stroke="#141130" stroke-width="5"/></pattern>
+ <radialGradient id="tglow"><stop offset="0" stop-color="#ffb347" stop-opacity=".55"/><stop offset="1" stop-color="#ff8c1a" stop-opacity="0"/></radialGradient>
+ <linearGradient id="beam" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c7d2fe" stop-opacity=".28"/><stop offset="1" stop-color="#c7d2fe" stop-opacity="0"/></linearGradient>
+ <radialGradient id="exitg" cx="50%" cy="45%" r="60%"><stop offset="0" stop-color="#fffbe6"/><stop offset=".5" stop-color="#fde68a"/><stop offset="1" stop-color="#f59e0b"/></radialGradient>
+ <radialGradient id="flg"><stop offset="0" stop-color="#ffd27a" stop-opacity=".9"/><stop offset="1" stop-color="#ff7a1a" stop-opacity="0"/></radialGradient>
+ <clipPath id="arch"><path d="M360 1080 V640 A180 180 0 0 1 720 640 V1080 Z"/></clipPath>
+</defs>
+<rect width="1080" height="1100" fill="url(#brick)"/>
+<path d="M0 0 H1080 V120 Q540 30 0 120 Z" fill="#15122e"/>
+<!-- window + beam -->
+<rect x="110" y="230" width="150" height="130" rx="10" fill="#0e1a3a" stroke="#14112c" stroke-width="10"/>
+<circle cx="200" cy="275" r="26" fill="#f8fafc" opacity=".9"/>
+<path d="M135 230V360M165 230V360M195 230V360M225 230V360" stroke="#14112c" stroke-width="8"/>
+<polygon points="110,360 260,360 700,1300 300,1300" fill="url(#beam)"/>
+<!-- floor -->
+<rect y="1080" width="1080" height="840" fill="url(#tile)"/>
+<rect y="1080" width="1080" height="20" fill="#14112c"/>
+<!-- torches -->
+<g id="torch0" transform="translate(150,640)"><circle r="190" fill="url(#tglow)" class="tgl"/><rect x="-10" y="20" width="20" height="90" fill="#5b3a1e"/><rect x="-22" y="10" width="44" height="22" rx="6" fill="#6b4423"/><path class="flm" d="M0,-60 C25,-30 22,-5 0,12 C-22,-5 -25,-30 0,-60Z" fill="#ffb020"/><path class="flm2" d="M0,-35 C12,-18 10,-4 0,6 C-10,-4 -12,-18 0,-35Z" fill="#fff1b8"/></g>
+<g id="torch1" transform="translate(930,640)"><circle r="190" fill="url(#tglow)" class="tgl"/><rect x="-10" y="20" width="20" height="90" fill="#5b3a1e"/><rect x="-22" y="10" width="44" height="22" rx="6" fill="#6b4423"/><path class="flm" d="M0,-60 C25,-30 22,-5 0,12 C-22,-5 -25,-30 0,-60Z" fill="#ffb020"/><path class="flm2" d="M0,-35 C12,-18 10,-4 0,6 C-10,-4 -12,-18 0,-35Z" fill="#fff1b8"/></g>
+<!-- door -->
+<path d="M320 1090 V630 A220 220 0 0 1 760 630 V1090 Z" fill="#4b4570" stroke="#14112c" stroke-width="10"/>
+<g clip-path="url(#arch)">
+ <rect x="360" y="440" width="360" height="660" fill="url(#exitg)"/>
+ <g id="rays" opacity=".7"><path d="M540 620 L380 1080 M540 620 L700 1080 M540 620 L460 1080 M540 620 L620 1080" stroke="#fff" stroke-width="16" opacity=".35"/></g>
+ <text x="540" y="760" text-anchor="middle" font-size="80">🌙</text>
+ <g id="slab"><rect x="360" y="440" width="360" height="660" fill="#6b6590"/>
+  <path d="M360 600H720M360 760H720M360 920H720M540 440V600M450 600V760M630 600V760M540 760V920M450 920V1100M630 920V1100" stroke="#57517c" stroke-width="8"/>
+  <rect x="455" y="680" width="170" height="70" rx="10" fill="#3a3460"/><text x="540" y="732" text-anchor="middle" font-size="46" font-weight="900" fill="#c4b5fd" font-family="Inter" letter-spacing="6">EXIT</text></g>
+</g>
+<rect x="455" y="372" width="170" height="58" rx="10" fill="#3a3460" stroke="#14112c" stroke-width="6"/><text id="tab" x="540" y="414" text-anchor="middle" font-size="36" font-weight="900" fill="#fde68a" font-family="Inter">⏳ 45:00</text>
+<!-- table -->
+<polygon points="230,1250 930,1250 980,1345 180,1345" fill="#7a4a24" stroke="#3b2210" stroke-width="8"/>
+<rect x="180" y="1345" width="800" height="45" fill="#5a3518" stroke="#3b2210" stroke-width="8"/>
+<rect x="220" y="1390" width="34" height="230" fill="#4a2c14"/><rect x="906" y="1390" width="34" height="230" fill="#4a2c14"/>
+<g id="ropes"></g>
+<g transform="translate(905,1300) rotate(-8)"><rect x="-38" y="-24" width="76" height="48" rx="6" fill="#dc2626" stroke="#3b0d0d" stroke-width="5"/><rect x="-38" y="-24" width="76" height="14" fill="#fde047"/><text x="0" y="16" text-anchor="middle" font-size="18" font-weight="900" fill="#fff" font-family="Inter">MATCH</text></g>
+<g id="lbls" font-family="Inter" font-weight="900"></g>
+<!-- character -->
+<g id="man"><g id="manIn">
+ <ellipse cx="0" cy="0" rx="85" ry="18" fill="rgba(0,0,0,.35)"/>
+ <g id="lgL"><rect x="-38" y="-190" width="32" height="190" rx="14" fill="#3b3a5a" stroke="#14112c" stroke-width="6"/><rect x="-46" y="-18" width="44" height="22" rx="8" fill="#1f1d33"/></g>
+ <g id="lgR"><rect x="6" y="-190" width="32" height="190" rx="14" fill="#3b3a5a" stroke="#14112c" stroke-width="6"/><rect x="2" y="-18" width="44" height="22" rx="8" fill="#1f1d33"/></g>
+ <rect x="-62" y="-400" width="124" height="230" rx="36" fill="#c9a36a" stroke="#14112c" stroke-width="7"/>
+ <path d="M-62 -340 H62" stroke="#8b6b3e" stroke-width="10"/>
+ <g id="arm"><rect x="52" y="-385" width="30" height="150" rx="14" fill="#c9a36a" stroke="#14112c" stroke-width="6"/></g>
+ <rect x="-82" y="-385" width="30" height="150" rx="14" fill="#c9a36a" stroke="#14112c" stroke-width="6"/>
+ <circle cx="0" cy="-470" r="66" fill="#e8b98a" stroke="#14112c" stroke-width="7"/>
+ <path d="M-90 -500 Q0 -540 90 -500 L70 -520 Q0 -600 -70 -520 Z" fill="#6b4a2b" stroke="#14112c" stroke-width="6"/>
+ <circle cx="-22" cy="-470" r="7" fill="#14112c"/><circle cx="22" cy="-470" r="7" fill="#14112c"/>
+ <path id="mouth" d="M-16 -432 Q0 -420 16 -432" stroke="#14112c" stroke-width="6" fill="none" stroke-linecap="round"/>
+ <g id="youtag" opacity="0"><rect x="-48" y="-322" width="96" height="44" rx="6" fill="#ef4444" stroke="#fff" stroke-width="4"/><text x="0" y="-288" text-anchor="middle" font-size="30" font-weight="900" fill="#fff" font-family="Inter">YOU</text></g>
+ <g id="thought" opacity="0"><circle cx="100" cy="-580" r="12" fill="#f4efe2"/><circle cx="135" cy="-625" r="18" fill="#f4efe2"/>
+  <rect x="110" y="-880" width="470" height="230" rx="110" fill="#f4efe2" stroke="#2b2a33" stroke-width="7"/><text x="345" y="-735" text-anchor="middle" font-size="92" font-weight="900" fill="#2b2a33" font-family="Inter">⏳ 45:00?</text></g>
+</g></g>
+<text id="scis" x="0" y="0" font-size="90" opacity="0">✂️</text>
+<text id="stamp" x="0" y="0" font-size="64" opacity="0"></text>
+</svg>
+<div id="dust"></div>
+</div>
+
+<div id="fx"><div id="vig"></div><div id="grain"></div><div id="scan"></div><div id="flash"></div></div>
+<div id="hud"><span class="ic">⏰</span><span class="dg" id="d0">0</span><span class="dg" id="d1">0</span><span class="col">:</span><span class="dg" id="d2">0</span><span class="dg" id="d3">0</span></div>
+<div id="wm">📷 @pretestpassed.codes</div>
+<div class="a" id="rwi" style="left:50px;top:60px;font-size:80px;font-weight:900;z-index:21">⏪</div>
+
+<!-- stickers -->
+<div class="a" id="T_cold" style="left:40px;top:200px"><span class="pap" id="T_coldt">Darwaza khula...</span></div>
+<div class="a c" id="T_late" style="top:250px"><span class="red">⏰ TOO LATE!</span></div>
+<div class="a c" id="T_esc" style="top:250px"><span class="grn">🔓 ESCAPED!</span></div>
+<div class="a" id="T_way" style="left:60px;top:220px"><span class="pap">Sirf 1 raasta 🚪</span></div>
+<div class="a c" id="T_45" style="top:220px"><span class="pap">Door opens at 45:00<span class="sub">sirf 1 pal ke liye!</span></span></div>
+<div class="a xi" id="X1" style="left:80px;top:240px">⌚</div>
+<div class="a xi" id="X2" style="left:260px;top:240px">📱</div>
+<div class="a c" id="T_60" style="top:220px"><span class="pap">Har rassi = 60 min ⏱️</span></div>
+<div class="a" id="T_ff" style="left:860px;top:225px;font-size:70px">⏩</div>
+<div class="a c" id="T_uneven" style="top:220px"><span class="red" style="font-size:54px">Barabar nahi jalti!</span></div>
+<div class="a c" id="T_how" style="top:220px"><span class="pap">45 min kaise naapoge?</span></div>
+<div class="a c" id="T_comment" style="top:230px"><span class="yel">Apna plan<br>comment karo!</span></div>
+<div class="a c" id="T_who" style="top:470px"><span class="pap" style="font-size:44px">🔓 Bahar?  vs  🔒 Yahin?</span></div>
+<div class="a c" id="T_part2" style="top:240px"><span class="pap">Part 2<span class="sub" style="color:#b45309">aaj shaam</span></span></div>
+<div class="a c" id="T_trick" style="top:230px"><span class="yel">Trick 👇</span></div>
+<div class="a c" id="T_30" style="top:230px"><span class="grn" style="font-size:52px">Rassi A khatam = 30:00 ✅</span></div>
+<div class="a c" id="T_tm" style="top:380px"><span class="pap" style="font-size:40px">Tedhi-medhi jale? Farak nahi 😎</span></div>
+<div class="a c" id="T_half" style="top:230px"><span class="pap" style="font-size:44px">B ki bachi rassi = 30 min<span class="sub" style="color:#15803d">dono sire ➜ 15 min ⚡</span></span></div>
+<div class="a c" id="T_eq" style="top:230px"><span class="yel" style="font-size:80px">30 + 15 = 45 ✅</span></div>
+<div class="a" id="follow"><span id="fb">FOLLOW</span><br><span id="fh">📷 @pretestpassed.codes</span></div>
+<div class="a" id="cur" style="left:0;top:0;font-size:90px;z-index:23">👆</div>
+
+<div id="cap"><span class="a" id="capw" style="position:relative;display:inline-block"><span id="capt"></span></span></div>
+</div>
+<script>
+const PART=window.PART, TLP=window.TLALL[PART], K=TLP.K, CAPS=TLP.CAPS, END=TLP.END;
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const eo=x=>1-Math.pow(1-clamp(x),3);
+const eio=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const back=x=>{x=clamp(x);const c1=2.0,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const CUES=[]; const cue=(t,n,g)=>CUES.push([+t.toFixed(3),n,g||1]);
+function set(el,o,x,y,s,r){el=typeof el=='string'?$(el):el;el.style.setProperty('--o',o);el.style.setProperty('--x',(x||0)+'px');el.style.setProperty('--y',(y||0)+'px');el.style.setProperty('--s',s==null?1:s);el.style.setProperty('--r',(r||0)+'deg')}
+function stk(id,t,a,b,rot){const p=clamp((t-a)/.3);const q=b?clamp((b-t)/.18):1;set(id,t<a?0:Math.min(clamp(p*3),q),0,-20*(1-eo(p)),t<a?.5:.5+.5*back(p),rot||0)}
+function lerpKeys(keys,t){if(t<=keys[0][0]) return keys[0].slice(1);for(let i=1;i<keys.length;i++){if(t<=keys[i][0]){const a=keys[i-1],b=keys[i];const u=eio((t-a[0])/(b[0]-a[0]||1));return a.slice(1).map((v,j)=>v+(b[j+1]-v)*u)}}return keys[keys.length-1].slice(1)}
+function rnd(i,k){const x=Math.sin(i*12.9898+k*78.233)*43758.5453;return x-Math.floor(x)}
+
+// ---------- rope model ----------
+const NS=90, RX0=280, RX1=880, RY=[1278,1318];
+function rp(i,p){const x=RX0+(RX1-RX0)*p;return [x,RY[i]+7*Math.sin(x/28+i*2)]}
+// uneven density: G(p)= burn-time fraction to reach p from left
+const AMP=[0.75,-0.7];
+function G(i,p){return p+AMP[i]*Math.sin(3*Math.PI*p)/(3*Math.PI)}
+function Ginv(i,u){u=clamp(u);let lo=0,hi=1;for(let k=0;k<30;k++){const m=(lo+hi)/2;if(G(i,m)<u) lo=m; else hi=m}return (lo+hi)/2}
+(function(){let h='';for(let i=0;i<2;i++){for(let s=0;s<NS;s++){const [x0,y0]=rp(i,s/NS),[x1,y1]=rp(i,(s+1)/NS);h+=`<line id="r${i}_${s}" x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}" stroke="#d9a65e" stroke-width="13" stroke-linecap="round"/>`}
+  h+=`<g id="fl${i}a" opacity="0"><circle r="40" fill="url(#flg)"/><text x="0" y="12" text-anchor="middle" font-size="54">🔥</text></g><g id="fl${i}b" opacity="0"><circle r="40" fill="url(#flg)"/><text x="0" y="12" text-anchor="middle" font-size="54">🔥</text></g>`}
+ h+=`<g id="cutgap" opacity="0"><rect x="572" y="1296" width="16" height="44" fill="#7a4a24"/></g>`;
+ $('ropes').innerHTML=h;
+ $('lbls').innerHTML=`<g id="LA" opacity="0"><rect x="196" y="1252" width="74" height="44" rx="8" fill="#fde047" stroke="#2b2a33" stroke-width="4"/><text x="233" y="1286" text-anchor="middle" font-size="30" fill="#2b2a33">A</text></g>
+ <g id="LB" opacity="0"><rect x="196" y="1300" width="74" height="44" rx="8" fill="#93c5fd" stroke="#2b2a33" stroke-width="4"/><text x="233" y="1334" text-anchor="middle" font-size="30" fill="#2b2a33">B</text></g>
+ <g id="LT" opacity="0"><rect x="300" y="1150" width="190" height="56" rx="10" fill="#ef4444" stroke="#fff" stroke-width="4"/><text x="395" y="1190" text-anchor="middle" font-size="32" fill="#fff">TEZ 🔥</text></g>
+ <g id="LD" opacity="0"><rect x="600" y="1150" width="230" height="56" rx="10" fill="#f4efe2" stroke="#2b2a33" stroke-width="4"/><text x="715" y="1190" text-anchor="middle" font-size="32" fill="#2b2a33">DHEERE 🐢</text></g>
+ <g id="LM" opacity="0"><rect x="700" y="1360" width="200" height="56" rx="10" fill="#f4efe2" stroke="#2b2a33" stroke-width="4"/><text x="800" y="1400" text-anchor="middle" font-size="30" fill="#2b2a33">MAACHIS 🔥</text></g>
+ <g id="LC" opacity="0"><rect x="330" y="1150" width="420" height="60" rx="10" fill="#f4efe2" stroke="#2b2a33" stroke-width="4"/><text id="LCt" x="540" y="1192" text-anchor="middle" font-size="32" fill="#2b2a33"></text></g>`;
+ let d='';for(let i=0;i<40;i++) d+=`<div class="a" id="ds${i}" style="left:0;top:0;width:${4+(i%3)*2}px;height:${4+(i%3)*2}px;border-radius:50%;background:#e9d5ff"></div>`; $('dust').innerHTML=d;
+})();
+// rope state: returns {L,R,litL,litR,cut} fractions burnt from left/right for each rope
+function ropeState(t){
+ const S=[{L:0,R:0,a:0,b:0},{L:0,R:0,a:0,b:0}];
+ if(PART=='p1'){
+  // cold open: both ropes partly ash (failed attempt)
+  if(t<K.rw1){const ex=t<K.rw0?1:1-clamp((t-K.rw0)/(K.rw1-K.rw0));S[0].L=0.55*ex;S[1].L=0.3*ex;S[1].R=0.2*ex;}
+  // demo full burn A from left: har..ghanta+0.8
+  if(t>=K.har+0.3&&t<K.dhyan){const e=clamp((t-K.har-0.3)/2.8);S[0].L=Ginv(0,e);S[0].a=e<1?1:0;}
+  if(t>=K.dhyan&&t<K.dhyan+0.4){S[0].L=1*(1-clamp((t-K.dhyan)/.4));}
+  // uneven demo on B: barabar..kaato
+  if(t>=K.barabar&&t<K.kaato-0.1){const e=clamp((t-K.barabar)/4.2);const p=e<.45?e/.45*0.62:0.62+(e-.45)/.55*0.18;S[1].L=p;S[1].a=1;}
+  if(t>=K.kaato-0.1&&t<K.kaato+0.3){S[1].L=0.8*(1-clamp((t-K.kaato+0.1)/.4));}
+  // cut demo: left half of B burns fast after aadhi
+  if(t>=K.aadhi&&t<K.batao){const e=clamp((t-K.aadhi)/1.3);S[1].L=0.5*e;S[1].a=e<1?1:0;}
+  if(t>=K.batao&&t<K.batao+0.4){S[1].L=0.5*(1-clamp((t-K.batao)/.4));}
+ } else {
+  const e=elapsed(t);
+  if(t<K.rw1){const ex=t<K.rw0?1:1-clamp((t-K.rw0)/(K.rw1-K.rw0));
+   // cold open: at e≈45 everything burnt; B fronts meet at khula
+   const ee=t<K.rw0?Math.min(45,44.93+ (t)/ (K.khula)*0.07):45;
+   S[0].L=0.5*ex+0.5*(1-ex)*0;S[0].R=0.5*ex; // fully burnt
+   const bl=Ginv(1,ee/60),br=Ginv(1,1-(ee-30)/60);S[1].L=bl*ex;S[1].R=(1-br)*ex;S[1].a=t<K.khula&&t<K.rw0?1:0;S[1].b=S[1].a;
+   if(t>=K.rw0){S[0].L=0.5*ex;S[0].R=0.5*ex}
+  } else {
+   const litA1=t>=K.dono, litA2=t>=K.jalao, litB1=t>=K.ektaraf, litB2=t>=K.jala;
+   if(e>0){S[0].L=litA1?Ginv(0,e/60):0;S[0].R=litA2?1-Ginv(0,1-e/60):0;
+     if(S[0].L+S[0].R>=1){const m=Ginv(0,0.5);S[0].L=m;S[0].R=1-m}
+     S[0].a=litA1&&e<30?1:0;S[0].b=litA2&&e<30?1:0;
+     S[1].L=litB1?Ginv(1,e/60):0;S[1].a=litB1&&e<45?1:0;
+     if(litB2&&e>30){S[1].R=1-Ginv(1,1-(e-30)/60);S[1].b=e<45?1:0}
+     if(S[1].L+S[1].R>=1){const m=Ginv(1,0.75);S[1].L=m;S[1].R=1-m}
+   } else {S[0].a=litA1?1:0;S[0].b=litA2?1:0;S[1].a=litB1?1:0;}
+  }
+ }
+ return S;
+}
+// puzzle elapsed minutes for HUD / ropes
+function elapsed(t){
+ if(PART=='p1'){
+  if(t<K.rw0) return 44+59/60+ (t-K.khula)/60;
+  if(t<K.rw1) return (44+58/60+K.rw0/60)*(1-eo((t-K.rw0)/(K.rw1-K.rw0)));
+  return 0;
+ } else {
+  if(t<K.rw0) return Math.min(45,44+56/60+t*(4/60)/K.khula);
+  if(t<K.rw1) return 45*(1-eo((t-K.rw0)/(K.rw1-K.rw0)));
+  if(t<K.donosire-0.9) return 0;
+  const A0=K.donosire-0.9, A1=K.tees+0.1;
+  if(t<A1) return 30*clamp((t-A0)/(A1-A0));
+  const B0=K.bachi+0.6, B1=K.pandrah+0.2;
+  if(t<B0) return 30;
+  return 30+15*clamp((t-B0)/(B1-B0));
+ }
+}
+// door open fraction
+function doorOpen(t){
+ if(PART=='p1'){
+  if(t<K.rw0){const o=eo((t+0.15)/0.5); if(t<K.band-1.4) return o; if(t<K.band-0.2) return 1-0.6*eio((t-K.band+1.4)/1.2); return 0.4*(1-eo((t-K.band+0.2)/0.2))}
+  return 0;
+ } else {
+  if(t<K.rw0) return t<K.khula?0:eo((t-K.khula)/0.8);
+  if(t<K.rw1) return 1-eo((t-K.rw0)/(K.rw1-K.rw0));
+  return t<K.t45?0:eo((t-K.t45)/0.8);
+ }
+}
+// character position: {x,y(feet),s,walk}
+function manPos(t){
+ const home=[150,1700,1.0], door=[540,1095,0.55];
+ if(PART=='p1'){
+  if(t<K.rw0){const p=eio((t-0.35)/(K.band-0.35));return mix(home,[520,1160,0.62],p,t>0.35&&t<K.band)}
+  if(t<K.rw1){const p=1-eo((t-K.rw0)/(K.rw1-K.rw0));return mix(home,[520,1160,0.62],p,true)}
+  return mix(home,home,0,false);
+ } else {
+  if(t<K.rw0){const p=eio((t-K.khula-0.3)/2.6);return mix(home,door,p,t>K.khula+0.3&&t<K.khula+2.9)}
+  if(t<K.rw1){const p=1-eo((t-K.rw0)/(K.rw1-K.rw0));return mix(home,door,p,true)}
+  const p=eio((t-K.t45-0.4)/2.0);return mix(home,door,p,t>K.t45+0.4&&t<K.t45+2.4);
+ }
+}
+function mix(a,b,p,walk){p=clamp(p);return [a[0]+(b[0]-a[0])*p,a[1]+(b[1]-a[1])*p,a[2]+(b[2]-a[2])*p,walk]}
+
+// camera keys [t,cx,cy,s]
+const CAM = PART=='p1' ? [[0,500,1180,1.18],[K.rw0,500,1180,1.18],[K.rw1,540,960,1.0],[K.tehkhana-0.1,540,960,1.0],[K.tehkhana+0.2,540,560,1.3],[K.bahar-0.2,540,700,1.3],[K.bahar+0.3,540,800,1.45],[K.fase-0.2,540,800,1.45],[K.fase+0.3,170,1380,1.55],[K.d45-0.2,170,1380,1.55],[K.d45+0.3,540,820,1.3],[K.ghadi-0.2,540,820,1.3],[K.ghadi+0.3,540,960,1.0],[K.rassiyan-0.4,540,960,1.0],[K.rassiyan+0.1,560,1290,1.45],[K.batao-0.2,560,1290,1.45],[K.batao+0.3,330,1250,1.25],[K.comment-0.2,330,1250,1.25],[K.comment+0.3,540,1000,1.05],[END-1.0,540,1000,1.05],[END,500,1180,1.18]]
+ : [[0,520,1120,1.12],[K.rw0,520,1120,1.12],[K.rw1,540,960,1.0],[K.trick-0.2,540,960,1.0],[K.trick+0.3,560,1290,1.45],[K.t45-0.3,560,1290,1.45],[K.t45+0.3,520,1050,1.12],[K.aise-0.2,520,1050,1.12],[K.aise+0.3,540,1000,1.05],[END-1.0,540,1000,1.05],[END,520,1120,1.12]];
+
+// ---------- cues ----------
+(function(){
+ if(PART=='p1'){
+  cue(0.02,'tick',1); cue(0.12,'rumble',.7); cue(K.band-1.4,'rumble',.6); cue(K.aur1+0.3,'step',.6); cue(K.aur1+0.7,'step',.6); cue(K.aur1+1.1,'step',.6); cue(K.aur1+1.5,'step',.6);
+  cue(K.band-0.05,'boom',1); cue(K.band,'alarm',.8); cue(K.band+0.05,'slap',.8);
+  cue(K.rw0,'rewind',1); cue(K.ruko,'thump',.6); cue(K.tehkhana,'whoosh',.4); cue(K.bahar+0.2,'whoosh',.4); cue(K.bahar+0.3,'slap',.6);
+  cue(K.fase+0.2,'whoosh',.4); cue(K.tum,'thump',1); cue(K.d45+0.2,'slap',.7); cue(K.pal,'tick',1);
+  cue(K.ghadi,'buzz',.5); cue(K.phone,'buzz',.5); cue(K.rassiyan,'whoosh',.4); cue(K.machis,'pop',.7);
+  cue(K.har,'slap',.6); cue(K.har+0.3,'match',.8); cue(K.har+0.4,'fire',.7); cue(K.har+0.3,'riser',.35);
+  cue(K.barabar,'match',.7); cue(K.barabar+0.05,'fire',.7); cue(K.barabar,'slap',.6); cue(K.tez,'whoosh',.4); cue(K.dheere,'pop',.6);
+  cue(K.kaato+0.2,'snip',1); cue(K.aadhi,'match',.7); cue(K.aadhi+0.1,'fire',.6); cue(K.aadhi+1.35,'buzz',.6);
+  cue(K.batao,'slap',.7); cue(K.batao+0.4,'pop',.6); cue(K.comment,'slap',.8); cue(K.dekhte,'pop',.6); cue(K.jawab,'slap',.7);
+  cue(K.follow+0.6,'click',1); cue(K.follow+0.65,'sparkle',.6); cue(END-1.0,'rewind',.4);
+ } else {
+  cue(0.02,'tick',1); cue(K.khula-0.1,'ding',.6); cue(K.khula,'rumble',.8); for(let i=0;i<5;i++) cue(K.khula+0.4+i*0.45,'step',.5);
+  cue(K.azaad,'success',.9); cue(K.azaad+0.05,'slap',.7);
+  cue(K.rw0,'rewind',1); cue(K.kaise,'thump',.6); cue(K.trick,'whoosh',.4); cue(K.trick+0.2,'slap',.7);
+  cue(K.dono,'match',.9); cue(K.dono+0.1,'fire',.6); cue(K.jalao,'match',.9); cue(K.jalao+0.1,'fire',.6); cue(K.ektaraf,'match',.9); cue(K.ektaraf+0.1,'fire',.6);
+  cue(K.donosire-0.9,'riser',.35); for(let i=0;i<12;i++) cue(K.donosire-0.9+i*0.33,'tick',.6);
+  cue(K.tees+0.1,'ding',.8); cue(K.tees+0.15,'slap',.6); cue(K.chahe,'pop',.6);
+  cue(K.jala,'match',.9); cue(K.jala+0.1,'fire',.6); cue(K.bachi,'slap',.6); for(let i=0;i<14;i++) cue(K.bachi+0.6+i*0.33,'tick',.6);
+  cue(K.pandrah+0.2,'ding',.8); cue(K.tees2,'slap',.9); cue(K.t45,'rumble',.8); cue(K.t45+0.2,'success',.9);
+  cue(K.follow+0.6,'click',1); cue(K.follow+0.65,'sparkle',.6); cue(END-1.0,'rewind',.4);
+ }
+})();
+
+window.render=function(t){
+ const rew=t>=K.rw0&&t<K.rw1, loopT=t>END-1.0;
+ // camera
+ let [cx,cy,s]=lerpKeys(CAM,t); s*=1+0.025*Math.sin(t*0.35); cx+=10*Math.sin(t*0.27); let sh=0; if(PART=='p1'&&t>K.band-0.05&&t<K.band+0.4) sh=14*Math.sin(t*95)*(1-(t-K.band)/0.45);
+ if(PART=='p2'&&((t>K.khula&&t<K.khula+0.8)||(t>K.t45&&t<K.t45+0.8))) sh=4*Math.sin(t*80);
+ const jit=rew?(Math.sin(t*137)*14):0;
+ $('world').style.transform=`translate(${540-cx*s+sh+jit}px,${960-cy*s+sh*0.5}px) scale(${s})`;
+ $('world').style.filter=rew?'saturate(.35) contrast(1.25) hue-rotate(-20deg) brightness(1.1)':'none';
+ $('scan').style.opacity=rew?0.9:0; set('rwi',rew?(Math.floor(t*6)%2?1:0.4):0);
+ $('grain').style.backgroundPosition=`${Math.floor(rnd(Math.floor(t*30),1)*540)}px ${Math.floor(rnd(Math.floor(t*30),2)*960)}px`;
+ // flash
+ let fl=0; if(PART=='p1'&&t>K.band-0.05) fl=Math.max(0,0.55-(t-K.band+0.05)*2.5); if(t>K.rw1-0.05&&t<K.rw1+0.25) fl=Math.max(fl,0.4-(t-K.rw1)*1.5);
+ if(PART=='p2'&&t>K.azaad) fl=Math.max(fl,0.35-(t-K.azaad)*1.5); $('flash').style.opacity=clamp(fl);
+ // torches flicker
+ document.querySelectorAll('.flm').forEach((f,i)=>f.setAttribute('transform',`scale(${1+0.12*Math.sin(t*17+i)},${1+0.18*Math.sin(t*23+i*2)})`));
+ document.querySelectorAll('.tgl').forEach((g,i)=>g.setAttribute('opacity',0.75+0.25*Math.sin(t*11+i*3)));
+ // dust
+ for(let i=0;i<40;i++){const x=(rnd(i,1)*1080+t*12*(rnd(i,3)-.5)*4)%1080, y=(rnd(i,2)*1900+ -t*(10+rnd(i,4)*25))%1900;set('ds'+i,0.25+0.25*Math.sin(t*2+i),x,(y+1900)%1900,1)}
+ // door
+ const d=doorOpen(t); $('slab').setAttribute('transform',`translate(0,${-640*d})`); $('rays').setAttribute('opacity',0.35+0.35*d);
+ // HUD
+ let e=elapsed(t); if(loopT){const u=eio((t-END+1.0)/1.0); e=e+(e*0+ (PART=='p1'?44+58/60:44+56/60)-e)*u}
+ const tot=Math.round(e*60), mm=Math.floor(tot/60), ss=tot%60;
+ const ds=[Math.floor(mm/10)%10,mm%10,Math.floor(ss/10),ss%10]; ds.forEach((v,i)=>$('d'+i).textContent=v);
+ const late=PART=='p1'&&t>=K.band&&t<K.rw0, good=(PART=='p2'&&((t>=K.khula&&t<K.rw0)||(t>=K.pandrah+0.2&&t<END-1)));
+ document.querySelectorAll('.dg').forEach(x=>x.style.background=late?'#dc2626':good?'#16a34a':(rew?'#7c3aed':'#2b2a33'));
+ $('hud').style.transform=`scale(${late&&Math.floor(t*6)%2?1.08:1})`;
+ // ropes
+ const RS=ropeState(t);
+ for(let i=0;i<2;i++){const L=RS[i].L,R=RS[i].R;
+  for(let sgm=0;sgm<NS;sgm++){const p=(sgm+.5)/NS;const burnt=p<L||p>1-R;const el=$(`r${i}_${sgm}`);el.setAttribute('stroke',burnt?'#3b3640':((sgm%6<3)?'#d9a65e':'#c48f4a'));el.setAttribute('stroke-width',burnt?6:13)}
+  const fa=$(`fl${i}a`),fb=$(`fl${i}b`);const [ax,ay]=rp(i,L),[bx,by]=rp(i,1-R);
+  const fs=1+0.15*Math.sin(t*25+i);
+  fa.setAttribute('opacity',RS[i].a?1:0);fa.setAttribute('transform',`translate(${ax},${ay-18}) scale(${fs})`);
+  fb.setAttribute('opacity',RS[i].b?1:0);fb.setAttribute('transform',`translate(${bx},${by-18}) scale(${fs})`)}
+ $('cutgap').setAttribute('opacity',PART=='p1'&&t>=K.kaato+0.3&&t<K.batao+0.3?1:0);
+ // labels in world
+ const LBL=(id,on)=>$(id).setAttribute('opacity',on?1:0);
+ if(PART=='p1'){LBL('LA',t>=K.rassiyan&&t<K.comment);LBL('LB',t>=K.rassiyan+0.3&&t<K.comment);LBL('LM',t>=K.machis&&t<K.har);
+  LBL('LT',t>=K.tez&&t<K.kaato-0.1);LBL('LD',t>=K.dheere&&t<K.kaato-0.1);
+  const lc=(t>=K.har+0.3&&t<K.dhyan)?('⏩ '+Math.round(60*clamp((t-K.har-0.3)/2.8))+' MIN'):(t>=K.aadhi+1.35&&t<K.batao)?'❌ SIRF 10 MIN?!':'';
+  LBL('LC',lc!=='');$('LCt').textContent=lc;}
+ else {LBL('LA',t>=K.trick&&t<END-1);LBL('LB',t>=K.trick&&t<END-1);LBL('LM',false);LBL('LT',false);LBL('LD',false);
+  const lc=(t>=K.dono&&t<K.doosri)?'A: DONO SIRE 🔥🔥':(t>=K.doosri&&t<K.donosire)?'B: SIRF EK SIRA 🔥':(t>=K.jala&&t<K.bachi)?'B: AB DONO SIRE 🔥🔥':'';
+  LBL('LC',lc!=='');$('LCt').textContent=lc;}
+ // scissors
+ {const on=PART=='p1'&&t>=K.kaato-0.2&&t<K.aadhi;const p=eo((t-K.kaato+0.2)/0.4);$('scis').setAttribute('opacity',on?1:0);$('scis').setAttribute('x',540+40*(1-p));$('scis').setAttribute('y',1290+(t>K.kaato+0.15&&t<K.kaato+0.35?8:0))}
+ // character
+ const [mx,my,ms,walk]=manPos(t);
+ $('man').setAttribute('transform',`translate(${mx},${my-(walk?10*Math.abs(Math.sin(t*12)):0)}) scale(${ms})`);
+ $('lgL').setAttribute('transform',walk?`rotate(${22*Math.sin(t*12)} -22 -190)`:'');$('lgR').setAttribute('transform',walk?`rotate(${-22*Math.sin(t*12)} 22 -190)`:'');
+ $('arm').setAttribute('transform',walk?`rotate(${-25*Math.sin(t*12)} 67 -385)`:(PART=='p1'&&t>=K.band&&t<K.rw0?`rotate(-150 67 -385)`:''));
+ const scared=PART=='p1'&&t>=K.band-0.2&&t<K.rw0, happy=PART=='p2'&&((t>=K.khula&&t<K.rw0)||t>=K.t45);
+ $('mouth').setAttribute('d',scared?'M-16 -425 Q0 -445 16 -425 Q0 -415 -16 -425':happy?'M-20 -436 Q0 -412 20 -436':'M-16 -432 Q0 -424 16 -432');
+ $('youtag').setAttribute('opacity',(PART=='p1'?t>=K.tum:t>=K.kaise)?1:0);
+ {const tp=PART=='p1'&&t>=K.batao+0.3&&t<K.comment+0.2;$('thought').setAttribute('opacity',tp?1:0)}
+ // ---------- stickers ----------
+ if(PART=='p1'){
+  stk('T_cold',t,-0.3,K.band-0.1,-3); $('T_coldt').textContent='Darwaza khula...';
+  if(loopT){set('T_cold',clamp((t-END+0.8)/.3),0,0,1,-3)}
+  stk('T_late',t,K.band,K.rw0,-4); set('T_esc',0);
+  stk('T_way',t,K.bahar+0.3,K.fase,-2); stk('T_45',t,K.d45+0.2,K.ghadi-0.1,2);
+  stk('X1',t,K.ghadi,K.rassiyan-0.2,-6); stk('X2',t,K.phone,K.rassiyan-0.2,6);
+  stk('T_60',t,K.har,K.dhyan,-2); set('T_ff',t>=K.har+0.3&&t<K.har+3.9?(Math.floor(t*4)%2?1:.5):0,0,0,1);
+  stk('T_uneven',t,K.barabar,K.kaato-0.1,-3); stk('T_how',t,K.batao,K.comment-0.1,-2);
+  {stk('T_comment',t,K.comment,K.jawab-0.1,-3); if(t>K.comment+0.4&&t<K.jawab) $('T_comment').style.setProperty('--s',1+0.04*Math.sin(t*8))}
+  stk('T_who',t,K.dekhte,K.jawab-0.1,2); stk('T_part2',t,K.jawab,END-1.0,-3);
+  ['T_trick','T_30','T_tm','T_half','T_eq'].forEach(x=>set(x,0));
+ } else {
+  stk('T_cold',t,-0.3,K.azaad-0.1,-3); $('T_coldt').textContent='45:00 poore...';
+  if(loopT){set('T_cold',clamp((t-END+0.8)/.3),0,0,1,-3)}
+  stk('T_esc',t,K.azaad,K.rw0,-3); if(t>=K.t45+0.2&&t<K.aise) stk('T_esc',t,K.t45+0.2,K.aise,-3);
+  set('T_late',0); ['T_way','T_45','X1','X2','T_60','T_ff','T_uneven','T_how','T_comment','T_who','T_part2'].forEach(x=>set(x,0));
+  stk('T_trick',t,K.trick+0.2,K.tees-0.1,-3); stk('T_30',t,K.tees+0.1,K.usi-0.1,-2); stk('T_tm',t,K.chahe,K.usi-0.1,2);
+  stk('T_half',t,K.bachi,K.tees2-0.1,-2); stk('T_eq',t,K.tees2,K.t45+0.15,-3);
+ }
+ // follow
+ {const a=K.follow-0.2;stk('follow',t,a,END-1.0,0);const tc=K.follow+0.6;const p=eo((t-tc+0.7)/0.6);
+  set('cur',t>=a+0.2&&t<END-1.0?1:0,760+(560-760)*p,1820+(1600-1820)*p,t>tc&&t<tc+0.18?.85:1);
+  const b=$('fb');if(t>tc){b.textContent='✓ FOLLOWING';b.style.background='#475569'}else{b.textContent='FOLLOW';b.style.background='#ef4444'}}
+ // captions
+ {let cur=null;for(let i=0;i<CAPS.length;i++){const s0=CAPS[i][0],e0=i+1<CAPS.length?Math.min(CAPS[i+1][0],s0+3.6):s0+2.6;if(t>=s0-0.05&&t<e0) cur=[i,s0,e0]}
+  if(cur&&!rew&&!loopT){$('capt').innerHTML=CAPS[cur[0]][1];const p=clamp((t-cur[1]+0.05)/.18);set('capw',Math.min(clamp(p*2),clamp((cur[2]-t)/.12)),0,10*(1-eo(p)),.92+.08*back(p))} else set('capw',0)}
+ // loop fade
+ $('stage').style.filter=loopT?`brightness(${1-0.35*Math.sin(Math.PI*clamp((t-END+1)/1))})`:'none';
+};
+window.CUES=CUES; window.render(0);
+</script></body></html>
