@@ -1,0 +1,9 @@
+[
+ ["w1","SQL mein GROUP BY already hai... toh phir Window Function ki zaroorat kyun? Ye sawaal data analyst interviews mein bahut poocha jaata hai!"],
+ ["w2","Ye rahi employees table. A aur B, HR mein. C aur D, IT mein."],
+ ["w3","Department-wise total salary chahiye? GROUP BY lagao. HR, sattar hazaar. IT, ek lakh das hazaar. Easy!"],
+ ["w4","Lekin interviewer bola: mujhe har employee ka naam bhi chahiye, aur saath mein uske department ka total bhi! Ab GROUP BY fail! Kyunki usne rows ko collapse kar diya."],
+ ["w5","Yahan entry hoti hai Window Function ki! SUM salary OVER, PARTITION BY department."],
+ ["w6","Har employee ki row safe, aur saath mein department total! A aur B, sattar hazaar. C aur D, ek lakh das hazaar."],
+ ["w7","Ek line mein yaad rakho: GROUP BY rows ko collapse karta hai, Window Function nahi! Aise hi concepts ke liye, pretestpassed dot codes ko follow karo!"]
+]
