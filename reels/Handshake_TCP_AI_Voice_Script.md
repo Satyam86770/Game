@@ -2,7 +2,7 @@
 
 **v2 changes:** the creator's old burned-in labels in the Taarak Mehta hook clip ("3-Way Handshake",
 CLIENT/server icons, "Syn", "Syn ❌", "Syn + Ack ✅", "Ack", channel logo, Step bar) are removed
-frame-by-frame with OpenCV inpainting (`inp.py`) and replaced with HD labels. Hook now shows the
+frame-by-frame with OpenCV inpainting (`inp.py`, plus an ffmpeg delogo on the top-left page-curl corner) and replaced with HD labels. Hook now shows the
 concept running LIVE: packets fly between client/server on the clip, and a "TCP LIVE" terminal under
 the clip logs `[SYN] seq=X` → `[SYN,ACK] ack=X+1 seq=Y` → `[ACK] ack=Y+1` → ✅ CONNECTION ESTABLISHED.
 Top text after 1.6s: "ORACLE ne poocha! 💰 18 LPA 😳".
