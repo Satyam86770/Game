@@ -1,0 +1,11 @@
+[
+ ["c1","Ye linked list kabhi khatam hi nahi hoti... kyunki iske andar ek loop hai!"],
+ ["c2","Amazon ne SDE One, fresher interview mein yahi poocha: linked list mein cycle detect karo! Aur package? Lagbhag chawalis lakh ka CTC!"],
+ ["c3","Normal list mein last node ka next, null hota hai. Par cycle wali list mein, last node wapas kisi purane node pe point karta hai... aur loop chalta rehta hai, infinite!"],
+ ["c4","Pehla idea: har node ko HashSet mein daalo. Agar koi node dobara mila, toh cycle! Kaam toh karega... par O of n extra space! Interviewer bolega: bina extra space ke karo... Rejected!"],
+ ["c5","Best solution: Floyd ka algorithm, yaani kachua aur khargosh! Do pointers lo: slow ek step chalega, aur fast do step."],
+ ["c6","Agar cycle nahi hai, toh fast null tak pahunch jaayega. Par agar cycle hai, toh gol track ki race jaisa, tez runner slow wale ko peeche se pakad lega! Jahan slow aur fast mile... cycle confirm!"],
+ ["c7","Time O of n, aur space O of one. Bas do pointers!"],
+ ["c8","Interviewer ka twist: cycle shuru kahan se hoti hai? Slow ko wapas head pe le jao, aur dono ko ek-ek step chalao. Jahan milenge, wahi cycle ka start! Comment mein batao, ye kyun kaam karta hai?"],
+ ["c9","Ek line mein yaad rakho: slow ek step, fast do step, mile toh cycle! Aise hi interview concepts ke liye, pretestpassed dot codes ko follow karo!"]
+]
