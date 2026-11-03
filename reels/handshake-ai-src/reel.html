@@ -44,15 +44,25 @@ svg{position:absolute;left:0;top:0;overflow:visible}
 <!-- HOOK -->
 <div class="scene" id="H">
   <div class="a c h1" id="H1" style="top:165px;font-size:58px">Internet bhi <y>haath milata</y> hai? 🤝</div>
-  <div class="a c h1" id="H1b" style="top:165px;font-size:58px"><y>TCP 3-Way Handshake</y> 😂</div>
-  <div class="a cov" id="C0" style="left:122px;top:332px;width:836px;height:186px;background:#a855f7;font-size:60px">🤝 3-WAY HANDSHAKE</div>
-  <div class="a cov" id="CA1" style="left:505px;top:310px;width:300px;height:296px;background:#22d3ee;color:#062033;font-size:44px;flex-direction:column"><span style="font-size:90px">💻</span>CLIENT</div>
-  <div class="a cov" id="CA2" style="left:218px;top:876px;width:270px;height:190px;background:#22d3ee;color:#062033;font-size:58px;flex-direction:column">SYN 👋<span style="font-size:28px">"Sorry"</span></div>
-  <div class="a cov" id="CB1" style="left:330px;top:405px;width:290px;height:432px;background:#fb923c;color:#2a1000;font-size:46px;flex-direction:column"><span style="font-size:110px">🖥️</span>SERVER</div>
-  <div class="a cov" id="CB2" style="left:640px;top:918px;width:405px;height:218px;background:#fb923c;color:#2a1000;font-size:54px;flex-direction:column">SYN+ACK 🤝<span style="font-size:28px">"It's okay"</span></div>
-  <div class="a cov" id="CC1" style="left:556px;top:308px;width:306px;height:388px;background:#22d3ee;color:#062033;font-size:46px;flex-direction:column"><span style="font-size:110px">💻</span>CLIENT</div>
-  <div class="a cov" id="CC2" style="left:362px;top:904px;width:348px;height:220px;background:#22c55e;color:#03210f;font-size:60px;flex-direction:column">ACK ✅<span style="font-size:28px">"Sorry" (got it!)</span></div>
-  <div class="a c" id="HS" style="top:1300px"><span class="pill dk" id="HSt" style="font-size:42px">STEP 1 • SYN</span></div>
+  <div class="a c h1" id="H1b" style="top:165px;font-size:58px"><y>ORACLE</y> ne poocha! 💰 <g>18 LPA</g> 😳</div>
+  <div class="a cov" id="C0" style="left:100px;top:320px;width:880px;height:220px;background:#a855f7;font-size:60px">🤝 3-WAY HANDSHAKE</div>
+  <div class="a cov" id="CA1" style="left:503px;top:304px;width:304px;height:304px;background:#22d3ee;color:#062033;font-size:44px;flex-direction:column"><span style="font-size:90px">💻</span>CLIENT</div>
+  <div class="a cov" id="CA2" style="left:212px;top:866px;width:282px;height:202px;background:#22d3ee;color:#062033;font-size:58px;flex-direction:column">SYN 👋<span style="font-size:28px">"Sorry"</span></div>
+  <div class="a cov" id="CB1" style="left:308px;top:408px;width:312px;height:422px;background:#fb923c;color:#2a1000;font-size:46px;flex-direction:column"><span style="font-size:110px">🖥️</span>SERVER</div>
+  <div class="a cov" id="CB2" style="left:370px;top:898px;width:680px;height:244px;background:#fb923c;color:#2a1000;font-size:54px;flex-direction:column">SYN+ACK 🤝<span style="font-size:30px">"It's okay" = Tumhara SYN mil gaya ✅</span></div>
+  <div class="a cov" id="CC1" style="left:558px;top:306px;width:360px;height:392px;background:#22d3ee;color:#062033;font-size:46px;flex-direction:column"><span style="font-size:110px">💻</span>CLIENT</div>
+  <div class="a cov" id="CC2" style="left:358px;top:874px;width:338px;height:252px;background:#22c55e;color:#03210f;font-size:60px;flex-direction:column">ACK ✅<span style="font-size:26px">"Tumhara SYN bhi mil gaya!"</span></div>
+  <div class="a pkt" id="HP1" style="left:0;top:0;background:#0e7490">✉️ SYN</div>
+  <div class="a pkt" id="HP2" style="left:0;top:0;background:#0e7490">✉️ SYN</div>
+  <div class="a pkt" id="HP3" style="left:0;top:0;background:#9a3412">✉️ SYN+ACK</div>
+  <div class="a pkt" id="HP4" style="left:0;top:0;background:#15803d">✉️ ACK</div>
+  <div class="a mono" id="TERM" style="left:60px;top:1395px;width:960px;height:330px;border-radius:22px;background:rgba(5,8,20,.94);border:3px solid #334155;box-shadow:0 0 30px rgba(34,211,238,.25);padding:18px 26px;font-size:36px;line-height:1.55">
+   <div style="color:#94a3b8;font-size:26px">● ● ●&nbsp;&nbsp; <span id="tdot" style="color:#f43f5e">⏺</span> TCP LIVE • client ⇄ server</div>
+   <div id="tl1" style="color:#22d3ee">💻 ➜ 🖥️ [SYN]&nbsp;&nbsp;&nbsp;&nbsp; seq=X</div>
+   <div id="tl2" style="color:#fb923c">🖥️ ➜ 💻 [SYN,ACK] ack=X+1 seq=Y</div>
+   <div id="tl3" style="color:#4ade80">💻 ➜ 🖥️ [ACK]&nbsp;&nbsp;&nbsp;&nbsp; ack=Y+1</div>
+   <div id="tl4" style="color:#4ade80;font-weight:900">✅ CONNECTION ESTABLISHED<span id="tcur">▌</span></div></div>
+  <div class="a c" id="HS" style="top:1290px"><span class="pill dk" id="HSt" style="font-size:42px">STEP 1 • SYN</span></div>
 </div>
 
 <!-- S1 intro -->
@@ -60,8 +70,9 @@ svg{position:absolute;left:0;top:0;overflow:visible}
   <div class="a c h2" id="A1" style="top:300px;font-size:58px">"Sorry" ➜ "It's okay" ➜ 🤝</div>
   <div class="a c h1" id="A2" style="top:430px;font-size:76px;line-height:1.2">Internet ka<br><y>3-WAY HANDSHAKE</y> ⚡</div>
   <div class="a c" id="A3" style="top:720px"><span style="display:inline-block;background:#c74634;color:#fff;font-size:84px;font-weight:900;letter-spacing:4px;padding:10px 46px;border-radius:16px;box-shadow:0 0 50px rgba(199,70,52,.6)">ORACLE</span></div>
-  <div class="a c" id="A4" style="top:880px"><span class="pill dk" style="font-size:40px">Interview mein poocha gaya 🔥</span></div>
-  <div class="a c" id="A5" style="top:1010px"><span class="pill r" style="font-size:44px">⏱️ 30 sec mein samjho</span></div>
+  <div class="a c" id="A4" style="top:870px"><span class="pill dk" style="font-size:38px">Applications Developer-1 • Fresher 🎓</span></div>
+  <div class="a c" id="A6" style="top:990px"><span style="display:inline-block;padding:16px 44px;border-radius:24px;background:rgba(10,40,20,.92);border:4px solid #4ade80;box-shadow:0 0 50px rgba(74,222,128,.5);font-size:66px;font-weight:900;color:#4ade80">💰 CTC: ~₹<span id="ctcn">18</span> LPA</span></div>
+  <div class="a c" id="A5" style="top:1170px"><span class="pill r" style="font-size:44px">⏱️ 30 sec mein samjho</span></div>
 </div>
 
 <!-- S2 query -->
@@ -93,10 +104,12 @@ svg{position:absolute;left:0;top:0;overflow:visible}
    <rect id="pipe" x="170" y="1210" width="740" height="70" rx="35" fill="rgba(34,197,94,.25)" stroke="#4ade80" stroke-width="5"/>
   </svg>
   <div class="a pkt" id="K1" style="left:0;top:0;background:#0e7490">✉️ SYN • seq=<y>X</y></div>
-  <div class="a pkt" id="K2" style="left:0;top:0;background:#9a3412">✉️ SYN-ACK • seq=<y>Y</y>, ack=<y>X+1</y></div>
+  <div class="a pkt" id="K2" style="left:0;top:0;background:#9a3412">✉️ SYN-ACK • ack=<y>X+1</y>, seq=<y>Y</y></div>
   <div class="a pkt" id="K3" style="left:0;top:0;background:#15803d">✉️ ACK • ack=<y>Y+1</y></div>
   <div class="a" id="KX" style="left:20px;top:530px"><span class="pill dk" style="font-size:34px">X = 4291 🎲</span></div>
-  <div class="a" id="KM" style="left:20px;top:960px"><span class="pill g" style="font-size:32px">✅ Mera msg mila!</span></div>
+  <div class="a" id="KM" style="left:300px;top:742px"><span class="pill or" style="font-size:30px">🖥️ "Tumhara SYN mil gaya!" ✅</span></div>
+  <div class="a" id="KM2" style="left:20px;top:1185px"><span class="pill g" style="font-size:30px">💻 "Tumhara SYN bhi mil gaya!" ✅</span></div>
+  <div class="a" id="KAN" style="left:0;top:0"></div>
   <div class="a c" id="KE" style="top:1300px"><span style="display:inline-block;font-size:40px;font-weight:900;color:#4ade80;text-shadow:0 0 20px rgba(74,222,128,.8)">✅ CONNECTION ESTABLISHED</span></div>
   <div id="flow"></div>
 </div>
@@ -115,6 +128,7 @@ svg{position:absolute;left:0;top:0;overflow:visible}
 <div class="scene" id="S5">
   <div class="a c h1" id="F1" style="top:230px;color:#fde047;font-size:58px">EK LINE MEIN YAAD RAKHO 🧠</div>
   <div class="a c" id="F2" style="top:380px"><span class="chip" style="background:#0e7490">SYN</span><span style="font-size:52px">➜</span><span class="chip" style="background:#9a3412">SYN-ACK</span><span style="font-size:52px">➜</span><span class="chip" style="background:#15803d">ACK</span></div>
+  <div class="a c" id="F3" style="top:510px;font-size:30px;font-weight:800;color:#cbd5e1">Synchronize ➜ Synchronize-Acknowledgement ➜ Acknowledgement</div>
   <div class="a" id="F5" style="left:190px;top:620px;width:700px;height:380px;border-radius:30px;background:rgba(12,16,45,.92);border:4px solid #f472b6;box-shadow:0 0 50px rgba(244,114,182,.4)">
     <div style="position:absolute;left:290px;top:26px;width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#f472b6);display:flex;align-items:center;justify-content:center;font-size:50px;font-weight:900;border:4px solid #fff">PP</div>
     <div style="position:absolute;width:100%;top:165px;text-align:center;font-size:46px;font-weight:900">@pretestpassed.codes</div>
@@ -145,14 +159,14 @@ function draw(el,p){el=typeof el=='string'?$(el):el;if(!el._L){el._L=el.getTotal
 function rnd(i,k){const x=Math.sin(i*12.9898+k*78.233)*43758.5453;return x-Math.floor(x)}
 (function(){let ch='';for(let i=0;i<90;i++){const col=['#22d3ee','#f472b6','#fde047','#4ade80','#a855f7','#fb923c'][i%6];ch+=`<div class="a" id="cf${i}" style="left:0;top:0;width:${14+(i*7)%12}px;height:${8+(i*5)%10}px;background:${col};border-radius:3px"></div>`}$('conf').innerHTML=ch;
  let f='';for(let i=0;i<6;i++) f+=`<div class="a" id="fl${i}" style="left:0;top:0;font-size:46px">📦</div>`;$('flow').innerHTML=f;})();
-const SA=1.6, SB=2.567, SC=5.233;
+const SA=1.6, SB=2.70, SC=5.233;
 (function(){
  cue(0.05,'whoosh',.4); cue(SA,'pop',.7); cue(SB,'pop',.7); cue(SC,'pop',.7); cue(HK-0.6,'riser',.45);
- cue(HK,'boom',.6); cue(K.inet,'pop'); cue(K.oracle,'slap',.6); cue(K.oracle+0.1,'cash',.5); cue(K.sec30,'tick',.8);
+ cue(HK,'boom',.6); cue(K.inet,'pop'); cue(K.oracle,'slap',.6); cue(K.role,'pop',.7); cue(K.ctc,'cash',.8); cue(SA+0.3,'whoosh',.3); cue(2.8,'whoosh',.3); cue(4.62,'whoosh',.3); cue(5.4,'whoosh',.3); cue(5.75,'ding',.5); cue(K.sec30,'tick',.8);
  cue(K.client,'whoosh',.4); cue(K.query,'whoosh',.5); cue(K.nahi,'buzz',.6); cue(K.pehle,'pop'); cue(K.steps,'pop');
  cue(K.step1,'whoosh',.4); cue(K.syn1,'whoosh',.6); cue(K.syn1+0.9,'ding',.5); cue(K.X,'pop');
- cue(K.step2,'whoosh',.4); cue(K.synack,'whoosh',.6); cue(K.synack+0.9,'ding',.5); cue(K.mila,'success',.6);
- cue(K.step3,'whoosh',.4); cue(K.ack,'whoosh',.6); cue(K.ack+0.9,'ding',.5); cue(K.estab,'success',.8); cue(K.estab+0.1,'sparkle',.6);
+ cue(K.step2,'whoosh',.4); cue(K.synack,'whoosh',.6); cue(K.synack+0.9,'ding',.5); cue(K.mila,'success',.6); cue(K.xp1,'pop',.6);
+ cue(K.step3,'whoosh',.4); cue(K.ack,'whoosh',.6); cue(K.ack+0.9,'ding',.5); cue(K.mila2,'success',.5); cue(K.estab,'success',.8); cue(K.estab+0.1,'sparkle',.6);
  cue(K.twist,'riser',.4); cue(K.twist+0.5,'slap',.6); cue(K.kyun,'buzz',.4); cue(K.because,'ding',.6);
  cue(K.yaad,'pop'); cue(K.c1,'pop'); cue(K.c2,'pop'); cue(K.c3,'pop'); cue(K.follow+0.3,'click'); cue(K.follow+0.35,'sparkle',.9);
 })();
@@ -166,9 +180,15 @@ window.render=function(t){
  pop('H1',t,0.05); if(t>SA-0.1) set('H1',0); pop('H1b',t,SA);
  win('C0',t,0,SA); win('CA1',t,SA,SB); win('CA2',t,SA,SB); win('CB1',t,SB,SC); win('CB2',t,SB,SC); win('CC1',t,SC,HK+1); win('CC2',t,SC,HK+1);
  for(const [id,a] of [['CA2',SA],['CB2',SB],['CC2',SC],['CA1',SA],['CB1',SB],['CC1',SC]]){if(t>=a&&t<a+0.35) $(id).style.setProperty('--s',0.6+0.4*back((t-a)/0.35))}
+
+ {const tf=(id,a,b,x0,y0,x1,y1)=>{const p=eio((t-a)/(b-a));const o=t<a?0:t<b+0.15?1:Math.max(0,1-(t-b-0.15)/0.2);set(id,o*(t<SC+2?1:0),x0+(x1-x0)*p,y0+(y1-y0)*p,1)};
+  tf('HP1',SA+0.25,SA+0.9,300,820,1060,820); tf('HP2',2.78,3.4,-200,1000,250,800); tf('HP3',4.62,5.15,500,860,-260,860); tf('HP4',5.35,5.9,480,820,1080,820);
+  set('TERM',t<SA?0:clamp((t-SA)/.25)); const L=[[SA+0.4,'tl1'],[2.85,'tl2'],[5.4,'tl3'],[5.75,'tl4']];
+  for(const [a,id] of L){const e=$(id);e.style.opacity=t>=a?1:0;e.style.transform=t>=a?`translateX(${-30*(1-eo((t-a)/.25))}px)`:'none'}
+  $('tdot').style.opacity=(Math.floor(t*3)%2)?1:.3; $('tcur').style.opacity=(Math.floor(t*4)%2)?1:0;}
  {const st=t<SB?'STEP 1 • SYN 👋':t<SC?'STEP 2 • SYN+ACK 🤝':'STEP 3 • ACK ✅';$('HSt').textContent=st;pop('HS',t,SA,.3)}
  // S1
- rise('A1',t,K.inet-0.3); pop('A2',t,K.inet+0.4); pop('A3',t,K.oracle-0.1); rise('A4',t,K.oracle+0.4); pop('A5',t,K.sec30-0.1);
+ rise('A1',t,K.inet-0.3); pop('A2',t,K.inet+0.4); pop('A3',t,K.oracle-0.1); rise('A4',t,K.role); pop('A6',t,K.ctc-0.1); $('ctcn').textContent=Math.round(18*eo((t-K.ctc+0.1)/0.9)); pop('A5',t,K.sec30-0.1);
  // S2
  pop('Q1',t,K.client-0.05); pop('Q2',t,K.client+0.3);
  {const p=eo((t-K.query)/0.8);set('Q3',t>=K.query-0.1&&t<K.pehle?1:0,330*p,0,1)}
@@ -181,13 +201,13 @@ window.render=function(t){
  $('ll').setAttribute('opacity',clamp((t-K.step1-0.2)/.3)*.7); $('lr').setAttribute('opacity',clamp((t-K.step1-0.3)/.3)*.7);
  const fly=(id,arr,t0,x0,y0,x1,y1)=>{const p=eio((t-t0)/0.9);draw(arr,p);set(id,t>=t0-0.05?1:0,x0+(x1-x0)*p,y0+(y1-y0)*p,1,0)};
  fly('K1','ar1',K.syn1,190,520,560,640); fly('K2','ar2',K.synack,560,740,150,860); fly('K3','ar3',K.ack,190,960,600,1080);
- pop('KX',t,K.X-0.1); pop('KM',t,K.mila-0.1);
+ pop('KX',t,K.X-0.1); pop('KM',t,K.mila-0.1); pop('KM2',t,K.mila2-0.1); if(t>K.estab-0.15) set('KM2',0);
  draw('pipe',0); $('pipe').style.opacity=clamp((t-K.estab+0.1)/.3); pop('KE',t,K.estab);
  for(let i=0;i<6;i++){const ph=((t-K.estab-0.3)*0.9+i/6)%1;const on=t>K.estab+0.3;set('fl'+i,on?Math.min(1,Math.sin(Math.PI*ph)*2):0,180+ph*700,1215,1)}
  // S4
  pop('W1',t,K.twist); pop('W2',t,K.kyun-0.2); rise('W3',t,K.kyun+0.3); rise('W4',t,K.because);
  // S5
- pop('F1',t,K.yaad-0.05);
+ pop('F1',t,K.yaad-0.05); rise('F3',t,K.c3+0.2);
  {const el=$('F2');const p=clamp((t-K.c1+0.1)/.3);set(el,t<K.c1-0.1?0:clamp(p*2.5),0,0,.5+.5*back(p));const ch=el.querySelectorAll('.chip');ch.forEach((c,i)=>c.style.opacity=t>=[K.c1,K.c2,K.c3][i]-0.1?1:0.15)}
  pop('F5',t,K.aise-0.2); rise('F7',t,K.follow+0.8);
  {const tc=K.follow+0.3;const p=eo((t-tc+0.9)/0.8);const x=900+(560-900)*p,y=1260+(940-1260)*p;const press=t>tc&&t<tc+.2?.85:1;
