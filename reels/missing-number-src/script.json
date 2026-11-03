@@ -1,0 +1,10 @@
+[
+ ["y1","Is array mein ek number gayab hai! Ek se paanch tak ke numbers hain... par ek missing. Interview mein poocha jaaye, toh kaise dhoondhoge?"],
+ ["y2","Zyaadatar log pehle sort karte hain, phir loop. Par sorting matlab n log n! Interviewer ko chahiye O of n."],
+ ["y3","Coding bhool jao, bachpan ki maths yaad karo! Ek se n tak ka sum: n into n plus one, by two."],
+ ["y4","Yahan n paanch hai. Toh total sum: paanch into chheh, by two... pandrah!"],
+ ["y5","Ab array ka sum nikalo: teen, ek, paanch, do... gyaarah!"],
+ ["y6","Pandrah minus gyaarah... chaar! Ye raha missing number! Na sorting, na extra space. Time O of n, space O of one."],
+ ["y7","Interviewer ka twist: n bahut bada ho, toh sum overflow ho sakta hai! Tab XOR use karo. Comment mein batao, XOR wala logic kaise kaam karega?"],
+ ["y8","Aise hi interview tricks ke liye, pretestpassed dot codes ko follow karo!"]
+]

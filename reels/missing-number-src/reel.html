@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:transparent}
+body{font-family:'Inter','Noto Color Emoji',sans-serif;color:#fff}
+.mono{font-family:'DejaVu Sans Mono','Noto Color Emoji',monospace}
+#stage{position:absolute;inset:0;overflow:hidden}
+#bg{position:absolute;inset:0;background:
+ radial-gradient(700px 700px at var(--b1x,20%) var(--b1y,75%),rgba(150,40,200,.35),transparent 70%),
+ radial-gradient(650px 650px at var(--b2x,85%) var(--b2y,30%),rgba(34,211,238,.18),transparent 70%),
+ radial-gradient(900px 900px at 50% 110%,rgba(40,80,220,.30),transparent 70%),
+ linear-gradient(180deg,#0b0b2b 0%,#14102f 50%,#0b0a24 100%)}
+#prog{position:absolute;left:0;top:0;height:10px;background:linear-gradient(90deg,#22d3ee,#a855f7,#f472b6);box-shadow:0 0 18px #22d3ee}
+#wm{position:absolute;top:95px;width:100%;text-align:center;font-size:30px;font-weight:600;color:rgba(255,255,255,.7)}
+#cframe{position:absolute;left:84px;top:294px;width:912px;height:1137px;border-radius:18px;border:6px solid #f472b6;box-shadow:0 0 40px rgba(244,114,182,.6)}
+.scene{position:absolute;inset:0;opacity:0}
+.a{position:absolute;opacity:var(--o,0);transform:translate(var(--x,0px),var(--y,0px)) scale(var(--s,1)) rotate(var(--r,0deg));transform-origin:center}
+.c{left:0;width:1080px;text-align:center}
+.h1{font-size:64px;font-weight:900;line-height:1.15;text-shadow:0 4px 18px rgba(0,0,0,.8)}
+y,.y{color:#fde047}r,.r{color:#fb7185}g,.g{color:#4ade80}c,.cy{color:#22d3ee}o,.or{color:#fb923c}
+.pill{display:inline-block;padding:14px 32px;border-radius:999px;font-size:38px;font-weight:900}
+.pill.cy{background:#22d3ee;color:#062033;box-shadow:0 0 30px rgba(34,211,238,.6)}
+.pill.g{background:#22c55e;color:#03210f;box-shadow:0 0 30px rgba(34,197,94,.6)}
+.pill.pu{background:#a855f7;color:#fff;box-shadow:0 0 30px rgba(168,85,247,.6)}
+.pill.r{background:#f43f5e;color:#fff;box-shadow:0 0 30px rgba(244,63,94,.6)}
+.pill.dk{background:rgba(10,10,30,.9);color:#fde047;border:2px solid rgba(253,224,71,.6)}
+.box{position:absolute;width:150px;height:150px;border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:76px;font-weight:900;border:5px solid #93c5fd;background:linear-gradient(180deg,#1d4ed8,#1e3a8a);box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.box.q{border-color:#fb7185;background:linear-gradient(180deg,#7f1d1d,#3f0a12)}
+.box.ok{border-color:#86efac;background:linear-gradient(180deg,#16a34a,#14532d)}
+.board{position:absolute;left:90px;width:900px;border-radius:26px;background:#123524;border:10px solid #8b5a2b;box-shadow:inset 0 0 60px rgba(0,0,0,.5),0 10px 30px rgba(0,0,0,.5);font-family:'DejaVu Sans Mono',monospace;color:#f8fafc;text-align:center}
+.qry{position:absolute;left:60px;width:960px;padding:22px 30px;border-radius:22px;background:#05060f;border:3px solid #334155;font-size:30px;line-height:1.5;white-space:pre}
+#cap{position:absolute;left:60px;width:960px;top:1560px;text-align:center}
+#capt{display:inline-block;padding:14px 28px;border-radius:20px;background:rgba(0,0,0,.72);font-size:46px;font-weight:900;line-height:1.2;max-width:960px}
+</style></head>
+<body><div id="stage">
+<div id="bg"></div>
+<div class="a" id="cframe"></div>
+<div class="scene" id="C"><div class="a c" id="CL1" style="top:150px"><span class="pill pu" style="font-size:40px" id="CL1t">🕵️ Number 4 kahan hai?! 😂</span></div></div>
+
+<!-- HOOK -->
+<div class="scene" id="H">
+  <div class="a c h1" id="H1" style="top:230px">Array mein ek number<br><r>GAYAB</r> hai! 🕵️</div>
+  <div id="hboxes"></div>
+  <div class="a" id="mag" style="left:0;top:0;font-size:130px">🔍</div>
+  <div class="a c" id="H2" style="top:980px"><span class="pill dk" style="font-size:44px">n = 5 • 1 se 5 tak • 1 missing</span></div>
+  <div class="a c h1" id="H3" style="top:1120px;font-size:54px">Interview mein <y>kaise dhoondhoge?</y> 🤔</div>
+</div>
+
+<!-- SORT (wrong) -->
+<div class="scene" id="S">
+  <div class="a c" id="S0" style="top:220px"><span class="pill r" style="font-size:42px">❌ Common galti: SORT karo</span></div>
+  <div id="sboxes"></div>
+  <div class="a" id="sptr" style="left:0;top:0;font-size:80px">👆</div>
+  <div class="a c" id="S2" style="top:860px"><span style="display:inline-block;padding:16px 40px;border:7px solid #f43f5e;border-radius:18px;font-size:68px;font-weight:900;color:#fb7185;background:rgba(40,5,10,.9)">O(n log n) 🐢</span></div>
+  <div class="a c" id="S3" style="top:1060px"><span class="pill g" style="font-size:46px">Interviewer ko chahiye: O(n) ⚡</span></div>
+</div>
+
+<!-- MATH -->
+<div class="scene" id="F">
+  <div class="a c" id="F0" style="top:200px"><span class="pill cy" style="font-size:44px">🧮 Bachpan ki MATHS</span></div>
+  <div class="a board" id="F1" style="top:320px;padding:40px 20px;font-size:66px;font-weight:700">Sum(1..n) =<br><span style="font-size:96px;color:#fde047">n × (n+1) / 2</span></div>
+  <div class="a board" id="F2" style="top:720px;padding:30px 20px;font-size:62px;font-weight:700">n = 5 ➜ <span id="F2t"></span></div>
+  <div class="a c" id="F3" style="top:900px"><span class="pill g" style="font-size:54px">TOTAL = 15 ✅</span></div>
+  <div id="aboxes"></div>
+  <div class="a c" id="F5" style="top:1260px"><span class="pill dk" style="font-size:54px" id="F5t">ARRAY SUM = 0</span></div>
+</div>
+
+<!-- ANSWER -->
+<div class="scene" id="A">
+  <div class="a c h1" id="A1" style="top:260px;font-size:92px"><g>15</g> − <c>11</c> = <y>?</y></div>
+  <div id="fboxes"></div>
+  <div class="a c" id="A3" style="top:980px"><span class="pill g" style="font-size:52px">🎉 Missing number = 4</span></div>
+  <div class="a c" id="A4" style="top:1110px"><span class="pill dk" style="font-size:40px">❌ No sorting • ❌ No extra space</span></div>
+  <div class="a c" id="A5" style="top:1230px"><span class="pill cy" style="font-size:44px">⏱️ Time O(n) • 💾 Space O(1)</span></div>
+  <div id="conf"></div>
+</div>
+
+<!-- TWIST -->
+<div class="scene" id="T">
+  <div class="a c" id="T0" style="top:220px"><span class="pill pu" style="font-size:44px">🤔 INTERVIEWER KA TWIST</span></div>
+  <div class="a c h1" id="T1" style="top:340px;font-size:62px">n bahut BADA ho toh? 😱</div>
+  <div class="a c mono" id="T2" style="top:500px;font-size:62px;font-weight:900;color:#fb7185"><span id="T2t">2,147,483,647</span></div>
+  <div class="a c" id="T3" style="top:620px"><span style="display:inline-block;padding:14px 36px;border:6px solid #f43f5e;border-radius:16px;font-size:58px;font-weight:900;color:#fb7185;background:rgba(40,5,10,.9)">💥 SUM OVERFLOW!</span></div>
+  <div class="a c" id="T4" style="top:820px"><span class="pill g" style="font-size:60px">✅ Use XOR ⊕</span></div>
+  <div class="a c" id="T5" style="top:980px"><span class="pill dk" style="font-size:42px">💬 Comment: XOR kaise kaam karega?</span></div>
+</div>
+
+<!-- CTA -->
+<div class="scene" id="Z">
+  <div class="a c h1" id="Z1" style="top:260px;color:#fde047;font-size:56px">Total − Array Sum = Missing ✅</div>
+  <div class="a" id="Z4" style="left:190px;top:520px;width:700px;height:360px;border-radius:30px;background:rgba(12,16,45,.92);border:4px solid #f472b6;box-shadow:0 0 50px rgba(244,114,182,.4)">
+    <div style="position:absolute;left:290px;top:24px;width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#f472b6);display:flex;align-items:center;justify-content:center;font-size:50px;font-weight:900;border:4px solid #fff">PP</div>
+    <div style="position:absolute;width:100%;top:160px;text-align:center;font-size:46px;font-weight:900">@pretestpassed.codes</div>
+    <div id="fbtn" style="position:absolute;left:180px;top:245px;width:340px;height:86px;border-radius:20px;background:#3b82f6;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:900">FOLLOW</div></div>
+  <div class="a" id="Z5" style="left:0;top:0;font-size:110px">👆</div>
+  <div class="a c" id="Z6" style="top:930px"><span class="pill dk" style="font-size:38px">🔖 Save karo • interview se pehle revise!</span></div>
+  <div id="conf2"></div>
+</div>
+
+<div id="cap"><span class="a" id="capw" style="position:relative;display:inline-block"><span id="capt"></span></span></div>
+<div id="prog"></div>
+<div id="wm">@pretestpassed.codes</div>
+</div>
+<script>
+const TL=window.TL, K=TL.K, CAPS=TL.CAPS, END=TL.END, HK=TL.HK||0;
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const eo=x=>1-Math.pow(1-clamp(x),3);
+const eio=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const back=x=>{x=clamp(x);const c1=2.0,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const CUES=[]; const cue=(t,n,g)=>CUES.push([+t.toFixed(3),n,g||1]);
+function set(el,o,x,y,s,r){el=typeof el=='string'?$(el):el;el.style.setProperty('--o',o);el.style.setProperty('--x',(x||0)+'px');el.style.setProperty('--y',(y||0)+'px');el.style.setProperty('--s',s==null?1:s);el.style.setProperty('--r',(r||0)+'deg')}
+function pop(el,t,t0,d,t1){d=d||.4;const p=clamp((t-t0)/d);const q=t1?clamp((t1-t)/.2):1;set(el,t<t0?0:Math.min(clamp(p*2.5),q),0,0,t<t0?.4:.4+.6*back(p))}
+function rise(el,t,t0,t1){const p=clamp((t-t0)/.45);const q=t1?clamp((t1-t)/.2):1;set(el,t<t0?0:Math.min(clamp(p*2),q),0,50*(1-eo(p)),1)}
+function vis(t,a,b,f){f=f||.15;return Math.min(clamp((t-a)/f),clamp((b-t)/f))}
+function rnd(i,k){const x=Math.sin(i*12.9898+k*78.233)*43758.5453;return x-Math.floor(x)}
+const ARR=[3,1,5,2];
+const BX=i=>75+i*190;
+(function(){
+ let h='';[1,2,3,4,5].forEach((v,i)=>h+=`<div class="a box ${v==4?'q':''}" id="hb${i}" style="left:${BX(i)}px;top:620px">${v==4?'❓':v}</div>`);$('hboxes').innerHTML=h;
+ let s='';ARR.forEach((v,i)=>s+=`<div class="a box" id="sb${i}" style="left:${170+i*190}px;top:420px">${v}</div>`);
+ [1,2,3,4].forEach((v,i)=>s+=`<div class="a" id="si${i}" style="left:${170+i*190+60}px;top:590px;font-size:34px;font-weight:800;color:#93c5fd">[${i}]</div>`);$('sboxes').innerHTML=s;
+ let a='';ARR.forEach((v,i)=>a+=`<div class="a box" id="ab${i}" style="left:${170+i*190}px;top:1060px;width:140px;height:140px;font-size:70px">${v}</div>`);$('aboxes').innerHTML=a;
+ let f='';[1,2,3,4,5].forEach((v,i)=>f+=`<div class="a box ${v==4?'q':''}" id="fb${i}" style="left:${BX(i)}px;top:560px">${v==4?'❓':v}</div>`);$('fboxes').innerHTML=f;
+ let ch='',ch2='';for(let i=0;i<90;i++){const col=['#22d3ee','#f472b6','#fde047','#4ade80','#a855f7','#fb923c'][i%6];ch+=`<div class="a" id="cf${i}" style="left:0;top:0;width:${14+(i*7)%12}px;height:${8+(i*5)%10}px;background:${col};border-radius:3px"></div>`;ch2+=`<div class="a" id="cg${i}" style="left:0;top:0;width:${14+(i*7)%12}px;height:${8+(i*5)%10}px;background:${col};border-radius:3px"></div>`}
+ $('conf').innerHTML=ch;$('conf2').innerHTML=ch2;
+})();
+function confetti(pref,t,tc,cy){for(let i=0;i<90;i++){const dt=t-tc;const el=$(pref+i);if(dt<0||dt>3){set(el,0);continue}
+ const ang=rnd(i,1)*Math.PI*2, sp=500+rnd(i,2)*900;const x=540+Math.cos(ang)*sp*dt*0.8, y=cy+Math.sin(ang)*sp*dt*0.7-500*dt+700*dt*dt;set(el,clamp(3-dt),x,y,1,dt*400*(rnd(i,3)-.5))}}
+(function(){
+ if(HK>0){cue(HK-0.02,'boom',.7);} else cue(0.05,'boom',.6);
+ cue(K.h0+0.1,'pop'); for(let i=0;i<5;i++) cue(K.h0+0.5+i*0.12,'tick',.5); cue(K.gayab,'buzz',.4); cue(K.kaise,'pop');
+ cue(K.sort,'whoosh',.5); cue(K.sort+0.6,'whoosh',.4); cue(K.nlogn,'buzz',.6); cue(K.on,'ding',.6);
+ cue(K.maths,'success',.5); cue(K.formula,'slap',.6); cue(K.npaanch,'pop'); cue(K.pandrah,'ding',.7);
+ [K.a1,K.a2,K.a3,K.a4].forEach(x=>cue(x,'pop',.6)); cue(K.gyaarah,'ding',.7);
+ cue(K.minus,'riser',.5); cue(K.chaar,'boom',.5); cue(K.chaar+0.05,'success',.9); cue(K.chaar+0.1,'sparkle',.7); cue(K.nosort,'pop'); cue(K.time,'pop');
+ cue(K.twist,'whoosh',.5); cue(K.twist+0.3,'slap',.6); cue(K.overflow,'boom',.6); cue(K.overflow+0.05,'alarm',.4); cue(K.xor,'success',.6); cue(K.comment,'pop');
+ cue(K.aise,'pop'); cue(K.follow+0.2,'click'); cue(K.follow+0.25,'sparkle',.9);
+})();
+window.render=function(t){
+ $('prog').style.width=(1080*clamp(t/END))+'px';
+ const bg=$('bg');bg.style.setProperty('--b1x',(20+8*Math.sin(t*.25))+'%');bg.style.setProperty('--b1y',(75+6*Math.cos(t*.2))+'%');bg.style.setProperty('--b2x',(82+6*Math.cos(t*.3))+'%');bg.style.setProperty('--b2y',(28+8*Math.sin(t*.22))+'%');
+ const clip=HK>0&&t<HK; bg.style.clipPath=clip?"path(evenodd,'M0 0 H1080 V1920 H0 Z M90 300 H990 V1425 H90 Z')":'none'; set('cframe',clip?1:0);
+ const W={C:[-1,HK],H:[HK,K.sort-0.1],S:[K.sort-0.1,K.maths-0.1],F:[K.maths-0.1,K.minus-0.1],A:[K.minus-0.1,K.twist-0.1],T:[K.twist-0.1,K.aise-0.1],Z:[K.aise-0.1,END+1]};
+ for(const id in W){const o=vis(t,W[id][0],W[id][1],.12);const el=$(id);el.style.opacity=o;el.style.display=o>0?'block':'none'}
+ pop('CL1',t,0.05);
+ // HOOK
+ pop('H1',t,K.h0+0.05);
+ for(let i=0;i<5;i++){const t0=K.h0+0.5+i*0.12;const p=clamp((t-t0)/.35);set('hb'+i,t<t0?0:clamp(p*2.5),0,0,.5+.5*back(p));if(i==3&&t>t0){$('hb3').style.setProperty('--o',0.55+0.45*Math.abs(Math.sin(t*6)))}}
+ {const p=((t-K.h0-1.2)/2.4);const on=t>K.h0+1.2&&t<K.sort;const x=BX(0)+20+Math.min(1,Math.max(0,p))*(BX(4)-BX(0))*(0.5-0.5*Math.cos(Math.PI*2*Math.min(p,1)))*1;set('mag',on?1:0,BX(0)+(BX(4)-BX(0))*(0.5+0.5*Math.sin(t*1.6)),560,1,-10)}
+ pop('H2',t,K.ekse-0.1); rise('H3',t,K.kaise-0.1);
+ // SORT
+ pop('S0',t,K.sort-0.05);
+ {const sorted=[1,2,3,5]; const ps=eio((t-K.sort-0.6)/0.8);
+  for(let i=0;i<4;i++){const v=ARR[i];const ni=sorted.indexOf(v);const x=(ni-i)*190*ps;const o=clamp((t-K.sort-i*0.08)/.3);set('sb'+i,o,x,-60*Math.sin(Math.PI*ps)*(i%2?1:-1),1);set('si'+i,o)}
+  const lp=clamp((t-K.sort-1.6)/1.4); const idx=Math.min(3,Math.floor(lp*4)); set('sptr',t>K.sort+1.6&&t<K.maths?1:0,170+idx*190+40,580,1);
+  for(let i=0;i<4;i++){const el=$('sb'+i);const v=ARR[i];el.classList.toggle('q',t>K.sort+2.9&&v==5);}}
+ pop('S2',t,K.nlogn-0.1); pop('S3',t,K.on-0.1);
+ // MATH
+ pop('F0',t,K.maths); pop('F1',t,K.formula-0.1);
+ {pop('F2',t,K.npaanch-0.1); const st=['5 × (5+1) / 2','5 × 6 / 2','30 / 2']; const p=clamp((t-K.npaanch-0.3)/(K.pandrah-K.npaanch-0.3)); $('F2t').textContent=st[Math.min(2,Math.floor(p*3))]+(t>=K.pandrah?' = 15':'')}
+ pop('F3',t,K.pandrah);
+ {const T=[K.a1,K.a2,K.a3,K.a4];let sum=0;for(let i=0;i<4;i++){pop('ab'+i,t,T[i]-0.05,.35);if(t>=T[i]) sum+=ARR[i]; $('ab'+i).classList.toggle('ok',t>=T[i]&&t<T[i]+0.5)}
+  pop('F5',t,K.arrsum-0.1); $('F5t').textContent='ARRAY SUM = '+(t>=K.gyaarah?'11 ✅':sum)}
+ // ANSWER
+ pop('A1',t,K.minus-0.05);
+ for(let i=0;i<5;i++){pop('fb'+i,t,K.minus+0.2+i*0.08,.35);}
+ {const el=$('fb3');if(t>=K.chaar){el.textContent='4';el.classList.remove('q');el.classList.add('ok');el.style.setProperty('--s',1+0.25*Math.max(0,Math.sin(Math.PI*clamp((t-K.chaar)/0.5))))}else{el.textContent='❓';el.classList.add('q');el.classList.remove('ok')}}
+ if(t>=K.chaar) $('A1').innerHTML='<g>15</g> − <c>11</c> = <y>4</y> 🎉';else $('A1').innerHTML='<g>15</g> − <c>11</c> = <y>?</y>';
+ pop('A3',t,K.chaar+0.1); rise('A4',t,K.nosort-0.1); rise('A5',t,K.time-0.1); confetti('cf',t,K.chaar,700);
+ // TWIST
+ pop('T0',t,K.twist); rise('T1',t,K.twist+0.4);
+ {pop('T2',t,K.bada); const v=2147483647; const of=t>=K.overflow; $('T2t').textContent=of?'-2,147,483,648 😵':(t>=K.bada+0.6?'2,147,483,647 + 1':'2,147,483,647')}
+ pop('T3',t,K.overflow); pop('T4',t,K.xor-0.1); rise('T5',t,K.comment-0.1);
+ // CTA
+ pop('Z1',t,K.aise-0.05); pop('Z4',t,K.aise+0.1); rise('Z6',t,K.follow+0.8);
+ {const tc=K.follow+0.2;const p=eo((t-tc+0.9)/0.8);const x=900+(560-900)*p,y=1160+(840-1160)*p;const press=t>tc&&t<tc+.2?.85:1;
+  set('Z5',clamp((t-tc+1)/.3),x-60,y-60,press);
+  const b=$('fbtn');if(t>tc){b.textContent='FOLLOWING ✓';b.style.background='#475569'}else{b.textContent='FOLLOW';b.style.background='#3b82f6'}
+  confetti('cg',t,tc,700)}
+ // captions
+ {let cur=null;for(let i=0;i<CAPS.length;i++){const s0=CAPS[i][0],e0=i+1<CAPS.length?Math.min(CAPS[i+1][0],s0+3.6):s0+2.6;if(t>=s0-0.05&&t<e0) cur=[i,s0,e0]}
+  if(cur&&!clip){$('capt').innerHTML=CAPS[cur[0]][1];const p=clamp((t-cur[1]+0.05)/.18);set('capw',Math.min(clamp(p*2),clamp((cur[2]-t)/.12)),0,14*(1-eo(p)),.9+.1*back(p))} else set('capw',0)}
+};
+window.CUES=CUES; window.render(0);
+</script></body></html>
