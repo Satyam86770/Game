@@ -18,7 +18,7 @@ act=np.convolve(act.astype(np.float32),np.ones(int(0.25*SR))/(0.25*SR),'same')
 duck=1-0.72*np.clip(act*1.5,0,1)
 fade=np.clip((END-t)/1.5,0,1)*np.clip((t-HK)/0.8,0,1)
 mus*=(0.135*duck*fade)[:,None]
-hk*=(1-0.6*np.clip(act*1.5,0,1))[:,None]
+hk*=(0.6*(1-0.6*np.clip(act*1.5,0,1)))[:,None]
 sfx=np.zeros((N,2),np.float32)
 for tc,name,g in json.load(open('/tmp/claude-0/-home-user-Game/74005bc4-5fbf-5625-bb25-abf031794fcf/scratchpad/gm/cues.json')):
     x=rd(f'/tmp/work/sfx/{name}.wav'); j=int(max(0,tc)*SR); m=min(len(x),N-j)

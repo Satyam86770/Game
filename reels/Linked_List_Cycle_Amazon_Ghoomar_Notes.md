@@ -1,8 +1,8 @@
-# Linked List Cycle — Amazon SDE-1 reel with the "Ghoomar" gorilla hook (~74s)
+# Linked List Cycle — Amazon SDE-1 reel with the "Ghoomar" gorilla hook (~74.5s)
 
 **Hook (0–8.5s): the user's clip**, a gorilla spinning round and round to "Ghoomar ghoomar...", ending dizzy on the floor.
-Source 0.6–9.13s, cropped to 720x720 (y=270) and shown in a 1000x1000 pink frame with the original song.
-The voiceover plays over the clip with the song ducked: *"Cycle wali linked list mein, end node dhoondhne ghuse...
+Source 1.6–9.13s (the first second is skipped because the gorilla is blurry), cropped to 720x720 (y=270) and shown in a 1000x1000 pink frame with the original song.
+The voiceover plays over the clip with the song ducked (hook gain 0.6, then −60% under the voice; the song sits ~11 dB below the VO): *"Cycle wali linked list mein, end node dhoondhne ghuse...
 toh bas aise hi ghoomte rahoge! Ghoomar, ghoomar! End node kabhi milega hi nahi!"*
 
 **How the hook ties to the concept (concept running live):**
