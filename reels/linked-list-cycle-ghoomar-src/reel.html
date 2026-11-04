@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:transparent}
+body{font-family:'Inter','Noto Color Emoji',sans-serif;color:#fff}
+.mono{font-family:'DejaVu Sans Mono','Noto Color Emoji',monospace}
+#stage{position:absolute;inset:0;overflow:hidden}
+#bg{position:absolute;inset:0;background:
+ radial-gradient(700px 700px at var(--b1x,20%) var(--b1y,75%),rgba(150,40,200,.35),transparent 70%),
+ radial-gradient(650px 650px at var(--b2x,85%) var(--b2y,30%),rgba(34,211,238,.18),transparent 70%),
+ radial-gradient(900px 900px at 50% 110%,rgba(40,80,220,.30),transparent 70%),
+ linear-gradient(180deg,#0b0b2b 0%,#14102f 50%,#0b0a24 100%)}
+#prog{position:absolute;left:0;top:0;height:10px;background:linear-gradient(90deg,#22d3ee,#a855f7,#f472b6);box-shadow:0 0 18px #22d3ee}
+#wm{position:absolute;top:95px;width:100%;text-align:center;font-size:30px;font-weight:600;color:rgba(255,255,255,.7)}
+.scene{position:absolute;inset:0;opacity:0}
+.a{position:absolute;opacity:var(--o,0);transform:translate(var(--x,0px),var(--y,0px)) scale(var(--s,1)) rotate(var(--r,0deg));transform-origin:center}
+.c{left:0;width:1080px;text-align:center}
+.h1{font-size:64px;font-weight:900;line-height:1.15;text-shadow:0 4px 18px rgba(0,0,0,.8)}
+.h2{font-size:50px;font-weight:800;line-height:1.25;text-shadow:0 3px 14px rgba(0,0,0,.8)}
+y,.y{color:#fde047}r,.r{color:#fb7185}g,.g{color:#4ade80}c,.cy{color:#22d3ee}o,.or{color:#fb923c}
+.pill{display:inline-block;padding:14px 32px;border-radius:999px;font-size:38px;font-weight:900}
+.pill.cy{background:#22d3ee;color:#062033;box-shadow:0 0 30px rgba(34,211,238,.6)}
+.pill.or{background:#fb923c;color:#2a1000;box-shadow:0 0 30px rgba(251,146,60,.6)}
+.pill.g{background:#22c55e;color:#03210f;box-shadow:0 0 30px rgba(34,197,94,.6)}
+.pill.pu{background:#a855f7;color:#fff;box-shadow:0 0 30px rgba(168,85,247,.6)}
+.pill.r{background:#f43f5e;color:#fff;box-shadow:0 0 30px rgba(244,63,94,.6)}
+.pill.dk{background:rgba(10,10,30,.9);color:#fde047;border:2px solid rgba(253,224,71,.6)}
+.chip{display:inline-block;margin:0 10px;padding:18px 30px;border-radius:20px;font-size:52px;font-weight:900}
+.card{border-radius:28px;background:rgba(12,16,45,.92);border:4px solid #22d3ee;padding:26px 36px}
+.tok{position:absolute;left:0;top:0;width:110px;height:110px;margin:-55px 0 0 -55px;font-size:84px;text-align:center;line-height:110px;opacity:var(--o,0);transform:translate(var(--x,0px),var(--y,0px)) scale(var(--s,1));filter:drop-shadow(0 6px 12px rgba(0,0,0,.6))}
+.tok b{position:absolute;left:50%;transform:translateX(-50%);font-size:24px;line-height:1;font-weight:900;padding:5px 12px;border-radius:999px;white-space:nowrap}
+#cap{position:absolute;left:60px;width:960px;top:1560px;text-align:center}
+#capt{display:inline-block;padding:14px 28px;border-radius:20px;background:rgba(0,0,0,.72);font-size:46px;font-weight:900;line-height:1.2;max-width:960px}
+svg{position:absolute;left:0;top:0;overflow:visible}
+.stamp{display:inline-block;padding:18px 50px;border:10px solid #f43f5e;border-radius:22px;color:#f43f5e;font-size:110px;font-weight:900;letter-spacing:6px;background:rgba(40,0,10,.55)}
+</style></head>
+<body><div id="stage">
+<div id="bg"></div>
+<div class="a" id="mframe" style="left:34px;top:294px;width:1012px;height:1012px;border-radius:18px;border:6px solid #f472b6;box-shadow:0 0 40px rgba(244,114,182,.6)"></div>
+
+<!-- shared rho diagram (used in H, S2, S4, S5) -->
+<svg id="rho" width="1080" height="1920"></svg>
+<div id="toks"></div>
+
+<!-- CLIP HOOK -->
+<div class="scene" id="HC">
+  <div class="a c h1" id="HT1" style="top:150px;font-size:56px"><y>AMAZON</y> ne poocha! 💰 <g>~44 LPA</g> 😳</div>
+  <div class="a c" id="HT2" style="top:228px"><span class="pill r" style="font-size:34px;padding:8px 26px">🔍 END node dhoondhne ghuse... 🌀</span></div>
+  <div class="a c" id="HLP" style="top:1170px"><span class="pill cy" style="font-size:42px">➡️ head se list mein ENTER...</span></div>
+  <div class="a c" id="HLF" style="top:1170px"><span class="pill r" style="font-size:42px">😵 END node? 🤷 kabhi nahi mila!</span></div>
+  <div class="a c" id="HLJ" style="top:1170px"><span class="pill or" style="font-size:42px" id="hljt">🦘 Same jump DOBARA! 🔁</span></div>
+  <div class="a mono" id="TERM2" style="left:540px;top:1345px;width:500px;height:300px;border-radius:22px;background:rgba(5,8,20,.94);border:3px solid #334155;padding:16px 22px;font-size:30px;line-height:1.5">
+   <div style="color:#94a3b8;font-size:22px"><span id="tdot2" style="color:#f43f5e">⏺</span> SEARCHING END...</div>
+   <div style="color:#22d3ee;font-size:27px">while(node.next!=<r>null</r>)</div>
+   <div style="color:#cbd5e1">&nbsp;node=node.next;</div>
+   <div id="tl2c" style="color:#fde047;font-weight:900">loop #0 🔁</div>
+   <div id="tl2n" style="color:#fb7185;font-weight:900;font-size:26px">END? ❌ kabhi nahi!</div></div>
+</div>
+
+<!-- HOOK -->
+<div class="scene" id="H">
+  <div class="a c h1" id="H1" style="top:170px;font-size:60px">Ye Linked List <r>kabhi khatam</r><br>nahi hoti! 😱</div>
+  <div class="a c" id="H2" style="top:340px"><span class="pill dk" style="font-size:40px">🔁 Andar ek LOOP hai!</span></div>
+  <div class="a mono" id="TERM" style="left:60px;top:1250px;width:960px;height:280px;border-radius:22px;background:rgba(5,8,20,.94);border:3px solid #334155;box-shadow:0 0 30px rgba(244,63,94,.25);padding:18px 26px;font-size:34px;line-height:1.5">
+   <div style="color:#94a3b8;font-size:26px">● ● ●&nbsp; <span id="tdot" style="color:#f43f5e">⏺</span> RUNNING...</div>
+   <div style="color:#22d3ee">while (node != <r>null</r>)</div>
+   <div style="color:#cbd5e1">&nbsp;&nbsp;node = node.next;</div>
+   <div id="tcount" style="color:#fde047;font-weight:900">steps: 0 ⏳</div></div>
+  <div class="a c" id="HV" style="top:1180px"><span id="hvis" class="mono" style="font-size:32px;color:#cbd5e1"></span></div>
+</div>
+
+<!-- S1 company -->
+<div class="scene" id="S1">
+  <div class="a c" id="A1" style="top:300px"><span style="display:inline-block;background:#111827;color:#ff9900;font-size:96px;font-weight:900;letter-spacing:4px;padding:10px 50px;border-radius:18px;border:4px solid #ff9900;box-shadow:0 0 50px rgba(255,153,0,.5)">AMAZON</span></div>
+  <div class="a c" id="A2" style="top:470px"><span class="pill dk" style="font-size:40px">SDE-1 • Fresher 🎓</span></div>
+  <div class="a" id="A3" style="left:90px;top:600px;width:900px;text-align:center" ><div class="card" style="border-color:#fde047;font-size:46px;font-weight:900;line-height:1.35">❓ "Linked List mein<br><y>CYCLE detect</y> karo" 🔁</div></div>
+  <div class="a c" id="A4" style="top:870px"><span style="display:inline-block;padding:16px 44px;border-radius:24px;background:rgba(10,40,20,.92);border:4px solid #4ade80;box-shadow:0 0 50px rgba(74,222,128,.5);font-size:72px;font-weight:900;color:#4ade80">💰 CTC: ~₹<span id="ctcn">44</span> LPA</span></div>
+</div>
+
+<!-- S2 normal vs cycle -->
+<div class="scene" id="S2">
+  <div class="a c h2" id="N0" style="top:200px">Normal list 👇</div>
+  <svg id="nsvg" width="1080" height="1920"></svg>
+  <div id="nnodes"></div>
+  <div class="a" id="NNULL" style="left:858px;top:322px"><span class="pill g" style="font-size:32px">NULL ✅</span></div>
+  <div class="a c h2" id="N1" style="top:500px">Cycle wali list 👇</div>
+  <div class="a" id="NINF" style="left:620px;top:1210px"><span class="pill r" style="font-size:44px">∞ infinite loop!</span></div>
+</div>
+
+<!-- S3 HashSet -->
+<div class="scene" id="S3">
+  <div class="a c" id="B0" style="top:190px"><span class="pill pu" style="font-size:44px">💡 Idea 1: HashSet</span></div>
+  <div class="a" id="B1" style="left:60px;top:330px;width:960px"><div class="card" style="border-color:#a855f7;font-size:40px;font-weight:800">
+     <div style="color:#cbd5e1;font-size:32px;margin-bottom:12px">visited = { }</div><div id="bset" class="mono" style="font-size:52px;font-weight:900;min-height:70px"></div></div></div>
+  <div class="a c" id="B2" style="top:600px"><span class="pill g" style="font-size:40px">3 dobara mila ➜ CYCLE ✅</span></div>
+  <div class="a c" id="B3" style="top:720px"><span class="pill or" style="font-size:44px">😬 Extra space: O(n)</span></div>
+  <div class="a" id="B4" style="left:90px;top:850px;width:900px"><div class="card" style="border-color:#fb7185;font-size:44px;font-weight:900;text-align:center">🧑‍💼 Interviewer: "<r>Bina extra space</r> ke karo!"</div></div>
+  <div class="a c" id="B5" style="top:1060px"><span class="stamp">REJECTED ❌</span></div>
+</div>
+
+<!-- S4 Floyd -->
+<div class="scene" id="S4">
+  <div class="a c" id="F0" style="top:180px"><span class="pill g" style="font-size:42px">✅ BEST: Floyd's Algorithm</span></div>
+  <div class="a c h2" id="F00" style="top:285px;font-size:48px">🐢 Kachua &amp; Khargosh 🐇</div>
+  <div class="a c" id="F1" style="top:390px"><span class="pill cy" style="font-size:36px">🐢 slow +1</span>&nbsp;&nbsp;<span class="pill or" style="font-size:36px">🐇 fast +2</span></div>
+  <div class="a c" id="FNC" style="top:1300px"><span class="pill dk" style="font-size:36px">No cycle? 🐇 ➜ NULL ➜ khatam ✅</span></div>
+  <div class="a c" id="FST" style="top:1300px"><span class="pill dk mono" id="fstt" style="font-size:38px">step 1</span></div>
+  <div class="a c" id="FM" style="top:1400px"><span class="pill g" style="font-size:46px">💥 Dono MILE ➜ CYCLE! ✅</span></div>
+  <div class="a c" id="FC" style="top:1390px"><span class="chip" style="background:#0e7490;font-size:44px">⏱ O(n)</span><span class="chip" style="background:#15803d;font-size:44px">💾 O(1)</span></div>
+</div>
+
+<!-- S5 twist -->
+<div class="scene" id="S5">
+  <div class="a c" id="W0" style="top:180px"><span class="pill pu" style="font-size:42px">🤔 INTERVIEWER KA TWIST</span></div>
+  <div class="a c h2" id="W1" style="top:280px;font-size:50px">Cycle <y>shuru kahan</y> se? 🎯</div>
+  <div class="a c" id="W2" style="top:390px"><span class="pill cy" style="font-size:34px">🐢 ➜ head</span>&nbsp;&nbsp;<span class="pill dk" style="font-size:34px">dono +1 step</span></div>
+  <div class="a c" id="W3" style="top:1300px"><span class="pill g" style="font-size:46px">🎯 Cycle START = 3</span></div>
+  <div class="a c" id="W4" style="top:1410px"><span class="pill dk" style="font-size:36px">💬 Kyun kaam karta hai? Comment karo!</span></div>
+</div>
+
+<!-- S6 summary + CTA -->
+<div class="scene" id="S6">
+  <div class="a c h1" id="E1" style="top:230px;color:#fde047;font-size:58px">EK LINE MEIN YAAD RAKHO 🧠</div>
+  <div class="a c" id="E2" style="top:370px"><span class="chip" style="background:#0e7490;font-size:44px">🐢 +1</span><span class="chip" style="background:#9a3412;font-size:44px">🐇 +2</span><span class="chip" style="background:#15803d;font-size:44px">mile = 🔁</span></div>
+  <div class="a" id="E5" style="left:190px;top:620px;width:700px;height:380px;border-radius:30px;background:rgba(12,16,45,.92);border:4px solid #f472b6;box-shadow:0 0 50px rgba(244,114,182,.4)">
+    <div style="position:absolute;left:290px;top:26px;width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#f472b6);display:flex;align-items:center;justify-content:center;font-size:50px;font-weight:900;border:4px solid #fff">PP</div>
+    <div style="position:absolute;width:100%;top:165px;text-align:center;font-size:46px;font-weight:900">@pretestpassed.codes</div>
+    <div id="fbtn" style="position:absolute;left:180px;top:255px;width:340px;height:90px;border-radius:20px;background:#3b82f6;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:900">FOLLOW</div></div>
+  <div class="a" id="E6" style="left:0;top:0;font-size:110px">👆</div>
+  <div class="a c" id="E7" style="top:1060px"><span class="pill dk" style="font-size:38px">❤️ Like • 🔁 Share • 🔖 Save</span></div>
+  <div id="conf"></div>
+</div>
+
+<div id="cap"><span class="a" id="capw" style="position:relative;display:inline-block"><span id="capt"></span></span></div>
+<div id="prog"></div>
+<div id="wm">@pretestpassed.codes</div>
+</div>
+<script>
+const TL=window.TL, K=TL.K, CAPS=TL.CAPS, END=TL.END;
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const eo=x=>1-Math.pow(1-clamp(x),3);
+const eio=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const back=x=>{x=clamp(x);const c1=2.0,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const CUES=[]; const cue=(t,n,g)=>CUES.push([+t.toFixed(3),n,g||1]);
+function set(el,o,x,y,s,r){el=typeof el=='string'?$(el):el;el.style.setProperty('--o',o);el.style.setProperty('--x',(x||0)+'px');el.style.setProperty('--y',(y||0)+'px');el.style.setProperty('--s',s==null?1:s);el.style.setProperty('--r',(r||0)+'deg')}
+function pop(el,t,t0,d){d=d||.4;const p=clamp((t-t0)/d);set(el,t<t0?0:clamp(p*2.5),0,0,t<t0?.4:.4+.6*back(p))}
+function rise(el,t,t0,d){d=d||.45;const p=clamp((t-t0)/d);set(el,t<t0?0:clamp(p*2),0,50*(1-eo(p)),1)}
+function vis(t,a,b,f){f=f||.15;return Math.min(clamp((t-a)/f),clamp((b-t)/f))}
+function rnd(i,k){const x=Math.sin(i*12.9898+k*78.233)*43758.5453;return x-Math.floor(x)}
+const NS='http://www.w3.org/2000/svg';
+function mk(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e}
+
+// ---------- rho geometry ----------
+const G={cx:700,cy:860,R:230,ty:860,x1:120,x2:300,nr:62};
+const ANG={3:180,4:270,5:360,6:450};
+function npos(n){if(n==1)return[G.x1,G.ty];if(n==2)return[G.x2,G.ty];const a=ANG[n]*Math.PI/180;return[G.cx+G.R*Math.cos(a),G.cy+G.R*Math.sin(a)]}
+const NEXT={1:2,2:3,3:4,4:5,5:6,6:3};
+function edgePos(a,p){const b=NEXT[a];if(a<=2){const A=npos(a),B=npos(b);return[A[0]+(B[0]-A[0])*p,A[1]+(B[1]-A[1])*p]}
+ let a0=ANG[a],a1=a==6?540:ANG[b];const an=(a0+(a1-a0)*p)*Math.PI/180;return[G.cx+G.R*Math.cos(an),G.cy+G.R*Math.sin(an)]}
+// walk k edges from node a with progress u in [0,k]
+function walk(a,u){let n=a;while(u>=1){n=NEXT[n];u-=1}return u<=0?npos(n):edgePos(n,u)}
+(function buildRho(){const s=$('rho');
+ mk('defs',{},s).innerHTML='<marker id="ma" viewBox="0 0 10 10" markerWidth="5" markerHeight="5" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#94a3b8"/></marker><filter id="gl"><feGaussianBlur stdDeviation="8"/></filter>';
+ const g=mk('g',{id:'rhog'},s);
+ mk('circle',{cx:G.cx,cy:G.cy,r:G.R,fill:'none',stroke:'rgba(244,63,94,.18)','stroke-width':60,id:'track'},g);
+ const off=G.nr+6;
+ mk('line',{x1:G.x1+off,y1:G.ty,x2:G.x2-off-8,y2:G.ty,stroke:'#94a3b8','stroke-width':7,'marker-end':'url(#ma)'},g);
+ mk('line',{x1:G.x2+off,y1:G.ty,x2:G.cx-G.R-off-8,y2:G.ty,stroke:'#94a3b8','stroke-width':7,'marker-end':'url(#ma)'},g);
+ const da=(off+6)/G.R*180/Math.PI;
+ for(const [a,b] of [[180,270],[270,360],[360,450],[450,540]]){const A=(a+da)*Math.PI/180,B=(b-da-3)*Math.PI/180;
+   mk('path',{d:`M${G.cx+G.R*Math.cos(A)} ${G.cy+G.R*Math.sin(A)} A${G.R} ${G.R} 0 0 1 ${G.cx+G.R*Math.cos(B)} ${G.cy+G.R*Math.sin(B)}`,fill:'none',stroke:b==540?'#f43f5e':'#94a3b8','stroke-width':b==540?9:7,'marker-end':'url(#ma)',id:b==540?'backedge':''},g)}
+ mk('circle',{id:'hl',cx:0,cy:0,r:G.nr+16,fill:'none',stroke:'#fde047','stroke-width':8,opacity:0},g);
+ for(let n=1;n<=6;n++){const [x,y]=npos(n);mk('circle',{id:'nc'+n,cx:x,cy:y,r:G.nr,fill:'#1e1b4b',stroke:'#22d3ee','stroke-width':6},g);
+   const tx=mk('text',{x:x,y:y+20,'text-anchor':'middle','font-size':56,'font-weight':900,fill:'#fff','font-family':'Inter'},g);tx.textContent=n}
+ mk('text',{id:'headlbl',x:G.x1,y:G.ty-90,'text-anchor':'middle','font-size':30,'font-weight':900,fill:'#94a3b8','font-family':'Inter'},g).textContent='head';
+ mk('circle',{id:'dot',cx:0,cy:0,r:22,fill:'#fde047',filter:'',opacity:0},g);
+ $('toks').innerHTML='<div class="tok" id="tS">🐢<b style="top:-26px;background:#0e7490">slow</b></div><div class="tok" id="tF">🐇<b style="bottom:-26px;background:#c2410c">fast</b></div>';
+})();
+function rho(o,dx,dy,s){const g=$('rhog');g.setAttribute('transform',`translate(${dx} ${dy}) translate(540 860) scale(${s}) translate(-540 -860)`);$('rho').style.opacity=o}
+function rhoXY(p,dx,dy,s){return[(p[0]-540)*s+540+dx,(p[1]-860)*s+860+dy]}
+let RT={dx:0,dy:0,s:1};
+function tok(id,o,p,yo){const q=rhoXY(p,RT.dx,RT.dy,RT.s);set(id,o,q[0],q[1]+yo*RT.s,RT.s)}
+function nodeCol(n,col){$('nc'+n).setAttribute('stroke',col)}
+
+// normal list (S2)
+(function(){const s=$('nsvg');let h='';for(let i=1;i<=4;i++){const x=100+(i-1)*200;h+=`<circle id="mm${i}" cx="${x}" cy="350" r="56" fill="#1e1b4b" stroke="#4ade80" stroke-width="6"/><text x="${x}" y="370" text-anchor="middle" font-size="52" font-weight="900" fill="#fff" font-family="Inter">${i}</text>`;
+ h+=`<line x1="${x+62}" y1="350" x2="${x+145}" y2="350" stroke="#94a3b8" stroke-width="7" marker-end="url(#ma)"/>`}s.innerHTML=h})();
+
+// confetti
+(function(){let ch='';for(let i=0;i<90;i++){const col=['#22d3ee','#f472b6','#fde047','#4ade80','#a855f7','#fb923c'][i%6];ch+=`<div class="a" id="cf${i}" style="left:0;top:0;width:${14+(i*7)%12}px;height:${8+(i*5)%10}px;background:${col};border-radius:3px"></div>`}$('conf').innerHTML=ch})();
+
+// race schedule
+const HK=TL.HK, ENT=TL.ENT, FALL=TL.FALL;
+const RA=K.race, RB=K.mile; const RD=(RB-RA)/4;   // 4 steps, meet at node 5
+const SLOW=[1,2,3,4,5], FAST=[1,3,5,3,5];
+const TW0=K.ekek, TW1=K.start, TD=(TW1-TW0)/2;    // twist: slow 1->3, fast 5->3
+
+(function(){
+ cue(0.05,'whoosh',.3); cue(ENT,'pop',.5); cue(FALL+0.05,'thump',.8); cue(FALL+0.12,'buzz',.35); cue(HK,'boom',.5);
+ cue(K.loop,'buzz',.5); cue(K.amazon-0.05,'whoosh',.5); cue(K.amazon,'slap',.6); cue(K.sde,'pop',.7); cue(K.q,'pop',.8); cue(K.ctc,'cash',.9);
+ cue(K.normal,'whoosh',.4); cue(K.null,'ding',.6); cue(K.cycle,'whoosh',.4); cue(K.infinite,'buzz',.5);
+ cue(K.hashset,'whoosh',.4); for(let i=0;i<6;i++) cue(K.hashset+0.5+i*0.28,'type',.6); cue(K.dobara,'ding',.7); cue(K.space,'buzz',.5); cue(K.bina,'slap',.5); cue(K.rejected,'boom',.7); cue(K.rejected+0.05,'buzz',.6);
+ cue(K.best,'success',.7); cue(K.kachua,'pop',.8); cue(K.slow1,'pop',.7); cue(K.fast2,'pop',.7); cue(K.nocycle,'whoosh',.4);
+ for(let i=0;i<4;i++){cue(RA+i*RD,'whoosh',.35)} cue(RB,'success',.9); cue(RB+0.1,'sparkle',.7);
+ cue(K.time,'pop'); cue(K.space1,'pop');
+ if(K.twist<K.yaad-1){cue(K.twist,'riser',.4); cue(K.twist+0.5,'slap',.6);} cue(K.head,'whoosh',.5); cue(TW0,'whoosh',.3); cue(TW0+TD,'whoosh',.3); cue(TW1,'ding',.8); cue(K.comment,'pop',.6);
+ cue(K.yaad,'pop'); cue(K.l1,'pop'); cue(K.l2,'pop'); cue(K.l3,'pop'); cue(K.follow+0.3,'click'); cue(K.follow+0.35,'sparkle',.9);
+})();
+
+window.render=function(t){
+ $('prog').style.width=(1080*clamp(t/END))+'px';
+ const bg=$('bg');bg.style.setProperty('--b1x',(20+8*Math.sin(t*.25))+'%');bg.style.setProperty('--b1y',(75+6*Math.cos(t*.2))+'%');bg.style.setProperty('--b2x',(82+6*Math.cos(t*.3))+'%');bg.style.setProperty('--b2y',(28+8*Math.sin(t*.22))+'%');
+ const hook=t<HK; bg.style.clipPath=hook?"path(evenodd,'M0 0 H1080 V1920 H0 Z M40 300 H1040 V1300 H40 Z')":'none'; set('mframe',hook?1:0);
+ const W={HC:[-1,HK],H:[HK,K.amazon-0.1],S1:[K.amazon-0.1,K.normal-0.1],S2:[K.normal-0.1,K.hashset-0.1],S3:[K.hashset-0.1,K.best-0.1],S4:[K.best-0.1,K.twist-0.1],S5:[K.twist-0.1,K.yaad-0.1],S6:[K.yaad-0.1,END+1]};
+ for(const id in W){const o=vis(t,W[id][0],W[id][1],.12);const el=$(id);el.style.opacity=o;el.style.display=o>0?'block':'none'}
+ // rho placement per scene
+ let ro=0; RT={dx:0,dy:0,s:1};
+ if(t<HK){ro=1;RT={dx:-225,dy:740,s:0.55}}
+ else if(t<K.amazon-0.1){ro=vis(t,HK,K.amazon-0.1,.15);RT={dx:-10,dy:-80,s:1}}
+ else if(t>=K.cycle-0.2&&t<K.hashset-0.1){ro=vis(t,K.cycle-0.2,K.hashset-0.1,.2);RT={dx:-10,dy:60,s:0.85}}
+ else if(t>=K.best-0.1&&t<K.yaad-0.1){ro=vis(t,K.best-0.1,K.yaad-0.1,.15);RT={dx:-10,dy:0,s:1}}
+ rho(ro,RT.dx,RT.dy,RT.s);
+ for(let n=1;n<=6;n++) nodeCol(n,'#22d3ee'); $('hl').setAttribute('opacity',0); $('track').setAttribute('stroke','rgba(244,63,94,.18)');
+ let dotOn=false, sO=0,fO=0, sP=npos(1), fP=npos(1);
+ // HOOK: infinite traversal
+ if(t<HK){const tt=Math.min(t,FALL);let u=clamp((tt-0.2)/(ENT-0.2))*2;if(tt>ENT)u=2+(tt-ENT)*3.6;const k=u>2?Math.floor((u-2)/4)+1:0;
+  const p=walk(1,u);$('dot').setAttribute('cx',p[0]);$('dot').setAttribute('cy',p[1]);dotOn=true;
+  $('tl2c').textContent='chakkar #'+k+' 🌀';$('backedge').setAttribute('stroke-width',t>ENT?9+6*Math.abs(Math.sin(t*5)):9);$('tdot2').style.opacity=(Math.floor(t*3)%2)?1:.3;
+  if(t>=FALL){$('track').setAttribute('stroke','rgba(244,63,94,.45)')}}
+ else if(t<K.amazon){const sp=2.6,u=Math.max(0,t-HK-0.3)*sp;let n=1,uu=u,seq=[1];while(uu>=1){n=NEXT[n];uu-=1;seq.push(n)}
+  const p=uu>0?edgePos(n,uu):npos(n);$('dot').setAttribute('cx',p[0]);$('dot').setAttribute('cy',p[1]);dotOn=t>0.3;
+  nodeCol(n,'#fde047');$('track').setAttribute('stroke',`rgba(244,63,94,${.15+.15*Math.sin(t*8)})`);
+  $('hvis').textContent=seq.slice(-11).join(' → ')+' …';
+  $('tcount').textContent='steps: '+Math.floor(Math.pow(Math.max(0,t-HK-0.3),2.2)*900).toLocaleString('en-IN')+' ⏳ ∞';}
+ set('TERM',t<HK+0.2?0:clamp((t-HK-0.2)/.3)); set('HV',t<HK+0.5?0:1); $('tdot').style.opacity=(Math.floor(t*3)%2)?1:.3;
+ pop('H1',t,HK+0.05); pop('H2',t,K.loop+1.0);
+ pop('HT1',t,0.15); pop('HT2',t,0.9); set('TERM2',t<0.3?0:clamp((t-0.3)/.3));
+ {const k=t>ENT?Math.floor((t-ENT)*0.9)+1:0; set('HLP',t>=0.3&&t<ENT?1:0); set('HLJ',t>=ENT&&t<FALL?1:0); pop('HLF',t,FALL+0.05);
+  $('hljt').textContent='🌀 Ghoomar ghoomar... chakkar #'+k;}
+ // S1
+ pop('A1',t,K.amazon); pop('A2',t,K.sde-0.1); rise('A3',t,K.q-0.1); pop('A4',t,K.ctc-0.1); $('ctcn').textContent=Math.round(44*eo((t-K.ctc+0.1)/0.9));
+ // S2
+ rise('N0',t,K.normal-0.05); {const s=$('nsvg');s.style.opacity=t>=K.normal?1:0;for(let i=1;i<=4;i++) $('mm'+i).style.opacity=t>=K.normal+0.15*i?1:0.1} pop('NNULL',t,K.null-0.1);
+ rise('N1',t,K.cycle-0.1); pop('NINF',t,K.infinite-0.1);
+ if(t>=K.cycle&&t<K.hashset){const u=(t-K.cycle)*3.2;const p=walk(1,u);$('dot').setAttribute('cx',p[0]);$('dot').setAttribute('cy',p[1]);dotOn=true;
+   $('backedge').setAttribute('stroke-width',9+5*Math.abs(Math.sin(t*6)))}
+ $('dot').setAttribute('opacity',dotOn?1:0);
+ // S3
+ pop('B0',t,K.hashset-0.05); rise('B1',t,K.hashset+0.2);
+ {const items=[1,2,3,4,5,6];let k=0;for(let i=0;i<6;i++) if(t>=K.hashset+0.5+i*0.28) k=i+1;let h=items.slice(0,k).map(x=>`<span style="color:#22d3ee">${x}</span>`).join(', ');
+  if(t>=K.dobara-0.1) h+=`, <span style="color:#f43f5e;text-decoration:underline">3 ❗</span>`; $('bset').innerHTML='{ '+h+' }'}
+ pop('B2',t,K.dobara-0.1); pop('B3',t,K.space-0.1); rise('B4',t,K.bina-0.1);
+ {const p=clamp((t-K.rejected+0.05)/0.25);set('B5',t<K.rejected-0.05?0:1,0,0,2.2-1.2*eo(p),-8)}
+ // S4 Floyd
+ pop('F0',t,K.best-0.05); pop('F00',t,K.kachua-0.1); pop('F1',t,K.slow1-0.1);
+ set('FNC',t>=K.nocycle-0.1&&t<RA-0.1?1:0);
+ if(t>=K.slow1-0.2&&t<K.twist){sO=1;fO=t>=K.fast2-0.2?1:0;
+  let i=Math.floor((t-RA)/RD);if(t<RA){sP=npos(1);fP=npos(1)}else if(i>=4){sP=npos(5);fP=npos(5)}else{const p=eio((t-RA-i*RD)/(RD*0.8));sP=walk(SLOW[i],p);fP=walk(FAST[i],2*p)}
+  if(t>=RA){const st=Math.min(4,Math.floor((t-RA)/RD)+1);$('fstt').innerHTML=`step ${st}: 🐢 ${SLOW[Math.min(st,4)]}&nbsp;&nbsp;🐇 ${FAST[Math.min(st,4)]}`}
+  set('FST',t>=RA-0.05&&t<RB+0.1?1:0);
+  if(t>=RB){$('hl').setAttribute('opacity',1);const q=npos(5);$('hl').setAttribute('cx',q[0]);$('hl').setAttribute('cy',q[1]);$('hl').setAttribute('r',G.nr+16+6*Math.sin(t*10));nodeCol(5,'#4ade80')}}
+ pop('FM',t,RB); if(t>K.time-0.15) set('FM',0); pop('FC',t,K.time-0.1);
+ {const ch=$('FC').querySelectorAll('.chip');ch[1].style.opacity=t>=K.space1-0.1?1:0.15}
+ // S5 twist
+ pop('W0',t,K.twist); pop('W1',t,K.twist+0.6); pop('W2',t,K.head-0.1);
+ if(t>=K.twist-0.1&&t<K.yaad){sO=1;fO=1;
+   if(t<K.head){sP=npos(5);fP=npos(5)}
+   else if(t<TW0){const p=eio((t-K.head)/0.6);const A=npos(5),B=npos(1);sP=[A[0]+(B[0]-A[0])*p,A[1]+(B[1]-A[1])*p-160*Math.sin(Math.PI*p)];fP=npos(5)}
+   else if(t<TW1){const i=Math.floor((t-TW0)/TD),p=eio((t-TW0-i*TD)/(TD*0.8));sP=walk([1,2][i],p);fP=walk([5,6][i],p)}
+   else{sP=npos(3);fP=npos(3);$('hl').setAttribute('opacity',1);const q=npos(3);$('hl').setAttribute('cx',q[0]);$('hl').setAttribute('cy',q[1]);$('hl').setAttribute('r',G.nr+16+6*Math.sin(t*10));nodeCol(3,'#4ade80')}}
+ pop('W3',t,TW1); pop('W4',t,K.comment-0.1);
+ tok('tS',sO*ro,sP,-95); tok('tF',fO*ro,fP,95);
+ // S6
+ pop('E1',t,K.yaad-0.05);
+ {const el=$('E2');const p=clamp((t-K.l1+0.1)/.3);set(el,t<K.l1-0.1?0:clamp(p*2.5),0,0,.5+.5*back(p));const ch=el.querySelectorAll('.chip');ch.forEach((c,i)=>c.style.opacity=t>=[K.l1,K.l2,K.l3][i]-0.1?1:0.15)}
+ pop('E5',t,K.aise-0.2); rise('E7',t,K.follow+0.8);
+ {const tc=K.follow+0.3;const p=eo((t-tc+0.9)/0.8);const x=900+(560-900)*p,y=1260+(940-1260)*p;const press=t>tc&&t<tc+.2?.85:1;
+  set('E6',clamp((t-tc+1)/.3),x-60,y-60,press);
+  const b=$('fbtn');if(t>tc){b.textContent='FOLLOWING ✓';b.style.background='#475569'}else{b.textContent='FOLLOW';b.style.background='#3b82f6'}
+  for(let i=0;i<90;i++){const dt=t-tc;const el=$('cf'+i);if(dt<0){set(el,0);continue}
+   const ang=rnd(i,1)*Math.PI*2, sp=500+rnd(i,2)*900;const x=540+Math.cos(ang)*sp*dt*0.8, y=800+Math.sin(ang)*sp*dt*0.7-500*dt+700*dt*dt;
+   set(el,clamp(3-dt),x,y,1,dt*400*(rnd(i,3)-.5))}}
+ // captions
+ {let cur=null;for(let i=0;i<CAPS.length;i++){const s0=CAPS[i][0],e0=i+1<CAPS.length?Math.min(CAPS[i+1][0],s0+3.4):s0+2.6;if(t>=s0-0.05&&t<e0) cur=[i,s0,e0]}
+  if(cur){$('capt').innerHTML=CAPS[cur[0]][1];const p=clamp((t-cur[1]+0.05)/.18);set('capw',Math.min(clamp(p*2),clamp((cur[2]-t)/.12)),0,14*(1-eo(p)),.9+.1*back(p))} else set('capw',0)}
+ $('cap').style.top=t>=K.yaad-0.1?'1200px':'1560px';
+};
+window.CUES=CUES; window.render(0);
+</script></body></html>
