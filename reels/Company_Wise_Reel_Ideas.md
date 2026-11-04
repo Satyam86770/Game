@@ -6,6 +6,8 @@ Each idea follows the viral formula: movie/meme clip with the concept running li
 - **Questions:** these are commonly reported in public interview experiences (GfG Interview Experiences, LeetCode Discuss, TUF / Striver sheets). Before making a reel, open 1–2 interview-experience posts for that company (as was done for Oracle, LeetCode discuss post 7553062) and mention the role and round from that post.
 - **CTC:** figures are approximate fresher CTC for India, as publicly reported. Write "~" on screen and cross-check on LeetCode Discuss compensation posts or AmbitionBox.
 
+> Amazon SDE-1 CTC is from a LeetCode Discuss offer post (Bangalore, Feb 2025): base ₹19.17L, sign-on ₹6.47L (Yr 1) / ₹5.18L (Yr 2), relocation ₹1.5L, RSU ₹15.56L over 4 yrs, total ~₹25L (Yr 1).
+
 ## Product companies (high CTC = strong hook)
 
 | # | Company • Role | ~CTC (fresher) | Question (60-sec size) | Topic | Hook clip idea (scene = concept) |
@@ -13,10 +15,10 @@ Each idea follows the viral formula: movie/meme clip with the concept running li
 | 1 | Oracle • Applications Dev-1 | ~18 LPA | DELETE vs TRUNCATE vs DROP | SQL | Hera Pheri "Utha le re baba" → rows vanish one by one (DELETE) vs table blank (TRUNCATE) vs table gone (DROP) |
 | 2 | Oracle • Server Tech | ~18 LPA | What is a deadlock? 4 conditions | OS | Narrow-bridge / two cars facing each other scene → both stuck, each waiting for the other |
 | 3 | Oracle | ~18 LPA | Primary key vs Unique key | DBMS | Aadhaar card scene: one per person, never NULL |
-| 4 | Amazon • SDE-1 | ~44 LPA | Detect a cycle in a linked list (Floyd's: slow & fast pointer) | DSA | Race / chase scene on a circular track → fast runner laps slow runner = cycle |
-| 5 | Amazon • SDE-1 | ~44 LPA | Find the middle of a linked list in one pass | DSA | Tortoise & hare: when hare reaches the end, tortoise is in the middle |
-| 6 | Amazon | ~44 LPA | Two Sum (HashMap, O(n)) | DSA | Shaadi matchmaking scene → "jodi" found in one pass with a register (hash map) |
-| 7 | Amazon | ~44 LPA | Kth largest element (min-heap of size k) | DSA | Talent show top-3 podium; only the top k are kept |
+| 4 | Amazon • SDE-1 | ~25 LPA (Yr 1; base ₹19.17L) | Detect a cycle in a linked list (Floyd's: slow & fast pointer) | DSA | Race / chase scene on a circular track → fast runner laps slow runner = cycle |
+| 5 | Amazon • SDE-1 | ~25 LPA (Yr 1) | Find the middle of a linked list in one pass | DSA | Tortoise & hare: when hare reaches the end, tortoise is in the middle |
+| 6 | Amazon | ~25 LPA (Yr 1) | Two Sum (HashMap, O(n)) | DSA | Shaadi matchmaking scene → "jodi" found in one pass with a register (hash map) |
+| 7 | Amazon | ~25 LPA (Yr 1) | Kth largest element (min-heap of size k) | DSA | Talent show top-3 podium; only the top k are kept |
 | 8 | Microsoft • SDE | ~50 LPA | How does HashMap work internally? (hashing, buckets, collision) | Java/DSA | Hotel room keys / locker-room scene: room number = hash, two guests in same room = collision |
 | 9 | Microsoft | ~50 LPA | LRU Cache (HashMap + doubly linked list) | DSA/Design | "Purana jaane do" scene: the least-used item gets thrown out when the bag is full |
 | 10 | Microsoft | ~50 LPA | Method overloading vs overriding | OOPs | Same dialogue said by father and son differently (overriding) vs one person, different contexts (overloading) |
@@ -57,7 +59,7 @@ Each idea follows the viral formula: movie/meme clip with the concept running li
 | 40 | Capgemini | ~4–7.5 LPA | What is an API? | Basics | Waiter between customer and kitchen |
 
 ## Top 5 picks to make first (strong clip match + high CTC)
-1. **Amazon: cycle in a linked list.** Circular race chase; the fast pointer laps the slow one live on screen.
+1. **Amazon: cycle in a linked list.** (done: Ghoomar hook) Circular race chase; the fast pointer laps the slow one live on screen.
 2. **Microsoft: HashMap internals.** Hotel room allotment, with a collision shown live.
 3. **Goldman Sachs: 25 horses puzzle.** Race clip with a live bracket. Puzzles performed well before.
 4. **Cisco: TCP vs UDP.** Natural follow-up to the handshake reel.
