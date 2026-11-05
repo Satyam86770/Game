@@ -1,0 +1,34 @@
+[
+ [
+  "c1",
+  "Bank ki tijori chori ho gayi! CCTV mein poore chaubees ghante ki footage hai... yaani chaubees guna saath guna saath, chhiyaasi hazaar chaar sau seconds!"
+ ],
+ [
+  "c2",
+  "Ek-ek second dekhoge, toh ghanton lag jaayenge. Par ACP ne sirf satrah checks mein chor pakad liya! Kaise?"
+ ],
+ [
+  "c3",
+  "Ye trick hai binary search, jo Amazon jaise interviews ka favourite hai. Aur package? Pehle saal ka lagbhag pachchees lakh!"
+ ],
+ [
+  "c4",
+  "Footage ko ek array ki tarah socho: index zero pe zero second, aur last index pe chhiyaasi hazaar chaar sau. Middle index, taintalis hazaar do sau... yaani dopahar baarah baje. Tijori hai! Toh zero se mid tak dekhna hi nahi... ab low ho gaya, mid plus one."
+ ],
+ [
+  "c5",
+  "Naya mid, chausath hazaar aath sau, yaani shaam chhe baje... tijori gayab! Toh high ho gaya mid. Phir teen baje... gayab. Har check pe array aadha!"
+ ],
+ [
+  "c6",
+  "Chhiyaasi hazaar, taintalis hazaar, ikkis hazaar... aur satrahve check pe: low aur high mil gaye, do baj ke saintees minute, terah second! Chor pakda gaya!"
+ ],
+ [
+  "c7",
+  "Har baar array aadha hua, isliye time complexity, O of log n! Agar ek-ek index traverse karte, toh O of n... yaani chhiyaasi hazaar checks!"
+ ],
+ [
+  "c8",
+  "Ek line mein yaad rakho: jahan jawab pehle haan, phir na ho, wahan binary search! Comment karo, tum ise aur kahan lagaoge? Aur pretestpassed dot codes ko follow karo!"
+ ]
+]

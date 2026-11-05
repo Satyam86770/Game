@@ -1,4 +1,4 @@
-# CCTV Binary Search: array version (v2, ~95s)
+# CCTV Binary Search: array version (v2, ~80s, Orus voice)
 
 Change requested by the user: explain the search as an ARRAY.
 - arr[i] = the i-th second's frame. arr[0] = 0 s (00:00:00), arr[86,400] = 86,400 s (24:00), so n = 86,401.
@@ -20,4 +20,6 @@ Steps: 12:00 ✅ → 18:00 ❌ → 15:00 ❌ → 13:30 ✅ → 14:15 ✅ → 14:
 
 **Complexity scene:** "Har check: array ÷ 2" (86,401 → 43,200 → … → 1, 17 times), giving O(log n). It is compared with "Ek-ek index: 86,400 checks = O(n)".
 
-**VO:** c1–c3 and c8 are reused from v1. c4–c7 are new (Algieba): the array framing, mid+1, high = mid, the 14:37:13 catch, and O(log n) vs O(n).
+**VO:** Gemini TTS **Orus**, the same voice as the viral Indexing reel, with the hype prompt. The user asked for it. Script: `script_all.json`.
+- c1 and c2 were made with gemini-3.1.
+- c3–c8 were made with gemini-3.8-flash(-lite) because the daily quota was exhausted. Those models read the prompt aloud first, so the first ~4–5 s were trimmed.
