@@ -1,0 +1,6 @@
+[
+ ["c4","Footage ko ek array ki tarah socho: index zero pe zero second, aur last index pe chhiyaasi hazaar chaar sau. Middle index, taintalis hazaar do sau... yaani dopahar baarah baje. Tijori hai! Toh zero se mid tak dekhna hi nahi... ab low ho gaya, mid plus one."],
+ ["c5","Naya mid, chausath hazaar aath sau, yaani shaam chhe baje... tijori gayab! Toh high ho gaya mid. Phir teen baje... gayab. Har check pe array aadha!"],
+ ["c6","Chhiyaasi hazaar, taintalis hazaar, ikkis hazaar... aur satrahve check pe: low aur high mil gaye, do baj ke saintees minute, terah second! Chor pakda gaya!"],
+ ["c7","Har baar array aadha hua, isliye time complexity, O of log n! Agar ek-ek index traverse karte, toh O of n... yaani chhiyaasi hazaar checks!"]
+]
