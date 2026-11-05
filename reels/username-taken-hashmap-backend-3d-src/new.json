@@ -1,0 +1,6 @@
+[
+ ["n3","Par Instagram har username ko line by line check nahi karta! Warna do sau crore users ek-ek karke... bahut zyada time lag jaata!"],
+ ["n4","Toh karta kya hai? Backend mein sabhi usernames, ek HashMap jaisi table mein pehle se rakhe hote hain. Har naam ka ek hash nikalta hai: rahul ka hash saat, rohit ka hash do, priya ka hash chaar... aur har naam apne hash wale bucket mein baith jaata hai."],
+ ["n5","Ab naya user aaya, aur usne type kiya: rahul. Instagram usi waqt, run time pe, rahul ka hash nikaalta hai... saat! Seedha bucket saat check kiya... rahul pehle se present hai! Toh, already taken!"],
+ ["n6","Aur agar type kiya, rahul twenty six? Hash aaya paanch. Bucket paanch khaali hai... toh username available!"]
+]
