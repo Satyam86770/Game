@@ -26,6 +26,7 @@ Public plays (Nov 2026):
 | Cycle detection | 3.2K |
 | GROUP BY vs Window (Kokilaben) | 961 |
 | 3-way handshake | 199 |
+| HashMap / username-taken 3D (83s, no human or movie clip, Insta-logo first frame) | 309 (day 1) |
 
 The viral Indexing reel used the SAME template, AI voice (Orus) and length as the flops, so those are NOT the cause.
 What actually differed:
@@ -41,4 +42,7 @@ What actually differed:
 5. **Company + CTC card is the SECOND hook (≈3–8s), never the first.** Use reported CTC with "~" and a source.
 6. **Keep it focused: one idea and one payoff.** Aim for 30–60s, and drop detours (extra approaches, twists) unless essential.
 7. **Posting:** at most 1 reel per day, never 2 the same day. Never use clips carrying another creator's watermark.
-8. **Self-check before rendering:** in the first 2s, does a non-coder see a result and ask "kaise?"? If not, redo the hook.
+8. **Every reel that went viral had a human face or an iconic movie clip in the very first second**
+   (binary-search duo, Google office, Rajinikanth, creator face). Pure animation reels (Auth, HashMap 3D) flopped even with a good hook.
+   Open on a face or iconic clip, not on a logo or animation. Use Instagram Trial Reels to test 2–3 hook variants before a full post.
+9. **Self-check before rendering:** in the first 2s, does a non-coder see a result and ask "kaise?"? If not, redo the hook.
