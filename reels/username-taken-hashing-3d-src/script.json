@@ -1,0 +1,34 @@
+[
+ [
+  "u1",
+  "Instagram pe naya ID banane ke liye username daala... aur Instagram bola: already taken! Doosra try kiya... ye bhi taken! Par socho, Instagram pe do sau crore se bhi zyada users hain. Itni jaldi pata kaise chala?"
+ ],
+ [
+  "u2",
+  "Yahi concept Amazon ke SDE One interview mein poocha jaata hai: HashMap andar se kaise kaam karta hai? Aur package? Pehle saal ka lagbhag pachchees lakh!"
+ ],
+ [
+  "u3",
+  "Normal tareeka: list mein har user ek-ek karke check karo. Aarav? Nahi. Priya? Nahi. Rohan? Nahi... Do sau crore users, matlab har signup pe do sau crore checks! Server ka dhuaan nikal jaayega!"
+ ],
+ [
+  "u4",
+  "Smart tareeka: Hashing! Username ko hash function mein daalo. Wo ek number deta hai, bucket ka address. Rahul ka hash aaya chaar... seedha bucket chaar kholo... Rahul mil gaya! Taken!"
+ ],
+ [
+  "u5",
+  "Aur rahul underscore twenty twenty-six? Hash aaya saat. Bucket saat khaali hai... Available!"
+ ],
+ [
+  "u6",
+  "Do sau crore users... aur check sirf ek! Time, O of one!"
+ ],
+ [
+  "u7",
+  "Interviewer ka follow-up: do usernames ka hash same aa gaya toh? Ise kehte hain collision. Us bucket mein ek chhoti list bana do!"
+ ],
+ [
+  "u8",
+  "Ek line mein yaad rakho: hash nikaalo, seedha bucket pe jao, O of one! Comment karo, tumhara kaunsa username taken tha? Aur pretestpassed dot codes ko follow karo!"
+ ]
+]

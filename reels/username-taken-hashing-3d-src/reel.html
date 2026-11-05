@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#1a2244}
+body{font-family:'Inter','Noto Color Emoji',sans-serif;color:#fff}
+.mono{font-family:'DejaVu Sans Mono','Noto Color Emoji',monospace}
+#gl{position:absolute;left:0;top:0;width:1080px;height:1920px}
+#ov{position:absolute;inset:0}
+.a{position:absolute;opacity:var(--o,0);transform:translate(var(--x,0px),var(--y,0px)) scale(var(--s,1));transform-origin:center}
+.c{left:0;width:1080px;text-align:center}
+y{color:#ffd166}r{color:#ff6b8b}g{color:#5ee6a0}c{color:#5cd6ff}o{color:#ffa94d}
+#prog{position:absolute;left:0;top:0;height:8px;background:linear-gradient(90deg,#5cd6ff,#a78bfa,#ff6b8b)}
+#wm{position:absolute;top:92px;right:56px;font-size:28px;font-weight:700;color:rgba(255,255,255,.65)}
+/* reference-style label block */
+#lab{position:absolute;left:56px;top:150px}
+#lab .k{font-size:26px;font-weight:700;color:#cdd5f5;display:flex;align-items:center;gap:10px}
+#lab .k i{width:12px;height:12px;border-radius:50%;background:#5ee6a0;display:inline-block}
+#lab .s{font-size:22px;color:#8f9bc8;margin:4px 0 14px 22px}
+#lab .h{display:inline-block;background:rgba(14,20,48,.88);border-radius:16px;padding:14px 26px;font-size:48px;font-weight:900;box-shadow:0 8px 30px rgba(0,0,0,.35)}
+.card{border-radius:26px;background:rgba(14,20,48,.9);padding:24px 34px;box-shadow:0 10px 40px rgba(0,0,0,.4)}
+#cap{position:absolute;left:60px;width:960px;top:1640px;text-align:center}
+#capt{display:inline-block;padding:14px 28px;border-radius:18px;background:rgba(10,14,34,.82);font-size:44px;font-weight:800;line-height:1.25;max-width:960px}
+#fade{position:absolute;inset:0;background:#0b1024;opacity:0}
+</style></head>
+<body>
+<canvas id="gl" width="1080" height="1920"></canvas>
+<div id="ov">
+  <div id="lab" class="a"><div class="k"><i></i><span id="labk">Interview Question</span></div><div class="s" id="labs">Day 002 · The question</div><div class="h" id="labh"></div></div>
+
+  <!-- hook counter -->
+  <div class="a c" id="HC" style="top:1380px"><span class="card mono" style="font-size:44px;font-weight:900;display:inline-block">👥 <span id="hcn">0</span> users</span></div>
+  <div class="a c" id="HT" style="top:1270px"><span class="card mono" style="font-size:34px;display:inline-block;color:#ffd166;padding:12px 26px">⚡ checked in 0.001 sec</span></div>
+
+  <!-- company -->
+  <div class="a c" id="A1" style="top:420px"><span style="display:inline-block;background:#0f1530;color:#ff9900;font-size:96px;font-weight:900;letter-spacing:4px;padding:10px 50px;border-radius:18px;border:4px solid #ff9900;box-shadow:0 0 50px rgba(255,153,0,.45)">AMAZON</span></div>
+  <div class="a c" id="A2" style="top:590px"><span class="card" style="font-size:38px;font-weight:800;display:inline-block;padding:12px 30px">SDE-1 • Fresher 🎓</span></div>
+  <div class="a" id="A3" style="left:110px;top:710px;width:860px;text-align:center"><div class="card" style="font-size:46px;font-weight:900;line-height:1.35;border:3px solid #ffd166">❓ "<y>HashMap</y> andar se<br>kaise kaam karta hai?"</div></div>
+  <div class="a c" id="A4" style="top:970px"><span style="display:inline-block;padding:16px 44px;border-radius:24px;background:rgba(10,40,26,.92);border:4px solid #5ee6a0;font-size:68px;font-weight:900;color:#5ee6a0">💰 CTC: ~₹<span id="ctcn">25</span> LPA <span style="font-size:32px;color:#bbf7d0">(Year 1)</span></span></div>
+  <div class="a c" id="A5" style="top:1110px"><span class="card" style="font-size:32px;font-weight:700;display:inline-block;padding:12px 26px">Base <y>₹19.17L</y> • Sign-on <y>₹6.47L</y> (Yr 1) • RSU <y>₹15.56L</y>/4y</span></div>
+  <div class="a c" id="A6" style="top:1200px;font-size:24px;color:#8f9bc8;font-weight:700">Source: LeetCode Discuss • Amazon SDE-1 offer, Bangalore, Feb 2025</div>
+
+  <!-- scan counter -->
+  <div class="a c" id="LC" style="top:1330px"><span class="card mono" style="font-size:50px;font-weight:900;color:#ffd166;display:inline-block">checks: <span id="lcn">0</span></span></div>
+
+  <!-- hashing -->
+  <div class="a" id="MC" style="left:110px;top:1330px;width:860px"><div class="card mono" style="font-size:31px;line-height:1.5;padding:16px 28px;border:3px solid #5ee6a0"><span style="color:#8f9bc8">// C++</span><br>unordered_set&lt;string&gt; users;<br>users.<y>count</y>("rahul");  <g>// O(1) ⚡</g></div></div>
+  <div class="a c" id="MR" style="top:1220px"><span class="card" style="font-size:46px;font-weight:900;display:inline-block;color:#ff6b8b;border:3px solid #ff6b8b;padding:12px 30px">❌ "rahul" TAKEN • 1 lookup</span></div>
+  <div class="a c" id="MG" style="top:1220px"><span class="card" style="font-size:46px;font-weight:900;display:inline-block;color:#5ee6a0;border:3px solid #5ee6a0;padding:12px 30px">✅ "rahul_26" AVAILABLE!</span></div>
+
+  <!-- wow -->
+  <div class="a c" id="W1" style="top:520px;font-size:84px;font-weight:900;text-shadow:0 6px 30px rgba(0,0,0,.6)"><y>200 CRORE</y> users</div>
+  <div class="a c" id="W3" style="top:660px;font-size:120px;font-weight:900;color:#5ee6a0;text-shadow:0 0 40px rgba(94,230,160,.7)">1 LOOKUP ⚡</div>
+  <div class="a" id="W4" style="left:150px;top:1250px;width:780px"><div class="card" style="font-size:42px;font-weight:900;line-height:1.7">🐌 List: <r>200,00,00,000</r> checks<br>⚡ Hash: <g>1</g> check • <g>O(1)</g></div></div>
+
+  <!-- collision -->
+  <div class="a c" id="K4" style="top:1240px"><span class="card" style="font-size:44px;font-weight:900;display:inline-block;color:#ff6b8b;padding:12px 30px">💥 h("rahul") = h("riya") = 4</span></div>
+  <div class="a c" id="K7" style="top:1360px"><span class="card" style="font-size:40px;font-weight:900;display:inline-block;color:#5ee6a0;padding:12px 30px">✅ Bucket mein chhoti list (chaining)</span></div>
+
+  <!-- CTA -->
+  <div class="a c" id="E1" style="top:330px;font-size:58px;font-weight:900;color:#ffd166">EK LINE MEIN YAAD RAKHO 🧠</div>
+  <div class="a c" id="E2" style="top:450px"><span id="e2a" class="card" style="font-size:44px;font-weight:900;display:inline-block;margin:0 8px;background:#5b21b6">#️⃣ hash</span><span id="e2b" class="card" style="font-size:44px;font-weight:900;display:inline-block;margin:0 8px;background:#9a3412">🗄️ bucket</span><span id="e2c" class="card" style="font-size:44px;font-weight:900;display:inline-block;margin:0 8px;background:#15803d">⚡ O(1)</span></div>
+  <div class="a c" id="E3" style="top:600px"><span class="card" style="font-size:38px;font-weight:800;display:inline-block;color:#ffd166;padding:12px 30px">💬 Tumhara kaunsa username TAKEN tha?</span></div>
+  <div class="a" id="E5" style="left:190px;top:740px;width:700px;height:380px;border-radius:30px;background:rgba(14,20,48,.92);border:4px solid #f472b6;box-shadow:0 0 50px rgba(244,114,182,.35)">
+    <div style="position:absolute;left:290px;top:26px;width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#f472b6);display:flex;align-items:center;justify-content:center;font-size:50px;font-weight:900;border:4px solid #fff">PP</div>
+    <div style="position:absolute;width:100%;top:165px;text-align:center;font-size:46px;font-weight:900">@pretestpassed.codes</div>
+    <div id="fbtn" style="position:absolute;left:180px;top:255px;width:340px;height:90px;border-radius:20px;background:#3b82f6;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:900">FOLLOW</div></div>
+  <div class="a" id="E6" style="left:0;top:0;font-size:110px">👆</div>
+  <div class="a c" id="E7" style="top:1180px"><span class="card" style="font-size:36px;font-weight:800;display:inline-block;padding:12px 30px">❤️ Like • 🔁 Share • 🔖 Save</span></div>
+  <div id="conf"></div>
+
+  <div id="cap"><span class="a" id="capw" style="position:relative;display:inline-block"><span id="capt"></span></span></div>
+  <div id="fade"></div>
+  <div id="prog"></div>
+  <div id="wm">@pretestpassed.codes</div>
+</div>
+<script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {RoundedBoxGeometry} from 'three/addons/geometries/RoundedBoxGeometry.js';
+const TL=window.TL, K=TL.K, CAPS=TL.CAPS, END=TL.END;
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const eo=x=>1-Math.pow(1-clamp(x),3);
+const eio=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const back=x=>{x=clamp(x);const c1=1.8,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const lerp=(a,b,p)=>a+(b-a)*p;
+const CUES=[]; const cue=(t,n,g)=>CUES.push([+t.toFixed(3),n,g||1]);
+function set(el,o,x,y,s){el=typeof el=='string'?$(el):el;el.style.setProperty('--o',o);el.style.setProperty('--x',(x||0)+'px');el.style.setProperty('--y',(y||0)+'px');el.style.setProperty('--s',s==null?1:s)}
+function pop(el,t,t0,d){d=d||.4;const p=clamp((t-t0)/d);set(el,t<t0?0:clamp(p*2.5),0,0,t<t0?.5:.5+.5*back(p))}
+function rise(el,t,t0,d){d=d||.45;const p=clamp((t-t0)/d);set(el,t<t0?0:clamp(p*2),0,40*(1-eo(p)),1)}
+function rnd(i,k){const x=Math.sin(i*12.9898+k*78.233)*43758.5453;return x-Math.floor(x)}
+const inr=n=>Math.round(n).toLocaleString('en-IN');
+
+// ---------------- three setup ----------------
+const renderer=new THREE.WebGLRenderer({canvas:$('gl'),antialias:true,preserveDrawingBuffer:true});
+renderer.setPixelRatio(1); renderer.setSize(1080,1920,false);
+renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+renderer.outputColorSpace=THREE.SRGBColorSpace; renderer.toneMapping=THREE.ACESFilmicToneMapping; renderer.toneMappingExposure=1.05;
+const scene=new THREE.Scene(); const BG=new THREE.Color('#1c2550'); scene.background=BG; scene.fog=new THREE.Fog(BG,14,60);
+const cam=new THREE.PerspectiveCamera(42,1080/1920,0.1,200);
+scene.add(new THREE.HemisphereLight('#c9d6ff','#2a2350',1.25));
+const sun=new THREE.DirectionalLight('#ffe2b8',2.1); sun.position.set(6,12,8); sun.castShadow=true; sun.shadow.mapSize.set(1024,1024);
+Object.assign(sun.shadow.camera,{left:-14,right:14,top:14,bottom:-14,near:1,far:60}); scene.add(sun); scene.add(sun.target);
+const M=(c,o={})=>new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.75,metalness:.05},o));
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(1200,400),M('#2b3566',{roughness:1})); ground.rotation.x=-Math.PI/2; ground.receiveShadow=true; scene.add(ground);
+
+function canvasTex(w,h,draw){const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');draw(x,w,h);const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=4;return {tex:t,ctx:x,canvas:c}}
+function rr(x,X,Y,W,H,R){x.beginPath();x.moveTo(X+R,Y);x.arcTo(X+W,Y,X+W,Y+H,R);x.arcTo(X+W,Y+H,X,Y+H,R);x.arcTo(X,Y+H,X,Y,R);x.arcTo(X,Y,X+W,Y,R);x.closePath()}
+function igGlyph(x,X,Y,S){ // Instagram-style logo glyph
+  const g=x.createLinearGradient(X,Y+S,X+S,Y);g.addColorStop(0,'#feda75');g.addColorStop(.3,'#fa7e1e');g.addColorStop(.55,'#d62976');g.addColorStop(.8,'#962fbf');g.addColorStop(1,'#4f5bd5');
+  x.fillStyle=g;rr(x,X,Y,S,S,S*.24);x.fill();x.strokeStyle='#fff';x.lineWidth=S*.075;rr(x,X+S*.2,Y+S*.2,S*.6,S*.6,S*.17);x.stroke();
+  x.beginPath();x.arc(X+S*.5,Y+S*.5,S*.145,0,Math.PI*2);x.stroke();x.fillStyle='#fff';x.beginPath();x.arc(X+S*.67,Y+S*.33,S*.04,0,Math.PI*2);x.fill()}
+function labelTex(text,{w=512,h=160,bg='#ffffff',fg='#151a33',font='bold 70px Inter',r=30}={}){return canvasTex(w,h,(x,W,H)=>{x.fillStyle=bg;rr(x,4,4,W-8,H-8,r);x.fill();x.fillStyle=fg;x.font=font;x.textAlign='center';x.textBaseline='middle';x.fillText(text,W/2,H/2+4)}).tex}
+function plane(tex,w,h,o={}){const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial(Object.assign({map:tex,transparent:true},o)));return m}
+
+// ---------- AREA A: logo + phone + crowd (origin 0,0,0) ----------
+const logo=new THREE.Group(); scene.add(logo);
+{const t=canvasTex(512,512,(x)=>igGlyph(x,0,0,512)).tex;const box=new THREE.Mesh(new RoundedBoxGeometry(2.2,2.2,0.35,6,0.45),[M('#c13584'),M('#c13584'),M('#c13584'),M('#c13584'),new THREE.MeshStandardMaterial({map:t,roughness:.4}),M('#c13584')]);box.castShadow=true;logo.add(box)}
+logo.position.set(0,2.4,2);
+const phone=new THREE.Group(); scene.add(phone);
+const phBody=new THREE.Mesh(new RoundedBoxGeometry(2.4,4.6,0.28,6,0.28),M('#111522',{roughness:.35,metalness:.4})); phBody.castShadow=true; phone.add(phBody);
+const SCR=canvasTex(560,1080,()=>{}); const scr=plane(SCR.tex,2.16,4.17,{transparent:false}); scr.position.z=0.145; phone.add(scr);
+phone.position.set(0,2.6,0);
+function drawScreen(state){const x=SCR.ctx,W=560,H=1080;x.fillStyle='#ffffff';x.fillRect(0,0,W,H);
+  x.fillStyle='#222';x.font='600 26px Inter';x.textAlign='center';x.fillText('9:41',W/2,44);
+  igGlyph(x,W/2-62,120,124);
+  x.fillStyle='#111';x.font='800 40px Inter';x.fillText('Create username',W/2,320);
+  x.fillStyle='#777';x.font='26px Inter';x.fillText('Pick a username for your new account.',W/2,366);
+  x.strokeStyle=state.red?'#ef4444':'#d4d4d8';x.lineWidth=4;rr(x,44,420,W-88,96,18);x.stroke();
+  x.textAlign='left';x.fillStyle='#111';x.font='600 40px Inter';x.fillText(state.txt+(state.caret?'|':''),70,482);
+  if(state.mark){x.font='44px "Noto Color Emoji"';x.textAlign='right';x.fillText(state.mark,W-66,484)}
+  if(state.msg){x.textAlign='left';x.fillStyle='#ef4444';x.font='700 27px Inter';x.fillText(state.msg,50,560)}
+  x.fillStyle='#4f7cf7';rr(x,44,610,W-88,92,18);x.fill();x.fillStyle='#fff';x.font='800 36px Inter';x.textAlign='center';x.fillText('Next',W/2,668);
+  SCR.tex.needsUpdate=true}
+// crowd: instanced capsule people far behind
+const CROWD=2600; const bodyG=new THREE.CapsuleGeometry(0.2,0.55,3,8), headG=new THREE.SphereGeometry(0.17,10,8);
+const crowdB=new THREE.InstancedMesh(bodyG,M('#ffffff'),CROWD), crowdH=new THREE.InstancedMesh(headG,M('#7a4b35'),CROWD);
+const PAL=['#7c6cf0','#2bb3a3','#f59e42','#e86ea8','#4f7cf7','#9b5de5','#f15bb5','#00bbf9'];
+{const d=new THREE.Object3D();const col=new THREE.Color();for(let i=0;i<CROWD;i++){const row=Math.floor(i/52),cc=i%52;const x=(cc-25.5)*1.05+(rnd(i,1)-.5)*.5,z=-5-row*1.1+(rnd(i,2)-.5)*.5;
+  d.position.set(x,0.48,z);d.rotation.y=(rnd(i,3)-.5)*.6;d.updateMatrix();crowdB.setMatrixAt(i,d.matrix);col.set(PAL[i%PAL.length]);crowdB.setColorAt(i,col);
+  d.position.set(x,1.05,z);d.updateMatrix();crowdH.setMatrixAt(i,d.matrix)}}
+crowdB.castShadow=true; scene.add(crowdB,crowdH);
+
+// ---------- AREA B: linear scan line (x=60) ----------
+const LX=60; const lineG=new THREE.Group(); scene.add(lineG);
+const NAMES=['aarav','priya','rohan','neha','vikram','sneha','arjun','kavya','ishaan','meera','kabir','anya'];
+const people=[];
+for(let i=0;i<140;i++){const g=new THREE.Group();const b=new THREE.Mesh(bodyG,M(PAL[i%PAL.length]));b.position.y=.48;b.castShadow=true;const h=new THREE.Mesh(headG,M('#7a4b35'));h.position.y=1.05;g.add(b,h);
+  g.position.set(LX,0,-i*1.3);let tag=null,xt=null;
+  if(i<NAMES.length){tag=plane(labelTex('@'+NAMES[i],{w:420,h:120,font:'bold 60px "DejaVu Sans Mono"'}),1.1,0.32);tag.position.set(0,1.55,0);g.add(tag);
+    xt=plane(labelTex('❌',{w:140,h:140,bg:'rgba(0,0,0,0)',font:'100px "Noto Color Emoji"'}),0.42,0.42);xt.position.set(0.72,1.55,0.02);xt.visible=false;g.add(xt)}
+  lineG.add(g);people.push({g,b,xt})}
+const spot=new THREE.Mesh(new THREE.CylinderGeometry(0.75,0.75,0.04,32),new THREE.MeshBasicMaterial({color:'#ffd166',transparent:true,opacity:.75}));spot.position.set(LX,0.03,0);scene.add(spot);
+const lookFor=plane(labelTex('looking for: "rahul" 🔍',{w:900,h:150,bg:'#ffd166',font:'bold 64px Inter'}),2.6,0.43);lookFor.position.set(LX-1.4,2.6,1.6);scene.add(lookFor);
+
+// ---------- AREA C: hashing (x=120) ----------
+const HX=120; const hashG=new THREE.Group(); hashG.position.set(HX,0,0); scene.add(hashG);
+const belt=new THREE.Mesh(new THREE.BoxGeometry(7,0.25,1.2),M('#3b4680'));belt.position.set(-8.6,0.8,2.2);belt.receiveShadow=true;hashG.add(belt);
+const mach=new THREE.Mesh(new RoundedBoxGeometry(2.2,2.0,1.8,4,0.2),M('#7c3aed',{emissive:'#3b0f8a',emissiveIntensity:.35}));mach.position.set(-4.5,1.9,2.2);mach.castShadow=true;hashG.add(mach);
+{const p=plane(labelTex('h( )',{w:420,h:200,bg:'#ffffff',fg:'#4c1d95',font:'bold 120px "DejaVu Sans Mono"'}),1.5,0.72);p.position.set(-4.5,2.0,3.11);hashG.add(p);
+ const p2=plane(labelTex('hash function ⚙️',{w:520,h:110,bg:'rgba(0,0,0,0)',fg:'#ffffff',font:'bold 54px Inter'}),1.6,0.34);p2.position.set(-4.5,1.3,3.11);hashG.add(p2)}
+const gears=[];for(const gx of [-0.15,1.35]){const gm=new THREE.Mesh(new THREE.TorusGeometry(0.32,0.11,6,10),M('#ffd166',{metalness:.5,roughness:.3}));gm.position.set(-4.5+gx-0.6,3.05,2.2);gm.rotation.x=Math.PI/2;hashG.add(gm);gears.push(gm)}
+const inBlk=new THREE.Group();hashG.add(inBlk);
+const inTexA=labelTex('"rahul"',{w:520,h:180,bg:'#5cd6ff',font:'bold 92px "DejaVu Sans Mono"'}),inTexB=labelTex('"rahul_26"',{w:640,h:180,bg:'#5cd6ff',font:'bold 84px "DejaVu Sans Mono"'});
+const inBox=new THREE.Mesh(new RoundedBoxGeometry(1.8,0.62,0.6,3,0.12),M('#5cd6ff'));inBox.castShadow=true;inBlk.add(inBox);
+const inLab=plane(inTexA,1.7,0.58);inLab.position.z=0.31;inBlk.add(inLab);
+const coin=new THREE.Group();hashG.add(coin);
+const coinM=new THREE.Mesh(new THREE.CylinderGeometry(0.42,0.42,0.16,28),M('#ffa94d',{metalness:.3,roughness:.4}));coinM.rotation.x=Math.PI/2;coinM.castShadow=true;coin.add(coinM);
+const coinT4=labelTex('4',{w:200,h:200,bg:'rgba(0,0,0,0)',fg:'#2a1000',font:'bold 150px Inter'}),coinT7=labelTex('7',{w:200,h:200,bg:'rgba(0,0,0,0)',fg:'#2a1000',font:'bold 150px Inter'});
+const coinL=plane(coinT4,0.7,0.7);coinL.position.z=0.09;coin.add(coinL);
+// lockers: 2 rows x 5 at z=-1.2
+const LK=[];const BKV={1:'priya',2:'aarav',4:'rahul',6:'neha',8:'rohan',9:'kavya'};
+for(let i=0;i<10;i++){const col=i%2,row=Math.floor(i/2);const g=new THREE.Group();g.position.set(-0.75+col*1.5,5.9-row*1.25,-1.2);hashG.add(g);
+  const shell=new THREE.Mesh(new THREE.BoxGeometry(1.3,1.12,0.9),M('#26305e'));shell.position.z=-0.45;shell.castShadow=true;g.add(shell);
+  const inner=new THREE.Mesh(new THREE.PlaneGeometry(1.14,0.96),M('#0f1430'));inner.position.z=0.005;g.add(inner);
+  let tag=null;if(BKV[i]){tag=plane(labelTex(BKV[i],{w:400,h:140,font:'bold 72px "DejaVu Sans Mono"'}),0.95,0.33);tag.position.set(0,-0.05,0.02);g.add(tag)}
+  const hinge=new THREE.Group();hinge.position.set(-0.6,0,0.03);g.add(hinge);
+  const door=new THREE.Mesh(new THREE.BoxGeometry(1.2,1.04,0.06),M('#3f4c8f'));door.position.x=0.6;door.castShadow=true;hinge.add(door);
+  const num=plane(labelTex(String(i),{w:200,h:200,bg:'rgba(0,0,0,0)',fg:'#e8ecff',font:'bold 130px Inter'}),0.5,0.5);num.position.set(0.6,0.05,0.04);hinge.add(num);
+  LK.push({g,hinge,door,tag})}
+const riya=plane(labelTex('riya',{w:400,h:140,bg:'#ff6b8b',fg:'#fff',font:'bold 72px "DejaVu Sans Mono"'}),0.95,0.33);riya.position.set(0,-0.42,0.03);LK[4].g.add(riya);
+const chainArrow=plane(labelTex('↓',{w:120,h:120,bg:'rgba(0,0,0,0)',fg:'#ffd166',font:'bold 100px Inter'}),0.28,0.28);chainArrow.position.set(0.55,-0.25,0.04);LK[4].g.add(chainArrow);
+// glow ring on a locker
+const ring=new THREE.Mesh(new THREE.TorusGeometry(0.8,0.05,8,40),new THREE.MeshBasicMaterial({color:'#ff6b8b'}));hashG.add(ring);
+
+// confetti
+(function(){let ch='';for(let i=0;i<90;i++){const col=['#5cd6ff','#f472b6','#ffd166','#5ee6a0','#a78bfa','#ffa94d'][i%6];ch+=`<div class="a" id="cf${i}" style="left:0;top:0;width:${14+(i*7)%12}px;height:${8+(i*5)%10}px;background:${col};border-radius:3px"></div>`}$('conf').innerHTML=ch})();
+
+const TRY=[[K.ty1,'rahul',K.tk1],[K.ty2,'rahul123',K.tk2]];
+(function(){
+ cue(0.05,'whoosh',.45); cue(0.25,'pop',.7);
+ for(const [a,s,b] of TRY){for(let i=0;i<s.length;i++) cue(a+i*Math.min(0.09,(b-0.25-a)/s.length),'type',.45); cue(b,'buzz',.45)}
+ cue(K.crowd,'riser',.3); cue(K.kaise,'boom',.4);
+ cue(K.amazon-0.05,'whoosh',.45); cue(K.amazon,'pop',.8); cue(K.q,'pop',.7); cue(K.ctc,'cash',.8);
+ cue(K.normal,'whoosh',.4); for(const k of ['aarav','priya','rohan']) cue(K[k]+0.2,'buzz',.25); cue(K.crore,'boom',.4);
+ cue(K.hashing,'success',.5); cue(K.hfunc,'whoosh',.4); cue(K.num,'pop',.6); cue(K.open,'door',.5); cue(K.found,'buzz',.45);
+ cue(K.r2,'whoosh',.4); cue(K.h7,'pop',.6); cue(K.h7+1.0,'door',.5); cue(K.avail,'success',.7);
+ cue(K.wow,'riser',.35); cue(K.one,'boom',.5); cue(K.one+0.1,'sparkle',.6);
+ cue(K.twist,'whoosh',.4); cue(K.coll,'boom',.4); cue(K.chain,'success',.5);
+ cue(K.yaad,'pop'); cue(K.l1,'pop'); cue(K.l2,'pop'); cue(K.l3,'pop'); cue(K.comment,'pop',.6); cue(K.follow+0.3,'click'); cue(K.follow+0.35,'sparkle',.9);
+})();
+
+// label text per scene
+function setLabel(t,k,s,h,t0){$('labk').textContent=k;$('labs').textContent=s;$('labh').innerHTML=h;const p=clamp((t-t0)/.35);set('lab',clamp(p*2),-20*(1-eo(p)),0,1)}
+function camAt(p,l){cam.position.set(p[0],p[1],p[2]);cam.lookAt(l[0],l[1],l[2])}
+function camLerp(a,b,p){return [lerp(a[0],b[0],p),lerp(a[1],b[1],p),lerp(a[2],b[2],p)]}
+
+window.render=function(t){
+ $('prog').style.width=(1080*clamp(t/END))+'px';
+ const sc= t<K.amazon-0.1?'H': t<K.normal-0.1?'S1': t<K.hashing-0.1?'S2': t<K.wow-0.1?'S3': t<K.twist-0.1?'S4': t<K.yaad-0.1?'S5':'S6';
+ const bounds=[0,K.amazon-0.1,K.normal-0.1,K.hashing-0.1,K.wow-0.1,K.twist-0.1,K.yaad-0.1];
+ let fd=0;for(const b of bounds.slice(1)){fd=Math.max(fd,1-Math.abs(t-b)/0.18)} $('fade').style.opacity=clamp(fd)*0.9;
+ for(const id of ['HC','HT','A1','A2','A3','A4','A5','A6','LC','MC','MR','MG','W1','W3','W4','K4','K7','E1','E2','E3','E5','E6','E7']) set(id,0);
+ logo.visible=false; phone.visible=(sc=='H'||sc=='S4'); spot.visible=false; lookFor.visible=false; ring.visible=false; riya.visible=false; chainArrow.visible=false;
+ gears.forEach((g,i)=>g.rotation.z=t*(i?-3:3));
+ // defaults for lockers
+ LK.forEach((L,i)=>{L.hinge.rotation.y=0;L.door.material.color.set('#3f4c8f');L.door.material.emissive=new THREE.Color('#000000')});
+ if(sc=='H'){
+  // logo intro
+  const lo=t<K.ty1-0.2; logo.visible=true; const lp=eo(t/0.6), out=clamp((t-(K.ty1-0.6))/0.4);
+  logo.scale.setScalar((0.2+0.8*back(lp))*(1-out)+0.0001); logo.rotation.y=(1-lp)*Math.PI*1.2+Math.sin(t*2)*0.08; logo.position.set(0,2.9+out*0.6,1.5);
+  const pin=clamp((t-(K.ty1-0.6))/0.6); phone.scale.setScalar(0.0001+eo(pin)); phone.rotation.y=Math.sin(t*0.6)*0.12*(1-clamp((t-K.crowd)/1));
+  // screen state
+  let txt='',mark='',msg='',red=false;
+  for(const [a,s,b] of TRY){ if(t>=a){const per=Math.min(0.09,(b-0.25-a)/s.length);txt=s.slice(0,Math.max(0,Math.min(s.length,Math.floor((t-a)/per)+1))); mark='';msg='';red=false;
+     if(t>=b-0.25&&t<b) mark='⏳'; if(t>=b){mark='❌';msg=`"${s}" isn't available. Try another.`;red=true}}}
+  drawScreen({txt,mark,msg,red,caret:(Math.floor(t*3)%2)==0});
+  const sh=TRY.reduce((m,[a,s,b])=>t>=b&&t<b+0.35?Math.sin((t-b)*60)*0.06*(1-(t-b)/0.35):m,0); phone.position.x=sh;
+  // camera: close on phone, then pull back to reveal the crowd
+  const pb=eio((t-K.crowd+0.2)/2.2);
+  camAt(camLerp([0,2.7,8.2],[0,5.2,15.5],pb),camLerp([0,2.6,0],[0,1.8,-12],pb));
+  setLabel(t,'Instagram',  t<K.crowd?'Sign up · New ID':'Day 002 · The question', t<K.tk1?'Naya username… 🤞': t<K.crowd?'<r>Already taken!</r> 😤':'<y>200 crore+</y> users… <g>kaise?!</g>', 0.1);
+  set('HT',t>=K.tk1&&t<K.crowd?1:0); set('HC',t>=K.crowd?1:0); $('hcn').textContent=inr(2000000000*eo((t-K.crowd)/1.6))+'+';
+ }
+ if(sc=='S1'){ camAt([Math.sin(t*0.2)*2,6,18],[0,2,-10]); setLabel(t,'Interview Question','Amazon · SDE-1','Ye concept yahan poocha gaya 🔥',K.amazon);
+  pop('A1',t,K.amazon); pop('A2',t,K.amazon+0.5); rise('A3',t,K.q-0.1); pop('A4',t,K.ctc-0.1); $('ctcn').textContent=Math.round(25*eo((t-K.ctc+0.1)/0.9)); pop('A5',t,K.ctc+0.4); rise('A6',t,K.ctc+0.7);
+ }
+ if(sc=='S2'){ spot.visible=true; lookFor.visible=true;
+  const marks=[K.aarav,K.priya,K.rohan]; let idx=0,pp=0;
+  if(t<K.aarav){idx=0;pp=0} else if(t<K.rohan+0.4){const i=t<K.priya?0:t<K.rohan?1:2;idx=i;pp=0} else {const f=Math.pow(clamp((t-K.rohan-0.4)/(K.crore-K.rohan-0.2)),1.6);idx=2+f*60}
+  if(t>=K.priya) idx=Math.max(idx,1); if(t>=K.rohan) idx=Math.max(idx,2);
+  const z=-idx*1.3; spot.position.z=z;
+  people.forEach((P,i)=>{const chk=i<NAMES.length&&(i<idx||(i==Math.floor(idx)&&t>=[K.aarav,K.priya,K.rohan][Math.min(i,2)]+0.25&&i<3)); if(P.xt) P.xt.visible=chk; P.b.material.emissive=new THREE.Color(chk?'#5a0010':'#000000')});
+  const fast=t>K.rohan+0.4; const back2=eio((t-K.crore+0.3)/1.6);
+  const zs=-Math.min(idx,2)*1.3; const ov=eio((t-K.rohan-0.4)/1.2); const cp=camLerp([LX+3.4,2.7,zs+4.6],[LX+7,9,zs+9],ov); camAt(cp,camLerp([LX,1.1,zs-1.5],[LX,0,zs-26],ov));
+  lookFor.position.set(LX+0.2,2.6,zs-0.6); lookFor.lookAt(cam.position);
+  setLabel(t,'Normal tareeka','Linear search · O(n)','Har user <r>ek-ek karke</r> check 🐌',K.normal);
+  set('LC',t>=K.aarav-0.2?1:0); {let n=0;if(t>=K.aarav) n=1+[K.priya,K.rohan].filter(x=>t>=x).length; if(fast) n=3+2000000000*Math.pow(clamp((t-K.rohan-0.4)/(K.crore-K.rohan+0.4)),3); $('lcn').textContent=inr(n)}
+  if(t>=K.crore) setLabel(t,'Normal tareeka','Linear search · O(n)','<r>200 crore checks</r> har signup pe! 😵',K.crore-0.3);
+ }
+ const inHash=sc=='S3'||sc=='S5'||sc=='S6';
+ if(inHash){
+  const second=t>=K.r2-0.15&&sc=='S3';
+  inLab.material.map=second?inTexB:inTexA; inBox.scale.x=second?1.25:1; coinL.material.map=second?coinT7:coinT4;
+  // block travels along belt into machine
+  const a0=second?K.r2:K.hfunc-0.2, a1=a0+1.3; const bp=eio((t-a0)/(a1-a0));
+  inBlk.position.set(lerp(-11.2,-5.4,bp),1.25,2.2); inBlk.visible=sc=='S3'&&t>=a0-0.3&&bp<0.98;
+  // coin pops and flies to locker
+  const tgt=second?7:4; const c0=second?K.h7-0.2:K.num, c1=c0+1.0; const cp2=eio((t-c0)/(c1-c0));
+  const L=LK[tgt].g.position; const sx=-4.5,sy=3.2,sz=3.2, ex=L.x,ey=L.y,ez=L.z+0.7;
+  coin.visible=sc=='S3'&&t>=c0-0.05&&t<c1+0.25; coin.position.set(lerp(sx,ex,cp2),lerp(sy,ey,cp2)+Math.sin(Math.PI*cp2)*1.6,lerp(sz,ez,cp2)); coin.rotation.y=(1-cp2)*Math.PI*2;
+  coin.scale.setScalar(t<c0?0.001:0.4+0.6*back(clamp((t-c0)/0.3)));
+  // open locker
+  const op=sc=='S3'? (second? eio((t-K.h7-0.9)/0.6): eio((t-K.open)/0.6)*(t<K.r2-0.2?1:1-clamp((t-K.r2+0.2)/0.3))) : 0;
+  if(sc=='S3'){const i=second?7:4; LK[i].hinge.rotation.y=-1.9*op; if(t>=(second?K.h7:K.open-0.1)){LK[i].door.material.color.set(second?'#2f9e6b':'#c2415e');ring.visible=true;ring.material.color.set(second?'#5ee6a0':'#ff6b8b');ring.position.set(LK[i].g.position.x,LK[i].g.position.y,LK[i].g.position.z+0.2);ring.scale.setScalar(1+0.05*Math.sin(t*8))}}
+  if(sc=='S5'||sc=='S6'){LK[4].hinge.rotation.y=-1.9*eio((t-K.twist-0.4)/0.6); riya.visible=t>=K.coll-0.1; chainArrow.visible=t>=K.chain-0.2; LK[4].door.material.color.set('#c2415e')}
+  // camera
+  let cp,lk;
+  if(sc=='S3'){const ph=eio((t-K.hashing)/1.4); const mv=[HX-6.2,3.0,10.5], ml=[HX-5.6,1.8,2.2], wv=[HX,3.5,12.8], wl=[HX,3.3,-1.2]; const q=Math.max(eio((t-K.num-0.1)/1.1)*(t<K.r2-0.3?1:0), eio((t-K.h7-0.3)/0.9)*(t>=K.r2-0.3?1:0)); const back1=t>=K.r2-0.3&&t<K.h7-0.3?eio((t-K.r2+0.3)/0.6):0;
+   cp=camLerp(camLerp([HX-9,4.5,14],mv,ph),wv,q); lk=camLerp(ml,wl,q); if(t>=K.r2-0.3&&t<K.h7-0.3){cp=camLerp(wv,mv,back1);lk=camLerp(wl,ml,back1)}
+    setLabel(t,'Smart tareeka','Hashing · O(1)', t<K.num?'Username ➜ <y>hash function</y> ⚙️': !second?(t<K.found?'Number = <y>locker ka address</y> 📍':'<r>"rahul"</r> mila ➜ TAKEN'):(t<K.avail?'h("rahul_26") = <o>7</o>':'Locker 7 khaali ➜ <g>AVAILABLE</g> ✅'),K.hashing);
+    pop('MR',t,K.found-0.1); if(second) set('MR',0); pop('MG',t,K.avail-0.1); rise('MC',t,K.found+0.6); if(t>=K.h7+0.2) set('MC',0)}
+  if(sc=='S5'){const L4=LK[4].g.position;cp=[HX+L4.x+0.6,L4.y+0.4,5.2];lk=[HX+L4.x,L4.y-0.1,-1.2]; setLabel(t,'Interviewer ka follow-up','Collision · Chaining','Do usernames, <y>same hash?</y> 😳',K.twist); pop('K4',t,K.coll-0.1); pop('K7',t,K.chain)}
+  if(sc=='S6'){cp=[HX+Math.sin(t*0.3)*1.5,3.6,14];lk=[HX,3.3,-1.2]; set('lab',0)}
+  camAt(cp,lk);
+ } else { inBlk.visible=false; coin.visible=false }
+ if(sc=='S4'){ const pb=eio((t-K.wow)/3); camAt(camLerp([0,7,18],[0,16,30],pb),[0,0.5,-20]); setLabel(t,'Result','The wow','<y>200 crore</y> users ➜ <g>1 check</g>',K.wow);
+   pop('W1',t,K.wow); pop('W3',t,K.one-0.1,0.5); rise('W4',t,K.one+0.6) }
+ if(sc=='S6'){
+  pop('E1',t,K.yaad-0.05);
+  {const p=clamp((t-K.l1+0.1)/.3);set('E2',t<K.l1-0.1?0:clamp(p*2.5),0,0,.6+.4*back(p));[['e2a',K.l1],['e2b',K.l2],['e2c',K.l3]].forEach(([id,k])=>$(id).style.opacity=t>=k-0.1?1:0.2)}
+  pop('E3',t,K.comment-0.1); pop('E5',t,K.follow-0.4); rise('E7',t,K.follow+0.8);
+  const tc=K.follow+0.3;const p=eo((t-tc+0.9)/0.8);const x=900+(560-900)*p,y=1380+(1060-1380)*p;set('E6',clamp((t-tc+1)/.3),x-60,y-60,t>tc&&t<tc+.2?.85:1);
+  const b=$('fbtn');if(t>tc){b.textContent='FOLLOWING ✓';b.style.background='#475569'}else{b.textContent='FOLLOW';b.style.background='#3b82f6'}
+  for(let i=0;i<90;i++){const dt=t-tc;const el=$('cf'+i);if(dt<0){set(el,0);continue}
+   const ang=rnd(i,1)*Math.PI*2, sp=500+rnd(i,2)*900;const xx=540+Math.cos(ang)*sp*dt*0.8, yy=920+Math.sin(ang)*sp*dt*0.7-500*dt+700*dt*dt;
+   set(el,clamp(3-dt),xx,yy,1)}
+ } else for(let i=0;i<90;i++) set('cf'+i,0);
+ sun.target.position.copy(cam.position).add(new THREE.Vector3(0,-2,-8)); sun.position.copy(sun.target.position).add(new THREE.Vector3(6,12,8));
+ // captions
+ {let cur=null;for(let i=0;i<CAPS.length;i++){const s0=CAPS[i][0],e0=i+1<CAPS.length?Math.min(CAPS[i+1][0],s0+3.6):s0+2.6;if(t>=s0-0.05&&t<e0) cur=[i,s0,e0]}
+  if(cur&&sc!='S6'){$('capt').innerHTML=CAPS[cur[0]][1];const p=clamp((t-cur[1]+0.05)/.18);set('capw',Math.min(clamp(p*2),clamp((cur[2]-t)/.12)),0,12*(1-eo(p)),.94+.06*back(p))} else set('capw',0)}
+ renderer.render(scene,cam);
+};
+window.CUES=CUES; window.render(0); window.READY=true;
+</script></body></html>
