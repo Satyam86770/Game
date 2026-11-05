@@ -45,4 +45,18 @@ What actually differed:
 8. **Every reel that went viral had a human face or an iconic movie clip in the very first second**
    (binary-search duo, Google office, Rajinikanth, creator face). Pure animation reels (Auth, HashMap 3D) flopped even with a good hook.
    Open on a face or iconic clip, not on a logo or animation. Use Instagram Trial Reels to test 2–3 hook variants before a full post.
-9. **Self-check before rendering:** in the first 2s, does a non-coder see a result and ask "kaise?"? If not, redo the hook.
+9. **Owner insights (vidIQ, connected Nov 2026): SKIP RATE is the gate.**
+
+   | Reel | Plays | Skip rate | Avg watch |
+   |---|---|---|---|
+   | Indexing | 246K | **30%** | 19.9s (28%); 3,002 shares; 4,294 saves |
+   | LL traversal | 7.2K | 42% | |
+   | Cycle | 3.4K | 55% | |
+   | GROUP BY | 990 | 69% | |
+   | Auth | 3K | 79% | |
+   | HashMap 3D | 336 | **79%** | 8.4s (10%); 0 shares |
+
+   Target skip rate < 35%. The HashMap reel spent 0–4.5s on a logo and typing before the "taken" result.
+   The payoff text and a face/iconic clip must be on screen at FRAME 0 (no intro, no logo animation).
+   Check insights with vidiq_instagram_owner_insights (platformAccountId 39687719547542292).
+10. **Self-check before rendering:** in the first 2s, does a non-coder see a result and ask "kaise?"? If not, redo the hook.
