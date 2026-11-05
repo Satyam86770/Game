@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#141a33}
+body{font-family:'Inter','Noto Color Emoji',sans-serif;color:#fff}
+.mono{font-family:'DejaVu Sans Mono','Noto Color Emoji',monospace}
+#bgx{position:absolute;inset:0;background:radial-gradient(900px 700px at 50% 30%,#22305e 0%,#141a33 60%,#0c1024 100%)}
+.a{position:absolute;opacity:var(--o,0);transform:translate(var(--x,0px),var(--y,0px)) scale(var(--s,1));transform-origin:center}
+.c{left:0;width:1080px;text-align:center}
+y{color:#ffd166}r{color:#ff6b8b}g{color:#5ee6a0}c{color:#5cd6ff}o{color:#ffa94d}
+#prog{position:absolute;left:0;top:0;height:8px;background:linear-gradient(90deg,#5cd6ff,#a78bfa,#ff6b8b)}
+#wm{position:absolute;top:92px;right:56px;font-size:28px;font-weight:700;color:rgba(255,255,255,.65)}
+.card{border-radius:24px;background:rgba(14,20,48,.92);padding:22px 32px;box-shadow:0 10px 40px rgba(0,0,0,.45)}
+#lab{position:absolute;left:56px;top:140px}
+#lab .k{font-size:26px;font-weight:700;color:#cdd5f5;display:flex;align-items:center;gap:10px}
+#lab .k i{width:12px;height:12px;border-radius:50%;background:#ff4d4d;display:inline-block}
+#lab .h{display:inline-block;margin-top:10px;background:rgba(14,20,48,.9);border-radius:16px;padding:12px 24px;font-size:46px;font-weight:900}
+/* monitor */
+#mon{position:absolute;left:40px;top:250px;width:1000px;height:880px;border-radius:22px;overflow:hidden;border:6px solid #2d3557;box-shadow:0 20px 60px rgba(0,0,0,.6);transform-origin:0 0;background:#000}
+#gl{position:absolute;left:0;top:0;width:1000px;height:880px;filter:grayscale(.55) sepia(.25) hue-rotate(60deg) contrast(1.15) brightness(.98)}
+#noise{position:absolute;inset:0;width:1000px;height:880px;mix-blend-mode:screen;opacity:.22}
+#scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 2px,transparent 2px 5px);pointer-events:none}
+#vig{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.6) 100%)}
+#static{position:absolute;inset:0;width:1000px;height:880px;opacity:0}
+.osd{position:absolute;font-family:'DejaVu Sans Mono',monospace;font-weight:700;color:#e9ffe9;text-shadow:0 0 6px rgba(0,0,0,.9),0 2px 0 #000}
+#rec{left:28px;top:22px;font-size:34px}#rec b{color:#ff3b3b}
+#cam{right:28px;top:22px;font-size:28px}
+#ts{left:28px;bottom:22px;font-size:46px}
+#day{right:28px;bottom:26px;font-size:26px}
+/* hook clip frame */
+#cframe{position:absolute;left:34px;top:284px;width:1012px;height:712px;border-radius:16px;border:6px solid #ff4d4d;box-shadow:0 0 40px rgba(255,77,77,.5)}
+/* timeline */
+#tl{position:absolute;left:40px;top:1160px;width:1000px}
+.bar{position:relative;height:64px;border-radius:14px;background:#2a3566;overflow:hidden;border:3px solid #3d4a85}
+.dead{position:absolute;top:0;bottom:0;background:repeating-linear-gradient(45deg,#1a1f38 0 10px,#232946 10px 20px)}
+.mk{position:absolute;top:-6px;width:6px;height:76px;margin-left:-3px;background:#ffd166;box-shadow:0 0 14px #ffd166}
+.ticks{display:flex;justify-content:space-between;font-family:'DejaVu Sans Mono',monospace;font-size:24px;color:#9aa6d6;margin-top:6px}
+#cap{position:absolute;left:60px;width:960px;top:1650px;text-align:center}
+#capt{display:inline-block;padding:14px 28px;border-radius:18px;background:rgba(10,14,34,.85);font-size:44px;font-weight:800;line-height:1.25;max-width:960px}
+#fade{position:absolute;inset:0;background:#0b1024;opacity:0}
+</style></head>
+<body>
+<div id="bgx"></div>
+<div id="cframe" class="a"></div>
+<div id="mon" class="a">
+  <canvas id="gl" width="1000" height="880"></canvas>
+  <canvas id="noise" width="250" height="220"></canvas>
+  <div id="scan"></div><div id="vig"></div>
+  <canvas id="static" width="250" height="220"></canvas>
+  <div class="osd" id="rec"><b id="recdot">●</b> REC</div>
+  <div class="osd" id="cam">CAM 01 • BANK VAULT</div>
+  <div class="osd" id="ts">00:00:00</div>
+  <div class="osd" id="day">DAY 1</div>
+</div>
+<!-- hook overlays -->
+<div class="a c" id="HT" style="top:132px;font-size:52px;font-weight:900;line-height:1.15;text-shadow:0 4px 18px rgba(0,0,0,.8)"><y>24 ghante</y> ki CCTV...<br>chor sirf <g>17 checks</g> mein?! 🤯</div>
+<div class="a" id="HR" style="left:530px;top:1030px;width:510px">
+  <div class="card mono" style="font-size:34px;line-height:1.6;padding:18px 24px">
+    <div style="color:#9aa6d6;font-size:24px">🔎 BINARY SEARCH LIVE</div>
+    check: <b id="hk" style="color:#ffd166">0</b>/17<br>
+    footage: <b id="hf" style="color:#ff6b8b">86,400</b>s<br>
+    <span id="hres" style="color:#5ee6a0;font-weight:900"></span></div></div>
+<div class="a" id="HB" style="left:40px;top:1470px;width:1000px"><div class="bar" style="height:44px"><div class="dead" id="hd1"></div><div class="dead" id="hd2"></div><div class="mk" id="hm" style="height:56px"></div></div></div>
+
+<div id="lab" class="a"><div class="k"><i></i><span id="labk">CID • Case 001</span></div><div class="h" id="labh"></div></div>
+
+<!-- P1/P2 -->
+<div class="a c" id="MATH" style="top:1170px"><span class="card mono" style="display:inline-block;font-size:58px;font-weight:900">24 × 60 × 60 = <y>86,400</y> s</span></div>
+<div class="a c" id="LIN" style="top:1170px"><span class="card mono" style="display:inline-block;font-size:44px;font-weight:900">🐌 check <r id="linn">1</r> / 86,400 ⏳</span></div>
+<div class="a" id="ACPB" style="left:120px;top:1300px;width:840px"><div class="card" style="display:flex;align-items:center;gap:26px;padding:18px 26px;border:3px solid #ffd166"><img src="acp.png" style="width:130px;height:130px;border-radius:50%;border:4px solid #ffd166"><div style="font-size:46px;font-weight:900">ACP: sirf <g>17 checks</g> ⚡<br><span style="font-size:32px;color:#cdd5f5">Kaise? 🤔</span></div></div></div>
+<!-- company -->
+<div class="a c" id="A1" style="top:420px"><span style="display:inline-block;background:#0f1530;color:#ff9900;font-size:96px;font-weight:900;letter-spacing:4px;padding:10px 50px;border-radius:18px;border:4px solid #ff9900;box-shadow:0 0 50px rgba(255,153,0,.45)">AMAZON</span></div>
+<div class="a c" id="A2" style="top:590px"><span class="card" style="font-size:40px;font-weight:900;display:inline-block;padding:14px 32px">🔎 <y>Binary Search</y> • interviewers ka favourite</span></div>
+<div class="a c" id="A4" style="top:740px"><span style="display:inline-block;padding:16px 44px;border-radius:24px;background:rgba(10,40,26,.95);border:4px solid #5ee6a0;font-size:66px;font-weight:900;color:#5ee6a0">💰 SDE-1: ~₹<span id="ctcn">25</span> LPA <span style="font-size:32px;color:#bbf7d0">(Year 1)</span></span></div>
+<div class="a c" id="A6" style="top:880px;font-size:24px;color:#9aa6d6;font-weight:700">CTC source: LeetCode Discuss • Amazon SDE-1 offer, Bangalore, Feb 2025</div>
+<!-- binary search timeline -->
+<div id="tl" class="a">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px"><span class="mono" style="font-size:34px;font-weight:900">check <y id="bk">0</y>/17</span><span class="mono" style="font-size:30px;color:#cdd5f5">bachi footage: <r id="bf">86,400</r> s</span></div>
+  <div class="bar"><div class="dead" id="d1"></div><div class="dead" id="d2"></div><div class="mk" id="mk"></div></div>
+  <div class="ticks"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span></div>
+  <div style="margin-top:14px;display:flex;gap:14px;align-items:center"><span class="mono" style="font-size:26px;color:#9aa6d6">zoom:</span><span class="mono" id="zl" style="font-size:28px;color:#5cd6ff"></span><span style="flex:1"></span><span class="mono" id="zr" style="font-size:28px;color:#5cd6ff"></span></div>
+</div>
+<div class="a c" id="VER" style="top:1510px"><span class="card" id="vert" style="display:inline-block;font-size:44px;font-weight:900;padding:12px 30px"></span></div>
+<div class="a c" id="CAUGHT" style="top:1170px"><span style="display:inline-block;padding:16px 40px;border:8px solid #5ee6a0;border-radius:22px;color:#5ee6a0;font-size:62px;font-weight:900;background:rgba(0,40,20,.8)" class="mono">🎯 CHOR: 14:37:12</span></div>
+<!-- wow -->
+<div class="a c" id="W1" style="top:400px;font-size:90px;font-weight:900"><r>86,400</r> seconds</div>
+<div class="a c" id="W2" style="top:520px;font-size:80px">⬇️</div>
+<div class="a c" id="W3" style="top:630px;font-size:116px;font-weight:900;color:#5ee6a0;text-shadow:0 0 40px rgba(94,230,160,.7)">17 CHECKS ⚡</div>
+<div class="a" id="W4" style="left:150px;top:860px;width:780px"><div class="card" style="font-size:42px;font-weight:900;line-height:1.7">🐌 1-by-1: <r>86,400</r> checks<br>🔎 Binary: <g>17</g> checks • <g>O(log n)</g></div></div>
+<!-- end -->
+<div class="a c" id="E1" style="top:330px;font-size:58px;font-weight:900;color:#ffd166">EK LINE MEIN YAAD RAKHO 🧠</div>
+<div class="a c" id="E2" style="top:450px"><span class="card mono" style="display:inline-block;font-size:44px;font-weight:900;padding:14px 30px">✅✅✅✅❌❌❌ ➜ <y>Binary Search</y></span></div>
+<div class="a c" id="E3" style="top:590px"><span class="card" style="font-size:38px;font-weight:800;display:inline-block;color:#ffd166;padding:12px 30px">💬 Tum ise aur kahan lagaoge?</span></div>
+<div class="a" id="E5" style="left:190px;top:730px;width:700px;height:380px;border-radius:30px;background:rgba(14,20,48,.95);border:4px solid #f472b6;box-shadow:0 0 50px rgba(244,114,182,.35)">
+  <div style="position:absolute;left:290px;top:26px;width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#f472b6);display:flex;align-items:center;justify-content:center;font-size:50px;font-weight:900;border:4px solid #fff">PP</div>
+  <div style="position:absolute;width:100%;top:165px;text-align:center;font-size:46px;font-weight:900">@pretestpassed.codes</div>
+  <div id="fbtn" style="position:absolute;left:180px;top:255px;width:340px;height:90px;border-radius:20px;background:#3b82f6;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:900">FOLLOW</div></div>
+<div class="a" id="E6" style="left:0;top:0;font-size:110px">👆</div>
+<div class="a c" id="E7" style="top:1170px"><span class="card" style="font-size:36px;font-weight:800;display:inline-block;padding:12px 30px">❤️ Like • 🔁 Share • 🔖 Save</span></div>
+<div id="conf"></div>
+<div id="cap"><span class="a" id="capw" style="position:relative;display:inline-block"><span id="capt"></span></span></div>
+<div id="fade"></div>
+<div id="prog"></div>
+<div id="wm">@pretestpassed.codes</div>
+<script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {RoundedBoxGeometry} from 'three/addons/geometries/RoundedBoxGeometry.js';
+const TL=window.TL, K=TL.K, CAPS=TL.CAPS, END=TL.END, HK=TL.HK;
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const eo=x=>1-Math.pow(1-clamp(x),3);
+const eio=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const back=x=>{x=clamp(x);const c1=1.8,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const lerp=(a,b,p)=>a+(b-a)*p;
+const CUES=[]; const cue=(t,n,g)=>CUES.push([+t.toFixed(3),n,g||1]);
+function set(el,o,x,y,s){el=typeof el=='string'?$(el):el;el.style.setProperty('--o',o);el.style.setProperty('--x',(x||0)+'px');el.style.setProperty('--y',(y||0)+'px');el.style.setProperty('--s',s==null?1:s)}
+function pop(el,t,t0,d){d=d||.4;const p=clamp((t-t0)/d);set(el,t<t0?0:clamp(p*2.5),0,0,t<t0?.5:.5+.5*back(p))}
+function rise(el,t,t0,d){d=d||.45;const p=clamp((t-t0)/d);set(el,t<t0?0:clamp(p*2),0,40*(1-eo(p)),1)}
+function rnd(i,k){const x=Math.sin(i*12.9898+k*78.233)*43758.5453;return x-Math.floor(x)}
+const inr=n=>Math.round(n).toLocaleString('en-IN');
+const hms=s=>{s=Math.max(0,Math.min(86399,Math.floor(s)));return String(Math.floor(s/3600)).padStart(2,'0')+':'+String(Math.floor(s%3600/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')};
+
+// binary search steps (theft at T)
+const T=14*3600+37*60+12; const STEPS=[]; {let lo=0,hi=86400;while(hi-lo>1){const m=Math.floor((lo+hi)/2);const gone=m>=T;STEPS.push({lo,hi,m,gone,nlo:gone?lo:m,nhi:gone?m:hi});if(gone)hi=m;else lo=m}}
+
+// ---------- three: CCTV vault ----------
+const renderer=new THREE.WebGLRenderer({canvas:$('gl'),antialias:true,preserveDrawingBuffer:true});
+renderer.setPixelRatio(1); renderer.setSize(1000,880,false); renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+renderer.outputColorSpace=THREE.SRGBColorSpace; renderer.toneMapping=THREE.ACESFilmicToneMapping;
+const scene=new THREE.Scene(); scene.background=new THREE.Color('#1b1f2a');
+const cam=new THREE.PerspectiveCamera(58,1000/880,0.1,100); cam.position.set(2.3,2.75,2.7); cam.lookAt(-0.55,1.15,-0.95);
+scene.add(new THREE.HemisphereLight('#dfe7ff','#3a3428',1.1));
+const lamp=new THREE.PointLight('#fff1d6',28,14,1.6); lamp.position.set(0,3.6,0.2); lamp.castShadow=true; lamp.shadow.mapSize.set(1024,1024); scene.add(lamp);
+const M=(c,o={})=>new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.8,metalness:.05},o));
+function canvasTex(w,h,draw){const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');draw(x,w,h);const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return t}
+const floorT=canvasTex(512,512,(x)=>{for(let i=0;i<8;i++)for(let j=0;j<8;j++){x.fillStyle=(i+j)%2?'#8b8f99':'#7a7e88';x.fillRect(i*64,j*64,64,64)}}); floorT.wrapS=floorT.wrapT=THREE.RepeatWrapping; floorT.repeat.set(3,3);
+const floor=new THREE.Mesh(new THREE.PlaneGeometry(10,10),new THREE.MeshStandardMaterial({map:floorT,roughness:.9}));floor.rotation.x=-Math.PI/2;floor.receiveShadow=true;scene.add(floor);
+const wallB=new THREE.Mesh(new THREE.BoxGeometry(10,4.5,0.2),M('#6d7280'));wallB.position.set(0,2.25,-3);wallB.receiveShadow=true;scene.add(wallB);
+const wallL=new THREE.Mesh(new THREE.BoxGeometry(0.2,4.5,10),M('#626775'));wallL.position.set(-3.5,2.25,0);wallL.receiveShadow=true;scene.add(wallL);
+// door on left wall
+const door=new THREE.Mesh(new THREE.BoxGeometry(0.08,2.3,1.2),M('#4b3a2a'));door.position.set(-3.38,1.15,0.9);scene.add(door);
+// sign
+{const t=canvasTex(512,128,(x,W,H)=>{x.fillStyle='#2b3a55';x.fillRect(0,0,W,H);x.fillStyle='#ffd166';x.font='bold 64px Inter';x.textAlign='center';x.textBaseline='middle';x.fillText('BANK VAULT',W/2,H/2+4)});const p=new THREE.Mesh(new THREE.PlaneGeometry(1.8,0.45),new THREE.MeshBasicMaterial({map:t}));p.position.set(-0.4,3.4,-2.88);scene.add(p)}
+// shelves
+for(let i=0;i<2;i++){const s=new THREE.Mesh(new THREE.BoxGeometry(1.4,2.6,0.5),M('#4a5060',{metalness:.3}));s.position.set(2.0+i*1.5,1.3,-2.6);s.castShadow=true;scene.add(s)}
+// table
+const table=new THREE.Mesh(new THREE.BoxGeometry(2.2,0.12,1.3),M('#5a4632'));table.position.set(-0.4,0.95,-0.9);table.castShadow=true;table.receiveShadow=true;scene.add(table);
+for(const [dx,dz] of [[-1,-.55],[1,-.55],[-1,.55],[1,.55]]){const l=new THREE.Mesh(new THREE.BoxGeometry(0.1,0.9,0.1),M('#4a3a28'));l.position.set(-0.4+dx,0.45,-0.9+dz);scene.add(l)}
+// tijori (safe)
+const safe=new THREE.Group();scene.add(safe);
+{const body=new THREE.Mesh(new RoundedBoxGeometry(1.0,1.1,0.9,3,0.06),M('#3b4250',{metalness:.6,roughness:.35}));body.castShadow=true;safe.add(body);
+ const dr=new THREE.Mesh(new THREE.BoxGeometry(0.8,0.9,0.04),M('#4d5566',{metalness:.6,roughness:.3}));dr.position.z=0.46;safe.add(dr);
+ const dial=new THREE.Mesh(new THREE.CylinderGeometry(0.15,0.15,0.06,28),M('#c9a227',{metalness:.8,roughness:.25}));dial.rotation.x=Math.PI/2;dial.position.set(0,0.12,0.5);safe.add(dial);
+ const h=new THREE.Mesh(new THREE.TorusGeometry(0.1,0.025,8,20),M('#c9a227',{metalness:.8,roughness:.25}));h.position.set(0.22,-0.18,0.5);safe.add(h);
+ const rupee=new THREE.Mesh(new THREE.PlaneGeometry(0.4,0.4),new THREE.MeshBasicMaterial({map:canvasTex(128,128,(x)=>{x.fillStyle='#ffd166';x.font='bold 100px Inter';x.textAlign='center';x.textBaseline='middle';x.fillText('₹',64,70)}),transparent:true}));rupee.position.set(-0.2,-0.2,0.49);safe.add(rupee)}
+const SAFE_POS=new THREE.Vector3(-0.4,1.56,-0.9); safe.position.copy(SAFE_POS);
+const dust=new THREE.Mesh(new THREE.PlaneGeometry(1.0,0.9),new THREE.MeshBasicMaterial({color:'#b9b4a6',transparent:true,opacity:.5}));dust.rotation.x=-Math.PI/2;dust.position.set(-0.4,1.012,-0.9);scene.add(dust);
+// thief
+const thief=new THREE.Group();scene.add(thief);
+{const b=new THREE.Mesh(new THREE.CapsuleGeometry(0.28,0.85,4,10),M('#15161c'));b.position.y=0.75;b.castShadow=true;thief.add(b);
+ const hd=new THREE.Mesh(new THREE.SphereGeometry(0.23,16,12),M('#15161c'));hd.position.y=1.55;thief.add(hd);
+ const eye=new THREE.Mesh(new THREE.BoxGeometry(0.34,0.07,0.05),M('#d9b08c'));eye.position.set(0,1.58,0.2);thief.add(eye);
+ const bag=new THREE.Mesh(new THREE.SphereGeometry(0.26,12,10),M('#5b4a2f'));bag.position.set(-0.32,0.95,-0.18);thief.add(bag)}
+// noise
+const NZ=$('noise').getContext('2d'), SZ=$('static').getContext('2d');
+function noiseFill(ctx,seed,alpha){const im=ctx.createImageData(250,220);for(let i=0;i<im.data.length;i+=4){const v=rnd(i+seed*7,seed)*255;im.data[i]=im.data[i+1]=im.data[i+2]=v;im.data[i+3]=alpha}ctx.putImageData(im,0,0)}
+function cctv(view,t,staticAmt){
+  const present=view<T, near=view>=T-25&&view<T+4;
+  safe.visible=present; dust.visible=!present;
+  thief.visible=near; if(near){const d=view-(T-25);let x,z,ry=0;
+    if(view<T-3){const p=clamp(d/22);x=lerp(-3.0,-1.1,p);z=lerp(0.9,-0.1,p);ry=Math.PI*0.35}else if(view<T){x=-1.1;z=-0.1;ry=Math.PI*0.75}else{const p=clamp((view-T)/4);x=lerp(-1.1,-3.0,p);z=lerp(-0.1,0.9,p);ry=-Math.PI*0.6}
+    thief.position.set(x,0,z);thief.rotation.y=ry}
+  if(view>=T&&view<T+4){safe.visible=true;safe.position.set(thief.position.x+0.25,1.2,thief.position.z+0.2);safe.scale.setScalar(0.55)} else {safe.position.copy(SAFE_POS);safe.scale.setScalar(1);if(view>=T)safe.visible=false}
+  $('ts').textContent=hms(view); $('recdot').style.opacity=(Math.floor(t*2)%2)?1:.25;
+  noiseFill(NZ,Math.floor(t*30),255); $('static').style.opacity=staticAmt; if(staticAmt>0) noiseFill(SZ,Math.floor(t*30)+999,255);
+  renderer.render(scene,cam)}
+
+// confetti
+(function(){let ch='';for(let i=0;i<90;i++){const col=['#5cd6ff','#f472b6','#ffd166','#5ee6a0','#a78bfa','#ffa94d'][i%6];ch+=`<div class="a" id="cf${i}" style="left:0;top:0;width:${14+(i*7)%12}px;height:${8+(i*5)%10}px;background:${col};border-radius:3px"></div>`}$('conf').innerHTML=ch})();
+
+// binary-search step schedule (main explanation)
+function stepTimes(){const t=[];t[0]=K.b1;t[1]=K.b2;t[2]=K.b3;const n=STEPS.length;const a=K.fast0,b=K.b17;for(let i=3;i<n-1;i++) t[i]=a+(b-a)*(i-3)/(n-4);t[n-1]=K.b17;return t}
+const ST=stepTimes();
+(function(){
+ cue(0.02,'boom',.35);
+ for(let i=0;i<17;i++) cue(0.55+i*0.19,'tick',.25); cue(0.55+17*0.19,'ding',.5);
+ cue(HK,'whoosh',.45); cue(K.chori,'buzz',.45); cue(K.math,'pop',.7);
+ cue(K.lin,'clock',.4); cue(K.acp17,'boom',.5); cue(K.amazon,'pop',.8); cue(K.ctc,'cash',.8);
+ ST.forEach((s,i)=>{cue(s,'whoosh',i<3?.4:.15); cue(i<3?[K.r1,K.r2,K.r3][i]:s+0.15,STEPS[i].gone?'buzz':'ding',i<3?.5:.15)});
+ cue(K.caught,'success',.9); cue(K.caught+0.1,'sparkle',.7);
+ cue(K.wow,'riser',.35); cue(K.w17,'boom',.5);
+ cue(K.yaad,'pop'); cue(K.comment,'pop',.6); cue(K.follow+0.3,'click'); cue(K.follow+0.35,'sparkle',.9);
+})();
+function setLabel(t,k,h,t0){$('labk').textContent=k;$('labh').innerHTML=h;const p=clamp((t-t0)/.35);set('lab',clamp(p*2),-20*(1-eo(p)),0,1)}
+function bar(d1,d2,mk,lo,hi,m,W){const w=W||1000;$(d1).style.left='0px';$(d1).style.width=(lo/86400*100)+'%';$(d2).style.left=(hi/86400*100)+'%';$(d2).style.width=((86400-hi)/86400*100)+'%';if(mk){$(mk).style.left=(m/86400*100)+'%';$(mk).style.opacity=m==null?0:1}}
+
+window.render=function(t){
+ $('prog').style.width=(1080*clamp(t/END))+'px';
+ const sc= t<HK?'H': t<K.amazon-0.1?'P1': t<K.p4-0.1?'P3': t<K.wow-0.1?'P4': t<K.yaad-0.1?'P5':'P6';
+ let fd=0;for(const b of [HK,K.amazon-0.1,K.p4-0.1,K.wow-0.1,K.yaad-0.1]) fd=Math.max(fd,1-Math.abs(t-b)/0.16); $('fade').style.opacity=clamp(fd)*0.85;
+ for(const id of ['HT','HR','HB','MATH','LIN','ACPB','A1','A2','A4','A6','tl','VER','CAUGHT','W1','W2','W3','W4','E1','E2','E3','E5','E6','E7','lab','cframe']) set(id,0);
+ const mon=$('mon'); let view=0, stat=0;
+ if(sc=='H'){
+  set('cframe',1); mon.style.left='40px';mon.style.top='1030px';mon.style.transform='scale(0.47)';set('mon',1);
+  set('HT',1,0,0,1+0.03*Math.sin(t*6)); set('HR',1); set('HB',1);
+  const k=Math.min(17,Math.floor(clamp((t-0.55)/(17*0.19))*17+(t>=0.55?1:0))); const st=k>0?STEPS[k-1]:null;
+  $('hk').textContent=k; $('hf').textContent=inr(st?st.nhi-st.nlo:86400); $('hres').textContent=k>=17?'🎯 chor: 14:37:12':'';
+  if(st){bar('hd1','hd2','hm',st.nlo,st.nhi,st.m);view=st.m} else {bar('hd1','hd2','hm',0,86400,43200);view=t*20000}
+  if(k>=17) view=T-1+((t*2)%2>1?0:0); stat=st&&t-(0.55+(k-1)*0.19)<0.05?0.2:0;
+ } else {
+  mon.style.left='40px';mon.style.top='250px';mon.style.transform='none';set('mon',sc=='P6'?0:1);
+ }
+ if(sc=='P1'){ // story: live footage, theft, math, linear scan, ACP 17
+  setLabel(t,'CID • Case 001',t<K.math?'Tijori <r>chori</r> ho gayi! 😱':t<K.lin?'<y>24 ghante</y> ki footage 🎥':t<K.acp17?'Ek-ek second dekhoge? 🐌':'ACP ka tareeka 🔎',HK);
+  if(t<K.math){ // play theft clip around T
+    const p=clamp((t-HK)/(K.math-HK)); view=T-22+p*28 }
+  else if(t<K.lin){ view=86399*clamp((t-K.math)/1.6); pop('MATH',t,K.math) }
+  else { const n=Math.floor(1+Math.pow(clamp((t-K.lin)/2.4),2)*120); view=n; set('LIN',t<K.acp17-0.1?1:0); $('linn').textContent=inr(n); if(t>=K.acp17-0.1){view=T-1;} }
+  if(t>=K.acp17-0.1){rise('ACPB',t,K.acp17-0.1)}
+ }
+ if(sc=='P3'){ set('mon',0.25); view=T-2; setLabel(t,'Interview','Ye trick: <y>Binary Search</y> 🔥',K.amazon);
+  pop('A1',t,K.amazon); rise('A2',t,K.amazon+0.6); pop('A4',t,K.ctc-0.1); $('ctcn').textContent=Math.round(25*eo((t-K.ctc+0.1)/0.9)); rise('A6',t,K.ctc+0.5) }
+ if(sc=='P4'){
+  set('tl',1); let i=-1; for(let j=0;j<STEPS.length;j++) if(t>=ST[j]) i=j;
+  const st=i>=0?STEPS[i]:null; const RS=[K.r1,K.r2,K.r3],ES=[K.e1,K.e2,K.e3]; const showRes=st&&t>=(i<3?RS[i]:ST[i]+0.12); const elim=st&&t>=(i<3?ES[i]:ST[i]+0.14);
+  const lo=st?(elim?st.nlo:st.lo):0, hi=st?(elim?st.nhi:st.hi):86400;
+  bar('d1','d2','mk',lo,hi,st?st.m:null); $('bk').textContent=i+1; $('bf').textContent=inr(hi-lo);
+  $('zl').textContent=hms(lo); $('zr').textContent=hms(Math.min(hi,86399));
+  view=st?st.m:(t<K.agli?0:86399); stat=st&&t-ST[i]<(i<3?0.16:0.07)?(i<3?0.6:0.3):(!st&&Math.abs(t-K.agli)<0.15?0.6:0);
+  if(st&&showRes&&t<K.caught){set('VER',1);$('vert').innerHTML=`${hms(st.m)} ➜ `+(st.gone?'<r>❌ tijori gayab</r> ⬅️ pehle hui':'<g>✅ tijori hai</g> ➡️ baad mein hui')}
+  setLabel(t,'ACP ka Binary Search', i<0?(t<K.agli?'Raat 12 baje: tijori <g>✅</g>':'Agli raat 12: tijori <r>❌</r>'):i<3?'Beech ka time dekho 🎯':t<K.caught?'Har check pe <y>aadhi</y> footage ✂️':'🎯 Chor pakda gaya!',K.p4);
+  if(t>=K.caught){view=T-1; pop('CAUGHT',t,K.caught); set('VER',0)}
+ }
+ if(sc=='P5'){ set('mon',0.2); view=T-1; setLabel(t,'Result','<r>86,400</r> ➜ <g>17</g> checks',K.wow); pop('W1',t,K.wow); pop('W2',t,K.wow+0.5); pop('W3',t,K.w17-0.1,0.5); rise('W4',t,K.w17+0.5) }
+ if(sc=='P6'){
+  pop('E1',t,K.yaad-0.05); pop('E2',t,K.l1-0.1); pop('E3',t,K.comment-0.1); pop('E5',t,K.follow-0.4); rise('E7',t,K.follow+0.8);
+  const tc=K.follow+0.3;const p=eo((t-tc+0.9)/0.8);const x=900+(560-900)*p,y=1370+(1050-1370)*p;set('E6',clamp((t-tc+1)/.3),x-60,y-60,t>tc&&t<tc+.2?.85:1);
+  const b=$('fbtn');if(t>tc){b.textContent='FOLLOWING ✓';b.style.background='#475569'}else{b.textContent='FOLLOW';b.style.background='#3b82f6'}
+  for(let i=0;i<90;i++){const dt=t-tc;const el=$('cf'+i);if(dt<0){set(el,0);continue}const ang=rnd(i,1)*Math.PI*2, sp=500+rnd(i,2)*900;set(el,clamp(3-dt),540+Math.cos(ang)*sp*dt*0.8,900+Math.sin(ang)*sp*dt*0.7-500*dt+700*dt*dt,1)}
+ } else for(let i=0;i<90;i++) set('cf'+i,0);
+ if(sc!='P6') cctv(view,t,stat);
+ {let cur=null;for(let i=0;i<CAPS.length;i++){const s0=CAPS[i][0],e0=i+1<CAPS.length?Math.min(CAPS[i+1][0],s0+3.6):s0+2.6;if(t>=s0-0.05&&t<e0) cur=[i,s0,e0]}
+  if(cur&&sc!='H'&&sc!='P6'){$('capt').innerHTML=CAPS[cur[0]][1];const p=clamp((t-cur[1]+0.05)/.18);set('capw',Math.min(clamp(p*2),clamp((cur[2]-t)/.12)),0,12*(1-eo(p)),.94+.06*back(p))} else set('capw',0)}
+};
+window.CUES=CUES; window.render(0); window.READY=true;
+</script></body></html>
