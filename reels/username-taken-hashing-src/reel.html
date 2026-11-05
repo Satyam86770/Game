@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:transparent}
+body{font-family:'Inter','Noto Color Emoji',sans-serif;color:#fff}
+.mono{font-family:'DejaVu Sans Mono','Noto Color Emoji',monospace}
+#stage{position:absolute;inset:0;overflow:hidden}
+#bg{position:absolute;inset:0;background:
+ radial-gradient(700px 700px at var(--b1x,20%) var(--b1y,75%),rgba(150,40,200,.35),transparent 70%),
+ radial-gradient(650px 650px at var(--b2x,85%) var(--b2y,30%),rgba(34,211,238,.18),transparent 70%),
+ radial-gradient(900px 900px at 50% 110%,rgba(40,80,220,.30),transparent 70%),
+ linear-gradient(180deg,#0b0b2b 0%,#14102f 50%,#0b0a24 100%)}
+#prog{position:absolute;left:0;top:0;height:10px;background:linear-gradient(90deg,#22d3ee,#a855f7,#f472b6);box-shadow:0 0 18px #22d3ee}
+#wm{position:absolute;top:95px;width:100%;text-align:center;font-size:30px;font-weight:600;color:rgba(255,255,255,.7)}
+.scene{position:absolute;inset:0;opacity:0}
+.a{position:absolute;opacity:var(--o,0);transform:translate(var(--x,0px),var(--y,0px)) scale(var(--s,1)) rotate(var(--r,0deg));transform-origin:center}
+.c{left:0;width:1080px;text-align:center}
+.h1{font-size:64px;font-weight:900;line-height:1.15;text-shadow:0 4px 18px rgba(0,0,0,.8)}
+.h2{font-size:50px;font-weight:800;line-height:1.25;text-shadow:0 3px 14px rgba(0,0,0,.8)}
+y,.y{color:#fde047}r,.r{color:#fb7185}g,.g{color:#4ade80}c,.cy{color:#22d3ee}o,.or{color:#fb923c}
+.pill{display:inline-block;padding:14px 32px;border-radius:999px;font-size:38px;font-weight:900}
+.pill.cy{background:#22d3ee;color:#062033;box-shadow:0 0 30px rgba(34,211,238,.6)}
+.pill.or{background:#fb923c;color:#2a1000;box-shadow:0 0 30px rgba(251,146,60,.6)}
+.pill.g{background:#22c55e;color:#03210f;box-shadow:0 0 30px rgba(34,197,94,.6)}
+.pill.pu{background:#a855f7;color:#fff;box-shadow:0 0 30px rgba(168,85,247,.6)}
+.pill.r{background:#f43f5e;color:#fff;box-shadow:0 0 30px rgba(244,63,94,.6)}
+.pill.dk{background:rgba(10,10,30,.9);color:#fde047;border:2px solid rgba(253,224,71,.6)}
+.chip{display:inline-block;margin:0 10px;padding:18px 30px;border-radius:20px;font-size:52px;font-weight:900}
+.card{border-radius:28px;background:rgba(12,16,45,.92);border:4px solid #22d3ee;padding:26px 36px}
+#cap{position:absolute;left:60px;width:960px;top:1600px;text-align:center}
+#capt{display:inline-block;padding:14px 28px;border-radius:20px;background:rgba(0,0,0,.72);font-size:46px;font-weight:900;line-height:1.2;max-width:960px}
+.stamp{display:inline-block;padding:18px 50px;border:10px solid #f43f5e;border-radius:22px;color:#f43f5e;font-size:100px;font-weight:900;letter-spacing:6px;background:rgba(40,0,10,.55)}
+/* phone */
+#phone{left:250px;top:300px;width:580px;height:1000px;border-radius:64px;background:#0a0a0f;border:10px solid #2a2a35;box-shadow:0 30px 80px rgba(0,0,0,.7),0 0 60px rgba(168,85,247,.35);overflow:hidden}
+#phone .scr{position:absolute;inset:0;background:#fafafa;color:#111}
+.inp{position:absolute;left:44px;width:472px;height:92px;border-radius:16px;border:3px solid #d4d4d8;background:#fff;font-size:38px;padding:22px 24px;font-weight:600;color:#111}
+.btn{position:absolute;left:44px;width:472px;height:90px;border-radius:16px;background:#3b82f6;color:#fff;font-size:36px;font-weight:800;text-align:center;line-height:90px}
+.user{position:absolute;left:140px;width:800px;height:96px;border-radius:20px;background:rgba(12,16,45,.92);border:3px solid #334155;font-size:40px;font-weight:800;padding:22px 30px}
+.bk{position:absolute;width:110px;height:110px;border-radius:18px;background:rgba(12,16,45,.92);border:4px solid #475569;text-align:center}
+.bk i{display:block;font-style:normal;font-size:26px;color:#94a3b8;font-weight:800;margin-top:6px}
+.bk b{display:block;font-size:26px;font-weight:900;margin-top:8px}
+</style></head>
+<body><div id="stage">
+<div id="bg"></div>
+
+<!-- HOOK: phone signup -->
+<div class="scene" id="H">
+  <div class="a c h1" id="H0" style="top:160px;font-size:56px">Naya username try karte hain... 🤞</div>
+  <div class="a c h1" id="H1" style="top:160px;font-size:62px">Ye bhi <r>TAKEN?!</r> 😤</div>
+  <div class="a c h1" id="H2" style="top:160px;font-size:54px"><y>200 crore</y> users mein check<br><g>0.001 sec</g> mein?! 🤯</div>
+  <div class="a" id="phone">
+   <div class="scr">
+    <div style="position:absolute;top:22px;width:100%;text-align:center;font-size:24px;font-weight:700;color:#555">9:41</div>
+    <div style="position:absolute;top:120px;width:100%;text-align:center;font-size:84px">📸</div>
+    <div style="position:absolute;top:240px;width:100%;text-align:center;font-size:40px;font-weight:900">Choose username</div>
+    <div style="position:absolute;top:300px;width:100%;text-align:center;font-size:26px;color:#666">You can always change it later.</div>
+    <div class="inp" id="pinp" style="top:380px"><span id="ptxt"></span><span id="pcar" style="color:#3b82f6">|</span><span id="pmark" style="position:absolute;right:20px;top:18px;font-size:44px"></span></div>
+    <div id="pmsg" style="position:absolute;left:48px;top:490px;width:480px;font-size:28px;font-weight:700;color:#ef4444"></div>
+    <div class="btn" id="pbtn" style="top:580px">Next</div>
+   </div>
+  </div>
+  <div class="a c" id="HT" style="top:1340px"><span class="pill dk mono" id="htt" style="font-size:38px">⚡ checked in 0.001 sec</span></div>
+  <div class="a c" id="HC" style="top:1440px"><span class="mono" style="font-size:40px;font-weight:900;color:#cbd5e1">🔍 <span id="hcn">0</span> users</span></div>
+</div>
+
+<!-- S1 company -->
+<div class="scene" id="S1">
+  <div class="a c" id="A1" style="top:300px"><span style="display:inline-block;background:#111827;color:#ff9900;font-size:96px;font-weight:900;letter-spacing:4px;padding:10px 50px;border-radius:18px;border:4px solid #ff9900;box-shadow:0 0 50px rgba(255,153,0,.5)">AMAZON</span></div>
+  <div class="a c" id="A2" style="top:470px"><span class="pill dk" style="font-size:40px">SDE-1 • Fresher 🎓</span></div>
+  <div class="a" id="A3" style="left:90px;top:600px;width:900px;text-align:center"><div class="card" style="border-color:#fde047;font-size:46px;font-weight:900;line-height:1.35">❓ "<y>HashMap</y> andar se<br>kaise kaam karta hai?"</div></div>
+  <div class="a c" id="A4" style="top:870px"><span style="display:inline-block;padding:16px 44px;border-radius:24px;background:rgba(10,40,20,.92);border:4px solid #4ade80;box-shadow:0 0 50px rgba(74,222,128,.5);font-size:70px;font-weight:900;color:#4ade80">💰 CTC: ~₹<span id="ctcn">25</span> LPA <span style="font-size:34px;color:#bbf7d0">(Year 1)</span></span></div>
+  <div class="a c" id="A5" style="top:1010px"><span style="display:inline-block;padding:14px 30px;border-radius:20px;background:rgba(12,16,45,.92);border:3px solid #fde047;font-size:34px;font-weight:800">Base <y>₹19.17L</y> • Sign-on <y>₹6.47L</y> (Yr 1) • RSU <y>₹15.56L</y>/4y</span></div>
+  <div class="a c" id="A6" style="top:1110px;font-size:26px;color:#94a3b8;font-weight:700">Source: LeetCode Discuss • Amazon SDE-1 offer, Bangalore, Feb 2025</div>
+</div>
+
+<!-- S2 linear scan -->
+<div class="scene" id="S2">
+  <div class="a c" id="L0" style="top:190px"><span class="pill r" style="font-size:42px">🐌 Normal tareeka: ek-ek check</span></div>
+  <div class="a c" id="L1" style="top:300px"><span class="pill dk mono" style="font-size:36px">looking for: "rahul"</span></div>
+  <div id="ulist"></div>
+  <div class="a c" id="LC" style="top:1150px"><span class="mono" style="font-size:52px;font-weight:900;color:#fde047">checks: <span id="lcn">0</span></span></div>
+  <div class="a c" id="L2" style="top:1260px"><span class="pill r" style="font-size:44px">😵 Har signup pe 200 crore checks!</span></div>
+  <div class="a c" id="L3" style="top:1370px"><span style="font-size:120px">🖥️💨🔥</span></div>
+</div>
+
+<!-- S3 hashing -->
+<div class="scene" id="S3">
+  <div class="a c" id="M0" style="top:180px"><span class="pill g" style="font-size:42px">⚡ Smart tareeka: HASHING</span></div>
+  <div class="a" id="MU" style="left:70px;top:330px"><span class="pill cy mono" id="mut" style="font-size:40px">"rahul"</span></div>
+  <div class="a" id="MF" style="left:480px;top:300px;width:250px;height:130px;border-radius:26px;background:linear-gradient(135deg,#a855f7,#6d28d9);border:4px solid #fff;text-align:center;box-shadow:0 0 40px rgba(168,85,247,.6)"><div class="mono" style="font-size:48px;font-weight:900;line-height:80px">h( )</div><div style="font-size:24px;font-weight:800;margin-top:-10px">hash function ⚙️</div></div>
+  <div class="a" id="MN" style="left:790px;top:315px"><span class="pill or mono" id="mnt" style="font-size:52px">4</span></div>
+  <div class="a c" id="MA" style="top:480px;font-size:30px;color:#cbd5e1;font-weight:800">number = bucket ka address 📍</div>
+  <svg id="msvg" width="1080" height="1920" style="position:absolute;left:0;top:0"><path id="marr" d="" stroke="#fde047" stroke-width="8" fill="none" stroke-dasharray="18 12"/></svg>
+  <div id="bks"></div>
+  <div class="a c" id="MR" style="top:1000px"><span class="pill r" style="font-size:46px">❌ "rahul" TAKEN • 1 lookup</span></div>
+  <div class="a c" id="MG" style="top:1000px"><span class="pill g" style="font-size:46px">✅ "rahul_2026" AVAILABLE!</span></div>
+  <div class="a" id="MC" style="left:110px;top:1130px;width:860px"><div class="card mono" style="border-color:#4ade80;font-size:32px;line-height:1.5;padding:18px 28px">
+   <span style="color:#94a3b8">// C++</span><br>unordered_set&lt;string&gt; users;<br>users.<y>count</y>("rahul");  <g>// O(1) ⚡</g></div></div>
+</div>
+
+<!-- S4 wow -->
+<div class="scene" id="S4">
+  <div class="a c h1" id="W1" style="top:300px;font-size:76px"><y>200 CRORE</y> users</div>
+  <div class="a c" id="W2" style="top:430px;font-size:90px">⬇️</div>
+  <div class="a c h1" id="W3" style="top:560px;font-size:110px;color:#4ade80;text-shadow:0 0 40px rgba(74,222,128,.7)">1 LOOKUP ⚡</div>
+  <div class="a" id="W4" style="left:120px;top:800px;width:840px"><div class="card" style="border-color:#fb7185;font-size:42px;font-weight:900;line-height:1.7">
+   🐌 List: <r>200,00,00,000</r> checks<br>⚡ Hash: <g>1</g> check</div></div>
+  <div class="a c" id="W5" style="top:1100px"><span class="chip" style="background:#15803d;font-size:64px">⏱ O(1)</span></div>
+</div>
+
+<!-- S5 collision -->
+<div class="scene" id="S5">
+  <div class="a c" id="K0" style="top:190px"><span class="pill pu" style="font-size:42px">🤔 INTERVIEWER KA FOLLOW-UP</span></div>
+  <div class="a c h2" id="K1" style="top:300px">Do usernames, <y>same hash</y>? 😳</div>
+  <div class="a" id="K2" style="left:150px;top:440px"><span class="pill cy mono" style="font-size:38px">h("rahul") = 4</span></div>
+  <div class="a" id="K3" style="left:560px;top:440px"><span class="pill cy mono" style="font-size:38px">h("riya") = 4</span></div>
+  <div class="a c" id="K4" style="top:580px"><span class="pill r" style="font-size:48px">💥 COLLISION!</span></div>
+  <div class="a" id="K5" style="left:150px;top:740px"><div class="bk" style="left:0;top:0;border-color:#fde047"><i>[4]</i><b>📦</b></div></div>
+  <div class="a" id="K6" style="left:300px;top:765px"><span class="pill dk mono" style="font-size:36px">rahul ➜ riya ➜ ∅</span></div>
+  <div class="a c" id="K7" style="top:950px"><span class="pill g" style="font-size:40px">✅ Bucket mein chhoti list (chaining)</span></div>
+</div>
+
+<!-- S6 summary + CTA -->
+<div class="scene" id="S6">
+  <div class="a c h1" id="E1" style="top:230px;color:#fde047;font-size:58px">EK LINE MEIN YAAD RAKHO 🧠</div>
+  <div class="a c" id="E2" style="top:370px"><span class="chip" style="background:#6d28d9;font-size:40px">#️⃣ hash</span><span class="chip" style="background:#9a3412;font-size:40px">📦 bucket</span><span class="chip" style="background:#15803d;font-size:40px">⚡ O(1)</span></div>
+  <div class="a c" id="E3" style="top:500px"><span class="pill dk" style="font-size:36px">💬 Tumhara kaunsa username TAKEN tha?</span></div>
+  <div class="a" id="E5" style="left:190px;top:640px;width:700px;height:380px;border-radius:30px;background:rgba(12,16,45,.92);border:4px solid #f472b6;box-shadow:0 0 50px rgba(244,114,182,.4)">
+    <div style="position:absolute;left:290px;top:26px;width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#f472b6);display:flex;align-items:center;justify-content:center;font-size:50px;font-weight:900;border:4px solid #fff">PP</div>
+    <div style="position:absolute;width:100%;top:165px;text-align:center;font-size:46px;font-weight:900">@pretestpassed.codes</div>
+    <div id="fbtn" style="position:absolute;left:180px;top:255px;width:340px;height:90px;border-radius:20px;background:#3b82f6;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:900">FOLLOW</div></div>
+  <div class="a" id="E6" style="left:0;top:0;font-size:110px">👆</div>
+  <div class="a c" id="E7" style="top:1080px"><span class="pill dk" style="font-size:38px">❤️ Like • 🔁 Share • 🔖 Save</span></div>
+  <div id="conf"></div>
+</div>
+
+<div id="cap"><span class="a" id="capw" style="position:relative;display:inline-block"><span id="capt"></span></span></div>
+<div id="prog"></div>
+<div id="wm">@pretestpassed.codes</div>
+</div>
+<script>
+const TL=window.TL, K=TL.K, CAPS=TL.CAPS, END=TL.END;
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const eo=x=>1-Math.pow(1-clamp(x),3);
+const eio=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const back=x=>{x=clamp(x);const c1=2.0,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const CUES=[]; const cue=(t,n,g)=>CUES.push([+t.toFixed(3),n,g||1]);
+function set(el,o,x,y,s,r){el=typeof el=='string'?$(el):el;el.style.setProperty('--o',o);el.style.setProperty('--x',(x||0)+'px');el.style.setProperty('--y',(y||0)+'px');el.style.setProperty('--s',s==null?1:s);el.style.setProperty('--r',(r||0)+'deg')}
+function pop(el,t,t0,d){d=d||.4;const p=clamp((t-t0)/d);set(el,t<t0?0:clamp(p*2.5),0,0,t<t0?.4:.4+.6*back(p))}
+function rise(el,t,t0,d){d=d||.45;const p=clamp((t-t0)/d);set(el,t<t0?0:clamp(p*2),0,50*(1-eo(p)),1)}
+function vis(t,a,b,f){f=f||.15;return Math.min(clamp((t-a)/f),clamp((b-t)/f))}
+function rnd(i,k){const x=Math.sin(i*12.9898+k*78.233)*43758.5453;return x-Math.floor(x)}
+const inr=n=>Math.round(n).toLocaleString('en-IN');
+
+// typing attempts in the hook: [startTyping, text, resultTime]
+const TRY=[[K.ty1,'rahul',K.tk1],[K.ty2,'rahul123',K.tk2],[K.ty3,'rahul.official',K.tk3]];
+// user list (S2)
+const USERS=['aarav','priya','rohan','neha','vikram','sneha','arjun','kavya','ishaan','meera'];
+(function(){let h='';for(let i=0;i<USERS.length;i++) h+=`<div class="a user mono" id="u${i}" style="top:0">@${USERS[i]}<span id="um${i}" style="position:absolute;right:30px"></span></div>`;$('ulist').innerHTML=h})();
+// buckets (S3)
+const BX=i=>60+(i%5)*196, BYi=i=>620+Math.floor(i/5)*180, BY=620;
+const BKV={1:'priya',2:'aarav',4:'rahul',6:'neha',8:'rohan',9:'kavya'};
+(function(){let h='';for(let i=0;i<10;i++) h+=`<div class="a bk" id="b${i}" style="left:${BX(i)}px;top:${BYi(i)}px;width:176px;height:150px"><i style="font-size:30px">[${i}]</i><b class="mono" style="font-size:${BKV[i]?34:40}px;margin-top:14px">${BKV[i]||'∅'}</b></div>`;$('bks').innerHTML=h})();
+// confetti
+(function(){let ch='';for(let i=0;i<90;i++){const col=['#22d3ee','#f472b6','#fde047','#4ade80','#a855f7','#fb923c'][i%6];ch+=`<div class="a" id="cf${i}" style="left:0;top:0;width:${14+(i*7)%12}px;height:${8+(i*5)%10}px;background:${col};border-radius:3px"></div>`}$('conf').innerHTML=ch})();
+
+(function(){
+ for(const [a,s,b] of TRY){for(let i=0;i<s.length;i++) cue(a+i*Math.min(0.09,(b-0.25-a)/s.length),'type',.5); cue(b,'buzz',.55)}
+ cue(K.kaise,'riser',.35); cue(K.kaise+0.4,'boom',.45);
+ cue(K.amazon-0.05,'whoosh',.5); cue(K.amazon,'slap',.6); cue(K.q,'pop',.8); cue(K.ctc,'cash',.9);
+ cue(K.normal,'whoosh',.4); for(const k of ['aarav','priya','rohan']) cue(K[k],'buzz',.3); cue(K.crore,'boom',.5); cue(K.dhuaan,'fire',.5);
+ cue(K.hashing,'success',.6); cue(K.hfunc,'whoosh',.5); cue(K.num,'pop',.7); cue(K.rahul,'pop',.6); cue(K.open,'whoosh',.5); cue(K.found,'buzz',.6);
+ cue(K.r2,'whoosh',.5); cue(K.h7,'pop',.6); cue(K.avail,'success',.8);
+ cue(K.wow,'riser',.4); cue(K.one,'boom',.6); cue(K.one+0.1,'sparkle',.7); cue(K.o1,'ding',.7);
+ cue(K.twist,'riser',.35); cue(K.twist+0.4,'slap',.5); cue(K.coll,'boom',.5); cue(K.chain,'success',.6);
+ cue(K.yaad,'pop'); cue(K.l1,'pop'); cue(K.l2,'pop'); cue(K.l3,'pop'); cue(K.comment,'pop',.6); cue(K.follow+0.3,'click'); cue(K.follow+0.35,'sparkle',.9);
+})();
+
+window.render=function(t){
+ $('prog').style.width=(1080*clamp(t/END))+'px';
+ const bg=$('bg');bg.style.setProperty('--b1x',(20+8*Math.sin(t*.25))+'%');bg.style.setProperty('--b1y',(75+6*Math.cos(t*.2))+'%');bg.style.setProperty('--b2x',(82+6*Math.cos(t*.3))+'%');bg.style.setProperty('--b2y',(28+8*Math.sin(t*.22))+'%');
+ const W={H:[-1,K.amazon-0.1],S1:[K.amazon-0.1,K.normal-0.1],S2:[K.normal-0.1,K.hashing-0.1],S3:[K.hashing-0.1,K.wow-0.1],S4:[K.wow-0.1,K.twist-0.1],S5:[K.twist-0.1,K.yaad-0.1],S6:[K.yaad-0.1,END+1]};
+ for(const id in W){const o=vis(t,W[id][0],W[id][1],.12);const el=$(id);el.style.opacity=o;el.style.display=o>0?'block':'none'}
+ // HOOK
+ set('phone',1,0,0,1);
+ {let txt='',mark='',msg='',red=false;
+  for(const [a,s,b] of TRY){ if(t>=a){const per=Math.min(0.09,(b-0.25-a)/s.length);txt=s.slice(0,Math.max(0,Math.min(s.length,Math.floor((t-a)/per)+1)));
+     if(t>=b-0.2&&t<b){mark='⏳'} if(t>=b){mark='❌';msg=`❌ "${s}" isn't available. Try another.`;red=true} else msg=''}}
+  $('ptxt').textContent=txt;$('pmark').textContent=mark;$('pmsg').textContent=msg;$('pinp').style.borderColor=red?'#ef4444':'#d4d4d8';
+  $('pcar').style.opacity=(Math.floor(t*3)%2)?1:0;
+  const sh=TRY.reduce((m,[a,s,b])=>t>=b&&t<b+0.35?Math.sin((t-b)*60)*12*(1-(t-b)/0.35):m,0);$('pinp').style.transform=`translateX(${sh}px)`;}
+ pop('H0',t,0.05); if(t>=K.tk1-0.1) set('H0',0); pop('H1',t,K.tk1); if(t>=K.kaise-0.15) set('H1',0); pop('H2',t,K.kaise);
+ {const ht=TRY.filter(x=>t>=x[2]).length;set('HT',ht>0?1:0,0,0,ht>0&&t<TRY[ht-1][2]+0.3?1.15:1)}
+ set('HC',t>=K.kaise-0.1?1:0); $('hcn').textContent=inr(2000000000*eo((t-K.kaise+0.1)/1.2));
+ // S1
+ pop('A1',t,K.amazon); pop('A2',t,K.amazon+0.5); rise('A3',t,K.q-0.1); pop('A4',t,K.ctc-0.1); $('ctcn').textContent=Math.round(25*eo((t-K.ctc+0.1)/0.9)); pop('A5',t,K.ctc+0.4); rise('A6',t,K.ctc+0.7);
+ // S2
+ pop('L0',t,K.normal); rise('L1',t,K.normal+0.3);
+ {const sp=K.crore-K.aarav; for(let i=0;i<USERS.length;i++){const ti=i<3?[K.aarav,K.priya,K.rohan][i]-0.15:K.rohan+0.2+(i-3)*0.12;
+   const off=t>K.rohan+0.2?Math.min(7,(t-K.rohan-0.2)/0.12)*100:0; const y=420+i*110-off;
+   const el=$('u'+i); set(el,t>=ti-0.1&&y>380&&y<1080?1:0,0,y,1); el.style.borderColor=t>=ti+0.15?'#f43f5e':'#334155'; $('um'+i).textContent=t>=ti+0.15?'❌':''}}
+ set('LC',t>=K.aarav-0.2?1:0); {let n=0;if(t>=K.aarav) n=Math.min(3,1+[K.priya,K.rohan].filter(x=>t>=x).length); if(t>K.rohan+0.2) n=3+2000000000*Math.pow(clamp((t-K.rohan-0.2)/(K.crore-K.rohan-0.2+0.6)),3); $('lcn').textContent=inr(n)}
+ pop('L2',t,K.crore); pop('L3',t,K.dhuaan-0.1);
+ // S3 hashing
+ pop('M0',t,K.hashing-0.05);
+ const second=t>=K.r2-0.1;
+ $('mut').textContent=second?'"rahul_2026"':'"rahul"'; $('mnt').textContent=second?'7':'4';
+ {const a0=second?K.r2-0.1:K.hfunc-0.1; const p=eio((t-a0)/0.6); set('MU',t>=a0?1:0,90*p*(second?0:1)*0,0,1)}
+ pop('MF',t,K.hfunc); {const tn=second?K.h7-0.1:K.num-0.1; pop('MN',t,tn); rise('MA',t,K.num+0.2)}
+ for(let i=0;i<10;i++){const el=$('b'+i);rise(el,t,K.num+0.1+i*0.05,0.35);const hi=(!second&&t>=K.open-0.1&&i==4)||(second&&t>=K.h7&&i==7);
+   el.style.borderColor=hi?(i==4?'#f43f5e':'#4ade80'):'#475569';el.style.boxShadow=hi?`0 0 30px ${i==4?'rgba(244,63,94,.7)':'rgba(74,222,128,.7)'}`:'none'}
+ {const tgt=second?7:4,ts=second?K.h7:K.open-0.1;const p=eo((t-ts)/0.5);const x0=840,y0=400,x1=BX(tgt)+88,y1=BYi(tgt)-10;
+  $('marr').setAttribute('d',t>=ts?`M${x0} ${y0} Q ${(x0+x1)/2} ${y0+40} ${x0+(x1-x0)*p} ${y0+(y1-y0)*p}`:'')}
+ pop('MR',t,K.found-0.1); if(second) set('MR',0); pop('MG',t,K.avail-0.1); rise('MC',t,K.found+0.6);
+ // S4 wow
+ pop('W1',t,K.wow); pop('W2',t,K.wow+0.5); pop('W3',t,K.one-0.1,0.5); rise('W4',t,K.one+0.5); pop('W5',t,K.o1-0.1);
+ // S5 collision
+ pop('K0',t,K.twist); pop('K1',t,K.twist+0.6); pop('K2',t,K.twist+1.6); pop('K3',t,K.twist+2.1); pop('K4',t,K.coll-0.1); pop('K5',t,K.chain-0.3); rise('K6',t,K.chain); pop('K7',t,K.chain+0.6);
+ // S6
+ pop('E1',t,K.yaad-0.05);
+ {const el=$('E2');const p=clamp((t-K.l1+0.1)/.3);set(el,t<K.l1-0.1?0:clamp(p*2.5),0,0,.5+.5*back(p));const ch=el.querySelectorAll('.chip');ch.forEach((c,i)=>c.style.opacity=t>=[K.l1,K.l2,K.l3][i]-0.1?1:0.15)}
+ pop('E3',t,K.comment-0.1); pop('E5',t,K.follow-0.4); rise('E7',t,K.follow+0.8);
+ {const tc=K.follow+0.3;const p=eo((t-tc+0.9)/0.8);const x=900+(560-900)*p,y=1280+(960-1280)*p;const press=t>tc&&t<tc+.2?.85:1;
+  set('E6',clamp((t-tc+1)/.3),x-60,y-60,press);
+  const b=$('fbtn');if(t>tc){b.textContent='FOLLOWING ✓';b.style.background='#475569'}else{b.textContent='FOLLOW';b.style.background='#3b82f6'}
+  for(let i=0;i<90;i++){const dt=t-tc;const el=$('cf'+i);if(dt<0){set(el,0);continue}
+   const ang=rnd(i,1)*Math.PI*2, sp=500+rnd(i,2)*900;const x=540+Math.cos(ang)*sp*dt*0.8, y=820+Math.sin(ang)*sp*dt*0.7-500*dt+700*dt*dt;
+   set(el,clamp(3-dt),x,y,1,dt*400*(rnd(i,3)-.5))}}
+ // captions
+ {let cur=null;for(let i=0;i<CAPS.length;i++){const s0=CAPS[i][0],e0=i+1<CAPS.length?Math.min(CAPS[i+1][0],s0+3.4):s0+2.6;if(t>=s0-0.05&&t<e0) cur=[i,s0,e0]}
+  if(cur){$('capt').innerHTML=CAPS[cur[0]][1];const p=clamp((t-cur[1]+0.05)/.18);set('capw',Math.min(clamp(p*2),clamp((cur[2]-t)/.12)),0,14*(1-eo(p)),.9+.1*back(p))} else set('capw',0)}
+ $('cap').style.top=t>=K.yaad-0.1?'1230px':'1600px';
+};
+window.CUES=CUES; window.render(0);
+</script></body></html>
