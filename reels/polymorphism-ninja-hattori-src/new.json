@@ -1,0 +1,5 @@
+[
+ ["p3","Ab code mein dekho: ek hi function, ninja Hattori ka roop. Par iske teen version: ek Papa leta hai, ek Mummy, aur ek Kenichi."],
+ ["p4","Call kiya ninja Hattori ka roop, mummy ke saath... toh print hua: mummy yahan hai! Aur Kenichi bheja... toh print hua: hello dosto!"],
+ ["p5","Function ka naam same, bas parameter badla... aur kaam badal gaya! Ise kehte hain method overloading, yaani compile time polymorphism."]
+]

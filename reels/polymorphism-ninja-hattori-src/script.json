@@ -1,0 +1,8 @@
+[
+ ["p1","Hattori ek hi hai... par kabhi Kenichi ke papa, kabhi mummy, aur kabhi khud Kenichi! Ek insaan, kai roop... isi ko kehte hain Polymorphism!"],
+ ["p2","Poly matlab many, aur morph matlab forms. Yaani ek naam, alag-alag kaam!"],
+ ["p3","Code mein dekho: ek parent class Roop, jismein method hai bolo. Papa, Mummy aur Kenichi, teeno ne bolo ko apne tarike se likha."],
+ ["p4","Ab ek hi variable r. r mein Papa daalo, toh bolega: padhai karo! Mummy daalo: khana kha lo! Aur Kenichi daalo: mujhe nahi padhna!"],
+ ["p5","Same call, r dot bolo... par result har baar alag! Ise kehte hain runtime polymorphism, yaani method overriding."],
+ ["p6","Ek line mein yaad rakho: ek naam, kai roop! Comment karo, tumhare ghar mein sabse bada polymorphic kaun hai? Aur pretestpassed dot codes ko follow karo!"]
+]

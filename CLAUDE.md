@@ -12,6 +12,12 @@
 - Voice: Gemini TTS voice **Puck** (user-approved), fast energetic Hinglish.
 - Example build: `reels/array-vs-linkedlist-src/`.
 
+## Anti-copy watermark (user rule, every reel)
+- Diagonal tiled "@pretestpassed.codes" over the whole frame (~9% opacity), drawn on top of the clips too.
+- Plus a moving "© @pretestpassed.codes" (~24%) that changes position every few seconds and avoids the main content.
+- Assets and ffmpeg commands: `reels/polymorphism-ninja-hattori-src/` (wm_tile.png, wm_move.png, final.sh).
+- Voice: use Gemini TTS **Orus** with the hype prompt (the voice of the viral Indexing reel). The user asked for it.
+
 ## VIRAL HOOK FORMULA (mandatory for every new reel — user rule, data-backed)
 Public plays (Nov 2026):
 

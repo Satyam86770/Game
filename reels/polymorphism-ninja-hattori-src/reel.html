@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:transparent}
+body{font-family:'Inter','Noto Color Emoji',sans-serif;color:#fff}
+.mono{font-family:'DejaVu Sans Mono','Noto Color Emoji',monospace}
+#bg{position:absolute;inset:0;background:
+ radial-gradient(700px 700px at var(--b1x,20%) var(--b1y,75%),rgba(150,40,200,.35),transparent 70%),
+ radial-gradient(650px 650px at var(--b2x,85%) var(--b2y,30%),rgba(34,211,238,.18),transparent 70%),
+ linear-gradient(180deg,#0b0b2b 0%,#14102f 50%,#0b0a24 100%)}
+.a{position:absolute;opacity:var(--o,0);transform:translate(var(--x,0px),var(--y,0px)) scale(var(--s,1)) rotate(var(--r,0deg));transform-origin:center}
+.c{left:0;width:1080px;text-align:center}
+y{color:#fde047}r{color:#fb7185}g{color:#4ade80}c{color:#22d3ee}o{color:#fb923c}p{color:#c4b5fd}
+#prog{position:absolute;left:0;top:0;height:10px;background:linear-gradient(90deg,#22d3ee,#a855f7,#f472b6)}
+#wm{position:absolute;top:95px;width:100%;text-align:center;font-size:30px;font-weight:600;color:rgba(255,255,255,.7)}
+.pill{display:inline-block;padding:12px 30px;border-radius:999px;font-size:36px;font-weight:900}
+.card{border-radius:26px;background:rgba(12,16,45,.93);padding:22px 30px;box-shadow:0 10px 40px rgba(0,0,0,.45)}
+#mframe{position:absolute;border-radius:18px;border:6px solid #f472b6;box-shadow:0 0 40px rgba(244,114,182,.6)}
+#cap{position:absolute;left:60px;width:960px;top:1650px;text-align:center}
+#capt{display:inline-block;padding:14px 28px;border-radius:20px;background:rgba(0,0,0,.72);font-size:44px;font-weight:900;line-height:1.2;max-width:960px}
+.role{display:inline-block;margin:0 10px;padding:14px 26px;border-radius:20px;font-size:40px;font-weight:900;background:rgba(12,16,45,.9);border:4px solid #475569;opacity:.35}
+.code{font-family:'DejaVu Sans Mono',monospace;font-size:29px;line-height:1.55;white-space:pre}
+.ln{border-radius:6px;padding:0 6px}
+.box{position:absolute;border-radius:20px;background:rgba(12,16,45,.95);border:4px solid #a855f7;text-align:center;font-weight:900}
+.bub{position:absolute;padding:16px 26px;border-radius:26px;font-size:44px;font-weight:900;color:#111;background:#fff;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+</style></head>
+<body>
+<div id="bg"></div>
+<div id="mframe" class="a"></div>
+
+<!-- HOOK -->
+<div class="a c" id="SER" style="top:140px"><span class="pill" style="background:#a855f7;font-size:30px;padding:8px 24px">🥷 OOPs in 30 sec • Ep 1</span></div>
+<div class="a c" id="HT" style="top:205px;font-size:58px;font-weight:900;line-height:1.12;text-shadow:0 4px 18px rgba(0,0,0,.8)">Ek Hattori... <y>3 roop?!</y> 🤯</div>
+<div class="a c" id="HT2" style="top:205px;font-size:56px;font-weight:900;line-height:1.12;text-shadow:0 4px 18px rgba(0,0,0,.8)">Isi ko kehte hain <p>POLYMORPHISM</p> 🥷</div>
+<div class="a c" id="ROLES" style="top:0"><span class="role" id="ro0">👨 Papa</span><span class="role" id="ro1">👩 Mummy</span><span class="role" id="ro2">👦 Kenichi</span></div>
+
+<!-- S2 poly + morph -->
+<div class="a c" id="P1" style="top:420px"><span class="card" style="display:inline-block;font-size:80px;font-weight:900">POLY = <y>many</y></span></div>
+<div class="a c" id="P2" style="top:600px"><span class="card" style="display:inline-block;font-size:80px;font-weight:900">MORPH = <c>forms</c></span></div>
+<div class="a c" id="P3" style="top:820px"><span class="pill" style="background:#22c55e;color:#03210f;font-size:52px">Ek naam ➜ alag-alag kaam ✨</span></div>
+<div class="a c" id="P4" style="top:980px;font-size:110px">🥷 ➜ 👨 👩 👦</div>
+
+<!-- S3/S4 overloading code -->
+<div class="a" id="CODE" style="left:40px;top:250px;width:1000px"><div class="card code" style="border:3px solid #a855f7;padding:18px 24px;font-size:27px"><div style="font-family:Inter;font-size:24px;color:#94a3b8;margin-bottom:6px">☕ Java • ek hi naam, 3 version 🥷</div><div class="ln" id="l1"><c>void</c> <y>ninjaHattoriKaRoop</y>(<o>Papa</o> p) {
+    print(<g>"Papa aa gaye! 👨"</g>); }</div><div class="ln" id="l2"><c>void</c> <y>ninjaHattoriKaRoop</y>(<o>Mummy</o> m) {
+    print(<g>"Mummy yahan hai! 👩"</g>); }</div><div class="ln" id="l3"><c>void</c> <y>ninjaHattoriKaRoop</y>(<o>Kenichi</o> k) {
+    print(<g>"Hello dosto! 👦"</g>); }</div></div></div>
+<div class="a c" id="CALL" style="top:820px"><span class="card mono" id="callt" style="display:inline-block;font-size:40px;font-weight:900;border:3px solid #fde047"><y>ninjaHattoriKaRoop</y>(<o>mummy</o>);</span></div>
+<div class="a" id="MWIN" style="left:254px;top:934px;width:572px;height:328px;border-radius:16px;border:6px solid #22d3ee;box-shadow:0 0 30px rgba(34,211,238,.5);background:#000"></div>
+<div class="a c" id="OUT" style="top:1290px"><span class="card mono" style="display:inline-block;font-size:40px;font-weight:900;color:#4ade80;border:3px solid #4ade80">&gt; <span id="outt">Mummy yahan hai! 👩</span></span></div>
+
+<!-- S5 overloading recap -->
+<div class="a c" id="R1" style="top:360px"><span class="card" style="display:inline-block;font-size:46px;font-weight:900;line-height:1.7;text-align:left">✅ Function ka <y>naam same</y><br>🔁 <c>Parameter</c> alag<br>✨ <g>Kaam</g> alag</span></div>
+<div class="a c" id="R2" style="top:740px"><span class="pill" style="background:#a855f7;font-size:50px">⚡ Method Overloading</span></div>
+<div class="a c" id="R3" style="top:860px"><span class="pill" style="background:#22c55e;color:#03210f;font-size:44px">= Compile-time Polymorphism ✅</span></div>
+<div class="a c" id="R4" style="top:990px"><span class="card" style="display:inline-block;font-size:30px;color:#cbd5e1;padding:12px 24px">Iska bhai: <y>Method Overriding</y> (runtime) ➜ next reel 👀</span></div>
+
+<!-- S6 -->
+<div class="a c" id="E1" style="top:250px;color:#fde047;font-size:58px;font-weight:900">EK LINE MEIN YAAD RAKHO 🧠</div>
+<div class="a c" id="E2" style="top:370px"><span class="pill" style="background:#a855f7;font-size:56px">🥷 Ek naam, kai roop!</span></div>
+<div class="a c" id="E3" style="top:510px"><span class="card" style="display:inline-block;font-size:36px;font-weight:800;color:#fde047;padding:12px 28px">💬 Tumhare ghar ka sabse bada polymorphic kaun? 😂</span></div>
+<div class="a" id="E5" style="left:190px;top:650px;width:700px;height:380px;border-radius:30px;background:rgba(12,16,45,.95);border:4px solid #f472b6;box-shadow:0 0 50px rgba(244,114,182,.4)">
+  <div style="position:absolute;left:290px;top:26px;width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#f472b6);display:flex;align-items:center;justify-content:center;font-size:50px;font-weight:900;border:4px solid #fff">PP</div>
+  <div style="position:absolute;width:100%;top:165px;text-align:center;font-size:46px;font-weight:900">@pretestpassed.codes</div>
+  <div id="fbtn" style="position:absolute;left:180px;top:255px;width:340px;height:90px;border-radius:20px;background:#3b82f6;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:900">FOLLOW</div></div>
+<div class="a" id="E6" style="left:0;top:0;font-size:110px">👆</div>
+<div class="a c" id="E7" style="top:1090px"><span class="pill" style="background:rgba(10,10,30,.9);border:2px solid rgba(253,224,71,.6);color:#fde047;font-size:36px">Next: Ep 2 ➜ Inheritance 👨‍👦 • Follow 🔔</span></div>
+<div id="conf"></div>
+
+<div id="cap"><span class="a" id="capw" style="position:relative;display:inline-block"><span id="capt"></span></span></div>
+<div id="prog"></div>
+<div id="wm">@pretestpassed.codes</div>
+<script>
+const TL=window.TL, K=TL.K, CAPS=TL.CAPS, END=TL.END, HK=TL.HK, CF=TL.CF;
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const eo=x=>1-Math.pow(1-clamp(x),3);
+const back=x=>{x=clamp(x);const c1=2.0,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const CUES=[]; const cue=(t,n,g)=>CUES.push([+t.toFixed(3),n,g||1]);
+function set(el,o,x,y,s,r){el=typeof el=='string'?$(el):el;el.style.setProperty('--o',o);el.style.setProperty('--x',(x||0)+'px');el.style.setProperty('--y',(y||0)+'px');el.style.setProperty('--s',s==null?1:s);el.style.setProperty('--r',(r||0)+'deg')}
+function pop(el,t,t0,d){d=d||.4;const p=clamp((t-t0)/d);set(el,t<t0?0:clamp(p*2.5),0,0,t<t0?.4:.4+.6*back(p))}
+function rise(el,t,t0,d){d=d||.45;const p=clamp((t-t0)/d);set(el,t<t0?0:clamp(p*2),0,50*(1-eo(p)),1)}
+function vis(t,a,b,f){f=f||.15;return Math.min(clamp((t-a)/f),clamp((b-t)/f))}
+function rnd(i,k){const x=Math.sin(i*12.9898+k*78.233)*43758.5453;return x-Math.floor(x)}
+(function(){let ch='';for(let i=0;i<90;i++){const col=['#22d3ee','#f472b6','#fde047','#4ade80','#a855f7','#fb923c'][i%6];ch+=`<div class="a" id="cf${i}" style="left:0;top:0;width:${14+(i*7)%12}px;height:${8+(i*5)%10}px;background:${col};border-radius:3px"></div>`}$('conf').innerHTML=ch})();
+// clip frame geometry from timeline
+$('mframe').style.left=(CF.x-6)+'px';$('mframe').style.top=(CF.y-6)+'px';$('mframe').style.width=(CF.w+12)+'px';$('mframe').style.height=(CF.h+12)+'px';
+$('ROLES').style.top=(CF.y+CF.h+40)+'px';
+(function(){
+ cue(0.02,'whoosh',.3); for(const k of K.roles) cue(k,'pop',.55); cue(HK,'boom',.45);
+ cue(K.isi,'success',.6); cue(K.poly,'pop',.8); cue(K.morph,'pop',.8); cue(K.naam,'ding',.6);
+ cue(K.code,'whoosh',.4); cue(K.v1,'pop',.6); cue(K.v2,'pop',.6); cue(K.v3,'pop',.6);
+ cue(K.call1,'type',.6); cue(K.clipB-0.05,'whoosh',.35); cue(K.clipB+1.6,'ding',.6); cue(K.call2,'type',.6); cue(K.clipC-0.05,'whoosh',.35); cue(K.clipC+2.0,'ding',.6);
+ cue(K.same,'pop',.6); cue(K.param,'pop',.6); cue(K.over,'boom',.5); cue(K.ctp,'success',.6);
+ cue(K.yaad,'pop'); cue(K.comment,'pop',.6); cue(K.follow+0.3,'click'); cue(K.follow+0.35,'sparkle',.9);
+})();
+window.render=function(t){
+ $('prog').style.width=(1080*clamp(t/END))+'px';
+ const bg=$('bg');bg.style.setProperty('--b1x',(20+8*Math.sin(t*.25))+'%');bg.style.setProperty('--b1y',(75+6*Math.cos(t*.2))+'%');
+ const hook=t<HK; bg.style.clipPath=hook?`path(evenodd,'M0 0 H1080 V1920 H0 Z M${CF.x} ${CF.y} H${CF.x+CF.w} V${CF.y+CF.h} H${CF.x} Z')`:'none'; set('mframe',hook?1:0);
+ const sc=t<HK?'H':t<K.poly-0.1?'H2':t<K.code-0.1?'S2':t<K.same-0.1?'S3':t<K.yaad-0.1?'S5':'S6';
+ for(const id of ['SER','HT','HT2','ROLES','P1','P2','P3','P4','CODE','CALL','MWIN','OUT','R1','R2','R3','R4','E1','E2','E3','E5','E6','E7']) set(id,0);
+ set('SER',sc=='S6'?0:1);
+ if(sc=='H'||sc=='H2'){
+   if(t<K.isi){set('HT',1,0,0,1+0.02*Math.sin(t*6))} else pop('HT2',t,K.isi);
+   if(hook){set('ROLES',1); K.roles.forEach((k,i)=>{const on=t>=k; const e=$('ro'+i); e.style.opacity=on?1:.35; e.style.borderColor=on?['#22d3ee','#f472b6','#4ade80'][i]:'#475569'; e.style.transform=on&&t<k+0.3?`scale(${1+0.2*(1-(t-k)/0.3)})`:'none'})}
+   else {set('P4',1)}
+ }
+ if(sc=='S2'){ pop('P1',t,K.poly); pop('P2',t,K.morph); pop('P3',t,K.naam); pop('P4',t,K.naam+0.4) }
+ if(sc=='S3'){
+   rise('CODE',t,K.code);
+   const lit=t<K.v1?[]:t<K.v2?[1]:t<K.v3?[2]:t<K.call1?[3]:(t<K.call2?[2]:[3]);
+   for(let i=1;i<=3;i++){const e=$('l'+i);const on=lit.includes(i);e.style.background=on?'rgba(253,224,71,.18)':'transparent';e.style.boxShadow=on?'inset 6px 0 0 #fde047':'none';e.style.opacity=(t>=K.fn&&t<[K.v1,K.v2,K.v3][i-1]-0.1)?0.25:1}
+   if(t>=K.call1-0.1){ const second=t>=K.call2-0.1; $('callt').innerHTML=`<y>ninjaHattoriKaRoop</y>(<o>${second?'kenichi':'mummy'}</o>);`; pop('CALL',t,second?K.call2-0.1:K.call1-0.1,0.35);
+     const c0=second?K.clipC:K.clipB; set('MWIN',t>=c0-0.25?1:0,0,0,t>=c0-0.25&&t<c0?0.8+0.2*eo((t-c0+0.25)/0.25):1);
+     $('outt').textContent=second?'Hello dosto! 👦':'Mummy yahan hai! 👩'; pop('OUT',t,c0+(second?0.6:0.3),0.35) }
+ }
+ if(sc=='S5'){ rise('R1',t,K.same); pop('R2',t,K.over-0.1); pop('R3',t,K.ctp-0.1); rise('R4',t,K.ctp+0.9) }
+ if(sc=='S6'){
+  pop('E1',t,K.yaad-0.05); pop('E2',t,K.yaad+0.7); pop('E3',t,K.comment-0.1); pop('E5',t,K.follow-0.4); rise('E7',t,K.follow+0.8);
+  const tc=K.follow+0.3;const p=eo((t-tc+0.9)/0.8);const x=900+(560-900)*p,y=1290+(970-1290)*p;set('E6',clamp((t-tc+1)/.3),x-60,y-60,t>tc&&t<tc+.2?.85:1);
+  const b=$('fbtn');if(t>tc){b.textContent='FOLLOWING ✓';b.style.background='#475569'}else{b.textContent='FOLLOW';b.style.background='#3b82f6'}
+  for(let i=0;i<90;i++){const dt=t-tc;const el=$('cf'+i);if(dt<0){set(el,0);continue}const ang=rnd(i,1)*Math.PI*2, sp=500+rnd(i,2)*900;set(el,clamp(3-dt),540+Math.cos(ang)*sp*dt*0.8,840+Math.sin(ang)*sp*dt*0.7-500*dt+700*dt*dt,1,dt*400*(rnd(i,3)-.5))}
+ } else for(let i=0;i<90;i++) set('cf'+i,0);
+ {let cur=null;for(let i=0;i<CAPS.length;i++){const s0=CAPS[i][0],e0=i+1<CAPS.length?Math.min(CAPS[i+1][0],s0+3.4):s0+2.6;if(t>=s0-0.05&&t<e0) cur=[i,s0,e0]}
+  if(cur&&!hook&&sc!='S6'){$('capt').innerHTML=CAPS[cur[0]][1];const p=clamp((t-cur[1]+0.05)/.18);set('capw',Math.min(clamp(p*2),clamp((cur[2]-t)/.12)),0,14*(1-eo(p)),.9+.1*back(p))} else set('capw',0)}
+};
+window.CUES=CUES; window.render(0);
+</script></body></html>
