@@ -54,8 +54,10 @@ What actually differed:
    | Cycle | 3.4K | 55% | |
    | GROUP BY | 990 | 69% | |
    | Auth | 3K | 79% | |
-   | HashMap 3D | 336 | **79%** | 8.4s (10%); 0 shares |
+   | HashMap 3D | 520 | **77%** | 8.5s (10%); 0 shares |
+   | Missing number (3 Idiots) | 3.1K (day 1) | 52% | 10.5s (19%); frame 0 = back of a head + label "Rank List = ARRAY" |
 
+   Frame-0 text must be a curiosity QUESTION with a number ("Lakhs mein se 1... 1 second mein?! 🤯"), never a concept label ("Rank List = ARRAY").
    Target skip rate < 35%. The HashMap reel spent 0–4.5s on a logo and typing before the "taken" result.
    The payoff text and a face/iconic clip must be on screen at FRAME 0 (no intro, no logo animation).
    Check insights with vidiq_instagram_owner_insights (platformAccountId 39687719547542292).
