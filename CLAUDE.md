@@ -12,11 +12,17 @@
 - Voice: Gemini TTS voice **Puck** (user-approved), fast energetic Hinglish.
 - Example build: `reels/array-vs-linkedlist-src/`.
 
-## Anti-copy watermark (user rule, every reel)
-- Diagonal tiled "@pretestpassed.codes" over the whole frame (~9% opacity), drawn on top of the clips too.
-- Plus a moving "© @pretestpassed.codes" (~24%) that changes position every few seconds and avoids the main content.
-- Assets and ffmpeg commands: `reels/polymorphism-ninja-hattori-src/` (wm_tile.png, wm_move.png, final.sh).
-- Voice: use Gemini TTS **Orus** with the hype prompt (the voice of the viral Indexing reel). The user asked for it.
+## Watermark: keep it minimal (user rule)
+- The user REJECTED the tiled and moving anti-copy watermark ("video bekar lag rha"). Do not add it.
+  Only the small top "@pretestpassed.codes" handle stays.
+
+## Voice (user rule)
+- Use exactly the viral Indexing reel's voice settings:
+  - Model: **gemini-2.5-flash-preview-tts only**, voice **Orus**.
+  - Prompt prefix: "Say in a fast, high-energy, hyped, fun young Indian Hinglish Instagram tech reel creator voice,
+    punchy with dramatic pauses (pronounce English tech words like SQL, index, pointer, binary search clearly): ".
+  - Post-processing: silence-trim, then **atempo=1.07**, then loudnorm I=-16.
+- Do not mix in 3.1 or 3.8 model lines. If the 2.5 quota is exhausted (10/day, resets 08:00 UTC), wait for the reset.
 
 ## VIRAL HOOK FORMULA (mandatory for every new reel — user rule, data-backed)
 Public plays (Nov 2026):
