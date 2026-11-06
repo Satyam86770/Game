@@ -1,0 +1,6 @@
+[
+ ["q1","Ab call karo: ninja Hattori ka roop, mummy ke saath. Compiler dekhta hai, parameter Mummy type ka hai... toh Mummy wala version chalega, aur print hoga:"],
+ ["q2","Aur Kenichi bheja? Toh Kenichi wala version chala, aur print hua:"],
+ ["q3","Ab asli code dekho! add do numbers ka: add ek, do... return teen. Aur add do strings ka: add ninja, hattori... return ninjahattori! Naam same add, par kaam alag. Yahi hai polymorphism!"],
+ ["p6","Ek line mein yaad rakho: ek naam, kai roop! Comment karo, tumhare ghar mein sabse bada polymorphic kaun hai? Aur pretestpassed dot codes ko follow karo!"]
+]

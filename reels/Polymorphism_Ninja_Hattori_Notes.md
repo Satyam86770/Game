@@ -18,6 +18,9 @@
   - `ninjaHattoriKaRoop(kenichi);` → the "Hello doston!" clip plays, and "> Hello dosto!" appears.
 - **Concept:** same name, different parameter, different work. That is **Method Overloading = Compile-time Polymorphism**. The bonus chip teases Overriding (runtime) as the next reel.
 - **End:** "Ek line: Ek naam, kai roop!", the comment prompt, and "Next: Ep 2 ➜ Inheritance".
-- **Anti-copy watermark (user request; use on all future reels):**
-  - A diagonal tiled "@pretestpassed.codes" over the whole frame at ~9% opacity (`wm_tile.png`).
-  - A moving "© @pretestpassed.codes" at ~24% that jumps between 4 bottom positions every 6–9 s (`wm_move.png`, ffmpeg overlay expressions in `final.sh`).
+- **v2 (user feedback):**
+  - The watermark was removed.
+  - All VO is now gemini-2.5 Orus with the Indexing prompt and atempo 1.07, so it matches the viral Indexing voice.
+  - The code walk-through is step by step: the call `ninjaHattoriKaRoop(mummy)` → "🔎 parameter mummy ➜ Mummy type" → the matching overload glows "✅ match!" → its print line → the cartoon clip "Hello, mummy yahan hai!" → the output "> Mummy yahan hai!". The same flow repeats for kenichi → "Hello doston!".
+  - Added a real overloading example: `int add(int,int)` → add(1,2) ➜ 3, and `String add(String,String)` → add("ninja","hattori") ➜ "ninjahattori".
+  - Length is ~78s.
