@@ -41,6 +41,13 @@ y{color:#fde047}r{color:#fb7185}g{color:#4ade80}c{color:#22d3ee}o{color:#fb923c}
 <div class="a c" id="P3" style="top:820px"><span class="pill" style="background:#22c55e;color:#03210f;font-size:52px">Ek naam ➜ alag-alag kaam ✨</span></div>
 <div class="a c" id="P4" style="top:980px;font-size:110px">🥷 ➜ 👨 👩 👦</div>
 
+<!-- big generic signature (p3 start) -->
+<div class="a" id="BIG" style="left:40px;top:640px;width:1000px"><div class="card code" style="border:4px solid #fde047;padding:28px 30px;font-size:39px;line-height:1.5;box-shadow:0 0 60px rgba(253,224,71,.25)"><c>void</c> <y>ninjaHattoriKaRoop</y>( <o id="bigp" style="border-bottom:5px solid #fb923c">parameter</o> ) {
+    <span style="color:#94a3b8">// parameter ke hisaab se</span>
+    <span style="color:#94a3b8">// roop badlega 🥷</span>
+}</div></div>
+<div class="a c" id="BIG2" style="top:1050px"><span class="pill" style="background:#a855f7;font-size:40px">1 naam • 3 version • <y>parameter</y> decide karega 🎯</span></div>
+<div class="a" id="VMAP" style="left:90px;top:860px;width:900px"><div class="card mono" style="font-size:36px;line-height:1.9;font-weight:900"><div id="vm1">(<o>Papa</o> p) ➜ 👨 <g>"Papa aa gaye!"</g></div><div id="vm2">(<o>Mummy</o> m) ➜ 👩 <g>"Mummy yahan hai!"</g></div><div id="vm3">(<o>Kenichi</o> k) ➜ 👦 <g>"Hello dosto!"</g></div></div></div>
 <!-- S3/S4 overloading code -->
 <div class="a" id="CODE" style="left:40px;top:250px;width:1000px"><div class="card code" style="border:3px solid #a855f7;padding:18px 24px;font-size:27px"><div style="font-family:Inter;font-size:24px;color:#94a3b8;margin-bottom:6px">☕ Java • ek hi naam, 3 version 🥷</div><div class="ln" id="l1"><c>void</c> <y>ninjaHattoriKaRoop</y>(<o>Papa</o> p) {
     print(<g>"Papa aa gaye! 👨"</g>); }</div><div class="ln" id="l2"><c>void</c> <y>ninjaHattoriKaRoop</y>(<o>Mummy</o> m) {
@@ -111,7 +118,7 @@ window.render=function(t){
  const bg=$('bg');bg.style.setProperty('--b1x',(20+8*Math.sin(t*.25))+'%');bg.style.setProperty('--b1y',(75+6*Math.cos(t*.2))+'%');
  const hook=t<HK; bg.style.clipPath=hook?`path(evenodd,'M0 0 H1080 V1920 H0 Z M${CF.x} ${CF.y} H${CF.x+CF.w} V${CF.y+CF.h} H${CF.x} Z')`:'none'; set('mframe',hook?1:0);
  const sc=t<HK?'H':t<K.poly-0.1?'H2':t<K.code-0.1?'S2':t<K.same-0.1?'S3':t<K.asli-0.1?'S5':t<K.yaad-0.1?'S5b':'S6';
- for(const id of ['SER','HT','HT2','ROLES','P1','P2','P3','P4','CODE','CALL','PTYPE','MATCH','MWIN','OUT','R1','R2','R3','R4','ADD','AR1','AR2','AR3','AR4','E1','E2','E3','E5','E6','E7']) set(id,0);
+ for(const id of ['SER','HT','HT2','ROLES','P1','P2','P3','P4','BIG','BIG2','VMAP','CODE','CALL','PTYPE','MATCH','MWIN','OUT','R1','R2','R3','R4','ADD','AR1','AR2','AR3','AR4','E1','E2','E3','E5','E6','E7']) set(id,0);
  set('SER',sc=='S6'?0:1);
  if(sc=='H'||sc=='H2'){
    if(t<K.isi){set('HT',1,0,0,1+0.02*Math.sin(t*6))} else pop('HT2',t,K.isi);
@@ -120,7 +127,11 @@ window.render=function(t){
  }
  if(sc=='S2'){ pop('P1',t,K.poly); pop('P2',t,K.morph); pop('P3',t,K.naam); pop('P4',t,K.naam+0.4) }
  if(sc=='S3'){
-   rise('CODE',t,K.code);
+   // big generic signature in the middle, then it gives way to the 3-version card
+   if(t<K.ver){ const p=eo((t-K.code)/0.5); set('BIG',clamp(p*2),0,60*(1-p),0.85+0.15*back(clamp((t-K.code)/0.5))); $('bigp').style.color=(Math.floor(t*3)%2)?'#fde047':'#fb923c'; pop('BIG2',t,K.fn+0.6) }
+   else if(t<K.ver+0.4){ const p=eo((t-K.ver)/0.4); set('BIG',1-p,0,-380*p,1-0.4*p) }
+   if(t>=K.ver-0.1) rise('CODE',t,K.ver-0.1);
+   if(t>=K.v1-0.2&&t<K.call1-0.1){ set('VMAP',1); ['vm1','vm2','vm3'].forEach((id,i)=>{const k=[K.v1,K.v2,K.v3][i]; $(id).style.opacity=t>=k-0.1?1:0.12}) }
    const second=t>=K.call2-0.1, inCall=t>=K.call1-0.1;
    const mi=second?3:2; const matched=inCall&&(second?t>=K.run2-0.2:t>=K.ptype1);
    for(let i=1;i<=3;i++){const e=$('l'+i); let on=false,op=1;
