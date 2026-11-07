@@ -68,6 +68,7 @@ What actually differed:
    | Auth | 3K | 79% | |
    | HashMap 3D | 520 | **77%** | 8.5s (10%); 0 shares |
    | Missing number (3 Idiots) | 3.1K (day 1) | 52% | 10.5s (19%); frame 0 = back of a head + label "Rank List = ARRAY" |
+   | Polymorphism (Ninja Hattori, 67s) | 5.3K (day 1) | 42% | 10.8s (16%); 32 shares, 25 saves; no CTC card; AI recap of the clip after 8s; "OOPs in 30 sec" pill on a 67s reel |
 
    Frame-0 text must be a curiosity QUESTION with a number ("Lakhs mein se 1... 1 second mein?! 🤯"), never a concept label ("Rank List = ARRAY").
    Target skip rate < 35%. The HashMap reel spent 0–4.5s on a logo and typing before the "taken" result.
