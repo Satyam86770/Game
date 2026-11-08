@@ -64,7 +64,7 @@ y{color:#ffd166}r{color:#ff5470}g{color:#4ade80}c{color:#5cd6ff}o{color:#ffa94d}
 #cho .opt .f b{color:#ffd166}
 #mx{top:1230px}
 #mx .card{display:inline-block;font-size:44px;font-weight:800;border:3px solid #4ade80}
-#cur{position:absolute;width:172px;height:350px;border:5px solid #ffd166;border-radius:26px;box-shadow:0 0 40px rgba(255,210,80,.6);opacity:0}
+#cur{position:absolute;width:172px;height:350px;border:5px dashed #c4b5fd;border-radius:26px;box-shadow:0 0 30px rgba(196,181,253,.45);opacity:0}
 #form{top:1030px}
 #form .card{display:inline-block;font-size:46px;font-weight:800;min-width:760px}
 #code{left:50px;top:300px;width:980px}
@@ -111,6 +111,7 @@ y{color:#ffd166}r{color:#ff5470}g{color:#4ade80}c{color:#5cd6ff}o{color:#ffa94d}
  <div id="ret" style="text-align:center">📤 Return: <y>maximum loot</y> = <span id="retv">?</span></div>
 </div></div>
 <div id="cur"></div>
+<svg id="arw" width="1080" height="1920" style="position:absolute;left:0;top:0;pointer-events:none"></svg>
 <div class="a c" id="cho"><div class="wrap">
  <div class="opt" id="oA" style="border:3px solid #ffd166"><div class="h">💰 LOOT LO</div><div class="f">pichla chhodo ➜<br><b>dp[i-2] + nums[i]</b></div></div>
  <div class="opt" id="oB" style="border:3px solid #5cd6ff"><div class="h">🚶 CHHOD DO</div><div class="f">pichle tak ka total ➜<br><b>dp[i-1]</b></div></div>
@@ -389,7 +390,7 @@ window.render=function(t){
  // problem + dp panel
  const pv=win(t,K.prob,K.code-0.1,0.4,0.3);setA($('prob'),pv,0,30*(1-ease((t-K.prob)/0.4)));
  (K.nums||[]).forEach((x,i)=>{const e=$('h'+i);e.style.opacity=t<x?0.15:1;e.style.transform=`scale(${t<x?0.9:back((t-x)/0.35)})`});
- $('adj').style.opacity=ease((t-K.adj)/0.3);$('ret').style.opacity=ease((t-K.ret)/0.3);
+ const hideF=t>=K.fill0-0.2&&t<(K.res||[])[4]+0.6;$('adj').style.opacity=ease((t-K.adj)/0.3)*(hideF?0:1);$('ret').style.opacity=ease((t-K.ret)/0.3)*(hideF?0:1);
  $('dprow').style.opacity=ease((t-K.fill0)/0.3);
  const fills=K.fill||[],res=K.res||[];
  for(let i=0;i<5;i++){const e=$('d'+i);const done=res[i]!=null&&t>=res[i];e.textContent=done?DP[i]:'';e.style.borderColor=done?'#5cd6ff':'#39406a';
@@ -404,8 +405,31 @@ window.render=function(t){
  $('oA').style.transform=`scale(${0.85+0.15*back((t-K.oA)/0.4)})`;$('oB').style.transform=`scale(${0.85+0.15*back((t-K.oB)/0.4)})`;
  setA($('mx'),win(t,K.mx,K.code-0.1,0.35,0.3),0,0,0.85+0.15*back((t-K.mx)/0.4));
  // formula per step
- const FT=['dp[0] = <y>2</y>','dp[1] = max(2, 7) = <g>7</g>','dp[2] = max(7, 2+9) = <g>11</g>','dp[3] = max(11, 7+3) = <g>11</g>','dp[4] = max(11, 11+1) = <g>12</g>'];
- if(ci>=0&&t>=K.fill0){$('formt').innerHTML=FT[ci];}
+ const BL=[null,'2','7','11','11'],YL=[null,'7','2 + 9','7 + 3','11 + 1'],RS=['2','7','11','11','12'];
+ if(ci>=0&&t>=K.fill0){const B=K.blue||[],Y=K.yel||[],R2=K.res||[];let h;
+  if(ci==0){h=`dp[0] = nums[0] = ${t>=R2[0]?'<g>2</g>':'<o>2</o>'}`}
+  else{const sb=t>=B[ci],sy=t>=Y[ci],sr=t>=R2[ci];
+   h=`dp[${ci}] = max( <span style="color:#5cd6ff;opacity:${sb?1:.15}">${BL[ci]}</span> , <span style="color:#ffd166;opacity:${sy?1:.15}">${YL[ci]}</span> )`+(sr?` = <g>${RS[ci]}</g>`:'');}
+  $('formt').innerHTML=h;}
+ // arrows + highlights
+ const svg=$('arw');let sv='';
+ for(let i=0;i<5;i++){const m=document.querySelector('#h'+i+' .m');m.style.boxShadow='none';m.style.transform='none';m.style.outline='none';$('d'+i).style.outline='none'}
+ if(ci>=0&&t>=K.fill0&&t<K.code-0.1){const B=K.blue||[],Y=K.yel||[],NM=K.num||[],R2=K.res||[];const op=pv;
+  const rc=id=>$(id).getBoundingClientRect();const tgt=rc('d'+ci);
+  const arc=(a,b,col,depth,lab,u)=>{const x1=a.left+a.width/2,x2=b.left+b.width/2,y0=a.bottom+6,cy=y0+depth;
+   const dx=x2-x1;const pth=`M${x1},${y0} C${x1+dx*0.1},${cy} ${x2-dx*0.1},${cy} ${x2},${y0+4}`;
+   sv+=`<path d="${pth}" stroke="${col}" stroke-width="8" fill="none" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="${1-u}" opacity="${op}"/>`;
+   if(u>=1){const ax=x2,ay=y0+4;sv+=`<polygon points="${ax},${ay} ${ax-16},${ay+26} ${ax+16},${ay+26}" fill="${col}" opacity="${op}"/>`}
+   sv+=`<text x="${(x1+x2)/2}" y="${y0+depth*0.75+36}" fill="${col}" font-family="Poppins" font-weight="800" font-size="34" text-anchor="middle" opacity="${op*cl(u*2)}">${lab}</text>`};
+  const down=(a,b,col,u)=>{const x=b.left+b.width/2,y1=a.bottom+4,y2=b.top-6;const yy=lerp(y1,y2,u);
+   sv+=`<line x1="${x}" y1="${y1}" x2="${x}" y2="${yy}" stroke="${col}" stroke-width="8" stroke-linecap="round" opacity="${op}"/>`;
+   if(u>=1)sv+=`<polygon points="${x},${y2+4} ${x-14},${y2-20} ${x+14},${y2-20}" fill="${col}" opacity="${op}"/>`};
+  if(ci>=1&&t>=B[ci]){const a=rc('d'+(ci-1));arc(a,tgt,'#5cd6ff',70,'🚶 chhod',ease((t-B[ci])/0.4));$('d'+(ci-1)).style.outline='6px solid #5cd6ff'}
+  if(ci>=2&&t>=Y[ci]){const a=rc('d'+(ci-2));arc(a,tgt,'#ffd166',250,'💰 loot',ease((t-Y[ci])/0.45));$('d'+(ci-2)).style.outline='6px solid #ffd166'}
+  if(NM[ci]!=null&&t>=NM[ci]){const m=document.querySelector('#h'+ci+' .m');m.style.boxShadow='0 0 0 6px #fff, 0 0 40px rgba(255,209,102,1)';m.style.transform=`scale(${1+0.25*Math.exp(-(t-NM[ci])*3)})`;
+   down(m.getBoundingClientRect(),tgt,'#ffd166',ease((t-NM[ci])/0.3))}
+ }
+ svg.innerHTML=sv;
  setA($('form'),win(t,K.fill0,K.code-0.1,0.3,0.3),0,0,1);
  // code
  const cd=win(t,K.code,K.smart-0.1,0.4,0.3);setA($('code'),cd,0,40*(1-ease((t-K.code)/0.4)));
