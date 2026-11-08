@@ -11,13 +11,15 @@ alarm=round(e2+0.25,3);rew=round(alarm+2.9,3)
 st['v3']=rew+0.4;t=st['v3']+dur('v3')+0.4
 st['v4']=t;t+=dur('v4')+0.35
 st['v5']=t;t+=dur('v5')+0.35
-st['v6']=t;t+=dur('v6')+0.4
+st['v6a']=t;t+=dur('v6a')+0.35
+st['v6']=round(t-1.40,3);t+=dur('v6b')+0.4
 st['v7']=t;e7=t+dur('v7');t=e7+1.1
 st['v8']=t;END=round(t+dur('v8')+2.2,3)
 K=dict(rule=w('v1',I['rule']),wire=w('v1',I['wire']),robGo=w('v1',I['robGo']),rob1=w('v2',I['rob1'])+0.35,rob2=round(alarm-0.8,3),alarm=alarm,rew=rew,
  q2=round(st['v3'],3),lc=w('v3',I['lc']),prob=round(st['v4'],3),nums=[w('v4',i) for i in I['nums']],adj=w('v4',I['adj']),ret=w('v4',I['ret']),
  oA=w('v5',I['oA']),oB=w('v5',I['oB']),mx=w('v5',I['mx']),fill0=w('v6',I['fill'][0])-0.2,fill=[w('v6',i)-0.1 for i in I['fill']],res=[w('v6',i) for i in I['res']],
- code=round(st['v7'],3),blue=[None if i is None else w('v6',i) for i in I['blue']],yel=[None if i is None else w('v6',i) for i in I['yel']],num=[w('v6',i) for i in I['num']],on=w('v7',I['on']),smart=w('v7',I['smart'])-0.4,smartEnd=round(e7+0.9,3),pay=w('v7',I['pay']),yaad=round(st['v8'],3),cta=w('v8',I['cta']))
+ code=round(st['v7'],3),dpdef=round(st['v6a'],3),dpi=round(st['v6a']+1.84,3),g0=round(st['v6a']+3.24,3),gi=round(st['v6a']+4.12,3),dmax=round(st['v6a']+5.56,3),blue=[None if i is None else w('v6',i) for i in I['blue']],yel=[None if i is None else w('v6',i) for i in I['yel']],num=[w('v6',i) for i in I['num']],on=w('v7',I['on']),smart=w('v7',I['smart'])-0.4,smartEnd=round(e7+0.9,3),pay=w('v7',I['pay']),yaad=round(st['v8'],3),cta=w('v8',I['cta']))
 json.dump({'K':K,'END':END,'VO':st},open(D+'timeline.json','w'))
-json.dump([[D+f'vo3/{k}.wav',v] for k,v in st.items()],open(D+'vofiles.json','w'))
+VF=[[D+f'vo3/{k}.wav',v] for k,v in st.items() if k!='v6']+[[D+'vo3/v6b.wav',round(st['v6']+1.40,3)]]
+json.dump(VF,open(D+'vofiles.json','w'))
 print(json.dumps(K),END)

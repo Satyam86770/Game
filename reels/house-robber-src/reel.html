@@ -117,6 +117,7 @@ y{color:#ffd166}r{color:#ff5470}g{color:#4ade80}c{color:#5cd6ff}o{color:#ffa94d}
  <div class="opt" id="oB" style="border:3px solid #5cd6ff"><div class="h">🚶 CHHOD DO</div><div class="f">pichle tak ka total ➜<br><b>dp[i-1]</b></div></div>
 </div></div>
 <div class="a c" id="mx"><div class="card">dp[i] = <g>max</g>( dp[i-1] , dp[i-2] + nums[i] )</div></div>
+<div class="a c" id="def" style="top:1010px"><div class="card" style="display:inline-block;font-size:46px;font-weight:800;line-height:1.4;border:3px solid #c4b5fd"><span style="color:#c4b5fd">dp[i]</span> = ghar <y>0</y> ➜ ghar <y>i</y> tak ka<br><g>MAX loot</g> ab tak 💰</div></div>
 <div class="a c" id="form"><div class="card" id="formt"></div></div>
 <div class="a" id="code"><div class="card mono" id="codet"></div></div>
 <div class="a c" id="dpf" style="top:1230px"><div class="card mono" style="display:inline-block;font-size:44px;font-weight:800">dp = [2, 7, 11, 11, <g>12</g>] ➜ return <g>12</g> ✅</div></div>
@@ -390,8 +391,8 @@ window.render=function(t){
  // problem + dp panel
  const pv=win(t,K.prob,K.code-0.1,0.4,0.3);setA($('prob'),pv,0,30*(1-ease((t-K.prob)/0.4)));
  (K.nums||[]).forEach((x,i)=>{const e=$('h'+i);e.style.opacity=t<x?0.15:1;e.style.transform=`scale(${t<x?0.9:back((t-x)/0.35)})`});
- const hideF=t>=K.fill0-0.2&&t<(K.res||[])[4]+0.6;$('adj').style.opacity=ease((t-K.adj)/0.3)*(hideF?0:1);$('ret').style.opacity=ease((t-K.ret)/0.3)*(hideF?0:1);
- $('dprow').style.opacity=ease((t-K.fill0)/0.3);
+ const hideF=t>=K.dpdef-0.2&&t<(K.res||[])[4]+0.6;$('adj').style.opacity=ease((t-K.adj)/0.3)*(hideF?0:1);$('ret').style.opacity=ease((t-K.ret)/0.3)*(hideF?0:1);
+ $('dprow').style.opacity=ease((t-K.dpdef)/0.3);setA($('def'),win(t,K.dpi,K.fill0-0.1,0.35,0.3),0,20*(1-ease((t-K.dpi)/0.35)),0.9+0.1*back((t-K.dpi)/0.4));
  const fills=K.fill||[],res=K.res||[];
  for(let i=0;i<5;i++){const e=$('d'+i);const done=res[i]!=null&&t>=res[i];e.textContent=done?DP[i]:'';e.style.borderColor=done?'#5cd6ff':'#39406a';
   const act=fills[i]!=null&&t>=fills[i]&&(i==4||fills[i+1]==null||t<fills[i+1]);e.style.boxShadow=act?'0 0 30px rgba(255,209,102,.8)':'none';e.style.background=act?'#2a2410':'#11152e';
@@ -401,7 +402,7 @@ window.render=function(t){
  let ci=-1;fills.forEach((x,i)=>{if(t>=x)ci=i});const cv2=ci>=0&&t<K.code-0.1&&t>=K.fill0;
  if(cv2){const hb=$('h'+ci).getBoundingClientRect();const cur=$('cur');cur.style.left=(hb.left-2)+'px';cur.style.top=(hb.top-8)+'px';cur.style.opacity=pv}else $('cur').style.opacity=0;
  // choice
- setA($('cho'),win(t,K.oA,K.fill0-0.1,0.35,0.3),0,0,1);$('oA').style.opacity=ease((t-K.oA)/0.3);$('oB').style.opacity=ease((t-K.oB)/0.3);
+ setA($('cho'),win(t,K.oA,K.dpdef-0.1,0.35,0.3),0,0,1);$('oA').style.opacity=ease((t-K.oA)/0.3);$('oB').style.opacity=ease((t-K.oB)/0.3);
  $('oA').style.transform=`scale(${0.85+0.15*back((t-K.oA)/0.4)})`;$('oB').style.transform=`scale(${0.85+0.15*back((t-K.oB)/0.4)})`;
  setA($('mx'),win(t,K.mx,K.code-0.1,0.35,0.3),0,0,0.85+0.15*back((t-K.mx)/0.4));
  // formula per step
@@ -428,6 +429,14 @@ window.render=function(t){
   if(ci>=2&&t>=Y[ci]){const a=rc('d'+(ci-2));arc(a,tgt,'#ffd166',250,'💰 loot',ease((t-Y[ci])/0.45));$('d'+(ci-2)).style.outline='6px solid #ffd166'}
   if(NM[ci]!=null&&t>=NM[ci]){const m=document.querySelector('#h'+ci+' .m');m.style.boxShadow='0 0 0 6px #fff, 0 0 40px rgba(255,209,102,1)';m.style.transform=`scale(${1+0.25*Math.exp(-(t-NM[ci])*3)})`;
    down(m.getBoundingClientRect(),tgt,'#ffd166',ease((t-NM[ci])/0.3))}
+ }
+ if(t>=K.dpi&&t<K.fill0-0.05&&pv>0){const op=pv*(1-ease((t-K.fill0+0.4)/0.35));const rc=id=>$(id).getBoundingClientRect();
+  const u=ease((t-K.g0)/0.5),ue=ease((t-K.gi)/0.6);const a=rc('h0'),c=rc('d2');const hb=rc('h2');
+  if(t>=K.g0){const d0=rc('d0');const x1=a.left+6,x2=lerp(a.right,hb.right,ue)-6,y=d0.bottom+26;
+   sv+=`<path d="M${x1},${y-22} L${x1},${y} L${x2},${y} L${x2},${y-22}" stroke="#c4b5fd" stroke-width="7" fill="none" opacity="${op*u}"/>`;
+   sv+=`<text x="${(x1+x2)/2}" y="${y+44}" fill="#c4b5fd" font-family="Poppins" font-weight="800" font-size="32" text-anchor="middle" opacity="${op*u}">ghar 0 ➜ ghar ${t>=K.gi?'i (=2)':'…'} ka best loot</text>`}
+  if(t>=K.dmax){$('d2').style.outline='6px solid #c4b5fd';$('d2').textContent='?';$('d2').style.color='#c4b5fd'}
+  else if(t>=K.dpi){$('d2').style.outline='4px dashed #c4b5fd'}
  }
  svg.innerHTML=sv;
  setA($('form'),win(t,K.fill0,K.code-0.1,0.3,0.3),0,0,1);
