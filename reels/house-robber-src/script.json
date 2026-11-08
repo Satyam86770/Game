@@ -1,0 +1,10 @@
+{
+"v1":"Ek raat... ek chor nikla, shehar ke paanch sabse ameer seths ko lootne! Har ghar mein crore-crore rupaye! Par ek shart hai... lagataar do ghar loote, toh alarm bajega... aur police aa jayegi!",
+"v2":"Lalchi chor ne socha: saat crore aur nau crore... dono le leta hoon! Aur phir...?",
+"v3":"Toh bina pakde... maximum kitna loot sakta hai? Yahi hai famous LeetCode one ninety eight: House Robber! DP ka sabse basic sawaal.",
+"v4":"Problem simple hai: ek array diya hai, har ghar ka paisa: do, saat, nau, teen, ek. Do pados wale ghar ek saath nahi loot sakte. Maximum loot return karo!",
+"v5":"Har ghar pe chor ke paas sirf do choice hain! Ya toh ye ghar loot lo... toh pichla ghar chhodna padega, yaani do ghar peeche tak ka total, plus is ghar ka paisa. Ya phir ye ghar chhod do, aur pichle ghar tak ka total rakh lo. Jo bada... wahi lo!",
+"v6":"Chalo table bharte hain! Pehla ghar: do. Doosra: do ya saat? Saat! Teesra: saat... ya do plus nau, gyaarah! Chautha: gyaarah... ya saat plus teen, das. Toh gyaarah hi! Paanchva: gyaarah... ya gyaarah plus ek, baarah!",
+"v7":"Code mein bas ek loop: dp of i, barabar max of, dp of i minus one, aur dp of i minus two plus nums of i. Ek hi pass, O of n time! Paanch ghar... aur bina pakde, poore baarah crore!",
+"v8":"Ek line mein yaad rakho: har ghar pe, loot lo ya chhod do... jo bada, wahi lo! Save karo, aur follow karo, next DP problem ke liye!"
+}
