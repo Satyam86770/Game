@@ -1,0 +1,11 @@
+{
+"l1":"Yaad hai wo chor? Pichli baar baarah crore loot ke bhaag gaya! Is baar wahi paanch seth... par colony GOL hai! Pehla ghar aur aakhri ghar... ab padosi hain!",
+"l2":"Chor ne wahi purana plan chalaya: pehla ghar, teesra, paanchva... aur phir?",
+"l3":"Toh gol colony mein, bina pakde maximum kitna? Yahi hai LeetCode two thirteen: House Robber Two! Pichle wale ka sequel.",
+"l4":"Problem same hai, bas ek twist: ghar gol mein hain. Toh pehla aur aakhri ghar... ek saath nahi loot sakte!",
+"l5":"Trick simple hai: gol ko todo! Ya toh aakhri ghar chhod do, toh bacha seedha raasta: ghar zero se teen tak. Ya phir pehla ghar chhod do: ghar ek se chaar tak. Dono pe purana House Robber chalao... jo bada, wahi answer!",
+"l6":"Case one: aakhri ghar bahar. dp of i matlab, ab tak ka maximum loot. Pehla: do. Phir: do ya saat? Saat! Phir: saat, ya do plus nau? Gyaarah! Phir: gyaarah, ya saat plus teen? Gyaarah. Case one ka answer: gyaarah!",
+"l7":"Case two: pehla ghar bahar. Pehla: saat. Phir: saat ya nau? Nau! Phir: nau, ya saat plus teen? Das! Phir: das, ya nau plus ek? Das. Case two ka answer: das!",
+"l8":"Ab max of gyaarah aur das... gyaarah crore! Code mein bas purana rob function, do range pe call karo: zero se n minus two, aur ek se n minus one. Aur dp ke sirf last do number rakho: prev one aur prev two. O of n time!",
+"l9":"Ek line mein yaad rakho: gol ko todo, do baar seedha loot lo, jo bada wahi lo! Comment karo, House Robber Three chahiye? Aur follow karo!"
+}
