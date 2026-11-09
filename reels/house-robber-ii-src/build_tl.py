@@ -12,7 +12,7 @@ smart=round(t+0.1,3);t=smart+3.3;st['l9']=round(t,3);END=round(t+dur('l9')+2.2,3
 w=lambda k,i: round(st[k]+W[k][i][1],3)
 L=lambda k,ids: [None if i is None else w(k,i) for i in ids]
 K=dict(padosi=w('l1',17),wire=w('l1',14),robGo=round(st['l2'],3),alarm=alarm,rew=rew,q2=st['l3'],lc=w('l3',8),prob=st['l4'],twist=w('l4',10),
- cut=w('l5',3),c1o=w('l5',8),c2o=w('l5',22),c1=st['l6'],dpi=w('l6',5),
+ cut=w('l5',3),r0=w('l5',16),r3=w('l5',18),r1=w('l5',26),r4=w('l5',28),c1o=w('l5',8),c2o=w('l5',22),c1=st['l6'],dpi=w('l6',5),
  fillA=[x-0.1 for x in L('l6',[14,16,21,27])],numA=L('l6',[15,19,25,31]),blueA=L('l6',[None,17,22,28]),yelA=L('l6',[None,19,24,30]),resA=L('l6',[15,20,26,32]),ansA=w('l6',33),
  c2=st['l7'],fillB=[x-0.1 for x in L('l7',[5,7,12,19])],numB=L('l7',[6,10,16,23]),blueB=L('l7',[None,8,13,20]),yelB=L('l7',[None,10,15,22]),resB=L('l7',[6,11,18,25]),ansB=w('l7',26),
  fin=st['l8'],code=w('l8',6),ranges=w('l8',12),prev=w('l8',27),on=w('l8',40),smart=smart,smartEnd=round(smart+3.0,3),pay=round(smart+2.3,3),yaad=st['l9'],cta=w('l9',18))
