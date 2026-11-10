@@ -1,0 +1,11 @@
+{
+"v1":"Ek chhota sa bandar ka baccha... nadi ke beech phas gaya! Aur peeche se... magarmach aa raha hai! Saamne patthar hain, har patthar pe likha hai: yahan se maximum kitne patthar aage kood sakta hai. Aur nadi ke us paar... mummy intezaar kar rahi hai!",
+"v2":"Baby ne pehle patthar se, teen ki lambi chhalaang maari... aur ye kya?! Is patthar pe likha hai... ZERO!",
+"v3":"Ruko! Koi bhi raasta lo... har baar yahi zero wala patthar aata hai! Toh pehle se kaise pata karein, baby pahunchega ya nahi? Yahi hai famous LeetCode fifty five: Jump Game!",
+"v4":"Array diya hai: har number batata hai, us index se maximum kitna aage kood sakte ho. Pehle index se shuru karo... kya last index tak pahunch sakte ho? True ya false?",
+"v5":"Trick: ulta socho! Mummy wala aakhri patthar hai hamara goal. Ab peeche se chalo, aur har patthar pe check karo: i plus nums of i, goal tak pahunchta hai? Agar haan... toh goal ko yahin kheech lo!",
+"v6":"Is nadi mein goal hai chaar. Index teen: teen plus zero, teen... chaar tak nahi! Index do: do plus ek, teen... nahi! Index ek: ek plus do, teen... nahi! Index zero: zero plus teen, teen... nahi! Goal hila hi nahi... answer: false!",
+"v7":"Ab doosri nadi! Goal chaar. Index teen: teen plus ek, chaar! Haan! Goal teen pe. Index do: do plus ek, teen! Goal do pe. Index ek: ek plus teen, chaar! Goal ek pe. Index zero: zero plus do, do! Goal zero pe... start tak aa gaya! True!",
+"v8":"Code mein bas ek loop, peeche se: agar i plus nums of i, goal se bada ya barabar hai, toh goal barabar i. End mein return goal equals zero. O of n time, O of one space! Aur dekho... baby mummy ke paas!",
+"v9":"Ek line mein yaad rakho: peeche se chalo, goal ko kheechte jao... goal zero pe aaya, toh baby ghar pahuncha! Save karo, share karo, aur follow karo!"
+}
