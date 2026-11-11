@@ -1,0 +1,12 @@
+{
+"h1":"Ek zero wala patthar... aur baby kabhi mummy tak nahi pahunchega!",
+"h2":"Amazon, Google, Adobe... sabke interview mein ye sawaal: LeetCode fifty five, Jump Game!",
+"p1":"Baby bandar ko nadi paar karni hai, mummy us paar intezaar kar rahi hai. Har patthar pe ek number likha hai.",
+"p2":"Number ka matlab: yahan se zyada se zyada kitne patthar aage kood sakte ho... beech mein kahin bhi!",
+"p3":"Baby pehle patthar pe hai. Last patthar tak pahunchega? True ya false?",
+"p4":"Aage se socho, toh har patthar pe options hi options... har raasta try karoge, toh TLE!",
+"p5":"Trick: ulta chalo! Last patthar hai goal. Ab ek ek patthar peeche aao, aur bas ek sawaal poochho: index plus jump, goal tak pahunchta hai? Haan, toh goal yahin le aao!",
+"p6":"Goal chaar. Index teen: teen plus zero, teen... goal tak nahi, skip! Index do: do plus do, chaar! Goal do pe. Index ek: ek plus zero, ek... skip! Index zero: zero plus teen, teen... goal do tak pahunch gaya! Goal zero pe... TRUE!",
+"p7":"Code mein bas ek loop, peeche se: agar i plus nums of i, goal se bada ya barabar, toh goal barabar i. End mein goal zero? True! O of n time, O of one space!",
+"p8":"Ek line mein yaad rakho: ulta chalo, goal kheencho! Save karo, aur follow karo!"
+}
