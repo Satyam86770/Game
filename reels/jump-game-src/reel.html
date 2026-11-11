@@ -236,7 +236,7 @@ const fx=$('fx').getContext('2d'),conf=$('conf').getContext('2d');
 const proj=v=>{const p=v.clone().project(cam);return {x:(p.x+1)/2*1080,y:(1-p.y)/2*1920,z:p.z}};
 window.CUES=[];window.READY=false;
 function init(){const C=window.CUES,c=(t,n,g=1)=>{if(t!=null)C.push([t,n,g])};
- c(K.rule,'pop',0.5);c(K.q2,'pop',0.6);c(K.lc,'whoosh',0.8);c(K.lc+0.15,'ding',0.7);c(K.prob,'whoosh',0.6);c(K.ask,'pop',0.5);
+ c(K.rule,'pop',0.5);c(K.jump,'whoosh',0.8);c(K.jump+0.9,'splash',1);c(K.zero,'boom',0.8);c(K.phas,'thump',1);c(K.rew,'rewind',0.9);(K.ghost||[]).forEach(x=>c(x,'whoosh',0.4));c(K.q2,'pop',0.6);c(K.lc,'whoosh',0.8);c(K.lc+0.15,'ding',0.7);c(K.prob,'whoosh',0.6);c(K.ask,'pop',0.5);
  c(K.range,'whoosh',0.5);c(K.rA1,'pop',0.6);c(K.rA2,'pop',0.6);c(K.rNo,'buzz',0.35);c(K.trick,'whoosh',0.6);c(K.goal,'pop',0.7);
  (K.tI||[]).forEach(x=>c(x,'click',0.6));(K.tG||[]).forEach(x=>c(x,'ding',0.5));c(K.tTrue,'success',0.8);
  c(K.code,'whoosh',0.6);c(K.on,'sparkle',0.7);c(K.hj1-0.7,'whoosh',0.5);c(K.hj1,'splash',0.7);c(K.hj1+0.15,'thump',0.9);c(K.hj2,'splash',0.6);c(K.hug,'success',0.9);c(K.yaad,'pop',0.6);c(K.cta,'sparkle',0.7);
@@ -266,6 +266,7 @@ window.render=function(t){
   if(t>=K.rNo){stones[3].ring.material.color.set('#ff5470');stones[3].ring.material.opacity=0.9}}
  // ---------- baby ----------
  let bp=stones[0].top.clone(),bRot=Math.PI/2,scared=hook?1:0;
+ if(hook&&t>=K.jump&&t<K.rew){const u=cl((t-K.jump)/0.95);bp=jumpPos(stones[0].top,stones[3].top,eio(u),3.4)}
  if(happy){if(t>=K.hj1-0.7){const u=cl((t-(K.hj1-0.7))/0.7);bp=jumpPos(stones[0].top,stones[1].top,eio(u),1.8)}
   if(t>=K.hj2-0.9){const u=cl((t-(K.hj2-0.9))/0.9);bp=jumpPos(stones[1].top,stones[4].top,eio(u),3.6)}
   if(t>=K.hug-0.6){const u=cl((t-(K.hug-0.6))/0.6);bp=jumpPos(stones[4].top,BANK.clone().add(new THREE.Vector3(0,0,-0.6)),eio(u),1.2)}}
@@ -278,10 +279,10 @@ window.render=function(t){
  // ---------- croc (behind baby, coming towards stone 0) ----------
  let cpos,crot=-0.35,jaw=0;// swimming in from the side towards the baby
  const c0=new THREE.Vector3(-9.5,0,2.0),c1=new THREE.Vector3(-4.6,0,0.6);
- if(hook)cpos=c0.clone().lerp(c1,eio(t/K.lc));
+ if(hook){if(t<K.jump)cpos=c0.clone().lerp(c1,eio(t/K.jump));else if(t<K.rew){const tgt=new THREE.Vector3(-2.3,0,-10.2);cpos=c1.clone().lerp(tgt,eio((t-K.jump-0.4)/(K.phas-K.jump-0.4)));crot=lerp(-0.35,0.15,eio((t-K.jump)/1.5))}else cpos=c1.clone()}
  else if(happy){const tl=K.hj1-0.3;if(t<tl)cpos=c1.clone();else{const u=eio((t-tl)/0.6);cpos=c1.clone().lerp(new THREE.Vector3(-3.2,0,0.15),u);jaw=t<K.hj1+0.15?0.6*cl((t-tl)/0.3):0.6*(1-cl((t-K.hj1-0.15)/0.15))}}
  else cpos=c1.clone();
- if(hook)jaw=0.25+0.2*Math.max(0,Math.sin(t*1.7));
+ if(hook)jaw=(t>=K.zero&&t<K.rew)?0.6*cl((t-K.zero)/0.8):0.25+0.2*Math.max(0,Math.sin(t*1.7));
  croc.position.set(cpos.x,0.08,cpos.z);croc.rotation.y=crot+Math.sin(t*0.8)*0.06;
  croc.userData.up.rotation.z=jaw;croc.userData.lo.rotation.z=-jaw*0.5;croc.userData.tail.rotation.y=Math.sin(t*3)*0.25;
  wake.position.set(cpos.x-3.5,0.03,cpos.z+0.8);wake.rotation.z=-0.35;wake.material.opacity=0.6+0.3*Math.sin(t*4);
@@ -291,18 +292,21 @@ window.render=function(t){
  // ---------- overlay ----------
  $('prog').style.width=(100*t/END)+'%';
  const dimv=Math.max(win(t,K.lc,K.range-0.1,0.4,0.4)*0.88,win(t,K.trick,K.happy,0.4,0.4)*0.88,win(t,K.yaad,null,0.4)*0.65);$('dim').style.opacity=dimv;
- $('red').style.opacity=hook?(0.05+0.06*Math.sin(t*5))*(t>K.croc?1:0):0;
+ $('red').style.opacity=hook?((t>=K.zero&&t<K.rew)?(0.14+0.12*Math.sin(t*8)):(0.05+0.06*Math.sin(t*5))*(t>K.croc?1:0)):0;
  $('flash').style.opacity=lt*0.55;
  const showL=hook||rng||happy;
  labs.forEach((d,i)=>{const p=proj(stones[i].top.clone().add(new THREE.Vector3(0,1.2,0)));d.style.left=p.x+'px';d.style.top=p.y+'px';
   const o=showL&&p.z<1?(hook?1-ease((t-K.lc)/0.3):(rng?ease((t-K.range)/0.4)*(1-ease((t-K.trick+0.3)/0.3)):ease((t-K.happy)/0.4))):0;d.style.opacity=o;
   const dist=cam.position.distanceTo(stones[i].top);d.style.transform=`translate(-50%,-100%) scale(${Math.max(0.7,Math.min(1.3,16/dist))})`;
-  d.querySelector('.p').textContent=TRUE_[i];d.className='sl'+(i==4?' goal':'')});
+  const failL=t<K.prob;d.querySelector('.p').textContent=failL?FAIL[i]:TRUE_[i];d.className='sl'+(failL?((i==3&&t>=K.zero)?' zero':''):(i==4?' goal':''))});
  const mp=proj(mom.G.position.clone().add(new THREE.Vector3(0,2.6,0)));$('mom').style.left=Math.max(200,Math.min(880,mp.x))+'px';$('mom').style.top=mp.y+'px';
  $('mom').style.opacity=(t>=K.mom&&t<K.lc)||(happy&&t<K.hug+2)?1:0;$('mom').textContent=happy&&t>=K.hug?'Mera baccha! 🥹❤️':'Beta, aaja! 🥺';
  setA($('hook'),t<K.rule?1:1-ease((t-K.rule)/0.35));
- setA($('rule'),win(t,K.rule,K.q2,0.35,0.3),0,30*(1-ease((t-K.rule)/0.4)));
- const cd=hook?lerp(9,3.5,cl(t/K.lc)):0;$('crocT').textContent=`🐊 ${cd.toFixed(1)} m door...`;setA($('croc'),hook&&t>=K.croc?1:0,0,0,1+0.04*Math.sin(t*10));
+ setA($('rule'),win(t,K.rule,K.jump,0.35,0.3),0,30*(1-ease((t-K.rule)/0.4)));
+ const cd=hook?(t<K.jump?lerp(9,5,cl(t/K.jump)):lerp(5,0.5,cl((t-K.jump)/(K.phas-K.jump)))):0;$('crocT').textContent=`🐊 ${cd.toFixed(1)} m door...`;setA($('croc'),hook&&t>=K.croc&&t<K.rew?1:0,0,0,1+0.04*Math.sin(t*10));
+ setA($('zero'),win(t,K.zero,K.phas-0.1,0.2,0.2),0,0,0.6+0.4*back((t-K.zero)/0.35));
+ setA($('phas'),win(t,K.phas,K.rew,0.15,0.2),0,0,0.7+0.3*back((t-K.phas)/0.3));
+ setA($('rew'),win(t,K.rew,K.rew+0.8,0.1,0.2),0,0,1+0.2*Math.sin(t*20));
  setA($('q2'),win(t,K.q2,K.lc-0.1,0.3,0.25),0,0,0.85+0.15*back((t-K.q2)/0.4));
  setA($('lc'),win(t,K.lc,K.prob-0.1,0.4,0.3),0,40*(1-ease((t-K.lc)/0.4)),0.85+0.15*back((t-K.lc)/0.45));
  // range demo overlay (3D arcs from stone 0)
@@ -312,6 +316,11 @@ window.render=function(t){
    g3+=`<path d="${d}" stroke="${col}" stroke-width="8" fill="none" stroke-dasharray="16 10" opacity="${op}"/>`;if(u>=1){const P=proj(stones[b].top);g3+=`<text x="${P.x+50}" y="${P.y-10}" font-size="54" font-family="Noto Color Emoji" opacity="${op}">${lab}</text>`}};
   if(t>=K.rA1)arc3(0,1,ease((t-K.rA1)/0.5),'#4ade80','✅');if(t>=K.rA2)arc3(0,2,ease((t-K.rA2)/0.5),'#4ade80','✅');
   if(t>=K.rNo){const P=proj(stones[3].top);g3+=`<text x="${P.x+50}" y="${P.y-10}" font-size="54" font-family="Noto Color Emoji" opacity="${op}">❌</text>`}}
+ if(t>=K.rew+0.3&&t<K.lc-0.1){const paths=[[0,1,3],[0,2,3],[0,1,2,3]];const G=K.ghost||[];
+  paths.forEach((pt,k)=>{if(G[k]==null||t<G[k])return;const u=cl((t-G[k])/0.8);const col=['#5cd6ff','#ffd166','#c4b5fd'][k];
+   for(let q=0;q<pt.length-1;q++){const su=cl(u*(pt.length-1)-q);if(su<=0)continue;const a=stones[pt[q]].top,b=stones[pt[q+1]].top;let d='';for(let m=0;m<=20;m++){const w=m/20*su;const P=proj(jumpPos(a,b,w,1.6+0.6*(pt[q+1]-pt[q])).add(new THREE.Vector3(0,0.4,0)));d+=(m?'L':'M')+P.x.toFixed(1)+','+P.y.toFixed(1)}
+    g3+=`<path d="${d}" stroke="${col}" stroke-width="8" fill="none" stroke-dasharray="16 10" opacity="${1-ease((t-K.lc+0.6)/0.4)}"/>`}
+   if(u>=1){const P=proj(stones[3].top);g3+=`<text x="${P.x+40+k*46}" y="${P.y-30}" font-size="54" font-family="Noto Color Emoji">❌</text>`}})}
  $('g3').innerHTML=g3;
  const rc=win(t,K.rMax,K.trick-0.1,0.35,0.3);setA($('rngC'),rc,0,20*(1-ease((t-K.rMax)/0.4)));
  $('rngL1').style.opacity=t>=K.rMax?1:0;$('rngL2').style.opacity=t>=K.rAny?1:0;$('rngL3').style.opacity=t>=K.rEx?1:0;
