@@ -70,10 +70,13 @@ canvas.fx{position:absolute;inset:0;pointer-events:none}
 <div id="ov">
 <div id="dim"></div>
 <canvas class="fx" id="fx" width="1080" height="1920"></canvas>
+<div id="say" style="position:absolute;width:660px;padding:22px 28px;border-radius:28px;background:#fff;color:#141414;font-size:40px;font-weight:800;line-height:1.3;opacity:0;box-shadow:0 10px 40px rgba(0,0,0,.5)"></div>
+<div class="a c" id="tease" style="top:110px"><div style="display:inline-block;font-size:48px;font-weight:800;padding:10px 30px;border-radius:22px;background:rgba(8,10,24,.82)">📀 Pendrive FULL hone pe <r>WEIGHT</r> badhega? 🤔</div></div>
+<div class="a c" id="qq" style="top:300px"><div style="display:inline-block;font-size:52px;font-weight:800;line-height:1.35;padding:18px 34px;border-radius:26px;background:rgba(8,10,24,.9);border:3px solid #ffd166">✋ RUKO! Khaali ➜ <r>FULL</r>...<br>⚖️ Kya <y>WEIGHT badhega</y>?</div></div>
 <div class="a c" id="hook"><div class="l1">🎬 128 GB pendrive <y>FULL</y> kar di...</div><br><div class="l2">WEIGHT <r>badhega?</r> 🤔⚖️</div></div>
 <div class="a" id="bar"><div class="t" id="barT">💾 0 / 128 GB</div><div class="o"><div class="i" id="barI"></div></div></div>
 <div class="a c" id="opts"><div class="row"><div class="op" id="o1">🅰️ ⬆️ Badhega</div><div class="op" id="o2">🅱️ ➖ Same rahega</div><div class="op" id="o3">🅲 ⬇️ Ghatega</div></div></div>
-<div class="a c" id="cd"><div class="n" id="cdn">2</div><div class="s">🤔 Socho... aur <y>COMMENT</y> karo 👇</div></div>
+<div class="a c" id="cd"><div class="n" id="cdn">2</div><div class="s">🤔 Socho... answer + <y>REASON</y> comment karo 👇</div></div>
 <div class="a c" id="ans"><div class="big">✅ HAAN, BADHTA HAI!</div><div class="sm">Par itna kam... koi machine <r>naap nahi</r> sakti 😳</div></div>
 <div id="chipT">🔬 Pendrive ke andar: <c>memory cells</c></div>
 <div id="chip"><canvas id="chipC" width="900" height="900"></canvas></div>
@@ -146,6 +149,50 @@ const lb=new THREE.Mesh(new RoundedBoxGeometry(7,0.35,5,4,0.1),new THREE.MeshSta
 const scT=cvTex(512,320,(g,w,h)=>{g.fillStyle='#0c1226';g.fillRect(0,0,w,h);g.fillStyle='#5cd6ff';g.font='bold 40px Poppins';g.fillText('Copying movies...',30,80);for(let i=0;i<5;i++){g.fillStyle='rgba(255,255,255,.15)';g.fillRect(30,110+i*40,450,24);g.fillStyle='#a78bfa';g.fillRect(30,110+i*40,450*(0.3+rnd(i)*0.7),24)}});
 const scr=new THREE.Mesh(new THREE.PlaneGeometry(6.6,4.2),new THREE.MeshBasicMaterial({map:scT}));scr.position.set(0,2.4,-2.6);scr.rotation.x=-0.15;lap.add(scr);
 const glowL=new THREE.PointLight(0x5cd6ff,12,14,2);glowL.position.set(9,3,-2);S.add(glowL);
+// ================= SHOP SET (at x=200) =================
+const SH=new THREE.Group();SH.position.set(200,0,0);S.add(SH);
+{const fl=new THREE.Mesh(new THREE.PlaneGeometry(40,30),new THREE.MeshStandardMaterial({color:'#3a3f4a',roughness:.8}));fl.rotation.x=-Math.PI/2;fl.position.y=-4;fl.receiveShadow=true;SH.add(fl);
+ const wl=new THREE.Mesh(new THREE.PlaneGeometry(40,20),new THREE.MeshStandardMaterial({color:'#e8dcc4',roughness:.9}));wl.position.set(0,6,-8);SH.add(wl);
+ // shelves with boxes
+ const shM=new THREE.MeshStandardMaterial({color:'#6b4a2e',roughness:.7});const cols=['#e11d48','#2563eb','#16a34a','#f59e0b','#7c3aed','#0ea5e9','#111827','#f97316'];
+ for(let r=0;r<4;r++){const b=new THREE.Mesh(new THREE.BoxGeometry(16,0.2,1.6),shM);b.position.set(0,-1+r*2.4,-7.2);SH.add(b);
+  for(let k=0;k<11;k++){const w=0.8+rnd(r*20+k)*0.7,h=0.8+rnd(r*31+k)*1.2;const bx=new THREE.Mesh(new RoundedBoxGeometry(w,h,1.0,2,0.05),new THREE.MeshStandardMaterial({color:cols[(r*3+k)%8],roughness:.5}));bx.position.set(-7.2+k*1.42,-0.9+r*2.4+h/2,-7.1);bx.castShadow=true;SH.add(bx)}}
+ const signT=cvTex(1024,200,(g,w,h)=>{const gr=g.createLinearGradient(0,0,w,0);gr.addColorStop(0,'#b91c1c');gr.addColorStop(1,'#f59e0b');g.fillStyle=gr;g.fillRect(0,0,w,h);g.fillStyle='#fff';g.font='bold 110px Poppins';g.textAlign='center';g.textBaseline='middle';g.fillText('⚡ SHARMA ELECTRONICS',w/2,h/2+6)});
+ const sign=new THREE.Mesh(new THREE.PlaneGeometry(14,2.7),new THREE.MeshBasicMaterial({map:signT}));sign.position.set(0,7.2,-7.9);SH.add(sign);
+ // counter
+ const ct=new THREE.Mesh(new RoundedBoxGeometry(12,3.6,3,4,0.12),new THREE.MeshStandardMaterial({color:'#20242c',roughness:.35,metalness:.3}));ct.position.set(0,-2.2,0);ct.castShadow=ct.receiveShadow=true;SH.add(ct);
+ const top=new THREE.Mesh(new RoundedBoxGeometry(12.4,0.25,3.4,3,0.08),new THREE.MeshStandardMaterial({color:'#c9ced6',roughness:.2,metalness:.6}));top.position.set(0,-0.3,0);top.receiveShadow=true;SH.add(top);
+ const gl=new THREE.Mesh(new THREE.BoxGeometry(11.8,2.8,0.08),new THREE.MeshStandardMaterial({color:'#8fd3ff',transparent:true,opacity:.18,roughness:.05}));gl.position.set(0,-2.1,1.55);SH.add(gl);
+ const sl1=new THREE.PointLight(0xfff1d6,60,30,1.6);sl1.position.set(0,9,4);SH.add(sl1);const sl2=new THREE.PointLight(0xa0c4ff,25,30,2);sl2.position.set(-6,5,6);SH.add(sl2)}
+// laptop on counter
+const sLap=new THREE.Group();sLap.position.set(1.6,-0.15,0.1);sLap.rotation.y=0.25;SH.add(sLap);
+{const b=new THREE.Mesh(new RoundedBoxGeometry(3.6,0.18,2.5,3,0.06),new THREE.MeshStandardMaterial({color:'#9aa1ad',metalness:.8,roughness:.3}));b.position.y=0.09;sLap.add(b)}
+const lc=document.createElement('canvas');lc.width=640;lc.height=420;const lg=lc.getContext('2d');const lT=new THREE.CanvasTexture(lc);lT.colorSpace=THREE.SRGBColorSpace;
+const lscr=new THREE.Mesh(new THREE.PlaneGeometry(3.5,2.3),new THREE.MeshBasicMaterial({map:lT}));lscr.position.set(0,1.25,-1.25);lscr.rotation.x=-0.18;sLap.add(lscr);
+const lback=new THREE.Mesh(new THREE.BoxGeometry(3.6,2.4,0.08),new THREE.MeshStandardMaterial({color:'#8a909c',metalness:.8,roughness:.3}));lback.position.set(0,1.25,-1.31);lback.rotation.x=-0.18;sLap.add(lback);
+const MOV=['Animal (2023).mp4  • 4.1 GB','Stree 2 (2024).mp4  • 3.6 GB','Sanam Teri Kasam.mp4  • 3.2 GB','+ 31 more movies...'];
+function drawLap(t){lg.fillStyle='#0c1226';lg.fillRect(0,0,640,420);lg.fillStyle='#5cd6ff';lg.font='bold 34px Poppins';lg.fillText('📂 Copying to PENDRIVE (128 GB)',24,52);
+ const u=cl((t-K.s1)/(K.s2-K.s1));MOV.forEach((m,i)=>{const show=t>=(K.mv||[])[i];if(!show)return;lg.fillStyle='#e8ecff';lg.font='bold 28px Poppins';lg.fillText('🎬 '+m,24,110+i*58)});
+ lg.fillStyle='rgba(255,255,255,.15)';lg.fillRect(24,360,592,30);const gb=t>=K.s2?127.9:u*127.9;lg.fillStyle=gb>=127.9?'#ff5470':'#a78bfa';lg.fillRect(24,360,592*gb/128,30);lg.fillStyle='#fff';lg.font='bold 24px Poppins';lg.fillText(gb.toFixed(1)+' / 128 GB'+(gb>=127.9?'  • FULL (100 MB free)':''),30,384);lT.needsUpdate=true}
+// people
+function person(o){const G=new THREE.Group();const sk=new THREE.MeshStandardMaterial({color:o.skin,roughness:.7}),sh=new THREE.MeshStandardMaterial({color:o.shirt,roughness:.8}),pn=new THREE.MeshStandardMaterial({color:o.pant,roughness:.8}),hr=new THREE.MeshStandardMaterial({color:'#1a120c',roughness:.9});
+ const body=new THREE.Mesh(new THREE.CapsuleGeometry(0.75,1.6,8,16),sh);body.position.y=2.2;body.scale.set(1,1,0.75);body.castShadow=true;G.add(body);
+ for(const s of [-1,1]){const l=new THREE.Mesh(new THREE.CapsuleGeometry(0.28,1.4,6,10),pn);l.position.set(s*0.38,0.75,0);G.add(l)}
+ const head=new THREE.Group();head.position.y=4.15;G.add(head);
+ const hm=new THREE.Mesh(new THREE.SphereGeometry(0.72,24,18),sk);hm.castShadow=true;head.add(hm);
+ const hair=new THREE.Mesh(new THREE.SphereGeometry(0.75,24,12,0,Math.PI*2,0,Math.PI*0.5),hr);hair.position.y=0.08;hair.rotation.x=-0.25;head.add(hair);
+ for(const s of [-1,1]){const e=new THREE.Mesh(new THREE.SphereGeometry(0.11,10,8),new THREE.MeshBasicMaterial({color:'#fff'}));e.position.set(s*0.25,0.08,0.63);head.add(e);const p=new THREE.Mesh(new THREE.SphereGeometry(0.065,8,6),new THREE.MeshBasicMaterial({color:'#111'}));p.position.set(s*0.25,0.08,0.72);head.add(p);
+  const eb=new THREE.Mesh(new THREE.BoxGeometry(0.26,0.06,0.05),hr);eb.position.set(s*0.25,0.28,0.68);head.add(eb);const ear=new THREE.Mesh(new THREE.SphereGeometry(0.16,8,8),sk);ear.position.set(s*0.72,0,0);head.add(ear)}
+ const nose=new THREE.Mesh(new THREE.SphereGeometry(0.1,8,8),sk);nose.position.set(0,-0.08,0.73);head.add(nose);
+ const mouth=new THREE.Mesh(new THREE.SphereGeometry(0.13,12,8),new THREE.MeshBasicMaterial({color:'#5a1a1a'}));mouth.scale.set(1.3,0.25,0.5);mouth.position.set(0,-0.34,0.64);head.add(mouth);
+ if(o.mous){const m=new THREE.Mesh(new THREE.TorusGeometry(0.22,0.06,6,12,Math.PI),hr);m.position.set(0,-0.2,0.68);m.rotation.z=Math.PI;head.add(m)}
+ const arms=[];for(const s of [-1,1]){const a=new THREE.Group();a.position.set(s*0.95,3.2,0);G.add(a);const am=new THREE.Mesh(new THREE.CapsuleGeometry(0.22,1.3,6,10),sh);am.position.y=-0.8;a.add(am);const hd=new THREE.Mesh(new THREE.SphereGeometry(0.22,10,8),sk);hd.position.y=-1.6;a.add(hd);arms.push(a)}
+ if(o.bag){const bg=new THREE.Mesh(new RoundedBoxGeometry(1.3,1.6,0.6,3,0.15),new THREE.MeshStandardMaterial({color:'#dc2626'}));bg.position.set(0,2.4,-0.75);G.add(bg)}
+ G.scale.setScalar(o.sc);SH.add(G);return {G,head,mouth,arms}}
+const keeper=person({skin:'#c08a5e',shirt:'#f3f4f6',pant:'#334155',mous:true,sc:1.0});keeper.G.position.set(-2.9,-2.3,-2.2);
+const kid=person({skin:'#d9a27a',shirt:'#60a5fa',pant:'#1e3a8a',bag:true,sc:0.72});kid.G.position.set(3.9,-4,3.0);kid.G.rotation.y=-1.25;
+// small pendrive in the shop (clone of hero pendrive)
+const pd2=pd.clone();pd2.scale.setScalar(0.45);SH.add(pd2);
 // ---------- overlay ----------
 const $=id=>document.getElementById(id);
 function setA(el,o,dx=0,dy=0,s=1){el.style.opacity=o;el.style.transform=`translate(${dx}px,${dy}px) scale(${s})`}
@@ -154,7 +201,7 @@ const fx=$('fx').getContext('2d'),conf=$('conf').getContext('2d'),chip=$('chipC'
 const proj=v=>{const p=v.clone().project(cam);return {x:(p.x+1)/2*1080,y:(1-p.y)/2*1920}};
 window.CUES=[];window.READY=false;
 function init(){const C=window.CUES,c=(t,n,g=1)=>{if(t!=null)C.push([t,n,g])};
- for(let k=0;k<8;k++)c(0.3+k*((K.fillEnd-0.3)/8),'whoosh',0.25);c(K.fillEnd,'ding',0.6);c(K.q,'boom',0.5);
+ c(K.k1e-0.2,'click',0.6);(K.mv||[]).forEach(x=>c(x,'pop',0.45));c(K.s2,'ding',0.7);c(K.n1,'boom',0.7);c(K.cut,'whoosh',0.7);
  c(K.cd,'tick',0.9);c(K.cd+1,'tock',0.9);c(K.o1,'pop',0.6);c(K.o2,'pop',0.6);c(K.o3,'pop',0.6);c(K.ans,'success',0.8);c(K.chip,'whoosh',0.6);c(K.leg,'pop',0.5);c(K.cnt,'pop',0.6);c(K.emc,'boom',0.6);c(K.dig,'whoosh',0.6);c(K.cmp,'pop',0.6);c(K.x30,'sparkle',0.8);c(K.yaad,'pop',0.6);c(K.cta,'sparkle',0.7);
  window.READY=true}
 // chip cell grid
@@ -172,6 +219,8 @@ function drawChip(t){chip.clearRect(0,0,900,900);
  if(t>=K.cnt&&t<K.emc){for(let k=0;k<24;k++){const u=cl(shiftU*1.6-k*0.03);const sx=80+rnd(k)*740,sy=790,tx=OX+(k%COLS)*CW+40,ty=OY+((k*5)%ROWS)*CH+40;const x=lerp(sx,tx,eio(u)),y=lerp(sy,ty,eio(u));chip.fillStyle='#5cd6ff';chip.beginPath();chip.arc(x,y,9,0,7);chip.fill();
    }}}
 window.render=function(t){
+ if(t<K.cut){renderShop(t);return}
+ cam.fov=40;cam.updateProjectionMatrix();
  const fillU=cl((t-0.3)/(K.fillEnd-0.3));
  // camera: hero 3/4 shot, slow push; payoff close-up on display
  let cp=new THREE.Vector3(3.8,10.2,14.5),ct=new THREE.Vector3(0,1.0,0.6);
@@ -184,13 +233,14 @@ window.render=function(t){
  R.render(S,cam);
  // overlay
  $('prog').style.width=(100*t/END)+'%';
- const dimv=Math.max(win(t,K.opts,K.ans,0.3,0.3)*0.7,win(t,K.chip,K.dig-0.6,0.4,0.4)*0.9,win(t,K.cmp,K.yaad,0.4,0.3)*0.75,win(t,K.yaad,null,0.4)*0.85);$('dim').style.opacity=dimv;
+ ['say','tease','qq','opts','cd'].forEach(id=>$(id).style.opacity=0);
+ const dimv=Math.max(0,win(t,K.chip,K.dig-0.6,0.4,0.4)*0.9,win(t,K.cmp,K.yaad,0.4,0.3)*0.75,win(t,K.yaad,null,0.4)*0.85);$('dim').style.opacity=dimv;
  setA($('hook'),t<K.opts?1:1-ease((t-K.opts)/0.3));
  setA($('bar'),t<K.opts?1:1-ease((t-K.opts)/0.3));const gb=Math.min(127.9,fillU*127.9);$('barI').style.width=(fillU*99.9)+'%';
  $('barT').innerHTML=fillU>=1?'💾 <r>127.9</r> / 128 GB • sirf <y>0.1 GB</y> bacha!':`💾 ${gb.toFixed(1)} / 128 GB`;
- setA($('opts'),win(t,K.opts,K.ans-0.1,0.3,0.3));
+ setA($('opts'),0);
  [['o1',K.o1],['o2',K.o2],['o3',K.o3]].forEach(([id,x])=>{const e=$(id);e.style.opacity=t>=x?1:0.15;e.style.transform=`scale(${t>=x?0.9+0.1*back((t-x)/0.35):0.9})`;e.style.borderColor=(t>=K.ans&&id=='o1')?'#4ade80':'rgba(255,255,255,.2)'});
- const cdOn=t>=K.cd&&t<K.cd+2.0;setA($('cd'),cdOn?1:0,0,0,1+0.06*Math.sin(t*12));$('cdn').textContent=t<K.cd+1?'2':'1';
+ setA($('cd'),0);
  setA($('ans'),win(t,K.ans,K.chip-0.1,0.25,0.3),0,0,0.6+0.4*back((t-K.ans)/0.4));
  const cv=win(t,K.chip,K.dig-0.6,0.4,0.4);$('chip').style.opacity=cv;$('chipT').style.opacity=cv*(t<K.emc-0.2?1:0);$('chip').style.transform=`scale(${0.85+0.15*ease((t-K.chip)/0.6)})`;if(cv>0)drawChip(t);
  setA($('leg'),win(t,K.leg,K.emc-0.2,0.35,0.3));
@@ -212,5 +262,43 @@ window.render=function(t){
  conf.clearRect(0,0,1080,1920);
  if(t>K.cta){const dt=t-K.cta;for(let i=0;i<120;i++){const x=rnd(i)*1080+Math.sin(dt*2+i)*40,yv=-60+((rnd(i+9)*900+dt*(300+rnd(i+3)*400))%2100);conf.save();conf.translate(x,yv);conf.rotate(dt*4+i);conf.fillStyle=['#ffd166','#ff5470','#4ade80','#5cd6ff','#a78bfa'][i%5];conf.fillRect(-9,-5,18,10);conf.restore()}}
 };
+
+function renderShop(t){
+ // camera: two-shot over the counter; push in on the pendrive at the question
+ cam.fov=55;cam.updateProjectionMatrix();let cp=new THREE.Vector3(201.3,2.2,15.5),ct=new THREE.Vector3(201.2,0.2,0.5);
+ if(t>=K.n1){const v=eio((t-K.n1)/1.6);cp.lerp(new THREE.Vector3(202.4,0.8,10.0),v);ct.lerp(new THREE.Vector3(203.2,-0.6,3.0),v)}
+ cp.x+=Math.sin(t*0.4)*0.15;cam.position.copy(cp);cam.lookAt(ct);
+ const talkK=(t>=K.k1&&t<K.k1e),talkS=(t>=K.s1&&t<K.s1e)||(t>=K.s2&&t<K.s2e);
+ kid.mouth.scale.y=talkK?0.25+0.35*Math.abs(Math.sin(t*16)):0.2;keeper.mouth.scale.y=talkS?0.25+0.35*Math.abs(Math.sin(t*14)):0.2;
+ kid.head.rotation.y=Math.sin(t*1.2)*0.08;keeper.head.rotation.y=t>=K.s1&&t<K.s2?0.6:-0.1;keeper.head.rotation.x=t>=K.s1&&t<K.s2?0.25:0;
+ kid.G.position.y=-4+(talkK?Math.abs(Math.sin(t*5))*0.06:0);
+ // pendrive: kid hand -> laptop -> back to kid
+ const kidHand=new THREE.Vector3(3.1,-2.0,3.8),lapPort=new THREE.Vector3(3.4,-0.05,0.75);
+ let pp=kidHand.clone();
+ if(t>=K.k1e-0.3&&t<K.s2){const u=eio((t-K.k1e+0.3)/0.9);pp=kidHand.clone().lerp(lapPort,u)}
+ if(t>=K.s2){const u=eio((t-K.s2-0.2)/1.0);pp=lapPort.clone().lerp(kidHand,u)}
+ pd2.position.copy(pp);pd2.rotation.set(0,t>=K.k1e-0.3&&t<K.s2+0.6?-2.1:0.3,0);
+ keeper.arms[0].rotation.x=(t>=K.s2&&t<K.s2+1.4)?-1.2:(t>=K.s1&&t<K.s2?-0.6+Math.sin(t*6)*0.15:0);
+ kid.arms[1].rotation.x=-1.0;kid.arms[0].rotation.x=t>=K.n1?-0.4:0;
+ led.material.color.set(t>=K.s1&&t<K.s2&&Math.sin(t*18)>0?'#5cd6ff':'#0a2a40');
+ drawLap(t);
+ R.render(S,cam);
+ // overlay
+ $('prog').style.width=(100*t/END)+'%';
+ ['hook','bar','chipT','chip','leg','cnt','ein','emc','dig','cmp','x30','src','yaad','cta','ans'].forEach(id=>$(id).style.opacity=0);
+ $('dim').style.opacity=t>=K.opts?0.55:0;
+ // speech bubbles
+ const say=$('say');let txt='',who=null;
+ if(t>=K.k1&&t<K.k1e+0.3){txt='🧒 "Bhaiya! 128 GB pendrive mein saari <y>top movies</y> daal do, <r>FULL</r> kar do!"';who=kid}
+ else if(t>=K.s1&&t<K.s1e+0.3){txt='👨 "Animal... Stree... Sanam Teri Kasam... <y>sab daal raha hoon!</y>"';who=keeper}
+ else if(t>=K.s2&&t<K.s2e+0.4){txt='👨 "Lo beta, pendrive <r>FULL</r>! Sirf <y>100 MB</y> khaali hai."';who=keeper}
+ if(who){const p=proj(who.head.getWorldPosition(new THREE.Vector3()).add(new THREE.Vector3(0,1.4,0)));say.style.left=Math.max(70,Math.min(1010-660,p.x-330))+'px';say.style.top=Math.max(150,p.y-140)+'px';say.style.opacity=1;say.innerHTML=txt}else say.style.opacity=0;
+ setA($('tease'),t<K.n1?1:1-ease((t-K.n1)/0.3));
+ setA($('qq'),win(t,K.n1,K.cut-0.1,0.3,0.25),0,0,0.85+0.15*back((t-K.n1)/0.4));
+ setA($('opts'),win(t,K.opts,K.cut-0.1,0.3,0.3));
+ [['o1',K.o1],['o2',K.o2],['o3',K.o3]].forEach(([id,x])=>{const e=$(id);e.style.opacity=t>=x?1:0.15;e.style.transform=`scale(${t>=x?0.9+0.1*back((t-x)/0.35):0.9})`});
+ const cdOn=t>=K.cd&&t<K.cd+2.0;setA($('cd'),cdOn?1:0,0,0,1+0.06*Math.sin(t*12));$('cdn').textContent=t<K.cd+1?'2':'1';
+ fx.clearRect(0,0,1080,1920);conf.clearRect(0,0,1080,1920);
+}
 init();
 </script></body></html>
