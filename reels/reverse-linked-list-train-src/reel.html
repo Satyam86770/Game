@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'Poppins';font-weight:600;src:url(Poppins600.woff2)}
+@font-face{font-family:'Poppins';font-weight:800;src:url(Poppins800.woff2)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#0b1430}
+body{font-family:'Poppins','Noto Color Emoji',sans-serif;color:#fff}
+.mono{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace}
+canvas{position:absolute;left:0;top:0}
+.a{position:absolute;opacity:0;transform-origin:center}
+.c{left:0;width:1080px;text-align:center}
+y{color:#ffd166}r{color:#ff5470}g{color:#4ade80}c{color:#5cd6ff}p{color:#c4b5fd}
+#prog{position:absolute;left:0;top:0;height:8px;background:linear-gradient(90deg,#ffd166,#ff5470);z-index:9}
+#handle{position:absolute;top:34px;width:100%;text-align:center;font-size:28px;font-weight:600;color:rgba(255,255,255,.8);z-index:9;text-shadow:0 2px 8px #000}
+#train{position:absolute;left:0;top:0;width:1080px;height:1920px}
+.node{position:absolute;top:930px;width:150px;height:118px;margin-left:-75px}
+.coach{position:absolute;inset:0;border-radius:18px;background:linear-gradient(180deg,#2f6fe0,#1d4fb0);border:4px solid #0e2a66;box-shadow:0 8px 0 #0b1f4d}
+.coach .win{position:absolute;top:16px;width:30px;height:30px;border-radius:6px;background:#cfe8ff;border:3px solid #0e2a66}
+.coach .num{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-size:44px;font-weight:800;color:#fff;text-shadow:0 3px 0 #0e2a66}
+.wheel{position:absolute;bottom:-26px;width:38px;height:38px;border-radius:50%;background:#222;border:6px solid #555}
+.eng .coach{background:linear-gradient(180deg,#e83b3b,#a61b1b);border-color:#5a0d0d;box-shadow:0 8px 0 #4a0b0b}
+.chim{position:absolute;top:-40px;width:34px;height:44px;background:#333;border-radius:6px 6px 0 0}
+.lbl{position:absolute;top:-62px;left:50%;transform:translateX(-50%);padding:4px 14px;border-radius:14px;font-size:26px;font-weight:800;white-space:nowrap;opacity:0}
+.ptr{position:absolute;top:1135px;transform:translateX(-50%);text-align:center;font-weight:800;font-size:32px;opacity:0;white-space:nowrap}
+.ptr .ar{font-size:44px;line-height:1}
+.ptr .t{display:inline-block;padding:6px 16px;border-radius:16px;margin-top:2px}
+#nullN{position:absolute;top:960px;left:80px;transform:translateX(-50%);padding:10px 16px;border-radius:16px;border:3px dashed #9aa5d6;font-size:32px;font-weight:800;color:#cfd6ff;opacity:0}
+#bubble{position:absolute;padding:12px 22px;border-radius:24px;background:#fff;color:#222;font-size:36px;font-weight:800;opacity:0;white-space:nowrap}
+#tag{position:absolute;top:150px;left:0;width:1080px;text-align:center}
+#tag span{display:inline-block;padding:6px 20px;border-radius:20px;background:rgba(255,209,102,.15);border:2px solid #ffd166;font-size:28px;font-weight:800;color:#ffe9b0}
+#title{position:absolute;top:205px;left:0;width:1080px;text-align:center;font-size:66px;font-weight:800;line-height:1.15;text-shadow:0 4px 18px rgba(0,0,0,.6)}
+.card{border-radius:28px;background:rgba(10,15,38,.94);padding:24px 34px;box-shadow:0 12px 40px rgba(0,0,0,.55);border:2px solid rgba(255,255,255,.1)}
+#intv{top:440px}
+#intv .card{display:inline-block;font-size:46px;font-weight:800;border:3px solid #ff5470}
+#lc{top:620px}
+#lc .tile{width:200px;height:200px;margin:0 auto;border-radius:46px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 0 60px rgba(255,170,30,.55)}
+#lc .tile img{width:150px;height:150px}
+#lc .t2{margin-top:20px;font-size:70px;font-weight:800;text-shadow:0 4px 16px #000}
+#lc .chips{margin-top:10px;font-size:34px;font-weight:800}
+#steps{left:60px;top:1450px;width:960px}
+#steps .card{padding:22px 26px;font-size:36px;line-height:1.55}
+#steps .s{padding:2px 14px;border-radius:12px;opacity:.45}
+#steps .s.on{opacity:1;background:rgba(255,209,102,.18);box-shadow:inset 4px 0 0 #ffd166}
+#code{left:40px;top:330px;width:1000px}
+#code .card{font-size:31px;line-height:1.55;padding:26px;border:2px solid #39406a;white-space:pre}
+.kw{color:#ff79c6}.ty{color:#5cd6ff}.nu{color:#ffb86c}.cm{color:#7f8bb5}.hl{background:rgba(255,209,102,.22);border-radius:8px}
+#on{top:860px}
+#on span{display:inline-block;padding:12px 30px;border-radius:40px;background:#16a34a;font-size:40px;font-weight:800}
+#pay{top:420px}
+#pay .card{display:inline-block;font-size:62px;font-weight:800;border:4px solid #4ade80;box-shadow:0 0 60px rgba(74,222,128,.5)}
+#yaad{top:520px}
+#yaad .card{display:inline-block;width:960px;border:3px solid #ffd166}
+#yaad .h{font-size:38px;font-weight:800;color:#ffd166}
+#yaad .b{margin-top:12px;font-size:52px;font-weight:800;line-height:1.35}
+#cta{top:1150px}
+#cta .row2{display:flex;gap:22px;justify-content:center}
+#cta .b{padding:16px 34px;border-radius:40px;font-size:42px;font-weight:800;background:rgba(10,13,30,.92);border:2px solid rgba(255,255,255,.2)}
+#cta .f{margin-top:30px;display:inline-block;padding:20px 60px;border-radius:50px;background:linear-gradient(90deg,#ffd166,#ff8a3d);color:#1b0d00;font-size:46px;font-weight:800}
+#cap{position:absolute;left:60px;width:960px;top:1745px;text-align:center}
+#capt{display:inline-block;padding:14px 30px;border-radius:20px;background:rgba(10,16,40,.86);font-size:48px;font-weight:800;line-height:1.25}
+#capt .on{color:#ffd166}
+#dim{position:absolute;inset:0;background:#060a1a;opacity:0}
+</style></head><body>
+<canvas id="bg" width="1080" height="1920"></canvas>
+<svg id="arw" width="1080" height="1920" style="position:absolute;left:0;top:0"></svg>
+<div id="train"></div>
+<div id="nullN">null</div>
+<div id="bubble"></div>
+<div class="ptr" id="pPrev"><div class="ar">⬆</div><div class="t" style="background:#7c3aed">prev</div></div>
+<div class="ptr" id="pCurr"><div class="ar">⬆</div><div class="t" style="background:#d97706">curr</div></div>
+<div class="ptr" id="pNext"><div class="ar">⬆</div><div class="t" style="background:#0284c7">next</div></div>
+<div id="dim"></div>
+<div id="tag"><span id="tagT"></span></div><div id="title"></div>
+<div class="a c" id="intv"><div class="card">💼 <y>Oracle</y> jaise interviews ka sawaal</div></div>
+<div class="a c" id="lc"><div class="tile"><img src="lc_logo.png"></div><div class="t2">206. Reverse Linked List</div><div class="chips"><g>Easy</g> • <c>Linked List</c></div></div>
+<div class="a" id="steps"><div class="card mono">
+<div class="s" id="s1">1️⃣ next = curr.next;  <span style="color:#7f8bb5">// bachao</span></div>
+<div class="s" id="s2">2️⃣ curr.next = prev;  <span style="color:#7f8bb5">// link palto</span></div>
+<div class="s" id="s3">3️⃣ prev = curr;       <span style="color:#7f8bb5">// aage</span></div>
+<div class="s" id="s4">4️⃣ curr = next;       <span style="color:#7f8bb5">// aage</span></div></div></div>
+<div class="a" id="code"><div class="card mono" id="codeT"></div></div>
+<div class="a c" id="on"><span>⚡ 1 loop • O(n) time • O(1) space</span></div>
+<div class="a c" id="pay"><div class="card">🚂 ➜ <g>DELHI</g> ✅ Reversed!</div></div>
+<div class="a c" id="yaad"><div class="card"><div class="h">🧠 Ek line mein yaad rakho</div><div class="b"><c>next</c> bachao ➜ <y>link palto</y> ➜ <g>aage badho</g>!</div></div></div>
+<div class="a c" id="cta"><div class="row2"><span class="b">📌 Save</span><span class="b">📤 Share</span><span class="b">💬 Comment</span></div><div class="f">Follow @pretestpassed.codes</div></div>
+<div id="cap"><div id="capt"></div></div>
+<canvas id="conf" width="1080" height="1920"></canvas>
+<div id="prog"></div><div id="handle">@pretestpassed.codes</div>
+<script>
+const TL=window.TL||{K:{},END:60,CAP:[]};const K=TL.K,END=TL.END,CAP=TL.CAP||[];
+const cl=x=>Math.max(0,Math.min(1,x)),ease=x=>1-Math.pow(1-cl(x),3),eio=x=>{x=cl(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const back=x=>{x=cl(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};const lerp=(a,b,u)=>a+(b-a)*u;
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+const $=id=>document.getElementById(id);
+function setA(el,o,dx=0,dy=0,s=1){el.style.opacity=o;el.style.transform=`translate(${dx}px,${dy}px) scale(${s})`}
+function win(t,a,b,fi=0.3,fo=0.25){if(a==null)return 0;return ease((t-a)/fi)*(b==null?1:1-ease((t-b)/fo))}
+// nodes: 0..3 coaches 1-4, 4 = engine
+const NX=[245,410,575,740,905];const NAMES=['1','2','3','4','🚂'];
+$('train').innerHTML=NAMES.map((n,i)=>`<div class="node${i==4?' eng':''}" id="n${i}"><div class="coach">${i<4?'<div class="win" style="left:16px"></div><div class="win" style="left:58px"></div><div class="win" style="left:100px"></div>':'<div class="win" style="left:86px;width:44px;height:38px"></div><div class="chim" style="left:20px"></div>'}<div class="num" style="${i==4?'font-size:54px;bottom:6px':''}">${i<4?n:'🚂'}</div></div><div class="wheel" style="left:14px"></div><div class="wheel" style="right:14px"></div><div class="lbl" id="l${i}"></div></div>`).join('');
+const bg=$('bg').getContext('2d'),conf=$('conf').getContext('2d');
+function drawBG(t,scroll){const g=bg.createLinearGradient(0,0,0,1920);g.addColorStop(0,'#1b2d6b');g.addColorStop(.32,'#ff9a62');g.addColorStop(.45,'#ffd29a');g.addColorStop(.46,'#7cc06a');g.addColorStop(1,'#2f6b34');bg.fillStyle=g;bg.fillRect(0,0,1080,1920);
+ bg.fillStyle='rgba(255,240,200,.95)';bg.beginPath();bg.arc(780,620,70,0,7);bg.fill();
+ // far hills (parallax)
+ bg.fillStyle='#5a9a58';for(let k=-1;k<6;k++){const x=((k*300-scroll*0.15)%1500+1500)%1500-200;bg.beginPath();bg.ellipse(x,880,260,120,0,Math.PI,0);bg.fill()}
+ bg.fillStyle='#4b8a4a';for(let k=-1;k<8;k++){const x=((k*220-scroll*0.35)%1540+1540)%1540-230;bg.beginPath();bg.ellipse(x,900,150,70,0,Math.PI,0);bg.fill()}
+ // poles
+ bg.strokeStyle='#5a4030';bg.lineWidth=8;for(let k=-1;k<8;k++){const x=((k*260-scroll*0.8)%1820+1820)%1820-260;bg.beginPath();bg.moveTo(x,900);bg.lineTo(x,760);bg.stroke();bg.beginPath();bg.moveTo(x-30,780);bg.lineTo(x+30,780);bg.stroke()}
+ // track bed + sleepers + rails
+ bg.fillStyle='#8a7a66';bg.fillRect(0,1060,1080,60);
+ bg.fillStyle='#5a3e28';for(let k=-1;k<30;k++){const x=((k*46-scroll)%1150+1150)%1150-50;bg.fillRect(x,1062,22,56)}
+ bg.fillStyle='#c9ced6';bg.fillRect(0,1070,1080,8);bg.fillRect(0,1100,1080,8);
+ bg.fillStyle='#24502a';bg.fillRect(0,1240,1080,700)}
+function sign(x,txt,col){return `<g transform="translate(${x},0)"><rect x="-6" y="760" width="12" height="170" fill="#5a4030"/><rect x="-150" y="700" width="300" height="80" rx="14" fill="${col}" stroke="#fff" stroke-width="5"/><text x="0" y="755" text-anchor="middle" font-family="Poppins" font-weight="800" font-size="40" fill="#fff">${txt}</text></g>`}
+const CODE=['<span class="ty">ListNode</span> reverseList(<span class="ty">ListNode</span> head) {','    <span class="ty">ListNode</span> prev = <span class="kw">null</span>, curr = head;','    <span class="kw">while</span> (curr != <span class="kw">null</span>) {','        <span class="ty">ListNode</span> next = curr.next; <span class="cm">// bachao</span>','        curr.next = prev;          <span class="cm">// palto</span>','        prev = curr;               <span class="cm">// aage</span>','        curr = next;               <span class="cm">// aage</span>','    }','    <span class="kw">return</span> prev;  <span class="cm">// 🚂 new head</span>','}'];
+window.CUES=[];window.READY=false;
+function init(){const C=window.CUES,c=(t,n,g=1)=>{if(t!=null)C.push([t,n,g])};
+ c(0.05,'whoosh',0.6);c(K.ulta,'buzz',0.6);c(K.h2,'whoosh',0.6);c(K.lc,'ding',0.7);c(K.p1,'whoosh',0.5);c(K.head,'pop',0.5);c(K.flash,'boom',0.4);
+ c(K.p2,'pop',0.6);(K.st||[]).forEach(x=>c(x,'click',0.7));(K.fl||[]).forEach(x=>c(x,'snip',0.7));c(K.newh,'success',0.8);c(K.code,'whoosh',0.6);c(K.on,'sparkle',0.6);c(K.go,'whoosh',0.7);c(K.pay,'success',0.8);c(K.yaad,'pop',0.6);c(K.cta,'sparkle',0.7);
+ window.READY=true}
+// flip schedule: node i's link reversed at K.fl[i]
+window.render=function(t){
+ $('prog').style.width=(100*t/END)+'%';
+ const FL=K.fl||[];let flipped=FL.map(x=>t>=x);
+ // ----- train motion -----
+ let off=0,scroll=t*260;
+ if(t<K.p1){off=lerp(-160,120,cl(t/K.p1));scroll=t*360}else if(t<K.go){scroll=K.p1*360}else{scroll=K.p1*360-(t-K.go)*420}
+ // reorder for payoff: engine to the left
+ const ro=t>=K.newh+0.8?eio((t-K.newh-0.8)/1.2):0;let goOff=t>=K.go?-(t-K.go)*120:0;
+ for(let i=0;i<5;i++){const e=$('n'+i);const x=lerp(NX[i],NX[4-i],ro)+off+goOff;e.style.left=x+'px';
+  const bob=Math.sin(t*14+i)*(t<K.p1||t>=K.go?2:0);e.style.transform=`translateY(${bob}px)`;e.querySelector('.coach').style.transform=(i==4&&ro>0.5)?'scaleX(-1)':'none';}
+ // ----- background + signs -----
+ drawBG(t,scroll);
+ let sv='';
+ const sDelhi=-150+((t<K.go)?(-(K.p1*360)%2000):0);
+ if(t<K.p1){sv+=sign(820-cl(t/K.p1)*300,'KANYAKUMARI ➜','#c2410c')}
+ else if(t<K.go)sv+=sign(860,'KANYAKUMARI ➜','#c2410c')+sign(160,'⬅ DELHI','#15803d');
+ else sv+=sign(160+(t-K.go)*200,'⬅ DELHI','#15803d');
+ // ----- next-pointer arrows (above the train) -----
+ const nx=i=>parseFloat($('n'+i).style.left);
+ const reord=ro>0&&ro<1;const showA=t>=K.head&&t<K.code&&!reord;
+ if(showA){for(let i=0;i<5;i++){const x1=nx(i);let tx,lab;
+   if(!flipped[i]){if(i<4){tx=nx(i+1)}else{tx=null}}else{tx=i==0?null:nx(i-1)}
+   const y=905;const col=flipped[i]?'#4ade80':'#ffffff';
+   if(tx==null){const dir=flipped[i]?-1:1;const xe=flipped[i]?$('nullN').offsetLeft:x1+105;
+     if(!flipped[i]){sv+=`<path d="M${x1+20},${y} Q${x1+60},${y-60} ${x1+108},${y-20}" stroke="${col}" stroke-width="7" fill="none"/><text x="${x1+120}" y="${y-30}" font-family="Poppins" font-weight="800" font-size="30" fill="#cfd6ff">null</text>`}
+     else if(ro>=1){sv+=`<path d="M${x1+20},${y} Q${x1+60},${y-60} ${x1+108},${y-20}" stroke="${col}" stroke-width="7" fill="none"/><text x="${x1+80}" y="${y-40}" font-family="Poppins" font-weight="800" font-size="30" fill="#cfd6ff">null</text>`}else{sv+=`<path d="M${x1-10},${y} Q${(x1+80)/2},${y-90} 110,${y+40}" stroke="${col}" stroke-width="8" fill="none"/><polygon points="110,${y+50} 98,${y+22} 124,${y+26}" fill="${col}"/>`}}
+   else{const mx=(x1+tx)/2,h=flipped[i]?-80:-70;sv+=`<path d="M${x1+(tx>x1?20:-20)},${y} Q${mx},${y+h} ${tx+(tx>x1?-28:28)},${y}" stroke="${col}" stroke-width="8" fill="none"/><polygon points="${tx+(tx>x1?-20:20)},${y+6} ${tx+(tx>x1?-44:44)},${y-8} ${tx+(tx>x1?-36:36)},${y+20}" fill="${col}"/>`}
+   if(t>=K.flash&&t<K.flash+1.0&&!flipped[i])sv=sv.replace(/stroke="#ffffff"/g,`stroke="${Math.sin(t*20)>0?'#ff5470':'#ffffff'}"`)}}
+ $('arw').innerHTML=sv;
+ $('nullN').style.opacity=t>=K.p2&&t<K.newh+0.8?1:0;$('nullN').style.left=(80+off)+'px';
+ // labels HEAD / LAST
+ for(let i=0;i<5;i++){const l=$('l'+i);let txt='',bg='';
+  if(t>=K.head&&t<K.newh&&i==0){txt='HEAD';bg='#16a34a'}if(t<K.p1&&i==4){txt='LAST 😱';bg='#e11d48'}if(t>=K.head&&t<K.newh&&i==4){txt='LAST';bg='#475569'}
+  if(t>=K.newh&&i==4){txt='🎉 NEW HEAD';bg='#16a34a'}
+  l.textContent=txt;l.style.background=bg;l.style.opacity=txt&&t<K.code?1:0}
+ // pointers prev/curr/next
+ const ST=K.st||[];// step times for node0 (4 steps), then fast steps per node via FL
+ let pv=-1,cu=0,ne=null;
+ if(t>=ST[0])ne=1;if(t>=ST[2])pv=0;if(t>=ST[3])cu=1;
+ for(let i=1;i<5;i++){const f=FL[i];if(f==null)continue;if(t>=f-0.35)ne=i+1;if(t>=f+0.25){pv=i;cu=i+1}}
+ if(t>=K.newh)ne=null;
+ const px=i=>i<0?(80+off):(i>=5?1010:nx(i));
+ const showP=t>=K.p2&&t<K.newh+0.7;
+ [['pPrev',pv,0],['pCurr',cu,60],['pNext',ne,120]].forEach(([id,i,dy])=>{const e=$(id);if(!showP||i==null){e.style.opacity=0;return}e.style.opacity=1;e.style.left=px(i)+'px';e.style.top=(1140+dy*0.0+(id=='pNext'?0:0))+'px';e.style.transform=`translateX(-50%) translateY(${id=='pPrev'?0:id=='pCurr'?100:200}px)`});
+ if(cu>=5&&showP){$('pCurr').querySelector('.t').textContent='curr = null';$('pCurr').style.left='960px'}else $('pCurr').querySelector('.t').textContent='curr';
+ // steps card
+ setA($('steps'),win(t,K.p3,K.code-0.1,0.3,0.3));for(let k=0;k<4;k++){const on=(t>=(ST[k]??1e9)&&(k==3||t<(ST[k+1]??1e9))&&t<(FL[1]??1e9))||(t>=(FL[1]??1e9)&&t<K.newh&&Math.floor((t*4))%4==k);$('s'+(k+1)).className='s'+(on?' on':'')}
+ // bubble
+ const b=$('bubble');if(t<K.h2-0.2&&t>=0.6){b.style.opacity=1;b.style.left=(Math.max(40,nx(2)-200))+'px';b.style.top='800px';b.textContent='😱 Ye toh Kanyakumari ja rahi hai!'}else b.style.opacity=0;
+ // ----- titles -----
+ let tag='',tit='';
+ if(t<K.h2){tag='🚆 BENGALURU ➜ DELHI?';tit='Train <r>ULTI</r> chal rahi! 😱<br><span style="font-size:48px">Engine LAST mein... reverse kaise?</span>'}
+ else if(t<K.p1){tag='⭐ FAMOUS';tit=''}
+ else if(t<K.p2){tag='🔗 TRAIN = LINKED LIST';tit='Har dabba ➜ <c>next</c> dabba'}
+ else if(t<K.p3){tag='👆 3 POINTERS';tit='<span style="color:#c4b5fd">prev</span> • <y>curr</y> • <c>next</c>'}
+ else if(t<K.p4){tag='🔁 HAR DABBE PE';tit='Bas <y>4 kaam</y>'}
+ else if(t<K.code){tag='🔁 DRY RUN';tit=t>=K.newh?'<g>prev = NEW HEAD</g> 🚂':'Link <g>ulta</g> karte jao'}
+ else if(t<K.go){tag='💻 CODE';tit='Bas 1 loop!'}
+ else if(t<K.yaad){tag='🎉 REVERSED';tit='Ab <g>Delhi</g> ki taraf! 🚂'}
+ $('tagT').textContent=tag;$('tagT').parentElement.style.opacity=tag&&t<K.yaad?1:0;$('title').innerHTML=tit;$('title').style.opacity=tit&&t<K.yaad?1:0;
+ $('dim').style.opacity=Math.max(win(t,K.h2,K.p1-0.1,0.3,0.3)*0.7,win(t,K.code,K.go-0.1,0.3,0.3)*0.85,win(t,K.yaad,null,0.4)*0.8);
+ setA($('intv'),win(t,K.h2,K.p1-0.1,0.3,0.25),0,0,0.85+0.15*back((t-K.h2)/0.4));
+ setA($('lc'),win(t,K.lc,K.p1-0.1,0.3,0.25),0,30*(1-ease((t-K.lc)/0.35)),0.85+0.15*back((t-K.lc)/0.4));
+ setA($('code'),win(t,K.code,K.go-0.1,0.35,0.3),0,30*(1-ease((t-K.code)/0.35)));
+ const hl=t>=K.ret?[8]:(t>=K.code+0.6?[3,4,5,6]:[]);$('codeT').innerHTML=CODE.map((l,i)=>hl.includes(i)?`<span class="hl">${l}</span>`:l).join('\n');
+ setA($('on'),win(t,K.on,K.go-0.1,0.3,0.3),0,0,0.8+0.2*back((t-K.on)/0.4));
+ setA($('pay'),win(t,K.pay,K.yaad-0.1,0.3,0.3),0,0,0.7+0.3*back((t-K.pay)/0.4));
+ setA($('yaad'),win(t,K.yaad,null,0.35),0,30*(1-ease((t-K.yaad)/0.4)));
+ setA($('cta'),win(t,K.cta,null,0.35),0,40*(1-ease((t-K.cta)/0.4)));
+ let ch='';for(const [s0,e0,words] of CAP){if(t>=s0&&t<e0+0.15){ch=words.map(([w,ws])=>`<span class="${t>=ws?'on':''}">${w}</span>`).join(' ');break}}
+ $('capt').innerHTML=ch;$('cap').style.opacity=ch&&t<K.yaad?1:0;
+ conf.clearRect(0,0,1080,1920);
+ if(t>K.cta||(t>=K.pay&&t<K.pay+2)){const dt=t-(t>K.cta?K.cta:K.pay);for(let i=0;i<110;i++){const x=rnd(i)*1080+Math.sin(dt*2+i)*40,yv=-60+((rnd(i+9)*900+dt*(300+rnd(i+3)*400))%2100);conf.save();conf.translate(x,yv);conf.rotate(dt*4+i);conf.fillStyle=['#ffd166','#ff5470','#4ade80','#5cd6ff','#a78bfa'][i%5];conf.fillRect(-9,-5,18,10);conf.restore()}}
+};
+document.fonts.ready.then(init);
+</script></body></html>

@@ -1,0 +1,10 @@
+{
+"h1":"Bengaluru se Delhi jaana tha... par ye kya?! Train toh ulti chal rahi hai, Kanyakumari ki taraf! Engine sabse peeche hai!",
+"h2":"Oracle jaise interviews mein pucha gaya ye sawaal: LeetCode two oh six, Reverse Linked List!",
+"p1":"Har dabba agle dabbe se juda hai: yahi hai linked list! Head pehla dabba, aur har dabbe ka next, agla dabba. Humein saare links ulte karne hain!",
+"p2":"Teen pointer lo: prev, curr, aur next. Prev shuru mein null, curr head pe.",
+"p3":"Ab har dabbe pe sirf chaar kaam: next ko bachao... curr ka link ulta karo, prev ki taraf... prev ko aage badhao... aur curr ko next pe le jao!",
+"p4":"Dabba ek: link null ki taraf! Dabba do: link ek ki taraf! Teen... chaar... aur engine: link chaar ki taraf! Curr null ho gaya, ruk jao. Prev hi naya head hai: engine!",
+"p5":"Bas ek loop: O of n time, O of one space! Aur dekho... train ab Delhi ki taraf!",
+"p6":"Ek line mein yaad rakho: next bachao, link palto, aage badho! Save karo, aur follow karo!"
+}
