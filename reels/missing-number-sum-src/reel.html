@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'Poppins';font-weight:600;src:url(Poppins600.woff2)}
+@font-face{font-family:'Poppins';font-weight:800;src:url(Poppins800.woff2)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#0a0f24}
+body{font-family:'Poppins','Noto Color Emoji',sans-serif;color:#fff}
+.mono{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace}
+#bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,#1f2a6b 0%,#0d1433 55%,#070b1c 100%)}
+#grid{position:absolute;inset:0;background-image:linear-gradient(rgba(120,140,255,.07) 2px,transparent 2px),linear-gradient(90deg,rgba(120,140,255,.07) 2px,transparent 2px);background-size:60px 60px}
+.a{position:absolute;opacity:0;transform-origin:center}
+.c{left:0;width:1080px;text-align:center}
+y{color:#ffd166}r{color:#ff5470}g{color:#4ade80}c{color:#5cd6ff}
+#prog{position:absolute;left:0;top:0;height:8px;background:linear-gradient(90deg,#5cd6ff,#a78bfa);z-index:9}
+#handle{position:absolute;top:34px;width:100%;text-align:center;font-size:28px;font-weight:600;color:rgba(255,255,255,.75);z-index:9}
+#pill{position:absolute;top:110px;left:0;width:1080px;text-align:center}
+#pill span{display:inline-block;padding:8px 24px;border-radius:30px;background:rgba(92,214,255,.12);border:2px solid #5cd6ff;font-size:30px;font-weight:800;color:#bdeeff}
+#title{position:absolute;top:175px;left:0;width:1080px;text-align:center;font-size:58px;font-weight:800;line-height:1.15}
+#nlab{position:absolute;top:420px;left:0;width:1080px;text-align:center;font-size:44px;font-weight:800;color:#cfd6ff;opacity:0}
+#arr{position:absolute;top:500px;left:0;width:1080px;display:flex;justify-content:center;gap:22px}
+.cell{width:170px;text-align:center;opacity:0}
+.cell .v{height:170px;border-radius:28px;background:linear-gradient(160deg,#2a3577,#1a2252);border:4px solid #5b6bd6;display:flex;align-items:center;justify-content:center;font-size:90px;font-weight:800;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.cell .i{margin-top:10px;font-size:28px;font-weight:800;color:#8f9bc8}
+.cell.miss .v{background:transparent;border:5px dashed #ff5470;color:#ff5470}
+.cell.found .v{background:linear-gradient(160deg,#22c55e,#15803d);border-color:#86efac;color:#fff;box-shadow:0 0 60px rgba(74,222,128,.8)}
+#line{position:absolute;top:500px;left:0;width:1080px;display:flex;justify-content:center;gap:14px;opacity:0}
+.card{border-radius:28px;background:rgba(10,14,34,.94);padding:24px 34px;box-shadow:0 12px 40px rgba(0,0,0,.55);border:2px solid rgba(255,255,255,.1)}
+#ask{top:800px}
+#ask .card{display:inline-block;font-size:46px;font-weight:800;line-height:1.35;border:3px solid #ffd166}
+#sortC{left:90px;top:780px;width:900px}
+#sortC .card{font-size:30px;line-height:1.55;white-space:pre;border:2px solid #39406a;position:relative}
+#cross{position:absolute;inset:0;pointer-events:none}
+#tc{top:1150px}
+#tc span{display:inline-block;font-size:56px;font-weight:800;padding:12px 34px;border-radius:24px;background:#7f1d1d;border:3px solid #ff5470}
+#bad{top:1280px;font-size:42px;font-weight:800}
+#on{top:800px}
+#on .card{display:inline-block;font-size:50px;font-weight:800;border:3px solid #4ade80}
+#formula{top:950px}
+#formula .card{display:inline-block;padding:30px 50px;border:3px solid #a78bfa}
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin-left:14px}
+.frac .t{font-size:62px;font-weight:800;padding:0 16px}
+.frac .b{font-size:62px;font-weight:800;border-top:5px solid #fff;padding:0 16px;width:100%;text-align:center}
+#formula .lhs{font-size:62px;font-weight:800;vertical-align:middle}
+#tot{top:1010px}
+#tot .card{display:inline-block;border:3px solid #5cd6ff}
+#asum{top:1225px}
+#asum .card{display:inline-block;font-size:46px;font-weight:800;border:3px solid #ffd166}
+#res{top:1395px}
+#res .card{display:inline-block;font-size:66px;font-weight:800;border:4px solid #4ade80;box-shadow:0 0 60px rgba(74,222,128,.5)}
+#cx{top:1560px}
+#cx span{display:inline-block;padding:12px 30px;border-radius:40px;background:#16a34a;font-size:40px;font-weight:800}
+#cta{top:880px}
+#cta .q{display:inline-block;font-size:46px;font-weight:800;line-height:1.35;padding:20px 34px;border-radius:26px;background:rgba(92,214,255,.12);border:3px solid #5cd6ff}
+#cta .row2{margin-top:36px;display:flex;gap:22px;justify-content:center}
+#cta .b{padding:16px 34px;border-radius:40px;font-size:42px;font-weight:800;background:rgba(10,13,30,.92);border:2px solid rgba(255,255,255,.2)}
+#cta .f{margin-top:30px;display:inline-block;padding:20px 60px;border-radius:50px;background:linear-gradient(90deg,#5cd6ff,#a78bfa);color:#06101c;font-size:46px;font-weight:800}
+#cap{position:absolute;left:60px;width:960px;top:1730px;text-align:center}
+#capt{display:inline-block;padding:14px 30px;border-radius:20px;background:rgba(10,16,40,.86);font-size:46px;font-weight:800;line-height:1.25}
+#capt .on{color:#ffd166}
+canvas{position:absolute;inset:0;pointer-events:none}
+</style></head><body>
+<div id="bg"></div><div id="grid"></div>
+<div id="pill"><span id="pillT"></span></div><div id="title"></div>
+<div id="nlab">n = <y>5</y> &nbsp;•&nbsp; numbers <c>1 se 5</c> tak</div>
+<div id="arr"></div>
+<div class="a c" id="ask"><div class="card">🧑‍💼 Interviewer: <y>missing number</y><br>dhoondho! Kaise karoge? 🤔</div></div>
+<div class="a" id="sortC"><div class="card mono" id="sortT"></div><svg id="cross" viewBox="0 0 900 420" preserveAspectRatio="none"></svg></div>
+<div class="a c" id="tc"><span>TC = O(n log n) ❌</span></div>
+<div class="a c" id="bad">😬 Interviewer <r>impress nahi</r> hoga</div>
+<div class="a c" id="on"><div class="card">✅ <g>O(n)</g> time • <g>O(1)</g> space</div></div>
+<div class="a c" id="formula"><div class="card"><span class="lhs">Sum (1…n) =</span><span class="frac"><span class="t" id="fT">n × (n+1)</span><span class="b">2</span></span></div></div>
+<div class="a c" id="tot"><div class="card"><span class="lhs" style="font-size:52px;font-weight:800;vertical-align:middle">Total =</span><span class="frac"><span class="t" style="font-size:52px">5 × 6</span><span class="b" style="font-size:52px;border-top-width:4px">2</span></span><span style="font-size:60px;font-weight:800;vertical-align:middle"> = <c id="totV">15</c></span></div></div>
+<div class="a c" id="asum"><div class="card mono" id="asumT"></div></div>
+<div class="a c" id="res"><div class="card"><c>15</c> − <y>12</y> = <g>3</g> ✅ Missing!</div></div>
+<div class="a c" id="cx"><span>⚡ 1 loop • O(n) time • O(1) space</span></div>
+<div class="a c" id="cta"><div class="q">💬 Tumhare dimaag mein<br>koi <y>aur logic</y>? Comment karo! 👇</div><div class="row2"><span class="b">📌 Save</span><span class="b">📤 Share</span></div><div class="f">Follow @pretestpassed.codes</div></div>
+<div id="cap"><div id="capt"></div></div>
+<canvas id="conf" width="1080" height="1920"></canvas>
+<div id="prog"></div><div id="handle">@pretestpassed.codes</div>
+<script>
+const TL=window.TL||{K:{},END:50,CAP:[]};const K=TL.K,END=TL.END,CAP=TL.CAP||[];
+const cl=x=>Math.max(0,Math.min(1,x)),ease=x=>1-Math.pow(1-cl(x),3),eio=x=>{x=cl(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const back=x=>{x=cl(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};const lerp=(a,b,u)=>a+(b-a)*u;
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+const $=id=>document.getElementById(id);
+function setA(el,o,dx=0,dy=0,s=1){el.style.opacity=o;el.style.transform=`translate(${dx}px,${dy}px) scale(${s})`}
+function win(t,a,b,fi=0.3,fo=0.25){if(a==null)return 0;return ease((t-a)/fi)*(b==null?1:1-ease((t-b)/fo))}
+const A=[1,5,2,4];
+$('arr').innerHTML=A.map((v,i)=>`<div class="cell" id="c${i}"><div class="v">${v}</div><div class="i">a[${i}]</div></div>`).join('')+`<div class="cell miss" id="cm"><div class="v" id="cmv">?</div><div class="i">missing</div></div>`;
+const SORT=['<span style="color:#5cd6ff">int</span> findMissing(<span style="color:#5cd6ff">int</span> a[], <span style="color:#5cd6ff">int</span> n) {','  sort(a, a + n - 1);   <span style="color:#7f8bb5">// 😬 sort</span>','  <span style="color:#ff79c6">for</span> (<span style="color:#5cd6ff">int</span> i = 0; i &lt; n - 1; i++)','    <span style="color:#ff79c6">if</span> (a[i] != i + 1) <span style="color:#ff79c6">return</span> i + 1;','  <span style="color:#ff79c6">return</span> n;','}'];
+$('sortT').innerHTML=SORT.join('\n');
+window.CUES=[];window.READY=false;
+function init(){const C=window.CUES,c=(t,n,g=1)=>{if(t!=null)C.push([t,n,g])};
+ (K.cells||[]).forEach(x=>c(x,'pop',0.55));c(K.miss,'buzz',0.5);c(K.ask,'pop',0.6);c(K.sort,'whoosh',0.6);c(K.stop,'boom',0.6);c(K.tc,'buzz',0.5);
+ c(K.on,'ding',0.7);c(K.form,'whoosh',0.6);c(K.n5,'pop',0.6);c(K.tot,'ding',0.6);(K.add||[]).forEach(x=>c(x,'click',0.6));c(K.asum,'ding',0.6);c(K.res,'success',0.9);c(K.cx,'sparkle',0.6);c(K.cta,'sparkle',0.7);
+ window.READY=true}
+const conf=$('conf').getContext('2d');
+window.render=function(t){
+ $('prog').style.width=(100*t/END)+'%';
+ // pill/title
+ let pill='',tit='';
+ if(t<K.sort){pill='🎯 INTERVIEW QUESTION';tit='1 se N mein <r>1 number gayab</r>! 🤔'}
+ else if(t<K.on){pill='❌ GALAT TARIKA';tit='Pehle <r>SORT</r>... phir loop?'}
+ else if(t<K.n5){pill='💡 SMART TRICK';tit='<g>Sum formula</g> use karo!'}
+ else if(t<K.res){pill='🧮 DRY RUN';tit='Total − Array Sum'}
+ else if(t<K.cta){pill='🎉 ANSWER';tit='Missing = <g>3</g> ✅'}
+ $('pillT').textContent=pill;$('pill').style.opacity=pill?1:0;$('title').innerHTML=tit;$('title').style.opacity=tit?1:0;
+ // array cells
+ const C=K.cells||[];const arrVis=t<K.sort-0.1||t>=K.n5;const arrO=t<K.sort?1-ease((t-K.sort+0.4)/0.3):ease((t-K.n5)/0.4);
+ $('arr').style.opacity=arrO;$('arr').style.transform=`translateY(${t>=K.n5?-40:0}px) scale(${t>=K.n5?0.85:1})`;
+ for(let i=0;i<4;i++){const e=$('c'+i);const st=C[i]??0;e.style.opacity=ease((t-st)/0.25);e.style.transform=`scale(${0.6+0.4*back((t-st)/0.35)})`;
+  const hl=(K.add||[])[i]!=null&&t>=K.add[i]&&t<K.asum+0.3;e.querySelector('.v').style.borderColor=hl?'#ffd166':'#5b6bd6';e.querySelector('.v').style.boxShadow=hl?'0 0 40px rgba(255,209,102,.8)':'0 10px 30px rgba(0,0,0,.45)'}
+ const m=$('cm');m.style.opacity=ease((t-K.miss)/0.25);m.style.transform=`scale(${0.6+0.4*back((t-K.miss)/0.35)}) translateY(${t>=K.miss&&t<K.miss+1.2?Math.sin(t*20)*4:0}px)`;
+ if(t>=K.res+0.3){m.className='cell found';$('cmv').textContent='3';m.style.transform=`scale(${back((t-K.res-0.3)/0.4)})`}else{m.className='cell miss';$('cmv').textContent='?'}
+ $('nlab').style.opacity=Math.max(win(t,K.nl,K.sort-0.2,0.3,0.25),win(t,K.n5,K.cta-0.1,0.3,0.25));$('nlab').style.top=t>=K.n5?'395px':'420px';
+ // hook
+ setA($('ask'),win(t,K.ask,K.sort-0.1,0.3,0.25),0,0,0.85+0.15*back((t-K.ask)/0.4));
+ // sorting
+ setA($('sortC'),win(t,K.sort,K.on-0.1,0.3,0.25),0,30*(1-ease((t-K.sort)/0.35)));
+ let cr='';if(t>=K.stop){const u=ease((t-K.stop)/0.35),u2=ease((t-K.stop-0.25)/0.35);cr=`<line x1="40" y1="40" x2="${40+820*u}" y2="${40+340*u}" stroke="#ff2a4f" stroke-width="16" stroke-linecap="round"/>`+(u2>0?`<line x1="860" y1="40" x2="${860-820*u2}" y2="${40+340*u2}" stroke="#ff2a4f" stroke-width="16" stroke-linecap="round"/>`:'')}
+ $('cross').innerHTML=cr;
+ setA($('tc'),win(t,K.tc,K.on-0.1,0.25,0.25),0,0,0.7+0.3*back((t-K.tc)/0.35));
+ setA($('bad'),win(t,K.bad,K.on-0.1,0.3,0.25));
+ // trick
+ setA($('on'),win(t,K.on,K.n5-0.1,0.3,0.25),0,0,0.85+0.15*back((t-K.on)/0.4));
+ const fv=win(t,K.form,K.cta-0.1,0.35,0.25);setA($('formula'),fv,0,t>=K.n5?-640:0,t>=K.n5?0.62:1+0.0*back((t-K.form)/0.4));
+ $('formula').style.transition='none';$('formula').style.top=(t>=K.n5?lerp(950,940,1):950)+'px';
+ if(t>=K.n5){$('formula').style.transform=`translate(0px,${lerp(0,-170,eio((t-K.n5)/0.5))}px) scale(${lerp(1,0.66,eio((t-K.n5)/0.5))})`}
+ setA($('tot'),win(t,K.tot,K.cta-0.1,0.3,0.25),0,0,0.8+0.2*back((t-K.tot)/0.4));$('totV').style.opacity=t>=K.totv?1:0;
+ // array sum build-up
+ const ad=K.add||[];let s='',run=0;for(let i=0;i<4;i++){if(t>=ad[i]){run+=A[i];s+=(i?' + ':'')+`<y>${A[i]}</y>`}}
+ $('asumT').innerHTML=`Array Sum = ${s||'…'}${t>=K.asum?` = <y>12</y>`:''}`;setA($('asum'),win(t,ad[0],K.cta-0.1,0.3,0.25));
+ setA($('res'),win(t,K.res,K.cta-0.1,0.3,0.25),0,0,0.6+0.4*back((t-K.res)/0.45));
+ setA($('cx'),win(t,K.cx,K.cta-0.1,0.3,0.25),0,0,0.8+0.2*back((t-K.cx)/0.4));
+ setA($('cta'),win(t,K.cta,null,0.35),0,40*(1-ease((t-K.cta)/0.4)));
+ let ch='';for(const [s0,e0,words] of CAP){if(t>=s0&&t<e0+0.15){ch=words.map(([w,ws])=>`<span class="${t>=ws?'on':''}">${w}</span>`).join(' ');break}}
+ $('capt').innerHTML=ch;$('cap').style.opacity=ch?1:0;
+ conf.clearRect(0,0,1080,1920);
+ const ct=t>=K.cta?K.cta:(t>=K.res+0.3&&t<K.res+2.3?K.res+0.3:null);
+ if(ct!=null){const dt=t-ct;for(let i=0;i<110;i++){const x=rnd(i)*1080+Math.sin(dt*2+i)*40,yv=-60+((rnd(i+9)*900+dt*(300+rnd(i+3)*400))%2100);conf.save();conf.translate(x,yv);conf.rotate(dt*4+i);conf.fillStyle=['#ffd166','#ff5470','#4ade80','#5cd6ff','#a78bfa'][i%5];conf.fillRect(-9,-5,18,10);conf.restore()}}
+};
+document.fonts.ready.then(init);
+</script></body></html>

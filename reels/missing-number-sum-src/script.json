@@ -1,0 +1,8 @@
+{
+"l1":"Is array ko dhyan se dekho: ek, paanch, do, chaar. Ek se paanch ke beech, ek number gayab hai! Interviewer bole, missing number dhoondho... toh kaise karoge?",
+"l2":"Agar socha ki pehle sort karenge, phir loop lagayenge... toh ruk jao! Sorting ki time complexity hai, O of n log n. Interviewer impress nahi hoga.",
+"l3":"Isko O of n mein solve kar sakte hain, bina extra space ke! Trick hai, ek se n tak ke sum ka formula: n into n plus one, divided by two.",
+"l4":"Yahan n hai paanch. Toh total sum: paanch into chhe, divided by do... pandrah! Ab array ka sum: ek plus paanch plus do plus chaar... baarah!",
+"l5":"Pandrah minus baarah... teen! Yahi hai missing number! Bas ek loop: O of n time, O of one space.",
+"l6":"Video save kar lo, aur comment mein batao: tumhare dimaag mein koi aur logic aa raha hai?"
+}
