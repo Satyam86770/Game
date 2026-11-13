@@ -64,7 +64,7 @@ canvas{position:absolute;inset:0;pointer-events:none}
 <div id="pill"><span id="pillT"></span></div><div id="title"></div>
 <div id="nlab">n = <y>5</y> &nbsp;•&nbsp; numbers <c>1 se 5</c> tak</div>
 <div id="arr"></div>
-<div class="a c" id="ask"><div class="card">🧑‍💼 Interviewer: <y>missing number</y><br>dhoondho! Kaise karoge? 🤔</div></div>
+<div class="a c" id="ask"><div class="card">🧑‍💼 "Is array mein <r>1 number missing</r> hai,<br><y>dhoondh kar dikhao!</y>" 🤔</div></div>
 <div class="a" id="sortC"><div class="card mono" id="sortT"></div><svg id="cross" viewBox="0 0 900 420" preserveAspectRatio="none"></svg></div>
 <div class="a c" id="tc"><span>TC = O(n log n) ❌</span></div>
 <div class="a c" id="bad">😬 Interviewer <r>impress nahi</r> hoga</div>
@@ -100,7 +100,7 @@ window.render=function(t){
  $('prog').style.width=(100*t/END)+'%';
  // pill/title
  let pill='',tit='';
- if(t<K.sort){pill='🎯 INTERVIEW QUESTION';tit='1 se N mein <r>1 number gayab</r>! 🤔'}
+ if(t<K.sort){pill='🎯 AGAR INTERVIEWER PUCHHE...';tit='1 se N mein <r>1 number gayab</r>! 🤔'}
  else if(t<K.on){pill='❌ GALAT TARIKA';tit='Pehle <r>SORT</r>... phir loop?'}
  else if(t<K.n5){pill='💡 SMART TRICK';tit='<g>Sum formula</g> use karo!'}
  else if(t<K.res){pill='🧮 DRY RUN';tit='Total − Array Sum'}
@@ -110,7 +110,7 @@ window.render=function(t){
  const C=K.cells||[];const arrVis=t<K.sort-0.1||t>=K.n5;const arrO=t<K.sort?1-ease((t-K.sort+0.4)/0.3):ease((t-K.n5)/0.4);
  $('arr').style.opacity=arrO;$('arr').style.transform=`translateY(${t>=K.n5?-40:0}px) scale(${t>=K.n5?0.85:1})`;
  for(let i=0;i<4;i++){const e=$('c'+i);const st=C[i]??0;e.style.opacity=ease((t-st)/0.25);e.style.transform=`scale(${0.6+0.4*back((t-st)/0.35)})`;
-  const hl=(K.add||[])[i]!=null&&t>=K.add[i]&&t<K.asum+0.3;e.querySelector('.v').style.borderColor=hl?'#ffd166':'#5b6bd6';e.querySelector('.v').style.boxShadow=hl?'0 0 40px rgba(255,209,102,.8)':'0 10px 30px rgba(0,0,0,.45)'}
+  const sy=(K.say||[])[i];const hl=((K.add||[])[i]!=null&&t>=K.add[i]&&t<K.asum+0.3)||(sy!=null&&t>=sy&&t<sy+0.6);e.querySelector('.v').style.borderColor=hl?'#ffd166':'#5b6bd6';e.querySelector('.v').style.boxShadow=hl?'0 0 40px rgba(255,209,102,.8)':'0 10px 30px rgba(0,0,0,.45)'}
  const m=$('cm');m.style.opacity=ease((t-K.miss)/0.25);m.style.transform=`scale(${0.6+0.4*back((t-K.miss)/0.35)}) translateY(${t>=K.miss&&t<K.miss+1.2?Math.sin(t*20)*4:0}px)`;
  if(t>=K.res+0.3){m.className='cell found';$('cmv').textContent='3';m.style.transform=`scale(${back((t-K.res-0.3)/0.4)})`}else{m.className='cell miss';$('cmv').textContent='?'}
  $('nlab').style.opacity=Math.max(win(t,K.nl,K.sort-0.2,0.3,0.25),win(t,K.n5,K.cta-0.1,0.3,0.25));$('nlab').style.top=t>=K.n5?'395px':'420px';
