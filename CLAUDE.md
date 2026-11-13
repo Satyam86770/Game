@@ -9,15 +9,15 @@
 ## Reel style
 - Reference style: dark gradient, top progress bar, handle watermark, step pills,
   real-life analogy, "Ek line mein yaad rakho", Save/Share/Follow CTA with confetti.
-- Voice: Gemini TTS voice **Puck** (user-approved), fast energetic Hinglish.
+- Voice: see "DEFAULT VOICE" below (ElevenLabs **Bunty**). Older Puck/Orus voices are retired.
 - Example build: `reels/array-vs-linkedlist-src/`.
 
 ## Watermark: keep it minimal (user rule)
 - The user REJECTED the tiled and moving anti-copy watermark ("video bekar lag rha"). Do not add it.
   Only the small top "@pretestpassed.codes" handle stays.
 
-## Voice (user rule)
-- Use exactly the viral Indexing reel's voice settings:
+## Old voice (RETIRED Nov 13 2026, kept only for re-editing old reels)
+- Old Gemini setup, do NOT use for new reels:
   - Model: **gemini-2.5-flash-preview-tts only**, voice **Orus**.
   - Prompt prefix: "Say in a fast, high-energy, hyped, fun young Indian Hinglish Instagram tech reel creator voice,
     punchy with dramatic pauses (pronounce English tech words like SQL, index, pointer, binary search clearly): ".
@@ -77,10 +77,16 @@ What actually differed:
    Check insights with vidiq_instagram_owner_insights (platformAccountId 39687719547542292).
 10. **Self-check before rendering:** in the first 2s, does a non-coder see a result and ask "kaise?"? If not, redo the hook.
 
-## Voice for explainer reels (user rule, Nov 2026)
-- User picked the ElevenLabs Voice Library voice **"Bunty - Punchy, Crisp and Reel King"** (voice_id `FZkK3TvQ0pjyDmT8fzIW`,
-  model `eleven_multilingual_v2`, Devanagari script with English tech words in Latin) to match their reference reel.
-- The ElevenLabs API key is saved as a network secret for api.elevenlabs.io (header xi-api-key; send `proxy-injected`).
-- Library voices need a paid ElevenLabs plan for API use. On the free plan, ask the user to generate the MP3 on the website
-  and attach it. Fallback premade voice: Liam (`TX3LPaxmHKxFdv7VOQHJ`).
-- Keep background music OUT of these reels (user adds music); keep the sound effects.
+## DEFAULT VOICE FOR ALL REELS (user rule, Nov 13 2026: "ye ai voice hamesa yaad rakhna")
+- ALWAYS use the ElevenLabs Voice Library voice **"Bunty - Punchy, Crisp and Reel King"**
+  (voice_id `FZkK3TvQ0pjyDmT8fzIW`, model `eleven_multilingual_v2`). It matched the user's reference reel 10/10.
+- Reference sample: `reels/voice/Bunty_Reference_Sample.mp3` (Missing Number reel voiceover).
+- Write scripts in Devanagari with English tech words in Latin (e.g. "इस array में एक number missing है").
+- The user is on the ElevenLabs FREE plan, so the API refuses library voices (402). Workflow:
+  1. Write the script to `reels/<Topic>_Bunty_Script.txt`.
+  2. Ask the user to generate it on elevenlabs.io (Text to Speech, voice Bunty, Multilingual v2) and attach the MP3.
+  3. Use the attached MP3 as one VO track; get word timestamps with faster-whisper (language='en' + romanized
+     initial_prompt) for captions and animation keys; fix caption spellings by hand.
+  If the user upgrades to a paid plan, call the API directly (api.elevenlabs.io, header xi-api-key: `proxy-injected`).
+- No background music in these reels (user adds music); keep the sound effects.
+- Fallback only if the user explicitly says so: ElevenLabs premade Liam (`TX3LPaxmHKxFdv7VOQHJ`).
