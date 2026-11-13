@@ -17,7 +17,7 @@ act=np.convolve(env,np.ones(win)/win,'same')>0.01
 act=np.convolve(act.astype(np.float32),np.ones(int(0.25*SR))/(0.25*SR),'same')
 duck=1-0.7*np.clip(act*1.5,0,1)
 fade=np.clip((END-t)/1.5,0,1)*np.clip((t-0.0)/0.6,0,1)
-mus*=(0.13*duck*fade)[:,None]
+mus*=0.0
 hduck=1-0.45*np.clip(act*1.5,0,1); hor*=hduck[:,None]
 sfx=np.zeros((N,2),np.float32)
 G={'snip':0.5,'buzz':0.3,'splash':0.6,'whoosh':0.2,'click':0.22,'pop':0.3,'ding':0.22,'boom':0.5,'door':0.6,'cash':0.45,'rewind':0.55,'thump':0.6,'buzz':0.25,'sparkle':0.35,'success':0.45}
