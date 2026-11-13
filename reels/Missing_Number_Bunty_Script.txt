@@ -1,0 +1,14 @@
+ElevenLabs voice: "Bunty - Punchy, Crisp and Reel King" (Voice Library, voice_id FZkK3TvQ0pjyDmT8fzIW)
+Model: Eleven Multilingual v2. Paste the whole script at once and download the MP3.
+
+अगर interviewer तुमसे ये पूछ ले... कि इस array में एक number missing है, उसे ढूँढ कर दिखाओ... तो तुम क्या करोगे? Array है: एक, पाँच, दो, चार। Numbers एक से पाँच तक होने चाहिए, लेकिन एक गायब है!
+
+अगर सोचा कि पहले sort करेंगे, फिर loop लगाएँगे... तो रुक जाओ! Sorting की time complexity है, O of n log n. Interviewer impress नहीं होगा।
+
+इसको O of n में solve कर सकते हैं, बिना extra space के! Trick है, एक से n तक के sum का formula: n into n plus one, divided by two.
+
+यहाँ n है पाँच। तो total sum: पाँच into छह, divided by दो... पंद्रह! अब array का sum: एक plus पाँच plus दो plus चार... बारह!
+
+पंद्रह minus बारह... तीन! यही है missing number! बस एक loop: O of n time, O of one space.
+
+Video save कर लो, और comment में बताओ: तुम्हारे दिमाग में कोई और logic आ रहा है?

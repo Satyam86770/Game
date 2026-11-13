@@ -76,3 +76,11 @@ What actually differed:
    The payoff text and a face/iconic clip must be on screen at FRAME 0 (no intro, no logo animation).
    Check insights with vidiq_instagram_owner_insights (platformAccountId 39687719547542292).
 10. **Self-check before rendering:** in the first 2s, does a non-coder see a result and ask "kaise?"? If not, redo the hook.
+
+## Voice for explainer reels (user rule, Nov 2026)
+- User picked the ElevenLabs Voice Library voice **"Bunty - Punchy, Crisp and Reel King"** (voice_id `FZkK3TvQ0pjyDmT8fzIW`,
+  model `eleven_multilingual_v2`, Devanagari script with English tech words in Latin) to match their reference reel.
+- The ElevenLabs API key is saved as a network secret for api.elevenlabs.io (header xi-api-key; send `proxy-injected`).
+- Library voices need a paid ElevenLabs plan for API use. On the free plan, ask the user to generate the MP3 on the website
+  and attach it. Fallback premade voice: Liam (`TX3LPaxmHKxFdv7VOQHJ`).
+- Keep background music OUT of these reels (user adds music); keep the sound effects.
