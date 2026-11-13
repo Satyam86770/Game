@@ -1,0 +1,14 @@
+ElevenLabs voice: Liam (Energetic, Social Media Creator), model: Eleven Multilingual v2
+Paste this whole script in one go:
+
+इस array को ध्यान से देखो: एक, पाँच, दो, चार। एक से पाँच के बीच, एक number गायब है! Interviewer बोले, missing number ढूँढो... तो कैसे करोगे?
+
+अगर सोचा कि पहले sort करेंगे, फिर loop लगाएँगे... तो रुक जाओ! Sorting की time complexity है, O of n log n. Interviewer impress नहीं होगा।
+
+इसको O of n में solve कर सकते हैं, बिना extra space के! Trick है, एक से n तक के sum का formula: n into n plus one, divided by two.
+
+यहाँ n है पाँच। तो total sum: पाँच into छह, divided by दो... पंद्रह! अब array का sum: एक plus पाँच plus दो plus चार... बारह!
+
+पंद्रह minus बारह... तीन! यही है missing number! बस एक loop: O of n time, O of one space.
+
+Video save कर लो, और comment में बताओ: तुम्हारे दिमाग में कोई और logic आ रहा है?
