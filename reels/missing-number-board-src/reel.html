@@ -77,10 +77,10 @@ canvas{position:absolute;inset:0;pointer-events:none}
   
 </g>
 <g id="T">
- <g id="legL"><rect x="455" y="715" width="70" height="330" rx="30" fill="#1f2937" stroke="#0b1220" stroke-width="4"/><path d="M440 1040 Q490 1020 545 1040 L548 1070 L432 1070 Z" fill="#111" /></g>
- <g id="legR"><rect x="555" y="715" width="70" height="330" rx="30" fill="#1f2937" stroke="#0b1220" stroke-width="4"/><path d="M535 1040 Q590 1020 648 1040 L652 1070 L532 1070 Z" fill="#111"/></g>
+ <g id="legL"><rect x="440" y="740" width="78" height="305" rx="30" fill="#1f2937" stroke="#0b1220" stroke-width="4"/><path d="M424 1040 Q478 1020 534 1040 L537 1070 L420 1070 Z" fill="#111" /></g>
+ <g id="legR"><rect x="562" y="740" width="78" height="305" rx="30" fill="#1f2937" stroke="#0b1220" stroke-width="4"/><path d="M546 1040 Q602 1020 656 1040 L660 1070 L543 1070 Z" fill="#111"/></g>
  <!-- torso / hoodie -->
-  <path d="M300 730 L320 560 Q340 470 440 450 L640 450 Q740 470 760 560 L780 730 Z" fill="url(#hood)" stroke="#2a1a80" stroke-width="5"/>
+  <path d="M402 770 L386 560 Q378 488 430 462 Q470 448 500 450 L580 450 Q610 448 650 462 Q702 488 694 560 L678 770 Q540 784 402 770 Z" fill="url(#hood)" stroke="#2a1a80" stroke-width="5"/><path d="M404 742 Q540 756 676 742" fill="none" stroke="#3b28b0" stroke-width="8"/>
   <path d="M470 452 Q540 520 610 452" fill="none" stroke="#2a1a80" stroke-width="6"/>
   <line x1="505" y1="480" x2="500" y2="560" stroke="#e8eaf0" stroke-width="6" stroke-linecap="round"/>
   <line x1="575" y1="480" x2="580" y2="560" stroke="#e8eaf0" stroke-width="6" stroke-linecap="round"/>
@@ -160,10 +160,11 @@ function init(){
 const conf=$('conf').getContext('2d');
 // two-bone IK in page coords; returns elbow
 function ik(Sh,H,L1,L2,sgn){const dx=H[0]-Sh[0],dy=H[1]-Sh[1];let d=Math.hypot(dx,dy);d=Math.min(d,L1+L2-1);const a=Math.atan2(dy,dx);const c=(L1*L1+d*d-L2*L2)/(2*L1*d);const b=Math.acos(Math.max(-1,Math.min(1,c)));return [Sh[0]+Math.cos(a+sgn*b)*L1,Sh[1]+Math.sin(a+sgn*b)*L1]}
+function ikOut(Sh,H,L1,L2,side){const a=ik(Sh,H,L1,L2,1),b=ik(Sh,H,L1,L2,-1);return side<0?(a[0]<b[0]?a:b):(a[0]>b[0]?a:b)}
 function armSVG(Sh,E,H,marker){const st=`stroke-linecap="round" stroke-linejoin="round" fill="none"`;
- let s=`<path d="M${Sh[0]} ${Sh[1]} L${E[0]} ${E[1]} L${H[0]} ${H[1]}" stroke="#2a1a80" stroke-width="${74}" ${st}/><path d="M${Sh[0]} ${Sh[1]} L${E[0]} ${E[1]} L${H[0]} ${H[1]}" stroke="#6a4cf0" stroke-width="${64}" ${st}/>`;
- s+=`<circle cx="${H[0]}" cy="${H[1]}" r="31" fill="#d9a77d" stroke="#8a5a3a" stroke-width="3"/>`;
- if(marker){const [tx,ty]=marker;s+=`<line x1="${H[0]}" y1="${H[1]}" x2="${tx}" y2="${ty}" stroke="#111827" stroke-width="22" stroke-linecap="round"/><line x1="${lerp(H[0],tx,.7)}" y1="${lerp(H[1],ty,.7)}" x2="${tx}" y2="${ty}" stroke="#ef4444" stroke-width="14" stroke-linecap="round"/><circle cx="${H[0]}" cy="${H[1]}" r="27" fill="#d9a77d" stroke="#8a5a3a" stroke-width="3"/>`}
+ let s=`<path d="M${Sh[0]} ${Sh[1]} L${E[0]} ${E[1]} L${H[0]} ${H[1]}" stroke="#2a1a80" stroke-width="${60}" ${st}/><path d="M${Sh[0]} ${Sh[1]} L${E[0]} ${E[1]} L${H[0]} ${H[1]}" stroke="#6a4cf0" stroke-width="${50}" ${st}/>`;
+ s+=`<circle cx="${H[0]}" cy="${H[1]}" r="25" fill="#d9a77d" stroke="#8a5a3a" stroke-width="3"/>`;
+ if(marker){const [tx,ty]=marker;s+=`<line x1="${H[0]}" y1="${H[1]}" x2="${tx}" y2="${ty}" stroke="#111827" stroke-width="22" stroke-linecap="round"/><line x1="${lerp(H[0],tx,.7)}" y1="${lerp(H[1],ty,.7)}" x2="${tx}" y2="${ty}" stroke="#ef4444" stroke-width="14" stroke-linecap="round"/><circle cx="${H[0]}" cy="${H[1]}" r="23" fill="#d9a77d" stroke="#8a5a3a" stroke-width="3"/>`}
  return s}
 window.render=function(t){
  let ch=CH[0];CH.forEach(c=>{if(t>=c[0])ch=c});const col=ch[2];$('chap').textContent='● '+ch[1];$('chap').style.color=col;$('chap').style.borderColor=col;
@@ -190,7 +191,7 @@ window.render=function(t){
  const walking=Math.abs(cx-(window._lcx??cx))>0.5;window._lcx=cx;
  const ox=cx-540*S;const bob=walking?Math.abs(Math.sin(t*9))*-6:Math.sin(t*2.1)*2;
  $('T').setAttribute('transform',`translate(${ox},${OY+bob}) scale(${S})`);
- const sw=walking?Math.sin(t*9)*10:0;$('legL').setAttribute('transform',`rotate(${sw} 490 715)`);$('legR').setAttribute('transform',`rotate(${-sw} 590 715)`);
+ const sw=walking?Math.sin(t*9)*10:0;$('legL').setAttribute('transform',`rotate(${sw} 479 745)`);$('legR').setAttribute('transform',`rotate(${-sw} 601 745)`);
  const fi=Math.floor((t-AOFF)*30);const a=fi>=0&&fi<AMP.length?(AMP[fi]+(AMP[fi+1]||0))/2:0;const open=Math.min(1,a*1.1);
  $('mOut').setAttribute('d',`M-34 0 Q0 ${10+6*open} 34 0 Q0 ${8+44*open} -34 0 Z`);$('mTeeth').setAttribute('opacity',open>0.15?1:0.4);$('brows').setAttribute('transform',`translate(0,${-open*6})`);
  const bl=((t*0.37)%1)<0.04;$('lidL').setAttribute('height',bl?40:0);$('lidR').setAttribute('height',bl?40:0);
@@ -199,14 +200,14 @@ window.render=function(t){
  $('pL').setAttribute('cx',-48+look*7*draw);$('pR').setAttribute('cx',52+look*7*draw);$('pL').setAttribute('cy',-6-4*draw);$('pR').setAttribute('cy',-6-4*draw);
  $('lapCur').setAttribute('opacity',Math.sin(t*6)>0?1:0);
  // ---- arms (page coords) ----
- const P=(x,y)=>[ox+x*S,OY+bob+y*S];const shL=P(350,505),shR=P(730,505);const L1=170*S,L2=160*S;
+ const P=(x,y)=>[ox+x*S,OY+bob+y*S];const shL=P(405,500),shR=P(675,500);const L1=165*S,L2=150*S;
  // marker arm (viewer-left)
- const restL=[shL[0]-40,shL[1]+300*S*0.95+Math.sin(t*1.7)*4];let mk=[restL[0]+8,restL[1]-58];
+ const restL=[shL[0]-28,shL[1]+(L1+L2)*0.96+Math.sin(t*1.7)*3];let mk=[restL[0]+8,restL[1]-58];
  let hL=restL;if(tip&&draw>0){const ML=58;const dir=[tip[0]-shL[0],tip[1]-shL[1]];const dl=Math.hypot(...dir);const want=[tip[0]-dir[0]/dl*ML,tip[1]-dir[1]/dl*ML];
   hL=[lerp(restL[0],want[0],draw),lerp(restL[1],want[1],draw)];const md=[tip[0]-hL[0],tip[1]-hL[1]],ml=Math.hypot(...md);mk=[hL[0]+md[0]/ml*ML*draw+8*(1-draw),hL[1]+md[1]/ml*ML*draw-58*(1-draw)]}
- const eL=ik(shL,hL,L1,L2,-1);
+ const eL=ikOut(shL,hL,L1,L2,-1);
  // free arm (viewer-right): small talking gestures
- const g=Math.max(0,Math.sin(t*1.6))*open;const restR=[shR[0]+40+g*30,shR[1]+300*S*0.95-g*120];const eR=ik(shR,restR,L1,L2,1);
+ const g=Math.max(0,Math.sin(t*1.6))*open;const restR=[shR[0]+28+g*45,shR[1]+(L1+L2)*0.96-g*120];const eR=ikOut(shR,restR,L1,L2,1);
  $('arms').innerHTML=armSVG(shR,eR,restR,null)+armSVG(shL,eL,hL,mk);
  conf.clearRect(0,0,1080,1920);const ct=t>=K.cta?K.cta:(t>=K.res+0.3&&t<K.res+2.3?K.res+0.3:null);
  if(ct!=null){const dt=t-ct;for(let i=0;i<90;i++){const x=rnd(i)*1080+Math.sin(dt*2+i)*40,yv=-60+((rnd(i+9)*900+dt*(300+rnd(i+3)*400))%2100);conf.save();conf.translate(x,yv);conf.rotate(dt*4+i);conf.fillStyle=['#ffd166','#ff5470','#4ade80','#5cd6ff','#a78bfa'][i%5];conf.fillRect(-9,-5,18,10);conf.restore()}}
