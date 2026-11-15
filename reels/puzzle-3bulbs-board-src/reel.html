@@ -1,0 +1,248 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:'Poppins';font-weight:600;src:url(Poppins600.woff2)}
+@font-face{font-family:'Poppins';font-weight:800;src:url(Poppins800.woff2)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#07080b}
+body{font-family:'Poppins','Noto Color Emoji',sans-serif;color:#fff}
+#bg{position:absolute;inset:0;background:linear-gradient(#10131c,#0b0d13 60%)}
+#floor{position:absolute;left:0;right:0;top:1600px;bottom:0;background:linear-gradient(#3a2a1c,#21170f)}
+#top{position:absolute;left:60px;right:60px;top:110px;display:flex;justify-content:space-between;align-items:center}
+#top .h{font-size:32px;font-weight:800}#top .r{font-size:22px;letter-spacing:5px;color:#7d8291;font-weight:600}
+#seg{position:absolute;left:60px;right:60px;top:170px;display:flex;gap:8px}#seg div{flex:1;height:6px;border-radius:3px;background:#262a33}#seg div.on{background:#e8eaf0}
+#chap{position:absolute;left:60px;top:200px;padding:6px 22px;border-radius:26px;border:3px solid;font-family:'DejaVu Sans Mono',monospace;font-size:26px;font-weight:800;letter-spacing:3px}
+#cap{position:absolute;left:50px;width:980px;top:300px;height:420px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:66px;font-weight:800;line-height:1.22}
+#cap .w{color:#4b505c}#cap .on{color:#fff}
+#board{position:absolute;left:20px;top:760px;width:1040px;height:820px;border-radius:16px;background:#7a4a24;box-shadow:0 20px 50px rgba(0,0,0,.6)}
+#slate{position:absolute;left:20px;top:20px;right:20px;bottom:20px;border-radius:8px;background:radial-gradient(ellipse at 35% 35%,#2f5a44,#21412f 70%,#1b3628)}
+.ch{position:absolute;color:#f4f1e6;font-weight:800;opacity:0;transition:none}
+.hd{left:40px;width:960px;text-align:center}
+.col{left:50px;width:580px;text-align:center}
+.y{color:#ffe27a}.r{color:#ff8c8c}.g{color:#8ff0a4}.b{color:#8fd8ff}
+.cell{display:inline-block;width:98px;height:98px;margin:0 6px;border:5px solid #f4f1e6;border-radius:14px;font-size:56px;line-height:88px;text-align:center}
+.cell.m{border-style:dashed;border-color:#ff8c8c;color:#ff8c8c}.cell.f{border-color:#8ff0a4;color:#8ff0a4;border-style:solid}
+.idx{display:inline-block;width:110px;text-align:center;font-size:18px;color:#c9d6c9}
+.code{font-family:'DejaVu Sans Mono',monospace;font-size:24px;line-height:1.7;white-space:pre;text-align:left}
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin:0 8px}
+.frac .t{padding:0 10px}.frac .bt{border-top:4px solid #f4f1e6;padding:0 10px;width:100%;text-align:center}
+#ink{position:absolute;left:0;top:0;pointer-events:none}
+canvas{position:absolute;inset:0;pointer-events:none}
+</style></head><body>
+<div id="bg"></div><div id="floor"></div>
+<div id="top"><div class="h">💻 @pretestpassed.codes</div><div class="r">DSA NOTES</div></div>
+<div id="seg"></div><div id="chap"></div><div id="cap"></div>
+<div id="board"><div id="slate"></div></div>
+<!-- board content in page coordinates -->
+<div class="ch hd" id="h1" style="top:790px;font-size:44px;line-height:1.3">3 switch • 3 bulb •<br>darwaza sirf <span class="r">1 BAAR</span> 🚪</div>
+<div class="ch hd" id="h2" style="top:790px;font-size:42px;line-height:1.3"><span class="r">MakeMyTrip</span> &amp; <span class="b">Qualcomm</span><br>jaise interviews mein 😱</div>
+<div class="ch hd" id="h3" style="top:800px;font-size:42px;line-height:1.3">Band kamra 🚪: <span class="y">bahar 3 switch</span>,<br><span class="g">andar 3 bulb</span></div>
+<div class="ch hd" id="h4" style="top:800px;font-size:42px;line-height:1.3">Switch: jitni baar chaho 🔁<br>Darwaza: sirf <span class="r">1 BAAR</span> ☝️</div>
+<div class="ch hd" id="h5" style="top:810px;font-size:46px"><span class="y">Kaunsa switch ➜ kaunsa bulb?</span> 🤔</div>
+<div class="ch hd" id="h6" style="top:800px;font-size:52px"><span class="g">✅ SOLUTION</span></div>
+<div class="ch hd" id="h7" style="top:790px;font-size:44px;line-height:1.3">Trick: bulb deta hai<br>💡 <span class="y">Roshni</span> + 🔥 <span class="r">Garmi</span></div>
+<div class="ch hd" id="h8" style="top:800px;font-size:44px">🔔 Follow <span class="y">@pretestpassed.codes</span></div>
+<svg id="dia" width="1080" height="1920" style="position:absolute;left:0;top:0;opacity:0">
+ <g fill="none" stroke="#f4f1e6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="66" y="1050" width="180" height="120" rx="14"/>
+  <rect x="290" y="1000" width="330" height="400" rx="6"/>
+ </g>
+ <g id="sw1"><rect x="88" y="1068" width="36" height="84" rx="8" fill="#1b3628" stroke="#f4f1e6" stroke-width="4"/><rect id="k1" x="94" y="1074" width="24" height="34" rx="5" fill="#f4f1e6"/></g>
+ <g id="sw2"><rect x="138" y="1068" width="36" height="84" rx="8" fill="#1b3628" stroke="#f4f1e6" stroke-width="4"/><rect id="k2" x="144" y="1074" width="24" height="34" rx="5" fill="#f4f1e6"/></g>
+ <g id="sw3"><rect x="188" y="1068" width="36" height="84" rx="8" fill="#1b3628" stroke="#f4f1e6" stroke-width="4"/><rect id="k3" x="194" y="1074" width="24" height="34" rx="5" fill="#f4f1e6"/></g>
+ <g font-family="Poppins" font-weight="800" font-size="26" fill="#f4f1e6" text-anchor="middle"><text x="106" y="1200">S1</text><text x="156" y="1200">S2</text><text x="206" y="1200">S3</text></g>
+ <g id="door"><rect x="276" y="1250" width="34" height="150" rx="4" fill="#7a4a24" stroke="#f4f1e6" stroke-width="4"/><circle cx="302" cy="1330" r="4" fill="#ffe27a"/></g>
+ <g id="bulbs">
+  <g id="bA"><line x1="370" y1="1000" x2="370" y2="1066" stroke="#f4f1e6" stroke-width="4"/><circle id="gA" cx="370" cy="1100" r="58" fill="#ffe27a" opacity="0"/><circle id="oA" cx="370" cy="1100" r="32" fill="#1b3628" stroke="#f4f1e6" stroke-width="5"/><rect x="358" y="1062" width="24" height="10" fill="#f4f1e6"/></g>
+  <g id="bB"><line x1="455" y1="1000" x2="455" y2="1066" stroke="#f4f1e6" stroke-width="4"/><circle id="gB" cx="455" cy="1100" r="58" fill="#8fd8ff" opacity="0"/><circle id="oB" cx="455" cy="1100" r="32" fill="#1b3628" stroke="#f4f1e6" stroke-width="5"/><rect x="443" y="1062" width="24" height="10" fill="#f4f1e6"/></g>
+  <g id="bC"><line x1="540" y1="1000" x2="540" y2="1066" stroke="#f4f1e6" stroke-width="4"/><circle id="gC" cx="540" cy="1100" r="58" fill="#ff8c4c" opacity="0"/><circle id="oC" cx="540" cy="1100" r="32" fill="#1b3628" stroke="#f4f1e6" stroke-width="5"/><rect x="528" y="1062" width="24" height="10" fill="#f4f1e6"/></g>
+  <g id="heat" opacity="0" fill="none" stroke="#ff8c4c" stroke-width="4" stroke-linecap="round"><path d="M526 1052 q6 -10 0 -20 q-6 -10 0 -20"/><path d="M554 1052 q6 -10 0 -20 q-6 -10 0 -20"/></g>
+  <g font-family="Poppins" font-weight="800" font-size="28" fill="#f4f1e6" text-anchor="middle"><text x="370" y="1172">A</text><text x="455" y="1172">B</text><text x="540" y="1172">C</text></g>
+ </g>
+ <g font-family="Poppins" font-weight="800" text-anchor="middle">
+  <text id="rA" x="370" y="1230" font-size="30" fill="#ffe27a" opacity="0">💡 S2</text>
+  <text id="rC" x="540" y="1230" font-size="30" fill="#ff8c8c" opacity="0">🔥 S1</text>
+  <text id="rB" x="455" y="1290" font-size="30" fill="#8fd8ff" opacity="0">❄️ S3</text>
+ </g>
+ <g id="cover"><rect x="293" y="1003" width="324" height="394" fill="#0e1f17"/><text x="455" y="1190" font-family="Poppins" font-weight="800" font-size="110" fill="#ffe27a" text-anchor="middle">?</text><text id="hide" x="455" y="1290" font-family="Poppins" font-weight="800" font-size="26" fill="#c9d6c9" text-anchor="middle" opacity="0">bahar se nahi dikhta 🙈</text></g>
+ <g id="wires" fill="none" stroke="#ffe27a" stroke-width="3" stroke-dasharray="8 10" opacity="0"><path d="M106 1050 Q240 900 370 1000"/><path d="M156 1050 Q300 880 455 1000"/><path d="M206 1050 Q360 900 540 1000"/></g>
+ <g id="cdn" opacity="0"><circle cx="335" cy="1200" r="150" fill="#0b1712" stroke="#ffe27a" stroke-width="10"/><text id="cdt" x="335" y="1250" font-family="Poppins" font-weight="800" font-size="150" fill="#ffe27a" text-anchor="middle">5</text></g>
+</svg>
+<div class="ch col" id="step" style="top:1440px;font-size:32px"></div>
+<svg id="ink" width="1080" height="1920"></svg>
+<svg id="room" width="1080" height="1920" viewBox="0 0 1080 1920" style="position:absolute;left:0;top:0">
+<defs>
+  <linearGradient id="hood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7c5cff"/><stop offset="1" stop-color="#4b2fd6"/></linearGradient>
+  <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6b48a"/><stop offset="1" stop-color="#cf9a70"/></linearGradient>
+ </defs>
+<g id="desk" transform="translate(-10,1530) scale(0.9)">
+ <rect x="20" y="725" width="360" height="26" rx="6" fill="#5e3618"/><rect x="40" y="751" width="18" height="160" fill="#4a2a12"/><rect x="342" y="751" width="18" height="160" fill="#4a2a12"/>
+ <g id="lap">
+   <path d="M60 640 L330 640 L360 730 L30 730 Z" fill="#2b2f38" stroke="#0e0f13" stroke-width="4"/>
+   <path d="M95 640 L300 640 L285 470 L110 470 Z" fill="#c9ced6" stroke="#6b7280" stroke-width="5"/>
+   <path d="M108 628 L288 628 L276 484 L120 484 Z" fill="#0b1220"/>
+   <g id="lapCode" font-family="DejaVu Sans Mono" font-size="15" font-weight="700">
+    <text x="132" y="512" fill="#ff79c6">for</text><text x="166" y="512" fill="#e8eaf0">(i=0;i&lt;n;i++)</text>
+    <text x="146" y="536" fill="#5cd6ff">sum</text><text x="182" y="536" fill="#e8eaf0">+= a[i];</text>
+    <text x="132" y="560" fill="#ff79c6">return</text><text x="196" y="560" fill="#ffd166">total-sum</text>
+    <rect id="lapCur" x="132" y="572" width="10" height="16" fill="#4ade80"/>
+   </g>
+   <circle cx="198" cy="604" r="10" fill="none" stroke="#7c5cff" stroke-width="3"/>
+   <path d="M90 690 L310 690" stroke="#3f4452" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  
+</g>
+<g id="T">
+ <g id="legL"><rect x="440" y="740" width="78" height="305" rx="30" fill="#1f2937" stroke="#0b1220" stroke-width="4"/><path d="M424 1040 Q478 1020 534 1040 L537 1070 L420 1070 Z" fill="#111" /></g>
+ <g id="legR"><rect x="562" y="740" width="78" height="305" rx="30" fill="#1f2937" stroke="#0b1220" stroke-width="4"/><path d="M546 1040 Q602 1020 656 1040 L660 1070 L543 1070 Z" fill="#111"/></g>
+ <!-- torso / hoodie -->
+  <path d="M402 770 L386 560 Q378 488 430 462 Q470 448 500 450 L580 450 Q610 448 650 462 Q702 488 694 560 L678 770 Q540 784 402 770 Z" fill="url(#hood)" stroke="#2a1a80" stroke-width="5"/><path d="M404 742 Q540 756 676 742" fill="none" stroke="#3b28b0" stroke-width="8"/>
+  <path d="M470 452 Q540 520 610 452" fill="none" stroke="#2a1a80" stroke-width="6"/>
+  <line x1="505" y1="480" x2="500" y2="560" stroke="#e8eaf0" stroke-width="6" stroke-linecap="round"/>
+  <line x1="575" y1="480" x2="580" y2="560" stroke="#e8eaf0" stroke-width="6" stroke-linecap="round"/>
+  <!-- headphones around neck -->
+  <path d="M440 455 Q540 505 640 455" fill="none" stroke="#1a1d24" stroke-width="16" stroke-linecap="round"/>
+  <ellipse cx="438" cy="458" rx="26" ry="32" fill="#22262f" stroke="#0e0f13" stroke-width="4"/>
+  <ellipse cx="642" cy="458" rx="26" ry="32" fill="#22262f" stroke="#0e0f13" stroke-width="4"/>
+  
+ <!-- neck -->
+  <rect x="505" y="385" width="70" height="80" rx="20" fill="url(#skin)"/>
+  
+ <!-- head group -->
+  <g id="head" transform="translate(540,300)">
+   <ellipse cx="-118" cy="10" rx="22" ry="30" fill="#d9a77d" stroke="#8a5a3a" stroke-width="3"/>
+   <ellipse cx="118" cy="10" rx="22" ry="30" fill="#d9a77d" stroke="#8a5a3a" stroke-width="3"/>
+   <path d="M-112 -40 Q-118 90 0 120 Q118 90 112 -40 Q100 -120 0 -126 Q-100 -120 -112 -40 Z" fill="url(#skin)" stroke="#8a5a3a" stroke-width="4"/>
+   <!-- hair: short spiky top + side fade -->
+   <!-- quiff hair: short sides, volume swept up & back -->
+   <path d="M-116 -20 Q-122 -80 -100 -112 L-104 -60 Q-112 -40 -116 -20 Z" fill="#17120e"/>
+   <path d="M116 -20 Q122 -80 100 -112 L104 -60 Q112 -40 116 -20 Z" fill="#17120e"/>
+   <path d="M-108 -70 Q-120 -150 -60 -178 Q-10 -205 50 -196 Q110 -188 128 -150 Q138 -120 112 -70 Q104 -104 70 -112 Q30 -98 -10 -110 Q-60 -100 -84 -92 Q-100 -84 -108 -70 Z" fill="#17120e"/>
+   <path d="M-40 -186 Q30 -214 110 -170 Q60 -186 -10 -176 Z" fill="#2c221b"/>
+   <path d="M-70 -150 Q0 -190 80 -160" fill="none" stroke="#3a2c22" stroke-width="5" stroke-linecap="round"/>
+   <path d="M-60 -126 Q10 -160 96 -132" fill="none" stroke="#3a2c22" stroke-width="5" stroke-linecap="round"/>
+   <!-- brows -->
+   <g id="brows"><path d="M-80 -40 Q-50 -56 -22 -44" fill="none" stroke="#17120e" stroke-width="11" stroke-linecap="round"/><path d="M22 -44 Q50 -56 80 -40" fill="none" stroke="#17120e" stroke-width="11" stroke-linecap="round"/></g>
+   <!-- eyes -->
+   <g id="eyes">
+    <ellipse cx="-50" cy="-8" rx="22" ry="20" fill="#fff"/><ellipse cx="50" cy="-8" rx="22" ry="20" fill="#fff"/>
+    <circle id="pL" cx="-48" cy="-6" r="10" fill="#2a1a10"/><circle id="pR" cx="52" cy="-6" r="10" fill="#2a1a10"/>
+    <circle cx="-45" cy="-10" r="3.5" fill="#fff"/><circle cx="55" cy="-10" r="3.5" fill="#fff"/>
+   </g>
+   <!-- glasses -->
+   <g id="glasses" fill="rgba(180,220,255,.12)" stroke="#111" stroke-width="7">
+    <rect x="-90" y="-38" width="76" height="60" rx="18"/><rect x="14" y="-38" width="76" height="60" rx="18"/>
+    <path d="M-14 -14 Q0 -22 14 -14" fill="none"/><path d="M-90 -18 L-112 -24" fill="none"/><path d="M90 -18 L112 -24" fill="none"/>
+   </g>
+   <circle cx="62" cy="40" r="6" fill="#3a2418"/>
+   <rect id="lidL" x="-75" y="-32" width="50" height="0" fill="#d9a77d"/><rect id="lidR" x="25" y="-32" width="50" height="0" fill="#d9a77d"/>
+   <!-- nose -->
+   <path d="M-6 8 Q-14 38 0 44 Q12 44 14 38" fill="none" stroke="#9a6440" stroke-width="5" stroke-linecap="round"/>
+   <!-- beard -->
+   <path d="M-108 0 Q-112 70 -70 108 Q-30 140 0 142 Q30 140 70 108 Q112 70 108 0 Q96 40 70 58 Q40 46 0 50 Q-40 46 -70 58 Q-96 40 -108 0 Z" fill="#1d1612"/>
+   <path d="M-46 60 Q-20 48 0 56 Q20 48 46 60 Q40 70 0 66 Q-40 70 -46 60 Z" fill="#1d1612"/>
+   <!-- mouth -->
+   <g id="mouth" transform="translate(0,74)">
+    <path id="mOut" d="M-34 0 Q0 18 34 0 Q0 30 -34 0 Z" fill="#5a1a1a" stroke="#2a0a0a" stroke-width="4"/>
+    <path id="mTeeth" d="M-26 2 Q0 10 26 2 L24 8 Q0 14 -24 8 Z" fill="#fff"/>
+   </g>
+   <!-- light stubble chin shadow -->
+   
+  </g>
+  
+</g>
+<g id="arms"></g>
+</svg>
+<canvas id="conf" width="1080" height="1920"></canvas>
+<script>
+const TL=window.TL||{K:{},END:60,CAP:[],AMP:[]};const K=TL.K,END=TL.END,CAP=TL.CAP||[],AMP=TL.AMP||[],AOFF=TL.AOFF||0;
+const cl=x=>Math.max(0,Math.min(1,x)),ease=x=>1-Math.pow(1-cl(x),3),eio=x=>{x=cl(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const lerp=(a,b,u)=>a+(b-a)*u;function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+const $=id=>document.getElementById(id);$('seg').innerHTML=Array.from({length:12},()=>'<div></div>').join('');
+const CH=[[0,'PUZZLE','#ffd166'],[K.mmt-0.3,'INTERVIEW','#ff5470'],[K.room,'SETUP','#5cd6ff'],[K.batao,'SOCHO','#ffd166'],[K.sol,'SOLUTION','#4ade80'],[K.trick,'TRICK','#a78bfa'],[K.aise,'FOLLOW','#5cd6ff']];
+function wt(sub,t0=0){for(const [s0,e0,ws] of CAP)for(const [w,t] of ws)if(t>=t0&&w.toLowerCase().includes(sub))return t;return null}
+// teacher geometry (native svg coords -> page): page = O + p*S
+const S=0.9,FEET=1895,HOME=860;const OY=FEET-1070*S;
+// few marker actions only on key words
+let EV=[[K.ekbaar,'door','circle',0.9,K.batao],[K.garam,'heat','circle',0.8,K.s2on],[K.r_on,'bA','circle',0.9,K.trick],[K.r_hot,'bC','circle',0.9,K.trick],[K.r_cold,'bB','circle',0.9,K.trick],[K.garmi,'tg','underline',0.7,K.aise]];
+function vis(t){const w=(a,b)=>t>=a&&t<b?1:0;return{h1:w(0,K.mmt-0.3),h2:w(K.mmt-0.3,K.room),h3:w(K.room,K.lekin),h4:w(K.lekin,K.batao),h5:w(K.batao,K.sol),h6:w(K.sol,K.trick),h7:w(K.trick,K.aise),h8:w(K.aise,1e9),step:w(K.s1on,K.aise)}}
+function box(id){const e=$(id);if(!e)return {x:300,y:1450,w:100,h:40,cx:350,cy:1470};const r=e.getBoundingClientRect();return {x:r.left,y:r.top,w:r.width,h:r.height,cx:r.left+r.width/2,cy:r.top+r.height/2}}
+window.CUES=[];window.READY=false;
+function init(){
+ EV=[[K.ekbaar,'door','circle',0.9,K.batao],[K.garam,'heat','circle',0.8,K.s2on],[K.r_on,'bA','circle',0.9,K.trick],[K.r_hot,'bC','circle',0.9,K.trick],[K.r_cold,'bB','circle',0.9,K.trick],[K.garmi,'tg','underline',0.7,K.aise]];
+ const C=window.CUES,c=(t,n,g=1)=>{if(t!=null)C.push([t,n,g])};EV.forEach(e=>c(e[0],'snip',0.35));c(K.s1on,'switch',0.9);c(K.s1off,'switch',0.9);c(K.s2on,'switch',0.9);c(K.jao,'door',0.8);c(K.garam,'sizzle',0.6);for(let i=0;i<5;i++)c(K.cd0+i,i%2?'tock':'tick',1);c(K.sol,'ding',0.7);c(K.r_on,'pop',0.5);c(K.r_hot,'sizzle',0.5);c(K.r_cold,'pop',0.5);c(K.follow,'sparkle',0.7);
+ window.READY=true}
+const conf=$('conf').getContext('2d');
+// two-bone IK in page coords; returns elbow
+function ik(Sh,H,L1,L2,sgn){const dx=H[0]-Sh[0],dy=H[1]-Sh[1];let d=Math.hypot(dx,dy);d=Math.min(d,L1+L2-1);const a=Math.atan2(dy,dx);const c=(L1*L1+d*d-L2*L2)/(2*L1*d);const b=Math.acos(Math.max(-1,Math.min(1,c)));return [Sh[0]+Math.cos(a+sgn*b)*L1,Sh[1]+Math.sin(a+sgn*b)*L1]}
+function ikOut(Sh,H,L1,L2,side){const a=ik(Sh,H,L1,L2,1),b=ik(Sh,H,L1,L2,-1);return side<0?(a[0]<b[0]?a:b):(a[0]>b[0]?a:b)}
+function armSVG(Sh,E,H,marker){const st=`stroke-linecap="round" stroke-linejoin="round" fill="none"`;
+ let s=`<path d="M${Sh[0]} ${Sh[1]} L${E[0]} ${E[1]} L${H[0]} ${H[1]}" stroke="#2a1a80" stroke-width="${60}" ${st}/><path d="M${Sh[0]} ${Sh[1]} L${E[0]} ${E[1]} L${H[0]} ${H[1]}" stroke="#6a4cf0" stroke-width="${50}" ${st}/>`;
+ s+=`<circle cx="${H[0]}" cy="${H[1]}" r="25" fill="#d9a77d" stroke="#8a5a3a" stroke-width="3"/>`;
+ if(marker){const [tx,ty]=marker;s+=`<line x1="${H[0]}" y1="${H[1]}" x2="${tx}" y2="${ty}" stroke="#111827" stroke-width="22" stroke-linecap="round"/><line x1="${lerp(H[0],tx,.7)}" y1="${lerp(H[1],ty,.7)}" x2="${tx}" y2="${ty}" stroke="#ef4444" stroke-width="14" stroke-linecap="round"/><circle cx="${H[0]}" cy="${H[1]}" r="23" fill="#d9a77d" stroke="#8a5a3a" stroke-width="3"/>`}
+ return s}
+window.render=function(t){
+ let ch=CH[0];CH.forEach(c=>{if(t>=c[0])ch=c});const col=ch[2];$('chap').textContent='● '+ch[1];$('chap').style.color=col;$('chap').style.borderColor=col;
+ const segs=$('seg').children,nOn=Math.ceil(12*t/END);for(let i=0;i<12;i++)segs[i].className=i<nOn?'on':'';
+ const v=vis(t);for(const id in v)$(id).style.opacity=v[id];
+ content(t);
+ let cap='';for(const [s0,e0,words] of CAP){if(t>=s0&&t<e0+0.15){cap=words.map(([w,ws])=>`<span class="${t>=ws?'on':'w'}">${w}</span>`).join(' ');break}}$('cap').innerHTML='<div>'+cap+'</div>';
+ // ---- current marker event ----
+ let ev=null,ph='rest';for(const e of EV){const [t0,id,kind,dur]=e;if(t>=t0-1.0&&t<t0+dur+0.55){ev=e;break}}
+ let cx=HOME,hand=null,tip=null,draw=0;let ink='';
+ // persistent ink for finished events (stays while their chapter element is visible)
+ for(const e of EV){const [t0,id,kind,dur,until]=e;if(t<t0||t>=until)continue;const p=cl((t-t0)/dur);const b=box(id);ink+=inkPath(kind,b,p)}
+ $('ink').innerHTML=ink;
+ if(ev){const [t0,id,kind,dur]=ev;const b=box(id);const target=[b.cx,b.cy];
+  const stand=Math.max(740,Math.min(HOME,b.cx+330));
+  const goIn=eio((t-(t0-1.0))/0.5),goOut=eio((t-(t0+dur+0.05))/0.5);cx=lerp(HOME,stand,goIn);if(t>t0+dur)cx=lerp(stand,HOME,goOut);
+  const raise=eio((t-(t0-0.5))/0.45)*(1-eio((t-(t0+dur))/0.45));
+  let tipP=kind=='circle'?ellPt(b,cl((t-t0)/dur)):kind=='underline'?[lerp(b.x-6,b.x+b.w+6,cl((t-t0)/dur)),b.y+b.h+8]:crossPt(b,cl((t-t0)/dur));
+  if(t<t0)tipP=kind=='circle'?ellPt(b,0):kind=='underline'?[b.x-6,b.y+b.h+8]:crossPt(b,0);
+  tip=tipP;draw=raise}
+ // ---- teacher body ----
+ const walking=Math.abs(cx-(window._lcx??cx))>0.5;window._lcx=cx;
+ const ox=cx-540*S;const bob=walking?Math.abs(Math.sin(t*9))*-6:Math.sin(t*2.1)*2;
+ $('T').setAttribute('transform',`translate(${ox},${OY+bob}) scale(${S})`);
+ const sw=walking?Math.sin(t*9)*10:0;$('legL').setAttribute('transform',`rotate(${sw} 479 745)`);$('legR').setAttribute('transform',`rotate(${-sw} 601 745)`);
+ const fi=Math.floor((t-AOFF)*30);const a=fi>=0&&fi<AMP.length?(AMP[fi]+(AMP[fi+1]||0))/2:0;const open=Math.min(1,a*1.1);
+ $('mOut').setAttribute('d',`M-34 0 Q0 ${10+6*open} 34 0 Q0 ${8+44*open} -34 0 Z`);$('mTeeth').setAttribute('opacity',open>0.15?1:0.4);$('brows').setAttribute('transform',`translate(0,${-open*6})`);
+ const bl=((t*0.37)%1)<0.04;$('lidL').setAttribute('height',bl?40:0);$('lidR').setAttribute('height',bl?40:0);
+ const look=tip&&draw>0.2?(tip[0]<cx?-1:1):0;const turn=draw*look*10;
+ $('head').setAttribute('transform',`translate(${540+Math.sin(t*1.3)*3},${300+Math.sin(t*2.1)*2+open*4}) rotate(${Math.sin(t*0.9)*2+turn*0.4})`);
+ $('pL').setAttribute('cx',-48+look*7*draw);$('pR').setAttribute('cx',52+look*7*draw);$('pL').setAttribute('cy',-6-4*draw);$('pR').setAttribute('cy',-6-4*draw);
+ $('lapCur').setAttribute('opacity',Math.sin(t*6)>0?1:0);
+ // ---- arms (page coords) ----
+ const P=(x,y)=>[ox+x*S,OY+bob+y*S];const shL=P(405,500),shR=P(675,500);const L1=185*S,L2=170*S;
+ // marker arm (viewer-left)
+ const restL=[shL[0]-28,shL[1]+(L1+L2)*0.96+Math.sin(t*1.7)*3];let mk=[restL[0]+8,restL[1]-58];
+ let hL=restL;if(tip&&draw>0){const ML=58;const dir=[tip[0]-shL[0],tip[1]-shL[1]];const dl=Math.hypot(...dir);const want=[tip[0]-dir[0]/dl*ML,tip[1]-dir[1]/dl*ML];
+  hL=[lerp(restL[0],want[0],draw),lerp(restL[1],want[1],draw)];const md=[tip[0]-hL[0],tip[1]-hL[1]],ml=Math.hypot(...md);mk=[hL[0]+md[0]/ml*ML*draw+8*(1-draw),hL[1]+md[1]/ml*ML*draw-58*(1-draw)]}
+ const eL=ikOut(shL,hL,L1,L2,-1);
+ // free arm (viewer-right): small talking gestures
+ const g=Math.max(0,Math.sin(t*1.6))*open;const restR=[shR[0]+28+g*45,shR[1]+(L1+L2)*0.96-g*120];const eR=ikOut(shR,restR,L1,L2,1);
+ $('arms').innerHTML=armSVG(shR,eR,restR,null)+armSVG(shL,eL,hL,mk);
+ conf.clearRect(0,0,1080,1920);const ct=t>=K.follow?K.follow:null;
+ if(ct!=null){const dt=t-ct;for(let i=0;i<90;i++){const x=rnd(i)*1080+Math.sin(dt*2+i)*40,yv=-60+((rnd(i+9)*900+dt*(300+rnd(i+3)*400))%2100);conf.save();conf.translate(x,yv);conf.rotate(dt*4+i);conf.fillStyle=['#ffd166','#ff5470','#4ade80','#5cd6ff','#a78bfa'][i%5];conf.fillRect(-9,-5,18,10);conf.restore()}}
+};
+function ellPt(b,p){const a=-Math.PI*0.6+p*Math.PI*2.15;return [b.cx+Math.cos(a)*(b.w/2+22),b.cy+Math.sin(a)*(b.h/2+18)]}
+function crossPt(b,p){if(p<0.5){const q=p/0.5;return [lerp(b.x,b.x+b.w,q),lerp(b.y,b.y+b.h,q)]}const q=(p-0.5)/0.5;return [lerp(b.x+b.w,b.x,q),lerp(b.y,b.y+b.h,q)]}
+function inkPath(kind,b,p){const st='fill="none" stroke-linecap="round" stroke-linejoin="round"';
+ if(kind=='circle'){let d='';const n=Math.max(2,Math.floor(60*p));for(let i=0;i<=n;i++){const q=p*i/n;const [x,y]=ellPt(b,q);d+=(i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)}return `<path d="${d}" stroke="#ef4444" stroke-width="7" ${st}/>`}
+ if(kind=='underline'){return `<path d="M${b.x-6} ${b.y+b.h+8} L${lerp(b.x-6,b.x+b.w+6,p)} ${b.y+b.h+8+Math.sin(p*6)*2}" stroke="#ef4444" stroke-width="7" ${st}/>`}
+ const q1=Math.min(1,p/0.5),q2=cl((p-0.5)/0.5);let s=`<path d="M${b.x} ${b.y} L${lerp(b.x,b.x+b.w,q1)} ${lerp(b.y,b.y+b.h,q1)}" stroke="#ef4444" stroke-width="9" ${st}/>`;if(q2>0)s+=`<path d="M${b.x+b.w} ${b.y} L${lerp(b.x+b.w,b.x,q2)} ${lerp(b.y,b.y+b.h,q2)}" stroke="#ef4444" stroke-width="9" ${st}/>`;return s}
+
+function content(t){
+ const dv=t<K.cd0||t>=K.sol?1:0.25;$('dia').style.opacity=t<K.aise?dv:0.25;
+ const s1=t>=K.s1on&&t<K.s1off,s2=t>=K.s2on;[['k1',s1],['k2',s2],['k3',false]].forEach(([id,on])=>{$(id).setAttribute('y',on?1074:1112);$(id).setAttribute('fill',on?'#8ff0a4':'#f4f1e6')});
+ const reveal=t>=K.jao+0.3;$('cover').setAttribute('opacity',(t>=K.sol&&t<K.jao+0.3)?0.35:(reveal?0:1));$('hide').setAttribute('opacity',t>=K.baharse&&t<K.sol?1:0);
+ $('wires').setAttribute('opacity',t>=K.har&&t<K.sol?1:0);
+ const hotU=cl((t-K.das)/2);const Aon=s2,Con=s1;
+ $('gA').setAttribute('opacity',Aon?0.55:0);$('oA').setAttribute('fill',Aon?'#ffe27a':'#1b3628');
+ $('gC').setAttribute('opacity',Con?0.45:(t>=K.s1off?0.35:0));$('oC').setAttribute('fill',Con?'#ffe27a':(t>=K.s1off?'#ff8c4c':'#1b3628'));
+ $('heat').setAttribute('opacity',t>=K.garam?hotU:0);$('gB').setAttribute('opacity',t>=K.r_cold?0.3:0);
+ $('rA').setAttribute('opacity',t>=K.r_on?1:0);$('rC').setAttribute('opacity',t>=K.r_hot?1:0);$('rB').setAttribute('opacity',t>=K.r_cold?1:0);
+ const cdOn=t>=K.cd0&&t<K.cd1;$('cdn').setAttribute('opacity',cdOn?1:0);$('cdt').textContent=Math.max(1,5-Math.floor(t-K.cd0));
+ let st='';if(t>=K.s1on&&t<K.s1off)st='Step 1: <span class="g">S1 ON</span> • 10 min ruko ⏱️';else if(t>=K.s1off&&t<K.r_on)st='Step 2: S1 <span class="r">OFF</span>, <span class="g">S2 ON</span> ➜ andar jao 🚶';
+ else if(t>=K.r_on&&t<K.trick)st='💡 jalta=S2 • 🔥 garam=S1 • ❄️ thanda=S3';else if(t>=K.trick)st='💡 Roshni + 🔥 <span id="tg">Garmi</span>';$('step').innerHTML=st;
+}
+document.fonts.ready.then(init);
+</script></body></html>
