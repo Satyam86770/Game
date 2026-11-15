@@ -4,77 +4,64 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{width:1080px;height:1920px;overflow:hidden;background:#07080b}
 body{font-family:'Poppins','Noto Color Emoji',sans-serif;color:#fff}
-#bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 85%,#1c2233 0%,#0b0d13 60%,#07080b 100%)}
-#floor{position:absolute;left:0;right:0;top:1640px;bottom:0;background:linear-gradient(#2a2016,#1a140e)}
+#bg{position:absolute;inset:0;background:linear-gradient(#10131c,#0b0d13 60%)}
+#floor{position:absolute;left:0;right:0;top:1600px;bottom:0;background:linear-gradient(#3a2a1c,#21170f)}
 #top{position:absolute;left:60px;right:60px;top:110px;display:flex;justify-content:space-between;align-items:center}
 #top .h{font-size:32px;font-weight:800}#top .r{font-size:22px;letter-spacing:5px;color:#7d8291;font-weight:600}
 #seg{position:absolute;left:60px;right:60px;top:170px;display:flex;gap:8px}#seg div{flex:1;height:6px;border-radius:3px;background:#262a33}#seg div.on{background:#e8eaf0}
 #chap{position:absolute;left:60px;top:200px;padding:6px 22px;border-radius:26px;border:3px solid;font-family:'DejaVu Sans Mono',monospace;font-size:26px;font-weight:800;letter-spacing:3px}
-/* chalkboard */
-#board{position:absolute;left:24px;top:262px;width:1032px;height:930px;border-radius:18px;background:#7a4a24;padding:22px;box-shadow:0 20px 50px rgba(0,0,0,.6)}
-#slate{position:absolute;inset:22px;border-radius:8px;background:radial-gradient(ellipse at 40% 35%,#2f5a44,#21412f 70%,#1b3628);overflow:hidden}
-#tray{position:absolute;left:120px;right:120px;bottom:-6px;height:20px;border-radius:6px;background:#5e3618}
-.chalkpc{position:absolute;bottom:6px;height:10px;border-radius:5px;background:#f5f2e6}
-.ch{position:absolute;color:#f4f1e6;font-weight:800;text-shadow:0 0 2px rgba(255,255,255,.5);opacity:0}
-.ch.c{left:0;width:984px;text-align:center}
+#cap{position:absolute;left:50px;width:980px;top:300px;height:420px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:66px;font-weight:800;line-height:1.22}
+#cap .w{color:#4b505c}#cap .on{color:#fff}
+#board{position:absolute;left:20px;top:760px;width:1040px;height:820px;border-radius:16px;background:#7a4a24;box-shadow:0 20px 50px rgba(0,0,0,.6)}
+#slate{position:absolute;left:20px;top:20px;right:20px;bottom:20px;border-radius:8px;background:radial-gradient(ellipse at 35% 35%,#2f5a44,#21412f 70%,#1b3628)}
+.ch{position:absolute;color:#f4f1e6;font-weight:800;opacity:0;transition:none}
+.hd{left:40px;width:960px;text-align:center}
+.col{left:50px;width:580px;text-align:center}
 .y{color:#ffe27a}.r{color:#ff8c8c}.g{color:#8ff0a4}.b{color:#8fd8ff}
-.cell{display:inline-block;width:132px;height:132px;margin:0 9px;border:5px solid #f4f1e6;border-radius:16px;font-size:72px;line-height:120px;text-align:center;vertical-align:top}
-.cell.m{border-style:dashed;border-color:#ff8c8c;color:#ff8c8c}
-.cell.f{border-color:#8ff0a4;color:#8ff0a4;border-style:solid}
-.idx{display:inline-block;width:150px;text-align:center;font-size:24px;color:#c9d6c9}
-.code{font-family:'DejaVu Sans Mono',monospace;font-size:30px;line-height:1.6;white-space:pre;text-align:left}
-.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin:0 10px}
-.frac .t{padding:0 12px}.frac .bt{border-top:5px solid #f4f1e6;padding:0 12px;width:100%;text-align:center}
-#scrib{position:absolute;inset:0;pointer-events:none}
-/* caption */
-#cap{position:absolute;left:30px;width:560px;top:1230px;font-size:46px;font-weight:800;line-height:1.25}
-#cap .w{color:#5b606c}#cap .on{color:#fff}
-#av{position:absolute;left:388px;top:1180px;width:864px;height:584px}
-#arm{position:absolute;inset:0;pointer-events:none}
+.cell{display:inline-block;width:98px;height:98px;margin:0 6px;border:5px solid #f4f1e6;border-radius:14px;font-size:56px;line-height:88px;text-align:center}
+.cell.m{border-style:dashed;border-color:#ff8c8c;color:#ff8c8c}.cell.f{border-color:#8ff0a4;color:#8ff0a4;border-style:solid}
+.idx{display:inline-block;width:110px;text-align:center;font-size:18px;color:#c9d6c9}
+.code{font-family:'DejaVu Sans Mono',monospace;font-size:24px;line-height:1.7;white-space:pre;text-align:left}
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin:0 8px}
+.frac .t{padding:0 10px}.frac .bt{border-top:4px solid #f4f1e6;padding:0 10px;width:100%;text-align:center}
+#ink{position:absolute;left:0;top:0;pointer-events:none}
 canvas{position:absolute;inset:0;pointer-events:none}
 </style></head><body>
 <div id="bg"></div><div id="floor"></div>
 <div id="top"><div class="h">💻 @pretestpassed.codes</div><div class="r">DSA NOTES</div></div>
-<div id="seg"></div><div id="chap"></div>
-<div id="board"><div id="slate">
- <div class="ch c" id="bq" style="top:22px;font-size:33px;white-space:nowrap">🧑‍💼 "Is array mein <span class="r">1 number missing</span> hai — <span class="y">dhoondho!</span>"</div>
- <div class="ch c" id="barr" style="top:110px"><span class="cell" id="c0">1</span><span class="cell" id="c1">5</span><span class="cell" id="c2">2</span><span class="cell" id="c3">4</span><span class="cell m" id="cm">?</span><br>
-   <span class="idx">a[0]</span><span class="idx">a[1]</span><span class="idx">a[2]</span><span class="idx">a[3]</span><span class="idx r">missing</span></div>
- <div class="ch c" id="bnl" style="top:316px;font-size:38px">n = <span class="y">5</span> &nbsp;•&nbsp; numbers <span class="b">1 se 5</span> tak</div>
- <div class="ch" id="bsort" style="left:90px;top:390px"><div class="code"><span class="b">int</span> findMissing(int a[], int n) {
-<span id="sl">  sort(a, a + n - 1);      <span class="r">// 😬 sort</span></span>
-<span id="ll">  for (i = 0; i &lt; n-1; i++)</span>
-    if (a[i] != i+1) return i+1;
+<div id="seg"></div><div id="chap"></div><div id="cap"></div>
+<div id="board"><div id="slate"></div></div>
+<!-- board content in page coordinates -->
+<div class="ch hd" id="hq" style="top:780px;font-size:38px;line-height:1.35">🧑‍💼 "Is array mein <span class="r">1 number missing</span> hai,<br><span class="y">dhoondh kar dikhao!</span>"</div>
+<div class="ch col" id="barr" style="top:1000px"><span class="cell" id="c0">1</span><span class="cell" id="c1">5</span><span class="cell" id="c2">2</span><span class="cell" id="c3">4</span><span class="cell m" id="cm">?</span><br><span class="idx">a[0]</span><span class="idx">a[1]</span><span class="idx">a[2]</span><span class="idx">a[3]</span><span class="idx r">missing</span></div>
+<div class="ch col" id="bnl" style="top:1140px;font-size:30px">n = <span class="y">5</span> • numbers <span class="b">1 se 5</span></div>
+<div class="ch hd" id="hs" style="top:790px;font-size:46px"><span class="r">❌ Galat tarika:</span> pehle SORT...</div>
+<div class="ch" id="bsort" style="left:50px;top:960px;width:600px"><div class="code"><span class="b">int</span> findMissing(int a[], int n){
+<span id="sl">  sort(a, a+n-1);   <span class="r">// sort</span></span>
+<span id="ll">  for(i=0;i&lt;n-1;i++)</span>
+    if(a[i]!=i+1) return i+1;
   return n;
 }</div></div>
- <div class="ch c" id="btc" style="top:720px;font-size:54px"><span class="r">TC = O(n log n) ❌</span></div>
- <div class="ch c" id="bon" style="top:400px;font-size:54px">✅ <span class="g">O(n)</span> time • <span class="g">O(1)</span> space</div>
- <div class="ch c" id="bform" style="top:520px;font-size:58px">Sum(1…n) = <span class="frac" id="bfrac"><span class="t">n × (n+1)</span><span class="bt">2</span></span></div>
- <div class="ch c" id="btot" style="top:400px;font-size:52px">Total = <span class="frac"><span class="t">5 × 6</span><span class="bt">2</span></span> = <span class="b" id="btotV">15</span></div>
- <div class="ch c" id="basum" style="top:570px;font-size:48px">Array Sum = <span id="basT"></span> <span class="y" id="basV">= 12</span></div>
- <div class="ch c" id="bres" style="top:700px;font-size:70px"><span class="b">15</span> − <span class="y">12</span> = <span class="g">3</span> ✅</div>
- <div class="ch c" id="bcx" style="top:400px;font-size:50px">⚡ 1 loop • <span class="g">O(n)</span> time • <span class="g">O(1)</span> space</div>
- <div class="ch c" id="bcta" style="top:560px;font-size:50px;line-height:1.4">💬 Tumhare dimaag mein<br>koi <span class="y">aur logic</span>?<br><span class="g">Comment karo! 👇</span></div>
- <svg id="scrib" viewBox="0 0 984 886"></svg>
-</div><div id="tray"><div class="chalkpc" style="left:80px;width:60px"></div><div class="chalkpc" style="left:180px;width:40px;background:#ffe27a"></div></div></div>
-<div id="cap"></div>
-<div id="av"><svg id="avs" width="864" height="584" viewBox="0 0 1080 730">
- <defs>
+<div class="ch col" id="btc" style="top:1270px;font-size:44px"><span class="r">TC = O(n log n)</span></div>
+<div class="ch hd" id="ht" style="top:790px;font-size:46px"><span class="g">💡 Smart trick:</span> SUM formula!</div>
+<div class="ch col" id="bon" style="top:980px;font-size:36px">✅ <span class="g">O(n)</span> time • <span class="g">O(1)</span> space</div>
+<div class="ch col" id="bform" style="top:1110px;font-size:46px">Sum = <span class="frac" id="bfrac"><span class="t">n × (n+1)</span><span class="bt">2</span></span></div>
+<div class="ch hd" id="hd" style="top:790px;font-size:46px"><span class="b">🧮 Dry run</span> (n = 5)</div>
+<div class="ch col" id="btot" style="top:1180px;font-size:42px">Total = <span class="frac"><span class="t">5 × 6</span><span class="bt">2</span></span> = <span class="b" id="btotV">15</span></div>
+<div class="ch col" id="basum" style="top:1320px;font-size:34px">Array Sum = <span id="basT"></span> <span class="y" id="basV">= 12</span></div>
+<div class="ch col" id="bres" style="top:1400px;font-size:58px"><span class="b">15</span> − <span class="y">12</span> = <span class="g" id="bres3">3</span> ✅</div>
+<div class="ch hd" id="ha" style="top:790px;font-size:46px"><span class="g">🎉 Missing number = 3</span></div>
+<div class="ch col" id="bcx" style="top:1500px;font-size:30px">⚡ 1 loop • <span class="g">O(n)</span> • <span class="g">O(1)</span></div>
+<div class="ch hd" id="hc" style="top:800px;font-size:46px;line-height:1.4">💬 Tumhare dimaag mein koi <span class="y">aur logic</span>?<br><span class="g">Comment karo! 👇</span></div>
+<svg id="ink" width="1080" height="1920"></svg>
+<svg id="room" width="1080" height="1920" viewBox="0 0 1080 1920" style="position:absolute;left:0;top:0">
+<defs>
   <linearGradient id="hood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7c5cff"/><stop offset="1" stop-color="#4b2fd6"/></linearGradient>
   <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6b48a"/><stop offset="1" stop-color="#cf9a70"/></linearGradient>
  </defs>
- <g id="body">
-  <!-- torso / hoodie -->
-  <path d="M300 730 L320 560 Q340 470 440 450 L640 450 Q740 470 760 560 L780 730 Z" fill="url(#hood)" stroke="#2a1a80" stroke-width="5"/>
-  <path d="M470 452 Q540 520 610 452" fill="none" stroke="#2a1a80" stroke-width="6"/>
-  <line x1="505" y1="480" x2="500" y2="560" stroke="#e8eaf0" stroke-width="6" stroke-linecap="round"/>
-  <line x1="575" y1="480" x2="580" y2="560" stroke="#e8eaf0" stroke-width="6" stroke-linecap="round"/>
-  <!-- headphones around neck -->
-  <path d="M440 455 Q540 505 640 455" fill="none" stroke="#1a1d24" stroke-width="16" stroke-linecap="round"/>
-  <ellipse cx="438" cy="458" rx="26" ry="32" fill="#22262f" stroke="#0e0f13" stroke-width="4"/>
-  <ellipse cx="642" cy="458" rx="26" ry="32" fill="#22262f" stroke="#0e0f13" stroke-width="4"/>
-  <!-- laptop on a side desk -->
-  <g id="lap">
+<g id="desk" transform="translate(-10,1530) scale(0.9)">
+ <rect x="20" y="725" width="360" height="26" rx="6" fill="#5e3618"/><rect x="40" y="751" width="18" height="160" fill="#4a2a12"/><rect x="342" y="751" width="18" height="160" fill="#4a2a12"/>
+ <g id="lap">
    <path d="M60 640 L330 640 L360 730 L30 730 Z" fill="#2b2f38" stroke="#0e0f13" stroke-width="4"/>
    <path d="M95 640 L300 640 L285 470 L110 470 Z" fill="#c9ced6" stroke="#6b7280" stroke-width="5"/>
    <path d="M108 628 L288 628 L276 484 L120 484 Z" fill="#0b1220"/>
@@ -87,11 +74,25 @@ canvas{position:absolute;inset:0;pointer-events:none}
    <circle cx="198" cy="604" r="10" fill="none" stroke="#7c5cff" stroke-width="3"/>
    <path d="M90 690 L310 690" stroke="#3f4452" stroke-width="6" stroke-linecap="round"/>
   </g>
-  <!-- left arm (resting) -->
-  <g id="armL" transform="translate(345,520)"><rect x="-40" y="0" width="70" height="200" rx="35" fill="url(#hood)" stroke="#2a1a80" stroke-width="5" transform="rotate(14)"/></g>
-  <!-- neck -->
+  
+</g>
+<g id="T">
+ <g id="legL"><rect x="455" y="715" width="70" height="330" rx="30" fill="#1f2937" stroke="#0b1220" stroke-width="4"/><path d="M440 1040 Q490 1020 545 1040 L548 1070 L432 1070 Z" fill="#111" /></g>
+ <g id="legR"><rect x="555" y="715" width="70" height="330" rx="30" fill="#1f2937" stroke="#0b1220" stroke-width="4"/><path d="M535 1040 Q590 1020 648 1040 L652 1070 L532 1070 Z" fill="#111"/></g>
+ <!-- torso / hoodie -->
+  <path d="M300 730 L320 560 Q340 470 440 450 L640 450 Q740 470 760 560 L780 730 Z" fill="url(#hood)" stroke="#2a1a80" stroke-width="5"/>
+  <path d="M470 452 Q540 520 610 452" fill="none" stroke="#2a1a80" stroke-width="6"/>
+  <line x1="505" y1="480" x2="500" y2="560" stroke="#e8eaf0" stroke-width="6" stroke-linecap="round"/>
+  <line x1="575" y1="480" x2="580" y2="560" stroke="#e8eaf0" stroke-width="6" stroke-linecap="round"/>
+  <!-- headphones around neck -->
+  <path d="M440 455 Q540 505 640 455" fill="none" stroke="#1a1d24" stroke-width="16" stroke-linecap="round"/>
+  <ellipse cx="438" cy="458" rx="26" ry="32" fill="#22262f" stroke="#0e0f13" stroke-width="4"/>
+  <ellipse cx="642" cy="458" rx="26" ry="32" fill="#22262f" stroke="#0e0f13" stroke-width="4"/>
+  
+ <!-- neck -->
   <rect x="505" y="385" width="70" height="80" rx="20" fill="url(#skin)"/>
-  <!-- head group -->
+  
+ <!-- head group -->
   <g id="head" transform="translate(540,300)">
    <ellipse cx="-118" cy="10" rx="22" ry="30" fill="#d9a77d" stroke="#8a5a3a" stroke-width="3"/>
    <ellipse cx="118" cy="10" rx="22" ry="30" fill="#d9a77d" stroke="#8a5a3a" stroke-width="3"/>
@@ -132,101 +133,89 @@ canvas{position:absolute;inset:0;pointer-events:none}
    <!-- light stubble chin shadow -->
    
   </g>
-  <!-- right arm: upper + forearm + hand, rotates per pose -->
-  <g id="armR" transform="translate(735,520)" style="display:none">
-   <g id="upR"><rect x="-35" y="-10" width="70" height="170" rx="35" fill="url(#hood)" stroke="#2a1a80" stroke-width="5"/>
-    <g id="foreR" transform="translate(0,150)"><rect x="-30" y="-10" width="60" height="150" rx="30" fill="url(#hood)" stroke="#2a1a80" stroke-width="5"/>
-     <g id="handR" transform="translate(0,170) scale(1,-1)">
-      <ellipse cx="0" cy="18" rx="34" ry="36" fill="url(#skin)" stroke="#8a5a3a" stroke-width="3"/>
-      <rect id="finger" x="-9" y="-48" width="18" height="60" rx="9" fill="url(#skin)" stroke="#8a5a3a" stroke-width="3"/>
-      <rect id="thumb" x="20" y="-6" width="16" height="40" rx="8" fill="url(#skin)" stroke="#8a5a3a" stroke-width="3" transform="rotate(-35 28 14)"/>
-      <g id="palm" opacity="0">
-       <rect x="-28" y="-46" width="13" height="50" rx="6" fill="url(#skin)" stroke="#8a5a3a" stroke-width="2"/><rect x="-13" y="-56" width="13" height="58" rx="6" fill="url(#skin)" stroke="#8a5a3a" stroke-width="2"/>
-       <rect x="2" y="-54" width="13" height="56" rx="6" fill="url(#skin)" stroke="#8a5a3a" stroke-width="2"/><rect x="17" y="-44" width="12" height="48" rx="6" fill="url(#skin)" stroke="#8a5a3a" stroke-width="2"/>
-      </g>
-     </g>
-    </g>
-   </g>
-  </g>
- </g>
-</svg></div>
-<svg id="arm" width="1080" height="1920"></svg>
+  
+</g>
+<g id="arms"></g>
+</svg>
 <canvas id="conf" width="1080" height="1920"></canvas>
 <script>
 const TL=window.TL||{K:{},END:60,CAP:[],AMP:[]};const K=TL.K,END=TL.END,CAP=TL.CAP||[],AMP=TL.AMP||[],AOFF=TL.AOFF||0;
 const cl=x=>Math.max(0,Math.min(1,x)),ease=x=>1-Math.pow(1-cl(x),3),eio=x=>{x=cl(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
-const back=x=>{x=cl(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};const lerp=(a,b,u)=>a+(b-a)*u;
-function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
-const $=id=>document.getElementById(id);
-$('seg').innerHTML=Array.from({length:12},()=>'<div></div>').join('');
-// first spoken time of a word (substring) at/after t0
-function wt(sub,t0=0){for(const [s0,e0,ws] of CAP)for(const [w,t] of ws)if(t>=t0&&w.toLowerCase().includes(sub))return t;return null}
+const lerp=(a,b,u)=>a+(b-a)*u;function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+const $=id=>document.getElementById(id);$('seg').innerHTML=Array.from({length:12},()=>'<div></div>').join('');
 const CH=[[0,'INTERVIEW Q','#ffd166'],[K.sort,'GALAT TARIKA','#ff5470'],[K.on,'SMART TRICK','#4ade80'],[K.n5,'DRY RUN','#5cd6ff'],[K.res,'ANSWER','#4ade80'],[K.cta,'TUMHARI BAARI','#a78bfa']];
-// [time, element id] — where the stick points (synced to the words)
-let PT=[];
-function buildPT(){const s=K.say||[],a=K.add||[];
- PT=[[0,'bq'],[wt('array',1),'barr'],[wt('missing',2),'cm'],[wt('array',7),'barr'],[s[0],'c0'],[s[1],'c1'],[s[2],'c2'],[s[3],'c3'],
- [K.nl,'bnl'],[wt('gayab',12),'cm'],[K.sort,'bsort'],[wt('sort',15),'sl'],[wt('loop',16),'ll'],[wt('ruk',17),'bsort'],[K.tc,'btc'],
- [K.on,'bon'],[K.form,'bform'],[wt('n',31),'bfrac'],[K.n5,'bnl'],[K.tot,'btot'],[K.totv,'btotV'],[wt('array',40),'basT'],
- [a[0],'c0'],[a[1],'c1'],[a[2],'c2'],[a[3],'c3'],[K.asum,'basV'],[K.res,'bres'],[K.res+1.0,'cm'],[K.cx,'bcx'],[K.cta,'bcta']].filter(p=>p[0]!=null).sort((x,y)=>x[0]-y[0])}
-// visibility windows for board items
-function V(t){const v={};const w=(a,b)=>t>=a&&t<b?1:0;
- v.bq=w(0,K.sort);v.barr=w(0,K.sort)||w(K.n5,K.cta);v.bnl=w(K.nl,K.sort)||w(K.n5,K.cx);v.bsort=w(K.sort,K.on);v.btc=w(K.tc,K.on);
- v.bon=w(K.on,K.n5);v.bform=w(K.form,K.n5);v.btot=w(K.tot,K.cx);v.basum=w((K.add||[])[0]||1e9,K.cx);v.bres=w(K.res,K.cx);v.bcx=w(K.cx,K.cta);v.bcta=w(K.cta,1e9);return v}
-const POS={btot:[400,330],basum:[570,480],bres:[700,600]};
+function wt(sub,t0=0){for(const [s0,e0,ws] of CAP)for(const [w,t] of ws)if(t>=t0&&w.toLowerCase().includes(sub))return t;return null}
+// teacher geometry (native svg coords -> page): page = O + p*S
+const S=0.9,FEET=1895,HOME=860;const OY=FEET-1070*S;
+// few marker actions only on key words
+let EV=[];
+function vis(t){const w=(a,b)=>t>=a&&t<b?1:0;return{hq:w(0,K.sort),barr:w(0,K.sort)||w(K.n5,K.cta),bnl:w(K.nl,K.sort)||w(K.n5,K.res),hs:w(K.sort,K.on),bsort:w(K.sort,K.on),btc:w(K.tc,K.on),
+ ht:w(K.on,K.n5),bon:w(K.on,K.n5),bform:w(K.form,K.n5),hd:w(K.n5,K.res),btot:w(K.tot,K.cta),basum:w((K.add||[])[0]||1e9,K.cta),bres:w(K.res,K.cta),ha:w(K.res,K.cta),bcx:w(K.cx,K.cta),hc:w(K.cta,1e9)}}
+function box(id){const r=$(id).getBoundingClientRect();return {x:r.left,y:r.top,w:r.width,h:r.height,cx:r.left+r.width/2,cy:r.top+r.height/2}}
 window.CUES=[];window.READY=false;
-function init(){buildPT();const C=window.CUES,c=(t,n,g=1)=>{if(t!=null)C.push([t,n,g])};
- PT.forEach(p=>c(p[0],'click',0.25));c(K.stop,'buzz',0.5);c(K.on,'ding',0.6);c(K.totv,'pop',0.5);c(K.asum,'ding',0.5);c(K.res,'success',0.9);c(K.cta,'sparkle',0.6);
+function init(){
+ EV=[[wt('gayab',12),'cm','circle',0.9],[K.sort+1.1,'sl','underline',0.7],[K.stop,'bsort','cross',0.9],[wt('n',31),'bfrac','circle',1.1],[K.totv,'btotV','circle',0.8],[K.asum,'basV','underline',0.7],[K.res+0.9,'cm','circle',0.9]].filter(e=>e[0]!=null);
+ const C=window.CUES,c=(t,n,g=1)=>{if(t!=null)C.push([t,n,g])};EV.forEach(e=>c(e[0],'snip',0.35));c(K.on,'ding',0.6);c(K.res,'success',0.9);c(K.cta,'sparkle',0.6);
  window.READY=true}
 const conf=$('conf').getContext('2d');
-let elRect={};
-function center(id){const e=$(id);if(!e)return [540,700];const r=e.getBoundingClientRect();return [r.left+r.width/2,r.top+r.height*0.62]}
-window.PTDBG=()=>PT;window.render=function(t){
+// two-bone IK in page coords; returns elbow
+function ik(Sh,H,L1,L2,sgn){const dx=H[0]-Sh[0],dy=H[1]-Sh[1];let d=Math.hypot(dx,dy);d=Math.min(d,L1+L2-1);const a=Math.atan2(dy,dx);const c=(L1*L1+d*d-L2*L2)/(2*L1*d);const b=Math.acos(Math.max(-1,Math.min(1,c)));return [Sh[0]+Math.cos(a+sgn*b)*L1,Sh[1]+Math.sin(a+sgn*b)*L1]}
+function armSVG(Sh,E,H,marker){const st=`stroke-linecap="round" stroke-linejoin="round" fill="none"`;
+ let s=`<path d="M${Sh[0]} ${Sh[1]} L${E[0]} ${E[1]} L${H[0]} ${H[1]}" stroke="#2a1a80" stroke-width="${74}" ${st}/><path d="M${Sh[0]} ${Sh[1]} L${E[0]} ${E[1]} L${H[0]} ${H[1]}" stroke="#6a4cf0" stroke-width="${64}" ${st}/>`;
+ s+=`<circle cx="${H[0]}" cy="${H[1]}" r="31" fill="#d9a77d" stroke="#8a5a3a" stroke-width="3"/>`;
+ if(marker){const [tx,ty]=marker;s+=`<line x1="${H[0]}" y1="${H[1]}" x2="${tx}" y2="${ty}" stroke="#111827" stroke-width="22" stroke-linecap="round"/><line x1="${lerp(H[0],tx,.7)}" y1="${lerp(H[1],ty,.7)}" x2="${tx}" y2="${ty}" stroke="#ef4444" stroke-width="14" stroke-linecap="round"/><circle cx="${H[0]}" cy="${H[1]}" r="27" fill="#d9a77d" stroke="#8a5a3a" stroke-width="3"/>`}
+ return s}
+window.render=function(t){
  let ch=CH[0];CH.forEach(c=>{if(t>=c[0])ch=c});const col=ch[2];$('chap').textContent='● '+ch[1];$('chap').style.color=col;$('chap').style.borderColor=col;
  const segs=$('seg').children,nOn=Math.ceil(12*t/END);for(let i=0;i<12;i++)segs[i].className=i<nOn?'on':'';
- // board contents
- const v=V(t);for(const id in v){const e=$(id);e.style.opacity=v[id];}
- const inDry=t>=K.n5;$('barr').style.top=inDry?'90px':'110px';$('barr').style.transform=inDry?'scale(.78)':'none';$('bnl').style.top=inDry?'300px':'316px';
- if(t>=K.cx){$('basum').style.top='520px';$('bres').style.top='650px'}
- $('btotV').style.opacity=t>=K.totv?1:0;
- const ad=K.add||[],A=[1,5,2,4];let s='';for(let i=0;i<4;i++)if(t>=ad[i])s+=(i?' + ':'')+`<span class="y">${A[i]}</span>`;$('basT').innerHTML=s||'…';$('basV').style.opacity=t>=K.asum?1:0;
+ const v=vis(t);for(const id in v)$(id).style.opacity=v[id];
+ $('btotV').style.opacity=t>=K.totv?1:0;const ad=K.add||[],A=[1,5,2,4];let sm='';for(let i=0;i<4;i++)if(t>=ad[i])sm+=(i?'+':'')+`<span class="y">${A[i]}</span>`;$('basT').innerHTML=sm||'…';$('basV').style.opacity=t>=K.asum?1:0;
  const m=$('cm');if(t>=K.res+0.3){m.className='cell f';m.textContent='3'}else{m.className='cell m';m.textContent='?'}
- // highlight cells being said/added
  for(let i=0;i<4;i++){const sy=(K.say||[])[i],a=ad[i];const hl=(sy!=null&&t>=sy&&t<sy+0.6)||(a!=null&&t>=a&&t<K.asum+0.3);$('c'+i).style.background=hl?'rgba(255,226,122,.25)':'transparent';$('c'+i).style.borderColor=hl?'#ffe27a':'#f4f1e6'}
- // chalk cross on sort code
- let sc='';if(t>=K.stop&&t<K.on){const u=ease((t-K.stop)/0.35),u2=ease((t-K.stop-0.25)/0.35);sc=`<path d="M70 120 L${70+780*u} ${120+300*u}" stroke="#ff8c8c" stroke-width="12" stroke-linecap="round" fill="none"/>`+(u2>0?`<path d="M850 120 L${850-780*u2} ${120+300*u2}" stroke="#ff8c8c" stroke-width="12" stroke-linecap="round" fill="none"/>`:'')}
- if(t>=K.res+0.3&&t<K.cx){sc+=`<ellipse cx="492" cy="745" rx="${300*ease((t-K.res-0.3)/0.5)}" ry="70" fill="none" stroke="#8ff0a4" stroke-width="7"/>`}
- $('scrib').innerHTML=sc;
- // caption
- let cap='';for(const [s0,e0,words] of CAP){if(t>=s0&&t<e0+0.15){cap=words.map(([w,ws])=>`<span class="${t>=ws?'on':'w'}">${w}</span>`).join(' ');break}}$('cap').innerHTML=cap;
- // ---- presenter body ----
+ let cap='';for(const [s0,e0,words] of CAP){if(t>=s0&&t<e0+0.15){cap=words.map(([w,ws])=>`<span class="${t>=ws?'on':'w'}">${w}</span>`).join(' ');break}}$('cap').innerHTML='<div>'+cap+'</div>';
+ // ---- current marker event ----
+ let ev=null,ph='rest';for(const e of EV){const [t0,id,kind,dur]=e;if(t>=t0-1.0&&t<t0+dur+0.55){ev=e;break}}
+ let cx=HOME,hand=null,tip=null,draw=0;let ink='';
+ // persistent ink for finished events (stays while their chapter element is visible)
+ for(const e of EV){const [t0,id,kind,dur]=e;if(t<t0)continue;const p=cl((t-t0)/dur);const vis_=parseFloat($(id).closest('.ch').style.opacity||0);if(vis_<=0)continue;const b=box(id);ink+=inkPath(kind,b,p)}
+ $('ink').innerHTML=ink;
+ if(ev){const [t0,id,kind,dur]=ev;const b=box(id);const target=[b.cx,b.cy];
+  const stand=Math.max(560,Math.min(HOME,b.cx+330));
+  const goIn=eio((t-(t0-1.0))/0.5),goOut=eio((t-(t0+dur+0.05))/0.5);cx=lerp(HOME,stand,goIn);if(t>t0+dur)cx=lerp(stand,HOME,goOut);
+  const raise=eio((t-(t0-0.5))/0.45)*(1-eio((t-(t0+dur))/0.45));
+  let tipP=kind=='circle'?ellPt(b,cl((t-t0)/dur)):kind=='underline'?[lerp(b.x-6,b.x+b.w+6,cl((t-t0)/dur)),b.y+b.h+8]:crossPt(b,cl((t-t0)/dur));
+  if(t<t0)tipP=kind=='circle'?ellPt(b,0):kind=='underline'?[b.x-6,b.y+b.h+8]:crossPt(b,0);
+  tip=tipP;draw=raise}
+ // ---- teacher body ----
+ const walking=Math.abs(cx-(window._lcx??cx))>0.5;window._lcx=cx;
+ const ox=cx-540*S;const bob=walking?Math.abs(Math.sin(t*9))*-6:Math.sin(t*2.1)*2;
+ $('T').setAttribute('transform',`translate(${ox},${OY+bob}) scale(${S})`);
+ const sw=walking?Math.sin(t*9)*10:0;$('legL').setAttribute('transform',`rotate(${sw} 490 715)`);$('legR').setAttribute('transform',`rotate(${-sw} 590 715)`);
  const fi=Math.floor((t-AOFF)*30);const a=fi>=0&&fi<AMP.length?(AMP[fi]+(AMP[fi+1]||0))/2:0;const open=Math.min(1,a*1.1);
- $('mOut').setAttribute('d',`M-34 0 Q0 ${10+6*open} 34 0 Q0 ${8+44*open} -34 0 Z`);$('mTeeth').setAttribute('opacity',open>0.15?1:0.4);
- $('brows').setAttribute('transform',`translate(0,${-open*6})`);const bl=((t*0.37)%1)<0.04;$('lidL').setAttribute('height',bl?40:0);$('lidR').setAttribute('height',bl?40:0);
- $('body').setAttribute('transform',`translate(0,${Math.sin(t*2.1)*2})`);$('lapCur').setAttribute('opacity',Math.sin(t*6)>0?1:0);
- $('armL').setAttribute('transform',`translate(345,520) rotate(${Math.sin(t*1.7)*3})`);
- // ---- stick target (smooth move between targets) ----
- let i=0;while(i<PT.length-1&&PT[i+1][0]<=t)i++;const cur=center(PT[i][1]),prev=i>0?center(PT[i-1][1]):cur;const u=eio((t-PT[i][0])/0.35);
- let T=[lerp(prev[0],cur[0],u),lerp(prev[1],cur[1],u)];const tap=Math.max(0,1-(t-PT[i][0])/0.25)*12;T[1]+=tap;
- // head + eyes look at the target
- const hx=388+540*0.8,hy=1180+300*0.8;const ang=Math.atan2(T[1]-hy,T[0]-hx);
- $('head').setAttribute('transform',`translate(${540+Math.sin(t*1.3)*3},${300+Math.sin(t*2.1)*3+open*4}) rotate(${Math.sin(t*0.9)*2+(T[0]-hx)/60})`);
- $('pL').setAttribute('cx',-48+Math.cos(ang)*6);$('pR').setAttribute('cx',52+Math.cos(ang)*6);$('pL').setAttribute('cy',-6+Math.sin(ang)*4);$('pR').setAttribute('cy',-6+Math.sin(ang)*4);
- // ---- arm + stick (page coords) ----
- const SH=[388+735*0.8,1180+520*0.8+Math.sin(t*2.1)*1.6];const dx=T[0]-SH[0],dy=T[1]-SH[1],d=Math.hypot(dx,dy),ux=dx/d,uy=dy/d;
- // raised hand on the outer (right) side so the arm never crosses the face; stick does the reaching
- const H=[SH[0]+30+ux*40,SH[1]-215+uy*30];const E=[SH[0]+70,SH[1]-95];
- const dx2=T[0]-H[0],dy2=T[1]-H[1],d2=Math.hypot(dx2,dy2);const ux2=dx2/d2,uy2=dy2/d2;
- const tip=[T[0]-ux2*6,T[1]-uy2*6];
- $('arm').innerHTML=`<line x1="${H[0]}" y1="${H[1]}" x2="${tip[0]}" y2="${tip[1]}" stroke="#5a3418" stroke-width="12" stroke-linecap="round"/>
- <line x1="${H[0]}" y1="${H[1]}" x2="${tip[0]}" y2="${tip[1]}" stroke="#8a5a2e" stroke-width="5" stroke-linecap="round"/>
- <circle cx="${tip[0]}" cy="${tip[1]}" r="9" fill="#f4f1e6"/>
- <path d="M${SH[0]} ${SH[1]} L${E[0]} ${E[1]} L${H[0]} ${H[1]}" stroke="#2a1a80" stroke-width="62" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
- <path d="M${SH[0]} ${SH[1]} L${E[0]} ${E[1]} L${H[0]} ${H[1]}" stroke="#6a4cf0" stroke-width="52" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
- <circle cx="${H[0]}" cy="${H[1]}" r="27" fill="#d9a77d" stroke="#8a5a3a" stroke-width="3"/>`;
- // confetti
+ $('mOut').setAttribute('d',`M-34 0 Q0 ${10+6*open} 34 0 Q0 ${8+44*open} -34 0 Z`);$('mTeeth').setAttribute('opacity',open>0.15?1:0.4);$('brows').setAttribute('transform',`translate(0,${-open*6})`);
+ const bl=((t*0.37)%1)<0.04;$('lidL').setAttribute('height',bl?40:0);$('lidR').setAttribute('height',bl?40:0);
+ const look=tip&&draw>0.2?(tip[0]<cx?-1:1):0;const turn=draw*look*10;
+ $('head').setAttribute('transform',`translate(${540+Math.sin(t*1.3)*3},${300+Math.sin(t*2.1)*2+open*4}) rotate(${Math.sin(t*0.9)*2+turn*0.4})`);
+ $('pL').setAttribute('cx',-48+look*7*draw);$('pR').setAttribute('cx',52+look*7*draw);$('pL').setAttribute('cy',-6-4*draw);$('pR').setAttribute('cy',-6-4*draw);
+ $('lapCur').setAttribute('opacity',Math.sin(t*6)>0?1:0);
+ // ---- arms (page coords) ----
+ const P=(x,y)=>[ox+x*S,OY+bob+y*S];const shL=P(350,505),shR=P(730,505);const L1=170*S,L2=160*S;
+ // marker arm (viewer-left)
+ const restL=[shL[0]-40,shL[1]+300*S*0.95+Math.sin(t*1.7)*4];let mk=[restL[0]+8,restL[1]-58];
+ let hL=restL;if(tip&&draw>0){const ML=58;const dir=[tip[0]-shL[0],tip[1]-shL[1]];const dl=Math.hypot(...dir);const want=[tip[0]-dir[0]/dl*ML,tip[1]-dir[1]/dl*ML];
+  hL=[lerp(restL[0],want[0],draw),lerp(restL[1],want[1],draw)];const md=[tip[0]-hL[0],tip[1]-hL[1]],ml=Math.hypot(...md);mk=[hL[0]+md[0]/ml*ML*draw+8*(1-draw),hL[1]+md[1]/ml*ML*draw-58*(1-draw)]}
+ const eL=ik(shL,hL,L1,L2,-1);
+ // free arm (viewer-right): small talking gestures
+ const g=Math.max(0,Math.sin(t*1.6))*open;const restR=[shR[0]+40+g*30,shR[1]+300*S*0.95-g*120];const eR=ik(shR,restR,L1,L2,1);
+ $('arms').innerHTML=armSVG(shR,eR,restR,null)+armSVG(shL,eL,hL,mk);
  conf.clearRect(0,0,1080,1920);const ct=t>=K.cta?K.cta:(t>=K.res+0.3&&t<K.res+2.3?K.res+0.3:null);
  if(ct!=null){const dt=t-ct;for(let i=0;i<90;i++){const x=rnd(i)*1080+Math.sin(dt*2+i)*40,yv=-60+((rnd(i+9)*900+dt*(300+rnd(i+3)*400))%2100);conf.save();conf.translate(x,yv);conf.rotate(dt*4+i);conf.fillStyle=['#ffd166','#ff5470','#4ade80','#5cd6ff','#a78bfa'][i%5];conf.fillRect(-9,-5,18,10);conf.restore()}}
 };
+function ellPt(b,p){const a=-Math.PI*0.6+p*Math.PI*2.15;return [b.cx+Math.cos(a)*(b.w/2+22),b.cy+Math.sin(a)*(b.h/2+18)]}
+function crossPt(b,p){if(p<0.5){const q=p/0.5;return [lerp(b.x,b.x+b.w,q),lerp(b.y,b.y+b.h,q)]}const q=(p-0.5)/0.5;return [lerp(b.x+b.w,b.x,q),lerp(b.y,b.y+b.h,q)]}
+function inkPath(kind,b,p){const st='fill="none" stroke-linecap="round" stroke-linejoin="round"';
+ if(kind=='circle'){let d='';const n=Math.max(2,Math.floor(60*p));for(let i=0;i<=n;i++){const q=p*i/n;const [x,y]=ellPt(b,q);d+=(i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)}return `<path d="${d}" stroke="#ef4444" stroke-width="7" ${st}/>`}
+ if(kind=='underline'){return `<path d="M${b.x-6} ${b.y+b.h+8} L${lerp(b.x-6,b.x+b.w+6,p)} ${b.y+b.h+8+Math.sin(p*6)*2}" stroke="#ef4444" stroke-width="7" ${st}/>`}
+ const q1=Math.min(1,p/0.5),q2=cl((p-0.5)/0.5);let s=`<path d="M${b.x} ${b.y} L${lerp(b.x,b.x+b.w,q1)} ${lerp(b.y,b.y+b.h,q1)}" stroke="#ef4444" stroke-width="9" ${st}/>`;if(q2>0)s+=`<path d="M${b.x+b.w} ${b.y} L${lerp(b.x+b.w,b.x,q2)} ${lerp(b.y,b.y+b.h,q2)}" stroke="#ef4444" stroke-width="9" ${st}/>`;return s}
 document.fonts.ready.then(init);
 </script></body></html>
