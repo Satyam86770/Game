@@ -5,33 +5,31 @@ On "Eleven Multilingual v2" they are read out loud or ignored, so with v2 delete
 Tip: v3 can sound a little different from v2. Generate the first 2 lines on v3, compare with the old Bunty sample, then do the full script.
 
 ==================== HOOK OPTION A (recommended: challenge + result-first) ====================
-[excited] Teen switch... teen bulb... aur darwaza sirf EK baar khulega! [whispers] Kaunsa switch, kaunsa bulb? [pause]
-Sirf ek chakkar mein bata diya, toh tum genius ho! [laughs]
+[excited] तीन switch... तीन bulb... और दरवाज़ा सिर्फ़ एक बार खुलेगा! [whispers] कौनसा switch, कौनसा bulb? [pause]
+सिर्फ़ एक चक्कर में बता दिया, तो तुम genius हो! [laughs]
 
 ==================== HOOK OPTION B (interview angle) ====================
-[serious] Ye puzzle MakeMyTrip aur Qualcomm jaise interviews mein poocha gaya hai... [pause] aur zyaadatar log yahin atak jaate hain! [excited] Kya tum solve kar paoge?
+[serious] ये puzzle MakeMyTrip और Qualcomm जैसे interviews में पूछा गया है... [pause] और ज़्यादातर लोग यहीं अटक जाते हैं! [excited] क्या तुम solve कर पाओगे?
 
 ==================== MAIN SCRIPT (same for both hooks) ====================
-Ek band kamra hai. Bahar teen switch hain... aur andar teen bulb. Har switch, sirf ek bulb se juda hai.
+एक बंद कमरा है। बाहर तीन switch हैं... और अंदर तीन bulb. हर switch, सिर्फ़ एक bulb से जुड़ा है।
 
-Rule simple hai: switch jitni baar chaaho on-off karo... [pause] lekin kamre ka darwaza... sirf EK baar khol sakte ho! [whispers] Aur bahar se bulb bilkul nahi dikhta.
+Rule simple है: switch जितनी बार चाहो on-off करो... [pause] लेकिन कमरे का दरवाज़ा... सिर्फ़ एक बार खोल सकते हो! [whispers] और बाहर से bulb बिल्कुल नहीं दिखता।
 
-[curious] Toh batao... kaunsa switch, kaunse bulb ka hai?
+[curious] तो बताओ... कौनसा switch, कौनसे bulb का है?
 
-[excited] Video yahin paanch second ke liye roko, socho... aur apna answer comment mein likho! [pause]
+[excited] Video यहीं पाँच second के लिए रोको, सोचो... और अपना answer comment में लिखो! [pause]
 
-[pause] [pause]
+[excited] चलो, solution देखते हैं!
 
-[excited] Chalo, solution dekhte hain!
+पहले, switch एक ON करो... और दस minute रुको। [whispers] ताकि वो bulb गरम हो जाए।
 
-Pehle, switch ek ON karo... aur das minute ruko. [whispers] Taaki wo bulb garam ho jaaye.
+अब switch एक OFF करो, switch दो ON करो... और तुरंत कमरे में जाओ!
 
-Ab switch ek OFF karo, switch do ON karo... aur turant kamre mein jao!
+जो bulb जल रहा है... [excited] वो switch दो का है!
+जो bulb बुझा है, पर गरम है... [laughs] वो switch एक का है!
+और जो बुझा और ठंडा है... वो switch तीन का!
 
-Jo bulb jal raha hai... [excited] wo switch do ka hai!
-Jo bulb bujha hai, par garam hai... [laughs] wo switch ek ka hai!
-Aur jo bujha aur thanda hai... wo switch teen ka!
+[amazed] Trick ये थी... bulb सिर्फ़ रोशनी नहीं देता, गर्मी भी देता है! [laughs]
 
-[amazed] Trick ye thi... bulb sirf roshni nahi deta, garmi bhi deta hai! [laughs]
-
-Aise hi interview puzzles ke liye... follow karo, pretest passed dot codes!
+ऐसे ही interview puzzles के लिए... follow करो, pretest passed dot codes!
