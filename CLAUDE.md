@@ -90,3 +90,11 @@ What actually differed:
   If the user upgrades to a paid plan, call the API directly (api.elevenlabs.io, header xi-api-key: `proxy-injected`).
 - No background music in these reels (user adds music); keep the sound effects.
 - Fallback only if the user explicitly says so: ElevenLabs premade Liam (`TX3LPaxmHKxFdv7VOQHJ`).
+
+## Presenter-avatar style (user request, Nov 15 2026)
+- Layout inspired by the user's reference (dark bg, top handle + segmented progress, colored chapter pill, content in the top half,
+  big caption in the middle with spoken words white / upcoming grey, cartoon presenter at the bottom in a glowing dashed ring
+  whose color follows the chapter).
+- Use OUR OWN presenter (purple hoodie, headphones around neck, short hair) — never copy the reference creator's character.
+- Template: `reels/missing-number-avatar-src/reel.html` (SVG avatar; mouth driven by per-frame VO amplitude `AMP` at 30 fps,
+  blink, head bob, right-arm poses: wave/point/up/think/stop/count/thumb keyed by `G` list; chapters in `CH`).

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'Poppins';font-weight:600;src:url(Poppins600.woff2)}
+@font-face{font-family:'Poppins';font-weight:800;src:url(Poppins800.woff2)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#050608}
+body{font-family:'Poppins','Noto Color Emoji',sans-serif;color:#fff}
+.mono{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace}
+#glow{position:absolute;inset:0}
+.a{position:absolute;opacity:0;transform-origin:center}
+.c{left:0;width:1080px;text-align:center}
+y{color:#ffd166}r{color:#ff5470}g{color:#4ade80}c{color:#5cd6ff}
+/* top bar */
+#top{position:absolute;left:70px;right:70px;top:120px;display:flex;align-items:center;justify-content:space-between}
+#top .h{display:flex;align-items:center;gap:16px;font-size:34px;font-weight:800}
+#top .h i{width:52px;height:52px;border-radius:50%;border:2px solid #8a8f9c;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:28px}
+#top .r{font-size:24px;letter-spacing:5px;color:#7d8291;font-weight:600}
+#seg{position:absolute;left:70px;right:70px;top:192px;display:flex;gap:10px}
+#seg div{flex:1;height:6px;border-radius:3px;background:#262a33}
+#seg div.on{background:#e8eaf0}
+#chap{position:absolute;left:70px;top:226px;padding:8px 26px;border-radius:30px;border:3px solid;font-family:'DejaVu Sans Mono',monospace;font-size:30px;font-weight:800;letter-spacing:3px}
+/* stage */
+#arr{position:absolute;top:360px;left:0;width:1080px;display:flex;justify-content:center;gap:20px}
+.cell{width:150px;text-align:center}
+.cell .v{height:150px;border-radius:24px;background:#10131a;border:4px solid #3b4150;display:flex;align-items:center;justify-content:center;font-size:78px;font-weight:800;font-family:'DejaVu Sans Mono',monospace}
+.cell .i{margin-top:8px;font-size:24px;font-weight:800;color:#7d8291;font-family:'DejaVu Sans Mono',monospace}
+.cell.miss .v{border:4px dashed #ff5470;color:#ff5470;background:transparent}
+.cell.found .v{border-color:#4ade80;color:#4ade80;box-shadow:0 0 50px rgba(74,222,128,.6)}
+.card{border-radius:24px;background:#0d1017;padding:22px 30px;border:3px solid #2b303c}
+#ask{top:600px}
+#ask .card{display:inline-block;font-size:42px;font-weight:800;line-height:1.35;border-color:#ffd166}
+#sortC{left:110px;top:330px;width:860px}
+#sortC .card{font-size:28px;line-height:1.55;white-space:pre;position:relative;border-color:#ff5470}
+#cross{position:absolute;inset:0;pointer-events:none}
+#tc{top:700px}
+#tc span{display:inline-block;font-size:52px;font-weight:800;padding:10px 30px;border-radius:20px;background:#2a0b12;border:3px solid #ff5470;color:#ff8aa0;font-family:'DejaVu Sans Mono',monospace}
+#on{top:340px}
+#on .card{display:inline-block;font-size:48px;font-weight:800;border-color:#4ade80}
+#formula{top:500px}
+#formula .card{display:inline-block;padding:26px 44px;border-color:#a78bfa}
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin-left:14px}
+.frac .t{font-size:58px;font-weight:800;padding:0 14px}
+.frac .b{font-size:58px;font-weight:800;border-top:5px solid #fff;padding:0 14px;width:100%;text-align:center}
+.lhs{font-size:56px;font-weight:800;vertical-align:middle}
+#tot{top:600px}
+#tot .card{display:inline-block;border-color:#5cd6ff}
+#asum{top:800px}
+#asum .card{display:inline-block;font-size:42px;font-weight:800;border-color:#ffd166}
+#res{top:930px}
+#res .card{display:inline-block;font-size:58px;font-weight:800;border-color:#4ade80;box-shadow:0 0 50px rgba(74,222,128,.4)}
+#cx{top:700px}
+#cx span{display:inline-block;padding:12px 30px;border-radius:40px;background:#14532d;border:2px solid #4ade80;font-size:40px;font-weight:800}
+#cta{top:380px}
+#cta .q{display:inline-block;font-size:44px;font-weight:800;line-height:1.35;padding:20px 34px;border-radius:24px;border:3px solid #5cd6ff;background:#0b1620}
+#cta .f{margin-top:30px;display:inline-block;padding:18px 54px;border-radius:50px;background:#e8eaf0;color:#08090c;font-size:42px;font-weight:800}
+/* caption */
+#cap{position:absolute;left:40px;width:1000px;top:1105px;text-align:center;font-size:56px;font-weight:800;line-height:1.2}
+#cap .w{color:#5b606c}#cap .on{color:#fff}
+/* avatar */
+#av{position:absolute;left:0;top:1190px;width:1080px;height:730px}
+#ring{position:absolute;left:250px;top:30px;width:580px;height:580px;border-radius:50%;border:3px dashed}
+canvas{position:absolute;inset:0;pointer-events:none}
+</style></head><body>
+<canvas id="glow" width="1080" height="1920"></canvas>
+<div id="top"><div class="h"><i>💻</i>@pretestpassed.codes</div><div class="r">DSA NOTES</div></div>
+<div id="seg"></div>
+<div id="chap"></div>
+<div id="arr"></div>
+<div class="a c" id="ask"><div class="card">🧑‍💼 "Is array mein <r>1 number missing</r> hai,<br><y>dhoondh kar dikhao!</y>" 🤔</div></div>
+<div class="a" id="sortC"><div class="card mono" id="sortT"></div><svg id="cross" viewBox="0 0 860 400" preserveAspectRatio="none"></svg></div>
+<div class="a c" id="tc"><span>O(n log n) ❌</span></div>
+<div class="a c" id="on"><div class="card">✅ <g>O(n)</g> time • <g>O(1)</g> space</div></div>
+<div class="a c" id="formula"><div class="card"><span class="lhs">Sum(1…n) =</span><span class="frac"><span class="t">n × (n+1)</span><span class="b">2</span></span></div></div>
+<div class="a c" id="tot"><div class="card"><span class="lhs" style="font-size:48px">Total =</span><span class="frac"><span class="t" style="font-size:48px">5 × 6</span><span class="b" style="font-size:48px;border-top-width:4px">2</span></span><span style="font-size:56px;font-weight:800;vertical-align:middle"> = <c id="totV">15</c></span></div></div>
+<div class="a c" id="asum"><div class="card mono" id="asumT"></div></div>
+<div class="a c" id="res"><div class="card"><c>15</c> − <y>12</y> = <g>3</g> ✅</div></div>
+<div class="a c" id="cx"><span>⚡ 1 loop • O(n) • O(1)</span></div>
+<div class="a c" id="cta"><div class="q">💬 Tumhare dimaag mein<br>koi <y>aur logic</y>? Comment karo!</div><br><div class="f">Follow @pretestpassed.codes</div></div>
+<div id="cap"></div>
+<div id="av"><div id="ring"></div>
+<svg id="avs" width="1080" height="730" viewBox="0 0 1080 730">
+ <defs>
+  <linearGradient id="hood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7c5cff"/><stop offset="1" stop-color="#4b2fd6"/></linearGradient>
+  <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6b48a"/><stop offset="1" stop-color="#cf9a70"/></linearGradient>
+ </defs>
+ <g id="body">
+  <!-- torso / hoodie -->
+  <path d="M300 730 L320 560 Q340 470 440 450 L640 450 Q740 470 760 560 L780 730 Z" fill="url(#hood)" stroke="#2a1a80" stroke-width="5"/>
+  <path d="M470 452 Q540 520 610 452" fill="none" stroke="#2a1a80" stroke-width="6"/>
+  <line x1="505" y1="480" x2="500" y2="560" stroke="#e8eaf0" stroke-width="6" stroke-linecap="round"/>
+  <line x1="575" y1="480" x2="580" y2="560" stroke="#e8eaf0" stroke-width="6" stroke-linecap="round"/>
+  <!-- headphones around neck -->
+  <path d="M440 455 Q540 505 640 455" fill="none" stroke="#1a1d24" stroke-width="16" stroke-linecap="round"/>
+  <ellipse cx="438" cy="458" rx="26" ry="32" fill="#22262f" stroke="#0e0f13" stroke-width="4"/>
+  <ellipse cx="642" cy="458" rx="26" ry="32" fill="#22262f" stroke="#0e0f13" stroke-width="4"/>
+  <!-- left arm (resting) -->
+  <g id="armL" transform="translate(345,520)"><rect x="-40" y="0" width="70" height="200" rx="35" fill="url(#hood)" stroke="#2a1a80" stroke-width="5" transform="rotate(14)"/></g>
+  <!-- neck -->
+  <rect x="505" y="385" width="70" height="80" rx="20" fill="url(#skin)"/>
+  <!-- head group -->
+  <g id="head" transform="translate(540,300)">
+   <ellipse cx="-118" cy="10" rx="22" ry="30" fill="#d9a77d" stroke="#8a5a3a" stroke-width="3"/>
+   <ellipse cx="118" cy="10" rx="22" ry="30" fill="#d9a77d" stroke="#8a5a3a" stroke-width="3"/>
+   <path d="M-112 -40 Q-118 90 0 120 Q118 90 112 -40 Q100 -120 0 -126 Q-100 -120 -112 -40 Z" fill="url(#skin)" stroke="#8a5a3a" stroke-width="4"/>
+   <!-- hair: short spiky top + side fade -->
+   <path d="M-116 -30 Q-130 -110 -60 -140 Q-30 -175 10 -150 Q40 -180 80 -150 Q130 -130 118 -30 Q100 -80 60 -92 Q20 -70 -10 -95 Q-50 -70 -80 -88 Q-110 -70 -116 -30 Z" fill="#17120e"/>
+   <!-- brows -->
+   <g id="brows"><path d="M-80 -40 Q-50 -56 -22 -44" fill="none" stroke="#17120e" stroke-width="11" stroke-linecap="round"/><path d="M22 -44 Q50 -56 80 -40" fill="none" stroke="#17120e" stroke-width="11" stroke-linecap="round"/></g>
+   <!-- eyes -->
+   <g id="eyes">
+    <ellipse cx="-50" cy="-8" rx="22" ry="20" fill="#fff"/><ellipse cx="50" cy="-8" rx="22" ry="20" fill="#fff"/>
+    <circle id="pL" cx="-48" cy="-6" r="10" fill="#2a1a10"/><circle id="pR" cx="52" cy="-6" r="10" fill="#2a1a10"/>
+    <circle cx="-45" cy="-10" r="3.5" fill="#fff"/><circle cx="55" cy="-10" r="3.5" fill="#fff"/>
+   </g>
+   <rect id="lidL" x="-75" y="-32" width="50" height="0" fill="#d9a77d"/><rect id="lidR" x="25" y="-32" width="50" height="0" fill="#d9a77d"/>
+   <!-- nose -->
+   <path d="M-6 8 Q-14 38 0 44 Q12 44 14 38" fill="none" stroke="#9a6440" stroke-width="5" stroke-linecap="round"/>
+   <!-- mouth -->
+   <g id="mouth" transform="translate(0,74)">
+    <path id="mOut" d="M-34 0 Q0 18 34 0 Q0 30 -34 0 Z" fill="#5a1a1a" stroke="#4a1010" stroke-width="4"/>
+    <path id="mTeeth" d="M-26 2 Q0 10 26 2 L24 8 Q0 14 -24 8 Z" fill="#fff"/>
+   </g>
+   <!-- light stubble chin shadow -->
+   <path d="M-70 70 Q0 128 70 70" fill="none" stroke="rgba(60,40,30,.15)" stroke-width="10"/>
+  </g>
+  <!-- right arm: upper + forearm + hand, rotates per pose -->
+  <g id="armR" transform="translate(735,520)">
+   <g id="upR"><rect x="-35" y="-10" width="70" height="170" rx="35" fill="url(#hood)" stroke="#2a1a80" stroke-width="5"/>
+    <g id="foreR" transform="translate(0,150)"><rect x="-30" y="-10" width="60" height="150" rx="30" fill="url(#hood)" stroke="#2a1a80" stroke-width="5"/>
+     <g id="handR" transform="translate(0,170) scale(1,-1)">
+      <ellipse cx="0" cy="18" rx="34" ry="36" fill="url(#skin)" stroke="#8a5a3a" stroke-width="3"/>
+      <rect id="finger" x="-9" y="-48" width="18" height="60" rx="9" fill="url(#skin)" stroke="#8a5a3a" stroke-width="3"/>
+      <rect id="thumb" x="20" y="-6" width="16" height="40" rx="8" fill="url(#skin)" stroke="#8a5a3a" stroke-width="3" transform="rotate(-35 28 14)"/>
+      <g id="palm" opacity="0">
+       <rect x="-28" y="-46" width="13" height="50" rx="6" fill="url(#skin)" stroke="#8a5a3a" stroke-width="2"/><rect x="-13" y="-56" width="13" height="58" rx="6" fill="url(#skin)" stroke="#8a5a3a" stroke-width="2"/>
+       <rect x="2" y="-54" width="13" height="56" rx="6" fill="url(#skin)" stroke="#8a5a3a" stroke-width="2"/><rect x="17" y="-44" width="12" height="48" rx="6" fill="url(#skin)" stroke="#8a5a3a" stroke-width="2"/>
+      </g>
+     </g>
+    </g>
+   </g>
+  </g>
+ </g>
+</svg></div>
+<canvas id="conf" width="1080" height="1920"></canvas>
+<script>
+const TL=window.TL||{K:{},END:60,CAP:[],AMP:[]};const K=TL.K,END=TL.END,CAP=TL.CAP||[],AMP=TL.AMP||[],AOFF=TL.AOFF||0;
+const cl=x=>Math.max(0,Math.min(1,x)),ease=x=>1-Math.pow(1-cl(x),3),eio=x=>{x=cl(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const back=x=>{x=cl(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};const lerp=(a,b,u)=>a+(b-a)*u;
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+const $=id=>document.getElementById(id);
+function setA(el,o,dx=0,dy=0,s=1){el.style.opacity=o;el.style.transform=`translate(${dx}px,${dy}px) scale(${s})`}
+function win(t,a,b,fi=0.3,fo=0.25){if(a==null)return 0;return ease((t-a)/fi)*(b==null?1:1-ease((t-b)/fo))}
+const A=[1,5,2,4];
+$('arr').innerHTML=A.map((v,i)=>`<div class="cell" id="c${i}"><div class="v">${v}</div><div class="i">a[${i}]</div></div>`).join('')+`<div class="cell miss" id="cm"><div class="v" id="cmv">?</div><div class="i">missing</div></div>`;
+$('seg').innerHTML=Array.from({length:12},()=>'<div></div>').join('');
+$('sortT').innerHTML=['<span style="color:#5cd6ff">int</span> findMissing(<span style="color:#5cd6ff">int</span> a[], <span style="color:#5cd6ff">int</span> n) {','  sort(a, a + n - 1);   <span style="color:#7f8bb5">// 😬</span>','  <span style="color:#ff79c6">for</span> (<span style="color:#5cd6ff">int</span> i = 0; i &lt; n - 1; i++)','    <span style="color:#ff79c6">if</span> (a[i] != i + 1) <span style="color:#ff79c6">return</span> i + 1;','  <span style="color:#ff79c6">return</span> n;','}'].join('\n');
+// chapters: [start key, label, color]
+const CH=[[0,'INTERVIEW Q','#ffd166'],[K.sort,'GALAT TARIKA','#ff5470'],[K.on,'SMART TRICK','#4ade80'],[K.n5,'DRY RUN','#5cd6ff'],[K.res,'ANSWER','#4ade80'],[K.cta,'TUMHARI BAARI','#a78bfa']];
+// gestures: [time, pose]
+const G=[[0,'wave'],[2.6,'point'],[6.2,'think'],[K.stop-0.3,'stop'],[K.tc,'point'],[K.on,'up'],[K.form,'point'],[K.n5,'count'],[K.res,'thumb'],[K.cx,'point'],[K.cta,'wave']];
+const POSE={rest:{u:20,f:-10,fin:0,palm:0,th:0},wave:{u:-150,f:-30,fin:0,palm:1,th:0},point:{u:-150,f:-5,fin:1,palm:0,th:0},up:{u:-160,f:5,fin:1,palm:0,th:0},
+ think:{u:-155,f:-125,fin:1,palm:0,th:0},stop:{u:-95,f:-80,fin:0,palm:1,th:0},count:{u:-160,f:10,fin:1,palm:0,th:0},thumb:{u:-120,f:-60,fin:0,palm:0,th:1}};
+window.CUES=[];window.READY=false;
+function init(){const C=window.CUES,c=(t,n,g=1)=>{if(t!=null)C.push([t,n,g])};
+ c(K.stop,'buzz',0.5);c(K.on,'ding',0.6);c(K.form,'whoosh',0.5);c(K.tot,'pop',0.5);(K.add||[]).forEach(x=>c(x,'click',0.6));c(K.asum,'ding',0.5);c(K.res,'success',0.9);c(K.cta,'sparkle',0.6);(K.say||[]).forEach(x=>c(x,'pop',0.35));
+ window.READY=true}
+const gl=$('glow').getContext('2d'),conf=$('conf').getContext('2d');
+function hexA(h,a){const n=parseInt(h.slice(1),16);return `rgba(${n>>16},${(n>>8)&255},${n&255},${a})`}
+window.render=function(t){
+ // chapter / colors
+ let ch=CH[0],ci=0;CH.forEach((c,i)=>{if(t>=c[0]){ch=c;ci=i}});const col=ch[1+1];
+ $('chap').textContent='● '+ch[1];$('chap').style.color=col;$('chap').style.borderColor=col;
+ const segs=$('seg').children;const nOn=Math.ceil(12*t/END);for(let i=0;i<12;i++)segs[i].className=i<nOn?'on':'';
+ gl.clearRect(0,0,1080,1920);let g=gl.createRadialGradient(540,1500,40,540,1500,520);g.addColorStop(0,hexA(col,0.55));g.addColorStop(1,hexA(col,0));gl.fillStyle=g;gl.fillRect(0,900,1080,1020);
+ g=gl.createRadialGradient(540,620,40,540,620,600);g.addColorStop(0,hexA(col,0.12));g.addColorStop(1,hexA(col,0));gl.fillStyle=g;gl.fillRect(0,0,1080,1300);
+ $('ring').style.borderColor=hexA(col,0.6);$('ring').style.transform=`rotate(${t*8}deg)`;
+ // ---- stage ----
+ const arrO=t<K.sort?1:(t>=K.n5?ease((t-K.n5)/0.4):1-ease((t-K.sort)/0.3));$('arr').style.opacity=arrO;$('arr').style.transform=`translateY(${t>=K.n5?-30:0}px) scale(${t>=K.n5?0.82:1})`;
+ for(let i=0;i<4;i++){const v=$('c'+i).querySelector('.v');const sy=(K.say||[])[i],ad=(K.add||[])[i];const hl=(sy!=null&&t>=sy&&t<sy+0.6)||(ad!=null&&t>=ad&&t<K.asum+0.3);v.style.borderColor=hl?'#ffd166':'#3b4150';v.style.boxShadow=hl?'0 0 34px rgba(255,209,102,.7)':'none'}
+ const m=$('cm');if(t>=K.res+0.3){m.className='cell found';$('cmv').textContent='3';m.style.transform=`scale(${back((t-K.res-0.3)/0.4)})`}else{m.className='cell miss';$('cmv').textContent='?';m.style.transform='none'}
+ setA($('ask'),win(t,K.ask+0.3,K.sort-0.1),0,0,0.9+0.1*back((t-K.ask-0.3)/0.4));
+ setA($('sortC'),win(t,K.sort,K.on-0.1),0,20*(1-ease((t-K.sort)/0.35)));
+ let cr='';if(t>=K.stop){const u=ease((t-K.stop)/0.35),u2=ease((t-K.stop-0.25)/0.35);cr=`<line x1="30" y1="30" x2="${30+800*u}" y2="${30+340*u}" stroke="#ff2a4f" stroke-width="14" stroke-linecap="round"/>`+(u2>0?`<line x1="830" y1="30" x2="${830-800*u2}" y2="${30+340*u2}" stroke="#ff2a4f" stroke-width="14" stroke-linecap="round"/>`:'')}$('cross').innerHTML=cr;
+ setA($('tc'),win(t,K.tc,K.on-0.1),0,0,0.7+0.3*back((t-K.tc)/0.35));
+ setA($('on'),win(t,K.on,K.n5-0.1),0,0,0.85+0.15*back((t-K.on)/0.4));
+ const fv=win(t,K.form,K.n5,0.3,0.3);$('formula').style.opacity=fv;$('formula').style.transform=t>=K.n5?`translateY(${lerp(0,-20,eio((t-K.n5)/0.5))}px) scale(${lerp(1,0.66,eio((t-K.n5)/0.5))})`:`scale(${0.9+0.1*back((t-K.form)/0.4)})`;
+ if(t>=K.n5)$('formula').style.top=lerp(500,520,eio((t-K.n5)/0.5))+'px';
+ setA($('tot'),win(t,K.tot,K.cta-0.1),0,0,0.85+0.15*back((t-K.tot)/0.4));$('totV').style.opacity=t>=K.totv?1:0;
+ const ad=K.add||[];let s='';for(let i=0;i<4;i++)if(t>=ad[i])s+=(i?' + ':'')+`<y>${A[i]}</y>`;$('asumT').innerHTML=`Array Sum = ${s||'…'}${t>=K.asum?' = <y>12</y>':''}`;setA($('asum'),win(t,ad[0],K.cta-0.1));
+ setA($('res'),win(t,K.res,K.cta-0.1),0,0,0.6+0.4*back((t-K.res)/0.45));
+ setA($('cx'),win(t,K.cx,K.cta-0.1),0,0,0.85+0.15*back((t-K.cx)/0.4));if(t>=K.cx){$('tot').style.opacity=0;$('formula').style.opacity=0;$('asum').style.top='560px';$('res').style.top='860px';$('cx').style.top='420px'}else{$('asum').style.top='800px';$('res').style.top='930px'}
+ setA($('cta'),win(t,K.cta,null,0.35),0,30*(1-ease((t-K.cta)/0.4)));if(t>=K.cta)$('arr').style.opacity=0;
+ // ---- caption: current chunk, spoken words white ----
+ let cap='';for(const [s0,e0,words] of CAP){if(t>=s0&&t<e0+0.15){cap=words.map(([w,ws])=>`<span class="${t>=ws?'on':'w'}">${w}</span>`).join(' ');break}}$('cap').innerHTML=cap;
+ // ---- avatar ----
+ const fi=Math.floor((t-AOFF)*30);const a=fi>=0&&fi<AMP.length?(AMP[fi]+(AMP[fi+1]||0))/2:0;
+ const open=Math.min(1,a*1.1);
+ $('mOut').setAttribute('d',`M-34 0 Q0 ${10+6*open} 34 0 Q0 ${8+44*open} -34 0 Z`);$('mTeeth').setAttribute('opacity',open>0.15?1:0.4);
+ const hb=Math.sin(t*2.1)*3+open*4;$('head').setAttribute('transform',`translate(${540+Math.sin(t*1.3)*4},${300+hb}) rotate(${Math.sin(t*0.9)*2.5+(open-0.3)*2})`);
+ $('brows').setAttribute('transform',`translate(0,${-open*6})`);
+ const bl=((t*0.37)%1)<0.04?1:0;$('lidL').setAttribute('height',bl?40:0);$('lidR').setAttribute('height',bl?40:0);
+ const look=Math.sin(t*0.5)*3;$('pL').setAttribute('cx',-48+look);$('pR').setAttribute('cx',52+look);
+ $('body').setAttribute('transform',`translate(0,${Math.sin(t*2.1)*2})`);
+ // arm pose blend
+ let p0='rest',p1='rest',u=1;for(let i=0;i<G.length;i++){if(t>=G[i][0]){p0=i?G[i-1][1]:'rest';p1=G[i][1];u=eio((t-G[i][0])/0.45)}}
+ const A0=POSE[p0],A1=POSE[p1],mx=k=>lerp(A0[k],A1[k],u);
+ let uR=mx('u'),fR=mx('f');if(p1=='wave'&&u>=1)fR+=Math.sin(t*9)*18;if(p1=='count'||p1=='point')uR+=Math.sin(t*3)*4;if(p1=='stop')uR+=Math.sin(t*12)*2;
+ $('upR').setAttribute('transform',`rotate(${uR})`);$('foreR').setAttribute('transform',`translate(0,150) rotate(${fR})`);
+ $('finger').setAttribute('opacity',mx('fin')>0.5?1:0);$('palm').setAttribute('opacity',mx('palm'));$('thumb').setAttribute('transform',mx('th')>0.5?'rotate(-160 28 14) translate(0,-30)':'rotate(-35 28 14)');
+ $('armL').setAttribute('transform',`translate(345,520) rotate(${Math.sin(t*1.7)*3})`);
+ conf.clearRect(0,0,1080,1920);
+ const ct=t>=K.cta?K.cta:(t>=K.res+0.3&&t<K.res+2.3?K.res+0.3:null);
+ if(ct!=null){const dt=t-ct;for(let i=0;i<90;i++){const x=rnd(i)*1080+Math.sin(dt*2+i)*40,yv=-60+((rnd(i+9)*900+dt*(300+rnd(i+3)*400))%2100);conf.save();conf.translate(x,yv);conf.rotate(dt*4+i);conf.fillStyle=['#ffd166','#ff5470','#4ade80','#5cd6ff','#a78bfa'][i%5];conf.fillRect(-9,-5,18,10);conf.restore()}}
+};
+document.fonts.ready.then(init);
+</script></body></html>
