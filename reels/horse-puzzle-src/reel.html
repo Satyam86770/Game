@@ -1,0 +1,162 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:'Poppins';font-weight:600;src:url(Poppins600.woff2)}
+@font-face{font-family:'Poppins';font-weight:800;src:url(Poppins800.woff2)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#0b0f19}
+body{font-family:'Poppins','Noto Color Emoji',sans-serif;color:#fff}
+canvas{position:absolute;left:0;top:0}
+#prog{position:absolute;left:0;top:0;height:9px;background:linear-gradient(90deg,#fde047,#fb923c,#f43f5e);z-index:9}
+#handle{position:absolute;top:40px;width:100%;text-align:center;font-size:28px;font-weight:600;color:rgba(255,255,255,.8);z-index:9;text-shadow:0 2px 8px #000}
+#title{position:absolute;left:40px;right:40px;top:96px;text-align:center;font-size:54px;font-weight:800;line-height:1.18;text-shadow:0 4px 16px rgba(0,0,0,.8)}
+y{color:#fde047}r{color:#fb7185}g{color:#4ade80}b{color:#7dd3fc}
+#cap{position:absolute;left:30px;right:30px;top:1330px;text-align:center}
+#capt{display:inline-block;padding:14px 28px;border-radius:20px;background:rgba(0,0,0,.72);font-size:42px;font-weight:800;line-height:1.25;border:2px solid rgba(255,255,255,.12)}
+#fcFrame{position:absolute;left:36px;top:1468px;width:470px;height:356px;border-radius:26px;border:5px solid #fde047;box-shadow:0 12px 40px rgba(0,0,0,.6)}
+#count{position:absolute;left:548px;top:1480px;width:496px;height:150px;border-radius:26px;background:#111827;border:4px solid #374151;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#count .l{font-size:28px;font-weight:600;color:#9ca3af;letter-spacing:4px}
+#count .n{font-size:84px;font-weight:800;line-height:1}
+#cos{position:absolute;left:548px;top:1660px;width:496px;display:flex;gap:16px;justify-content:center;opacity:0}
+#cos span{padding:14px 20px;border-radius:16px;background:#fff;font-size:30px;font-weight:800}
+#big{position:absolute;left:0;right:0;top:520px;text-align:center;opacity:0}
+#big span{display:inline-block;padding:20px 44px;border-radius:30px;font-size:96px;font-weight:800;background:rgba(0,0,0,.75);border:6px solid #4ade80;box-shadow:0 0 70px rgba(74,222,128,.6)}
+</style></head><body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<div id="title"></div>
+<div id="big"><span id="bigT"></span></div>
+<div id="cap"><div id="capt"></div></div>
+<div id="fcFrame"></div>
+<div id="count"><div class="l">RACES</div><div class="n" id="cn">0</div></div>
+<div id="cos"><span style="color:#1e3a8a">🏦 Goldman Sachs</span><span style="color:#e11d48">✈️ MakeMyTrip</span></div>
+<div id="prog"></div><div id="handle">@pretestpassed.codes</div>
+<script>
+const TL=window.TL||{K:{},END:113,CAPS:[]};const K=TL.K,END=TL.END,CAPS=TL.CAPS;
+const cl=x=>Math.max(0,Math.min(1,x)),ease=x=>1-Math.pow(1-cl(x),3),eio=x=>{x=cl(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const back=x=>{x=cl(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};const lerp=(a,b,u)=>a+(b-a)*u;
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+const $=id=>document.getElementById(id);const c=$('c'),g=c.getContext('2d');
+// ---------- data: 25 horses, row r has ids r*5..r*5+4 ; "speed rank" 1..25 (1 fastest) ----------
+const ROWC=['#ef4444','#3b82f6','#f59e0b','#10b981','#a855f7'];const COAT=['#7a4a2a','#3b2416','#a0663a','#2b1c12','#8b5a2b','#5a3a22','#c08050'];
+// overall order (1=fastest): row1 winner fastest; candidates for 2/3 = R1#2,R1#3,R3#1,R3#2,R0#1
+const ROWRANK=[[3,6,9,12,15],[1,4,5,16,20],[10,13,17,21,22],[2,7,11,18,23],[8,14,19,24,25]];
+// within each row, column order before race is shuffled
+const SHUF=[[2,0,4,1,3],[3,1,0,4,2],[1,4,2,0,3],[4,2,1,3,0],[0,3,4,2,1]];
+const H=[];for(let r=0;r<5;r++)for(let k=0;k<5;k++){const id=r*5+k;H.push({id,row:r,num:id+1,rank:ROWRANK[r][SHUF[r][k]],coat:COAT[(id*3)%7]})}
+const rowSorted=r=>H.filter(h=>h.row==r).sort((a,b)=>a.rank-b.rank);
+const winnerOrder=[0,1,2,3,4].sort((a,b)=>rowSorted(a)[0].rank-rowSorted(b)[0].rank); // rows by winner speed
+// ---------- horse drawing (side view, facing right) ----------
+function horse(x,y,s,ph,coat,silk,num,alpha=1,run=1){g.save();g.globalAlpha=alpha;g.translate(x,y);g.scale(s,s);
+ const L=(ox,oy,a1,a2,col)=>{g.save();g.translate(ox,oy);g.rotate(a1);g.fillStyle=col;g.beginPath();g.roundRect(-7,0,14,38,7);g.fill();g.translate(0,36);g.rotate(a2);g.beginPath();g.roundRect(-5.5,0,11,36,5);g.fill();g.fillStyle='#1a1a1a';g.fillRect(-7,32,14,8);g.restore()};
+ const sw=run?Math.sin(ph):0,sw2=run?Math.sin(ph+Math.PI):0,bob=run?Math.abs(Math.sin(ph))*-4:0;g.translate(0,bob);
+ const dark=shade(coat,-25);
+ L(-38,10,0.55*sw2,-0.5*Math.max(0,-sw2)-0.15,dark);L(30,8,0.6*sw,-0.7*Math.max(0,sw)-0.1,dark);
+ // tail
+ g.fillStyle=shade(coat,-45);g.beginPath();g.moveTo(-58,-8);g.quadraticCurveTo(-92,0+sw*6,-84,40);g.quadraticCurveTo(-70,10,-56,4);g.fill();
+ // body
+ const gr=g.createLinearGradient(0,-30,0,30);gr.addColorStop(0,shade(coat,25));gr.addColorStop(1,shade(coat,-20));g.fillStyle=gr;
+ g.beginPath();g.ellipse(-5,0,60,26,0,0,7);g.fill();
+ // neck + head
+ g.beginPath();g.moveTo(32,-14);g.quadraticCurveTo(50,-52,68,-58);g.lineTo(96,-44);g.quadraticCurveTo(100,-36,92,-32);g.lineTo(72,-34);g.quadraticCurveTo(58,-14,46,10);g.closePath();g.fill();
+ g.fillStyle=shade(coat,-45);g.beginPath();g.moveTo(40,-30);g.quadraticCurveTo(52,-56,66,-62);g.lineTo(62,-52);g.quadraticCurveTo(52,-40,44,-22);g.fill(); // mane
+ g.beginPath();g.moveTo(64,-58);g.lineTo(68,-72);g.lineTo(72,-58);g.fill(); // ear
+ g.fillStyle='#111';g.beginPath();g.arc(78,-48,2.6,0,7);g.fill();
+ g.fillStyle=shade(coat,-30);L(-30,12,0.55*sw,-0.5*Math.max(0,-sw)-0.15,coat);L(38,10,0.6*sw2,-0.7*Math.max(0,sw2)-0.1,coat);
+ // saddle cloth + number
+ g.fillStyle='#f8fafc';g.beginPath();g.roundRect(-30,-22,40,30,4);g.fill();g.fillStyle=silk;g.fillRect(-30,-22,40,6);
+ g.fillStyle='#111';g.font='bold 20px Poppins';g.textAlign='center';g.fillText(num,-10,4);
+ // jockey
+ g.fillStyle='#e5e7eb';g.beginPath();g.ellipse(-4,-30,12,8,0,0,7);g.fill(); // breeches
+ g.fillStyle=silk;g.beginPath();g.ellipse(6,-46,18,11,-0.5,0,7);g.fill(); // torso crouched
+ g.beginPath();g.ellipse(22,-50,6,12,0.9,0,7);g.fill(); // arm
+ g.fillStyle='#d9a77d';g.beginPath();g.arc(24,-62,8,0,7);g.fill();
+ g.fillStyle=silk;g.beginPath();g.arc(22,-65,9,Math.PI,0);g.fill();g.fillRect(22,-66,12,3);
+ g.strokeStyle='#2b2b2b';g.lineWidth=2;g.beginPath();g.moveTo(28,-50);g.lineTo(84,-40);g.stroke(); // reins
+ g.restore()}
+function shade(hex,p){const n=parseInt(hex.slice(1),16);let r=(n>>16)+p,gg=((n>>8)&255)+p,b=(n&255)+p;r=Math.max(0,Math.min(255,r));gg=Math.max(0,Math.min(255,gg));b=Math.max(0,Math.min(255,b));return `rgb(${r},${gg},${b})`}
+// ---------- track scene ----------
+function track(X,Y,W,Hh,t,scroll,horses,finishX,S0=0.55,SD=0.07){g.save();g.beginPath();g.roundRect(X,Y,W,Hh,24);g.clip();
+ const sky=g.createLinearGradient(0,Y,0,Y+Hh*0.35);sky.addColorStop(0,'#7cc4ff');sky.addColorStop(1,'#d7efff');g.fillStyle=sky;g.fillRect(X,Y,W,Hh*0.35);
+ // grandstand with crowd
+ const gy=Y+Hh*0.14,gh=Hh*0.2;g.fillStyle='#4b5563';g.fillRect(X,gy,W,gh);g.fillStyle='#9ca3af';g.fillRect(X,gy-10,W,12);
+ for(let i=0;i<260;i++){const px=X+((i*37.3-scroll*0.25)%(W+40)+W+40)%(W+40)-20,py=gy+8+(i%6)*(gh-14)/6;g.fillStyle=['#f87171','#fbbf24','#60a5fa','#f9fafb','#34d399','#f472b6'][i%6];g.beginPath();g.arc(px,py+Math.sin(t*8+i)*1.5,4.5,0,7);g.fill()}
+ // turf with mowing stripes
+ const ty=Y+Hh*0.34;const tg=g.createLinearGradient(0,ty,0,Y+Hh);tg.addColorStop(0,'#3f8f3a');tg.addColorStop(1,'#2f7a2c');g.fillStyle=tg;g.fillRect(X,ty,W,Hh);
+ for(let k=-2;k<W/90+2;k++){const sx=X+((k*90-scroll)%(180)+180)%180+Math.floor(k/2)*180-180;g.fillStyle='rgba(255,255,255,.05)';g.fillRect(X+((k*180-scroll)%(W+360)+W+360)%(W+360)-180,ty,90,Hh)}
+ // rails
+ g.fillStyle='#fff';g.fillRect(X,ty+4,W,6);for(let k=0;k<40;k++){const px=X+((k*70-scroll)%(W+70)+W+70)%(W+70)-35;g.fillRect(px,ty+4,5,26)}
+ // finish post
+ if(finishX!=null){g.fillStyle='#fff';g.fillRect(finishX-4,ty-90,8,Hh);g.fillStyle='#ef4444';g.beginPath();g.arc(finishX,ty-92,18,0,7);g.fill()}
+ // horses back to front
+ const lanes=horses.length;horses.forEach((h,i)=>{const ly=ty+50+(i+0.5)*(Hh*0.66-50)/lanes;const sc=S0+i*SD;
+  g.fillStyle='rgba(0,0,0,.25)';g.beginPath();g.ellipse(h.x,ly+40*sc,60*sc,8*sc,0,0,7);g.fill();
+  horse(h.x,ly,sc,h.ph,h.coat,h.silk,h.num,1,h.run);
+  // dust
+  if(h.run){for(let k=0;k<6;k++){const a=(t*3+k*0.37+i)%1;g.fillStyle=`rgba(210,190,150,${0.35*(1-a)})`;g.beginPath();g.arc(h.x-50*sc-a*80*sc,ly+38*sc-a*14,6+a*12,0,7);g.fill()}}
+  if(h.place){g.fillStyle=['#fde047','#e5e7eb','#f59e0b','#94a3b8','#94a3b8'][h.place-1];g.beginPath();g.arc(h.x+70*sc,ly-80*sc,22,0,7);g.fill();g.fillStyle='#111';g.font='bold 24px Poppins';g.textAlign='center';g.fillText(h.place,h.x+70*sc,ly-72*sc)}});
+ g.restore();g.strokeStyle='rgba(255,255,255,.25)';g.lineWidth=4;g.beginPath();g.roundRect(X,Y,W,Hh,24);g.stroke()}
+// race: list of horse objects (ordered lanes) with finish ranks; returns positions at time t
+function raceHorses(list,t0,dur,t,X,W){const p=cl((t-t0)/dur);const n=list.length;const order=[...list].sort((a,b)=>a.rank-b.rank);
+ return list.map((h,i)=>{const pl=order.indexOf(h);// 0 = winner
+  const lead=(n-1-pl)*55;const wob=Math.sin(t*2+i*1.7)*18*(1-p);const x=X+120+lerp(0,W-300,eio(p))*((W-300-(pl*55))/(W-300))+wob;
+  return {x:Math.min(x,X+W-150-pl*55),ph:t*13+i*1.3,coat:h.coat,silk:ROWC[h.row],num:h.num,run:p<1.0||t<t0+dur+0.4?1:0,place:p>=1?pl+1:0}})}
+// ---------- grid ----------
+const GX=110,GY=760,CW=184,RH=104;
+function gridPos(h,t){// column by row race result, row by winner order
+ const r=h.row;const rs=rowSorted(r);const done=t>=(K.rowEnd[r]??1e9);const colPre=H.filter(q=>q.row==r).indexOf(h),colPost=rs.indexOf(h);
+ const ux=done?eio((t-K.rowEnd[r])/0.6):0;const col=lerp(colPre,colPost,ux);
+ const ry=t>=K.reorder?eio((t-K.reorder)/0.8):0;const row=lerp(r,winnerOrder.indexOf(r),ry);
+ return [GX+col*CW,GY+row*RH]}
+function candidate(h){const rr=winnerOrder.indexOf(h.row),cc=rowSorted(h.row).indexOf(h);return rr+cc<=2}
+window.CUES=[];window.READY=false;
+function init(){const C=window.CUES,cu=(t,n,gg=1)=>{if(t!=null)C.push([t,n,gg])};
+ cu(0.05,'bell',0.8);cu(6.4,'pop',0.7);cu(11.8,'whoosh',0.6);cu(14.4,'ding',0.6);cu(20.7,'buzz',0.5);cu(33.5,'success',0.7);
+ K.rowStart.forEach(x=>cu(x,'bell',0.5));K.rowEnd.forEach(x=>cu(x,'ding',0.5));cu(K.r6,'bell',0.7);cu(K.r6+2.6,'ding',0.6);cu(K.drop,'buzz',0.5);cu(K.wrong,'buzz',0.6);
+ cu(K.r7,'bell',0.7);cu(K.r7+3,'success',0.8);cu(K.final,'sparkle',0.8);window.READY=true}
+window.render=function(t){g.clearRect(0,0,1080,1920);
+ const bgG=g.createLinearGradient(0,0,0,1920);bgG.addColorStop(0,'#0b1220');bgG.addColorStop(1,'#111827');g.fillStyle=bgG;g.fillRect(0,0,1080,1920);
+ $('prog').style.width=(100*t/END)+'%';
+ // titles
+ let tit='';if(t<11.8)tit='25 ghode 🐎 • 5 track<br><y>Top 3 kitni races mein?</y> 🤔';else if(t<33.5)tit='<y>Top 3 fastest</y> ghode dhoondo 🏆';else if(t<K.r6)tit='Step 1: <b>har row ki race</b> 🏁';
+ else if(t<K.wrong)tit='Step 2: <g>winners ki race</g> 🥇';else if(t<K.r7)tit='<r>1,2,3 nahi!</r> Candidates dhoondo 🔍';else if(t<K.final)tit='Step 3: <y>final race</y> 🏁';else tit='Answer = <g>7 races</g> ✅';
+ $('title').innerHTML=tit;
+ // ---- stage ----
+ const hook=t<11.8;
+ if(hook){const p=t/11.8;const hs=[0,1,2,3,4].map(i=>({x:300+[40,140,0,200,90][i]+Math.sin(t*1.1+i*2)*70+p*160,ph:t*13+i*1.7,coat:COAT[i],silk:ROWC[i],num:[7,12,3,19,24][i],run:1}));track(30,340,1020,900,t,t*900,hs,null,0.95,0.12)}
+ else{
+  // inset race track (top) + grid (bottom)
+  let rh=null,fin=null;const X=30,W=1020;
+  for(let r=0;r<5;r++){if(t>=K.rowStart[r]-0.2&&t<K.rowEnd[r]+1.2){rh=raceHorses(H.filter(h=>h.row==r),K.rowStart[r],K.rowEnd[r]-K.rowStart[r],t,X,W);fin=X+W-150}}
+  if(t>=K.r6-0.2&&t<K.r6+3.8){rh=raceHorses(winnerOrder.map(r=>rowSorted(r)[0]).sort((a,b)=>a.row-b.row),K.r6,2.6,t,X,W);fin=X+W-150}
+  if(t>=K.r7-0.2&&t<K.r7+4.5){rh=raceHorses(H.filter(candidate).filter(h=>!(winnerOrder.indexOf(h.row)==0&&rowSorted(h.row)[0]==h)),K.r7,3.0,t,X,W);fin=X+W-150}
+  if(!rh){rh=[0,1,2,3,4].map(i=>({x:200+i*150,ph:0,coat:COAT[i+1],silk:'#64748b',num:'',run:0}));}
+  track(X,330,W,400,t,rh[0].run?t*700:0,rh,fin);
+  // grid board
+  g.fillStyle='rgba(255,255,255,.04)';g.beginPath();g.roundRect(30,740,1020,560,24);g.fill();
+  const showGrid=t>=11.8;
+  for(let r=0;r<5;r++){const ry=t>=K.reorder?eio((t-K.reorder)/0.8):0;const yy=GY+lerp(r,winnerOrder.indexOf(r),ry)*RH;
+   g.fillStyle=ROWC[r];g.font='bold 30px Poppins';g.textAlign='center';g.fillText(t>=K.reorder+0.8?'ABCDE'[winnerOrder.indexOf(r)]:'R'+(r+1),62,yy+10)}
+  H.forEach((h,i)=>{const [x,y]=gridPos(h,t);const pop=back((t-11.8-i*0.05)/0.4);let a=1;
+   if(t>=K.drop){const rr=winnerOrder.indexOf(h.row);if(rr>=3)a=lerp(1,0.15,ease((t-K.drop)/0.6))}
+   if(t>=K.elim&&!candidate(h))a=Math.min(a,lerp(1,0.15,ease((t-K.elim)/0.8)));
+   const racing=(t>=K.rowStart[h.row]&&t<K.rowEnd[h.row]);
+   g.save();g.translate(x+60,y);g.scale(pop,pop);horse(0,0,0.62,racing?t*13+i:0,h.coat,ROWC[h.row],h.num,a,racing?1:0);g.restore();
+   // rank badge after row race
+   if(t>=K.rowEnd[h.row]+0.3&&a>0.5){const rk=rowSorted(h.row).indexOf(h)+1;g.fillStyle=rk==1?'#fde047':'rgba(255,255,255,.85)';g.beginPath();g.arc(x+120,y-38,15,0,7);g.fill();g.fillStyle='#111';g.font='bold 18px Poppins';g.fillText(rk,x+120,y-32)}
+   // highlights
+   if(t>=K.r6+3.2&&winnerOrder.indexOf(h.row)==0&&rowSorted(h.row)[0]==h){g.strokeStyle='#fde047';g.lineWidth=5;g.beginPath();g.arc(x+60,y-10,58,0,7);g.stroke();g.fillStyle='#fde047';g.font='bold 30px Poppins';g.fillText('🥇#1',x+60,y+66)}
+   if(t>=K.case1&&candidate(h)&&!(winnerOrder.indexOf(h.row)==0&&rowSorted(h.row)[0]==h)){const on=(t<K.case2)?(winnerOrder.indexOf(h.row)==0):1;if(on){g.strokeStyle='#4ade80';g.setLineDash([10,8]);g.lineWidth=4;g.beginPath();g.arc(x+60,y-10,56,0,7);g.stroke();g.setLineDash([])}}
+   if(t>=K.elim&&!candidate(h)&&a<0.6){g.strokeStyle='rgba(248,113,113,.9)';g.lineWidth=6;g.beginPath();g.moveTo(x+30,y-40);g.lineTo(x+90,y+20);g.moveTo(x+90,y-40);g.lineTo(x+30,y+20);g.stroke()}
+  });
+ }
+ // ---- overlays ----
+ let n=0;K.rowEnd.forEach(x=>{if(t>=x)n++});if(t>=K.r6+2.6)n=6;if(t>=K.r7+3)n=7;if(t>=33.5&&t<36.9)n='7?';
+ $('cn').textContent=n;$('cn').style.color=n===7?'#4ade80':'#fde047';
+ $('cos').style.opacity=t>=6.4&&t<11.8?1:0;
+ const bv=(t>=33.5&&t<36.9)?'Answer = 7 🤯':(t>=K.wrong&&t<K.case1)?'1, 2, 3 ? ❌':(t>=K.final&&t<END)?'7 Races ✅':'';
+ $('big').style.opacity=bv?1:0;$('bigT').textContent=bv;$('big').style.transform=`scale(${bv?0.8+0.2*back(((t>=K.final?t-K.final:t>=K.wrong?t-K.wrong:t-33.5))/0.4):1})`;
+ $('bigT').style.borderColor=bv.includes('❌')?'#fb7185':'#4ade80';
+ let cap='';for(const [s,txt] of CAPS)if(t>=s)cap=txt;$('capt').innerHTML=cap;
+ // confetti
+ if(t>=K.final){const dt=t-K.final;for(let i=0;i<120;i++){const x=rnd(i)*1080+Math.sin(dt*2+i)*40,yv=-60+((rnd(i+9)*900+dt*(300+rnd(i+3)*400))%2100);g.save();g.translate(x,yv);g.rotate(dt*4+i);g.fillStyle=['#ffd166','#ff5470','#4ade80','#5cd6ff','#a78bfa'][i%5];g.fillRect(-9,-5,18,10);g.restore()}}
+};
+document.fonts.ready.then(init);
+</script></body></html>
