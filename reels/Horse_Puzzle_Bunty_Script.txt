@@ -1,0 +1,21 @@
+25 HORSES PUZZLE — Bunty voice script (ElevenLabs: "Bunty - Punchy, Crisp and Reel King")
+Tags like [excited] work only on model "Eleven v3". On Multilingual v2, delete all [ ... ] tags.
+
+[excited] पच्चीस घोड़े... पाँच track... और stopwatch भी नहीं! [whispers] Top 3 सबसे तेज़ घोड़े, कितनी races में निकालोगे? [pause]
+ये puzzle Goldman Sachs और MakeMyTrip जैसे interviews में पूछा गया है!
+
+Rule simple है: एक race में सिर्फ़ पाँच घोड़े दौड़ सकते हैं। और speed नहीं नाप सकते... बस इतना पता चलता है कि कौन आगे आया।
+[curious] तो minimum कितनी races? [pause] Comment में लिखो!
+
+[excited] Answer है... सात! चलो देखते हैं कैसे।
+
+पहले, पच्चीस घोड़ों को पाँच groups में बाँटो, और हर group की race कराओ। ये हो गईं पाँच races. हर group का winner पता चल गया।
+
+अब छठी race: पाँचों group winners के बीच! जो जीता... वो है पूरे पच्चीस में number one!
+
+[pause] लेकिन रुको! Answer एक, दो, तीन नहीं है। [whispers] Number two और three, winner के group से भी आ सकते हैं।
+तो सिर्फ़ ये पाँच घोड़े बचते हैं: winner group के दूसरे और तीसरे, दूसरे group के पहले और दूसरे, और तीसरे group का पहला। बाकी सब बाहर!
+
+[excited] सातवीं race इन पाँचों के बीच... और top 3 पक्के!
+
+तो answer: सिर्फ़ सात races! [laughs] Video save करो, और ऐसे ही puzzles के लिए follow करो, pretest passed dot codes!
